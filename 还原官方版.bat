@@ -15,12 +15,12 @@ if not defined PYCMD (
   pause
   exit /b 1
 )
-echo 还原官方 exe 与 dcp.ini...
+echo 还原官方 exe（不影响游戏语言、存档与设置）...
 echo.
 if not "%~1"=="" (
-  %PYCMD% "%~dp0apply_zh_cn.py" --exe "%~1" --restore
+  %PYCMD% "%~dp0apply_zh_ui.py" --exe "%~1" --restore
 ) else (
-  %PYCMD% "%~dp0apply_zh_cn.py" --restore
+  %PYCMD% "%~dp0apply_zh_ui.py" --restore
 )
 echo.
 pause

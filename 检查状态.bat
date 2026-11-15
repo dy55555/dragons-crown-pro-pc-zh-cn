@@ -18,9 +18,9 @@ if not defined PYCMD (
 echo 检查当前汉化状态（不会改动任何文件）...
 echo.
 if not "%~1"=="" (
-  %PYCMD% "%~dp0apply_zh_cn.py" --exe "%~1" --check
+  %PYCMD% "%~dp0apply_zh_ui.py" --exe "%~1" --check
 ) else (
-  %PYCMD% "%~dp0apply_zh_cn.py" --check
+  %PYCMD% "%~dp0apply_zh_ui.py" --check
 )
 echo.
 pause

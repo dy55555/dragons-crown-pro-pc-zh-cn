@@ -15,12 +15,12 @@ if not defined PYCMD (
   pause
   exit /b 1
 )
-echo 正在应用简体中文界面语言包...
+echo 正在汉化启动器界面与游戏内 F1 菜单...
 echo.
 if not "%~1"=="" (
-  %PYCMD% "%~dp0apply_zh_cn.py" --exe "%~1"
+  %PYCMD% "%~dp0apply_zh_ui.py" --exe "%~1"
 ) else (
-  %PYCMD% "%~dp0apply_zh_cn.py" %*
+  %PYCMD% "%~dp0apply_zh_ui.py" %*
 )
 echo.
 pause
