@@ -1,0 +1,10 @@
+zh-CN.state.json
+config.json
+*.zhcn-orig
+__pycache__/
+*.pyc
+*.pyo
+*.png
+*.exe
+.DS_Store
+Thumbs.db

@@ -1,0 +1,743 @@
+# Dragon's Crown Pro PC - 简体中文界面语言包 (zh-CN)
+# 用法: 把本文件与 apply_zh_cn.py 放在同一目录, 双击 一键汉化.bat 即可。
+# 格式: 每行两列, TAB 分隔 = <启动器英文原文><TAB><简体中文译文>
+# 第一列是查表用的 key, 请勿修改; 要改翻译只改第二列。
+# 转义: \s=空格, \n=换行, \t=制表符, \\=反斜杠; %s 等占位符必须原样保留。
+# 以 # 开头的行为注释; 上游更新后新增的词条会显示为英文, 补一行即可。
+#
+Online version mismatch	联机版本不一致
+You	你
+Friend	好友
+Host	房主
+This player is using an incompatible version of Dragon's Crown Pro PC.	该玩家使用的《龙之皇冠 Pro》PC 版与你不兼容。
+more friends are listed in the launcher.	更多好友请在启动器中查看。
+Press A or Enter to run it.	按 A 或回车执行。
+Press A or Enter to copy it.	按 A 或回车复制。
+OPTIONS	选项
+CHEATS	金手指
+F10 Close	F10 关闭
+Not saved to the launcher	不保存到启动器
+Unavailable	不可用
+30 FPS	30 帧
+90 FPS	90 帧
+120 FPS	120 帧
+144 FPS	144 帧
+165 FPS	165 帧
+240 FPS	240 帧
+Options menu	选项菜单
+Ping (Online Play)	延迟（联机游戏）
+Applies after a restart.	重启后生效。
+(restart)	（重启）
+Some changes apply after a restart.	部分更改重启后生效。
+D-pad / Arrows  Select	十字键 / 方向键  选择
+Change	更改
+Page	翻页
+Add	添加
+Add 100 Skill Points	加 100 技能点
+Add 1,000 Gold	加 1,000 金币
+Level Up (+1 Level)	升一级（+1 级）
+Fill Health	回满生命
+Fill Ally Health	队友回满生命
+Set Low Health	设为低生命
+Set Ally Low Health	队友设为低生命
+Runs once each time it is pressed. Nothing is saved.	每按一次执行一次，不会保存。
+Cheats are not available for this game build.	此游戏版本不支持金手指。
+Session only: nothing here is saved to the launcher.	仅本次游戏有效：此处改动不会保存到启动器。
+Keyboard: type, Backspace to erase, Enter = OK, Esc = cancel	键盘：直接输入，退格删除，回车确定，Esc 取消
+Controller: Cross (A) = OK, Circle (B) = cancel	手柄：×（A）确定，○（B）取消
+Up/Down or D-pad: choose   Enter or Cross (A): OK   Esc or Circle (B): cancel	上/下或十字键：选择   回车或 ×（A）：确定   Esc 或 ○（B）：取消
+Loading shader cache...	正在加载着色器缓存…
+Loading shader cache	正在加载着色器缓存
+Preparing graphics...	正在准备图形…
+The first start after an update takes longer.	更新后首次启动耗时较长。
+What other players see. It is changed in the launcher.	其他玩家看到的名字，在启动器中修改。
+Online play is not active in this session; the log says why.	本次游戏未启用联机，原因见日志。
+The game has not connected to the online service yet.	游戏尚未连接到联机服务。
+Connecting to the online service...	正在连接联机服务…
+The friend list appears once the game has loaded it.	游戏加载完成后会显示好友列表。
+No friends yet.	暂无好友。
+Play	开始游戏
+Display	显示
+Graphics	图形
+Gameplay	游戏性
+Cheats	金手指
+Controls	控制
+Online	联机
+Trophies	奖杯
+About	关于
+Check the game files and start playing.	检查游戏文件并开始游玩。
+Window, monitor, scaling and presentation.	窗口、显示器、缩放与画面呈现。
+Resolution, anti-aliasing and texture filtering.	分辨率、抗锯齿与纹理过滤。
+Frame rate readouts.	帧率显示。
+Optional gameplay modifiers	可选的游戏玩法修改
+Controller and keyboard.	手柄与键盘。
+Play with others over the Internet: friends and the connection test.	通过互联网与其他玩家游玩：好友与连接测试。
+Your trophies on this PC.	本机上的奖杯。
+This port, and where your files and settings live.	本移植版信息，以及文件与设置的存放位置。
+Enter  Play     Alt+F4  Quit     Ctrl+S  Save	回车  开始   Alt+F4  退出   Ctrl+S  保存
+Play applies the changes. Save keeps them without starting.	开始游戏会应用更改；保存则只保存不启动。
+PC PORT   ·\s\s\s	PC 移植版   ·\s\s\s
+BY SAULOB	作者 SAULOB
+Sponsor on GitHub	在 GitHub 上赞助
+Quit	退出
+Save	保存
+PLAY	开始游戏
+Back	返回
+Cancel	取消
+OK	确定
+Confirm	确认
+Settings saved.	设置已保存。
+Could not save the settings.	无法保存设置。
+Settings saved. Starting game...	设置已保存，正在启动游戏…
+Ready to play	游戏就绪
+Game files needed	需要游戏文件
+Different version of Dragon's Crown Pro	《龙之皇冠 Pro》版本不符
+Could not read the game files	无法读取游戏文件
+Install the game from your own .pkg file.	请用你自己合法拥有的 PS4 PKG 安装游戏。
+Install a supported build from your own .pkg file.	请用你自己合法拥有的 PS4 PKG 安装受支持的版本。
+Check that the game folder can be read, then install again.	确认游戏文件夹可读取后重新安装。
+Game files	游戏文件
+Select your own legally obtained Dragon's Crown Pro package (.pkg). Supported:\s	请选择你自己合法获取的《龙之皇冠 Pro》PS4 PKG 文件。支持版本：\s
+. The USA 1.01, Japanese 1.02 and 1.03 and Asia/Hong Kong 1.02 updates are installed over their respective 1.00 base packages. The game is unpacked into the game folder next to the program (about 6 GB). The game itself is not included. Reinstalling keeps your saves and settings.	。美版 1.01、日版 1.02/1.03 及亚/港版 1.02 升级补丁需装在对应的 1.00 基础版之上。游戏会解包到程序旁的 game 文件夹（约 6 GB）。不含游戏本体。重装会保留存档与设置。
+The game files are not ready: see the Play page.	游戏文件未就绪：请查看「开始游戏」页。
+Wait for the installation to finish.	请等待安装完成。
+Wait for the game file changes to finish.	请等待游戏文件更改完成。
+Wait for the current install to finish.	请等待当前安装完成。
+Run the Connection test on the Online page before playing online.	联机前请先在「联机」页运行连接测试。
+Connection test required	需要先做连接测试
+Reinstall game...	重新安装游戏…
+Install game...	安装游戏…
+Install the game first	请先安装游戏
+Could not start the game.\s	无法启动游戏。\s
+Could not start the game.	无法启动游戏。
+. Install the game files first.	。请先安装游戏文件。
+Install failed:\s	安装失败：\s
+No graphics card found	未找到显卡
+Select your Dragon's Crown Pro package	选择《龙之皇冠 Pro》安装包
+PS4 packages (*.pkg)	PS4 PKG 文件（*.pkg）
+Display mode	显示模式
+Borderless Fullscreen fills the monitor. F11 switches while playing.	无边框全屏会铺满显示器，游戏中按 F11 可切换。
+Windowed	窗口模式
+Borderless Fullscreen	无边框全屏
+Window size	窗口大小
+The game window's size in pixels in Windowed mode. The picture keeps its shape: other window shapes get black bars.	窗口模式下的游戏窗口像素尺寸。画面保持原比例，其他比例会出现黑边。
+Monitor	显示器
+The display the game opens on.	游戏窗口在哪个显示器打开。
+(the game's own size)	（游戏原始尺寸）
+Display\s	显示器\s
+ (not connected)	 （未连接）
+ (primary)	 （主显示器）
+Aspect Ratio	画面比例
+Sets the game's target rendering format and the Window size choices.	设置游戏的目标渲染格式及可选窗口尺寸。
+This game build renders at 16:9; the other aspect ratios are not available for it.	此游戏版本以 16:9 渲染，其他画面比例不可用。
+16:9 Original	16:9 原始
+16:10	16:10
+21:9 Ultrawide	21:9 超宽屏
+32:9 Super Ultrawide	32:9 超超宽屏
+4:3	4:3
+5:4	5:4
+True Ultrawide	真·超宽屏
+Experimental. Expands gameplay beyond 16:9. Some scenes may show unintended background elements. Available with 21:9 and 32:9.	实验性功能，把游戏画面扩展到 16:9 以外。部分场景可能露出本不该显示的背景。仅在 21:9 与 32:9 下可用。
+This game build's scene projection is not verified; True Ultrawide is not available for it.	此游戏版本的场景投影未经校验，无法使用真·超宽屏。
+Renderer	渲染器
+Vulkan is the supported renderer. OpenGL is experimental and renders only part of the game's features. Auto uses Vulkan, and OpenGL when this system cannot run Vulkan. It takes effect the next time the game starts.	Vulkan 是受支持的渲染器；OpenGL 为实验性，只能呈现部分游戏效果。自动模式优先 Vulkan，本机无法运行 Vulkan 时改用 OpenGL。下次启动游戏生效。
+OpenGL (experimental)	OpenGL（实验性）
+Vulkan is the supported renderer. OpenGL and Direct3D 11 are experimental and render only part of the game's features. Direct3D 11 is intended mainly for Windows systems where Vulkan or OpenGL has problems. Auto uses Vulkan, and OpenGL when this system cannot run Vulkan. It takes effect the next time the game starts.	Vulkan 是受支持的渲染器；OpenGL 与 Direct3D 11 为实验性，只能呈现部分游戏效果。Direct3D 11 主要供 Vulkan/OpenGL 有问题的 Windows 系统使用。自动模式优先 Vulkan，无法运行时改用 OpenGL。下次启动游戏生效。
+Direct3D 11 (experimental)	Direct3D 11（实验性）
+Graphics card	显卡
+Selects which graphics card renders the game. If the selected card is no longer available, the first available card is used.	选择由哪块显卡渲染游戏。若所选显卡不可用，则使用第一块可用显卡。
+VSync	垂直同步
+On prevents tearing. Off allows it, for the lowest latency and G-Sync/FreeSync.	开启可避免画面撕裂；关闭则延迟最低，并支持 G-Sync/FreeSync。
+Presentation	画面呈现
+Controls how the rendered image fits a window or display with a different aspect ratio.	控制画面如何适配比例不同的窗口或显示器。
+Letterbox	黑边（等比显示）
+Stretch	拉伸铺满
+Scaling and sharpening	缩放与锐化
+Upscaling	超分放大
+Enlarges the game's picture to a bigger window with AMD FidelityFX Super Resolution 1. It has no effect when the window is the size of the render resolution or smaller.	用 AMD FSR 1 把画面放大到更大的窗口。当窗口不大于渲染分辨率时无效。
+FSR 1	FSR 1
+Sharpening	锐化
+Sharpens the final picture (AMD RCAS). It applies when the window is the size of the render resolution, or together with FSR 1 in a bigger window.	用 AMD RCAS 锐化最终画面。窗口等于渲染分辨率时生效，或与 FSR 1 一起在更大窗口生效。
+Sharpening strength	锐化强度
+How strong the sharpening is.	锐化的强度。
+Render resolution	渲染分辨率
+The resolution the game renders at. It is separate from the window size: the picture is scaled to the window. 1440p and above need a powerful graphics card.	游戏实际渲染的分辨率，与窗口大小无关：画面会缩放到窗口。1440p 及以上需要较强显卡。
+This game build renders at its original size; the custom render resolutions are not available for it.	此游戏版本按原始尺寸渲染，无法自定义渲染分辨率。
+Native (1080p)	原生（1080p）
+480p	480p
+720p	720p
+1440p	1440p
+1800p	1800p
+4K	4K
+Anti-aliasing	抗锯齿
+SMAA smooths jagged edges on the finished picture, at a small cost in performance.	SMAA 平滑最终画面的锯齿边缘，性能开销很小。
+SMAA	SMAA
+Texture filtering	纹理过滤
+Sharper textures on floors and walls seen at an angle. Game uses the game's own filtering.	让斜视角下的地面、墙面贴图更清晰；选「游戏自带」则使用游戏原有过滤。
+Game	游戏自带
+Menu & Subtitles	菜单与字幕
+Language used by game menus and subtitles.	游戏菜单与字幕使用的语言。
+English	英语
+French	法语
+German	德语
+Italian	意大利语
+Portuguese (Brazil)	葡萄牙语（巴西）
+Spanish	西班牙语
+Traditional Chinese	繁体中文
+Korean	韩语
+Japanese	日语
+Japanese NPC Voices	日文 NPC 语音
+Use Japanese voices for NPCs, enemies and AI allies	让 NPC、敌人与 AI 队友使用日文语音
+Frame rate	帧率
+60 FPS is the original game rate. 30 shows every second frame. Faster targets show the last frame again until the next one: the game still makes 60 new frames a second, so game speed and motion are unchanged. Unlimited repeats as often as the display allows, up to 480 a second.	60 FPS 是游戏原始帧率；30 表示每隔一帧显示一次。更高目标值会重复上一帧直到下一帧到来：游戏每秒仍生成 60 个新帧，因此速度与动作不变。「无限制」按显示器能力尽量重复，最高每秒 480 次。
+Unlimited	无限制
+60 FPS (Original)	60 FPS（原始）
+Frame rate in title	标题栏显示帧率
+Shows the frame rate in the window title: Dragon's Crown Pro | FPS: 60.00	在窗口标题显示帧率：Dragon's Crown Pro | FPS: 60.00
+Render resolution in title	标题栏显示渲染分辨率
+Shows the game's render resolution in the window title: Dragon's Crown Pro | 1920x1080	在窗口标题显示渲染分辨率：Dragon's Crown Pro | 1920x1080
+Frame counter	帧计数器
+Shows the frame rate and frame time in a corner of the game.	在游戏画面角落显示帧率与帧耗时。
+Arachnophobia Safe Mode	蜘蛛恐惧症安全模式
+Redraws the Giant Spider as two soft cream bodies with two orange eyes, with no legs or fangs. Gameplay does not change. It rewrites one picture file in the installed game archive (a few seconds, reversible); the change is kept across reinstalls.	把巨型蜘蛛重画成两个米色圆身体配两只橙色眼睛，没有腿和獠牙。不影响玩法。会改写已安装游戏 CPK 归档里的一张贴图（几秒，可还原）；重装后仍保留该改动。
+Story Skip Offer	提供跳过剧情选项
+Offers the game's built-in story skip when creating a new character	新建角色时提供游戏自带的跳过剧情选项
+Tutorial Skip Offer	提供跳过教学选项
+Lets new characters choose whether to begin the tutorial	让新角色自行选择是否进入教学
+Allow overlay programs	允许游戏覆盖层（Overlay）
+For programs that draw over games (recording, chat, store and performance overlays). On, PLAY starts the game as a separate program from this launcher, so they can attach to it cleanly. Off starts the game the usual way.	供游戏覆盖层程序使用（录屏、聊天、商店、性能悬浮窗）。开启时「开始游戏」会把游戏作为独立程序启动，便于它们正常挂载；关闭时按通常方式启动。
+Off	关闭
+On	开启
+Hidden	隐藏
+Shown	显示
+At startup	启动时
+Show this launcher	显示本启动器
+Off starts the game directly. Hold Shift while starting to bring it back.	关闭则直接启动游戏；启动时按住 Shift 可重新唤出。
+Off starts the game directly. Hold Shift while starting, or start the program with --launcher, to bring it back.	关闭则直接启动游戏；启动时按住 Shift，或用 --launcher 参数启动程序，可重新唤出。
+Reset settings	重置设置
+Put every setting back to its default.	把所有设置恢复为默认值。
+Reset all settings	重置全部设置
+Put every setting back to its default?	把所有设置恢复为默认值？
+Settings reset to defaults.	设置已恢复默认。
+Settings reset to defaults. Save or press Play to keep them.	设置已恢复默认。点保存或开始游戏以保留。
+Press a key...  (Esc cancels)	请按键…（Esc 取消）
+(none)	（无）
+Cheats are disabled while Online Play is enabled	启用联机时金手指被禁用
+Press F10 while playing to open the Cheats menu. Changes made there apply only to the current session. Meant for offline and local play.	游戏中按 F10 打开金手指菜单。菜单里的改动仅对本次游戏有效，适用于离线与本地游玩。
+Cheats are not available for\s	以下版本不支持金手指：\s
+Infinite Health	无限生命
+Freezes Player 1's current health	锁定 1P 当前血量
+Infinite Ally Health	队友无限生命
+Freezes AI allies' current health	锁定 AI 队友当前血量
+Infinite Mana	无限魔力
+Prevent mana from decreasing when casting spells	施法时不消耗魔力
+Infinite Ally Mana	队友无限魔力
+Prevent AI allies' mana from decreasing when casting spells	AI 队友施法时不消耗魔力
+Infinite Lives	无限命数
+Prevent remaining lives from decreasing	剩余命数不减少
+Infinite Durability	无限装备耐久
+Prevent equipped gear from losing durability	已装备的装备不掉耐久
+Infinite Ally Durability	队友无限装备耐久
+Prevent AI allies' equipped gear from losing durability	AI 队友的装备不掉耐久
+Infinite Arrows	无限箭矢
+Prevent the Elf's arrows from decreasing	精灵的箭矢不减少
+Infinite Skill Points	无限技能点
+Prevent skill points from decreasing when spent	消耗技能点时不会减少
+Infinite Skill Uses	无限技能使用次数
+Prevent equipped skill uses from decreasing when used	已装备技能的使用次数不减少
+Infinite Items	无限消耗品
+Prevent consumable items from decreasing when used	消耗品用后不减少
+Infinite Gold	无限金币
+Prevent gold from decreasing when spent	花费金币时不减少
+Movement Speed	移动速度
+Multiplies the normal movement speed	按倍数提高正常移动速度
+Experience Multiplier	经验倍率
+Multiplies the experience each award adds	按倍数提高每次获得的经验
+Damage Taken	承伤倍率
+Scales the damage Player 1 takes	按比例调整 1P 承受的伤害
+Infinite Ally Skill Uses	队友无限技能次数
+Prevent AI allies' equipped skill uses from decreasing when used	AI 队友已装备技能的使用次数不减少
+Infinite Ally Items	队友无限消耗品
+Prevent AI allies' consumable items from decreasing when used	AI 队友的消耗品用后不减少
+Damage Multiplier	伤害倍率
+Multiplies the damage enemies take	按倍数提高敌人受到的伤害
+Controller	手柄
+Automatic: Xbox controllers work without setup.	自动识别：Xbox 手柄无需设置即可使用。
+Controller prompts	手柄按键提示
+The buttons the game's prompts show. Xbox rewrites the button pictures in the installed game archives (a few seconds, reversible); the change is kept across reinstalls.	游戏中按键提示显示的按钮样式。选 Xbox 会改写已安装游戏 CPK 归档里的按键图标（几秒，可还原）；重装后仍保留该改动。
+Xbox prompts are not available for this game build.	此游戏版本不支持 Xbox 按键提示。
+PlayStation (original)	PlayStation（原始）
+Keyboard	键盘
+Always on, together with the controller.	始终启用，可与手柄同时使用。
+Keyboard defaults	键盘默认设置
+Puts the keyboard controls and the port hotkeys back to their defaults.	把键盘按键与移植版热键恢复为默认。
+Reset to defaults	恢复默认
+Put every key back to its default?	把所有按键恢复为默认？
+Reset	重置
+Keys reset to defaults.	按键已恢复默认。
+Keyboard controls	键盘按键
+Port hotkeys	移植版热键
+Click a key, then press the new one. Esc cancels. A key can be used for more than one control.	点一个按键，再按下新键。Esc 取消。同一个键可以绑定多个操作。
+That key cannot be used.	该按键不可用。
+Left stick up	左摇杆上
+Left stick down	左摇杆下
+Left stick left	左摇杆左
+Left stick right	左摇杆右
+Right stick up	右摇杆上
+Right stick down	右摇杆下
+Right stick left	右摇杆左
+Right stick right	右摇杆右
+Cross (A)	× 键（A）
+Circle (B)	○ 键（B）
+Square (X)	□ 键（X）
+Triangle (Y)	△ 键（Y）
+L1	L1
+R1	R1
+L2	L2
+R2	R2
+L3	L3
+R3	R3
+D-pad up	十字键上
+D-pad down	十字键下
+D-pad left	十字键左
+D-pad right	十字键右
+Options (Start)	OPTIONS 键（Start）
+Touchpad left (Back)	触摸板左（Back）
+Touchpad right	触摸板右
+Cheats menu	金手指菜单
+Window mode	窗口模式
+This open source PC port is maintained and developed in my free time. If you enjoy the project and would like to support its continued development, you can sponsor my work on GitHub.	这个开源 PC 移植版由我利用业余时间维护开发。如果你喜欢这个项目、希望它继续更新，可以在 GitHub 上赞助我。
+Support is completely optional and helps support ongoing improvements and future projects.	赞助完全自愿，有助于持续改进与新项目。
+Dragon's Crown Pro for PlayStation 4, running natively on this PC. The game itself is not included; it runs from the user's own copy.	PS4 版《龙之皇冠 Pro》在本机原生运行。不含游戏本体，需使用你自己的游戏副本。
+Where the prepared game is read from.	已准备好的游戏文件的读取位置。
+Open game folder	打开游戏文件夹
+Saves and settings	存档与设置
+Settings, saves and caches.	设置、存档与缓存。
+Open user folder	打开用户文件夹
+Settings file	设置文件
+Launcher choices stored as plain text.	启动器选项以纯文本保存。
+Show settings file	查看设置文件
+Put the launcher and display settings back to their defaults.	把启动器与显示设置恢复为默认。
+Diagnostics	诊断
+Detailed logging	详细日志
+Keeps logs for normal sessions. Crash diagnostics are always preserved.	保留正常会话的日志；崩溃诊断日志始终保留。
+Logs folder	日志文件夹
+Open the folder containing session and crash logs	打开存放会话与崩溃日志的文件夹
+Open logs folder	打开日志文件夹
+Port version	移植版版本
+Platform	平台
+Libraries	运行库
+Not installed	未安装
+Could not open the logs folder.	无法打开日志文件夹。
+Arachnophobia Safe Mode:\s	蜘蛛恐惧症安全模式：\s
+On.	开启。
+Off.	关闭。
+Controller prompts:\s	手柄按键提示：\s
+Game files unchanged.	游戏文件未改动。
+Could not change the game files. See the log.	无法修改游戏文件，详情见日志。
+Enabling Arachnophobia Safe Mode...	正在开启蜘蛛恐惧症安全模式…
+Disabling Arachnophobia Safe Mode...	正在关闭蜘蛛恐惧症安全模式…
+Switching to Xbox prompts...	正在切换为 Xbox 按键提示…
+Restoring PlayStation prompts...	正在恢复 PlayStation 按键提示…
+Restoring\s	正在恢复\s
+Patching\s	正在打补丁\s
+Preparing the game...	正在准备游戏…
+Verifying the installation...	正在校验安装…
+Finishing...	正在收尾…
+Unpacking the game files...	正在解包游戏文件…
+Checking the game files...	正在检查游戏文件…
+Unpacking the update...	正在解包升级补丁…
+Copying the game files...	正在复制游戏文件…
+Checking the package...	正在检查 PKG…
+Checking the game folder...	正在检查游戏文件夹…
+Cancelled	已取消
+Could not change the game files	无法修改游戏文件
+Game installed	游戏已安装
+Dragon's Crown Pro is ready to play.	《龙之皇冠 Pro》已就绪，可以开玩。
+Installation cancelled	安装已取消
+The installed game was not changed.	已安装的游戏未改动。
+Not a PS4 package	不是 PS4 PKG 文件
+Select the Dragon's Crown Pro .pkg file.	请选择《龙之皇冠 Pro》的 .pkg 文件。
+This package cannot be unpacked	此 PKG 无法解包
+It is encrypted for a PS4 console. Select a decrypted (fake) PKG of the game.	该包仍是 PS4 主机加密版，请选择解密后的（fake）PKG。
+Not a game folder	不是游戏文件夹
+Select the folder that contains eboot.bin, sce_module and sce_sys.	请选择包含 eboot.bin、sce_module 和 sce_sys 的文件夹。
+Wrong game	游戏不符
+This is not Dragon's Crown Pro.	这不是《龙之皇冠 Pro》。
+This port supports\s	本移植版支持\s
+ and\s	 和\s
+The package is incomplete or some of the game's files are missing. Copy or download it again.	PKG 不完整或缺少部分游戏文件，请重新复制或下载。
+The package could not be read or is damaged. Check the file, then try again.	PKG 无法读取或已损坏，请检查文件后重试。
+Choose another file	请选择其他文件
+Select your game package, not a file inside the port's own game folder.	请选择游戏 PKG，而不是移植版 game 文件夹里的文件。
+Could not install the game	无法安装游戏
+The port's game folder holds other files. Move them out and try again.	移植版的 game 文件夹里有其他文件，请移出后重试。
+Not enough free space	磁盘空间不足
+The game needs about 6 GB. Free up disk space and try again.	游戏约需 6 GB，请清理磁盘后重试。
+The game files could not be written next to the port.	无法在移植版目录下写入游戏文件。
+Could not prepare the game	无法准备游戏
+The game's code could not be prepared. The log has the details.	游戏代码准备失败，详情见日志。
+Base game required	需要基础版游戏
+This package is an update. Install the 1.00 base package of the same game first (CUSA10454 1.00 USA, CUSA07001 1.00 Japan or CUSA10209 1.00 Asia/Hong Kong), then install the update.	这个包是升级补丁，请先安装同一游戏的 1.00 基础版（CUSA10454 1.00 美版、CUSA07001 1.00 日版或 CUSA10209 1.00 亚/港版），再装补丁。
+Game activated	游戏已激活
+The selected build is now the active game.	所选版本现为当前使用的游戏。
+Already up to date	已是最新
+This version is already the active game.	该版本已是当前使用的游戏。
+Dragon's Crown Pro version not supported yet	暂不支持此《龙之皇冠 Pro》版本
+Diagnostic information was written to the latest log. Please share the latest log when reporting this version on GitHub.	诊断信息已写入最新日志。在 GitHub 反馈此版本时请附上该日志。
+An unexpected error occurred.	发生未知错误。
+Online play	联机游玩
+Lets the game's own Online menu create and join rooms. Players meet in the lobby; the game itself runs directly between your PCs.	让游戏自带的联机菜单可以建房、加入房间。玩家在大厅集合，游戏本身在两台电脑之间直连。
+Online name	联机昵称
+What other players see: up to 16 letters, digits, - or _.	其他玩家看到的名字：最多 16 个字符，可用字母、数字、- 或 _。
+Your friend code	你的好友码
+Share this code so another player can add you.	把此码发给对方，对方即可添加你为好友。
+Connection test	连接测试
+Checks that you can reach the online service and that other players can reach you. Takes a few seconds.	检查你能否连到联机服务、其他玩家能否连到你，大约需要几秒。
+Ping display	延迟显示
+Shows the round trip to the other players in game. F3 switches it while playing.	游戏中显示与其他玩家的往返延迟，游戏中按 F3 可切换。
+Early Story Online	剧情早期联机
+Lets you host online play right after the tutorial. The tutorial remains single-player. Only the host needs this option; guests keep their own campaign progress. Early story rooms are friend/direct only.	允许教学结束后立即建房联机，教学本身仍为单人。只需房主开启此选项；客机保留自己的剧情进度。剧情早期房间仅限好友/直连。
+Cannot reach the online service right now. Run the Connection test for details.	当前无法连接联机服务，请运行连接测试查看详情。
+Incompatible	版本不兼容
+New friend request	新的好友申请
+     Accept	    接受
+Decline	拒绝
+Not available right now	当前不可用
+Connecting...	正在连接…
+Copy	复制
+Friend code copied.	好友码已复制。
+Testing...	正在测试…
+Run test	运行测试
+Friends	好友
+Add a friend	添加好友
+Their friend code, for example ABCD-EFGH.	对方的好友码，例如 ABCD-EFGH。
+Send request	发送申请
+Your request is waiting for an answer.	申请已发出，等待对方回应。
+Cancel request	取消申请
+Remove	移除
+Settings	设置
+Lobby	联机大厅
+Show me in Lobby	在大厅中显示我
+Enable this option to let other Dragon's Crown Pro players see your Online name and send you a friend request.	开启后，其他《龙之皇冠 Pro》玩家能看到你的联机昵称并向你发好友申请。
+Other Dragon's Crown Pro players can see your Online name and send you a friend request.	其他《龙之皇冠 Pro》玩家可以看到你的联机昵称并发好友申请。
+Players in Lobby	大厅中的玩家
+Send friend request	发送好友申请
+Pending	等待回应
+Accept	接受
+No players are currently visible in the Lobby.	大厅中目前没有可见玩家。
+%s more players are not shown.	还有 %s 名玩家未显示。
+The Lobby is not available right now.	联机大厅当前不可用。
+Refresh lobby	刷新大厅
+Refreshing...	正在刷新…
+Updated just now	刚刚更新
+Updated %s min ago	%s 分钟前更新
+Version unknown	版本未知
+Could not refresh the Lobby.	无法刷新联机大厅。
+That player is no longer in the Lobby.	该玩家已不在大厅中。
+No friends yet. A friend in a room appears in the game's Join Friends Room list.	暂无好友。好友开的房间会出现在游戏的「加入好友房间」列表里。
+Online, in a room	在线，房间中
+Offline	离线
+ wants to be your friend	 想加你为好友
+If Windows asks whether to allow network access, choose Allow access so other players can connect to you.	若 Windows 弹出网络访问提示，请选择「允许访问」，否则其他玩家无法连入。
+Online service	联机服务
+Your online identity could not be created.	无法创建你的联机身份。
+Cannot reach the online service. Check your internet connection.	无法连接联机服务，请检查网络。
+Connected.	已连接。
+Not checked.	未检测。
+Your router may stop some players from connecting to you.	路由器可能阻止部分玩家连入。
+Direct connections	点对点直连
+Another router is in front of yours (often your provider's), so it cannot be opened automatically.	你的路由器前面还有一台（常为运营商设备），无法自动打通端口。
+Automatic setup is not available on your router.	你的路由器不支持自动配置。
+Router configuration	路由器设置
+Relay	中继转发
+Available. A match that cannot connect directly connects through the online service	可用。无法直连的对局会通过联机服务中继。
+Not ready: cannot reach the online service	未就绪：无法连接联机服务
+Ready for online play	联机已就绪
+Limited: the multiplayer UDP port could not be opened	受限：联机 UDP 端口未能打开
+Limited: direct connections may be blocked by your network	受限：网络可能阻止点对点直连
+Limited: some players may not be able to connect to you	受限：部分玩家可能无法连入
+Install a supported game to view its trophies.	安装受支持的游戏版本后才能查看奖杯。
+Trophy metadata requires a Trophy Key.	读取奖杯数据需要奖杯密钥（Trophy Key）。
+Dragon's Crown Pro PC does not include or generate this key.	《龙之皇冠 Pro》PC 版不附带也不生成该密钥。
+You can enter your own key or import it from an existing shadPS4 installation.	你可以手动输入密钥，或从已装好的 shadPS4 导入。
+The Trophy Key could not decrypt this game's trophy metadata.	该奖杯密钥无法解密本游戏的奖杯数据。
+Change the key, import another one, or remove it.	请更换密钥、导入另一个，或移除它。
+Trophy list unavailable	奖杯列表不可用
+This game folder has no trophy pack. Install the game again.	游戏文件夹中没有奖杯包，请重新安装游戏。
+The game's trophy pack could not be read. Install the game again.	无法读取游戏的奖杯包，请重新安装游戏。
+Enter Trophy Key	输入奖杯密钥
+Import from shadPS4...	从 shadPS4 导入…
+Trophy Key	奖杯密钥
+Configured	已配置
+Change...	更换…
+No file chooser (zenity or kdialog) is installed, so a key file cannot be imported here. Use Enter Trophy Key instead.	系统未安装文件选择器（zenity 或 kdialog），无法在此导入密钥文件，请改用「输入奖杯密钥」。
+Select a shadPS4 keys.json or config.toml	选择 shadPS4 的 keys.json 或 config.toml
+shadPS4 key files	shadPS4 密钥文件
+No valid Trophy Key was found in this file.	该文件中没有有效的奖杯密钥。
+The Trophy Key could not be saved. Check that the user folder can be written.	无法保存奖杯密钥，请确认用户文件夹可写。
+A Trophy Key is already configured. Replace it?	已配置奖杯密钥，是否替换？
+Remove the Trophy Key? Your trophies are kept.	移除奖杯密钥？奖杯记录会保留。
+Show key	显示密钥
+Enter exactly 32 hexadecimal characters (0-9, A-F).	请输入恰好 32 位十六进制字符（0-9、A-F）。
+Replace	替换
+The Trophy Key could not be removed. Check that the user folder can be written.	无法移除奖杯密钥，请确认用户文件夹可写。
+%d / %d unlocked     %d%%	已解锁 %d / %d     %d%%
+Saved trophies	已保存的奖杯
+Names, icons and grades appear once the trophy list can be read.	能读取奖杯列表后才会显示名称、图标与等级。
+Trophy	奖杯
+%d / %d unlocked	已解锁 %d / %d
+%d / %d unlocked     %d / %d G	已解锁 %d / %d     %d / %d G
+UNLOCKED	已解锁
+Platinum	白金
+Gold	金
+Silver	银
+Bronze	铜
+Unknown	未知
+Select your Dragon's Crown Pro package (.pkg)	选择《龙之皇冠 Pro》PKG 文件（.pkg）
+Up	上一级
+Show all files	显示所有文件
+This folder cannot be read.	无法读取该文件夹。
+This folder is empty.	该文件夹为空。
+No .pkg files or folders here.	这里没有 .pkg 文件或文件夹。
+../  (parent folder)	../  （上级文件夹）
+Choose the .pkg file. Controller: D-pad to move, A to choose, B to cancel.	选择 .pkg 文件。手柄：十字键移动，A 选择，B 取消。
+Program folder	程序文件夹
+Home	主目录
+Downloads	下载
+Desktop	桌面
+Documents	文档
+Computer	此电脑
+The game could not start	游戏无法启动
+Dragon's Crown Pro PC cannot run on this system.	《龙之皇冠 Pro》PC 移植版无法在本系统上运行。
+Checking for updates	正在检查更新
+Update available	发现新版本
+Downloading update	正在下载更新
+Verifying update	正在校验更新包
+Update ready	更新已就绪
+Update check failed	检查更新失败
+Update failed	更新失败
+Release notes	更新说明
+Contacting GitHub...	正在连接 GitHub…
+Version\s	版本\s
+ is available	\s已发布
+You are using\s	当前版本\s
+UPDATE NOW	立即更新
+Automatic installation is not available.	此版本不支持自动安装。
+Downloading update\s	正在下载更新\s
+Checking the download and preparing the files.	正在校验下载内容并准备文件。
+ is ready. The launcher will restart.	\s已就绪，启动器将重启。
+RESTART TO UPDATE	重启以更新
+Check your connection and try again.	请检查网络连接后重试。
+RETRY	重试
+Checking for updates...	正在检查更新…
+Downloading update...	正在下载更新…
+This build's version could not be read.	无法读取当前构建的版本号。
+The update check could not start.	无法发起更新检查。
+The update check failed.	更新检查失败。
+The update response could not be read.	无法读取更新服务器返回的数据。
+The update address is not secure.	更新地址不是安全连接（HTTPS）。
+The update package address is not secure.	更新包地址不是安全连接（HTTPS）。
+The update package has an invalid size.	更新包大小无效。
+The checksum address is not secure.	校验和文件地址不是安全连接（HTTPS）。
+The published checksum file does not match its own digest.	发布的校验和文件与其自身摘要不符。
+The published checksum file is not valid.	发布的校验和文件无效。
+The release does not provide a trusted SHA-256 checksum.	该版本未提供可信的 SHA-256 校验和。
+The update download is incomplete.	更新包下载不完整。
+The downloaded update does not match its SHA-256 checksum.	下载的更新包与 SHA-256 校验和不符。
+Cannot write the update manifest.	无法写入更新清单。
+The update download could not start.	无法开始下载更新。
+The update download failed.	更新下载失败。
+The update helper is missing from this installation.	当前安装缺少更新辅助程序。
+The update helper is missing from this installation. Reinstall this release to enable automatic updates.	当前安装缺少更新辅助程序。请重新安装本版本以启用自动更新。
+Automatic installation is available in the AppImage build.	自动安装仅适用于 AppImage 版本。
+The updater has no package name for this build.	更新器未找到此构建的包名。
+The release response is too large.	版本信息响应数据过大。
+The game process was already created.	游戏进程已创建。
+The game runs in the launcher's process on this system.	本系统上游戏运行在启动器进程内。
+The update helper is only used on Windows.	更新辅助程序仅用于 Windows。
+Cannot find a temporary folder for the update.	找不到用于更新的临时文件夹。
+Cannot find a free temporary folder for the update.	找不到可用的更新临时文件夹。
+The update workspace cannot be inside the installation.	更新工作目录不能位于安装目录内。
+Cannot create the update workspace.	无法创建更新工作目录。
+Automatic installation is not available in this build.	此构建不支持自动安装。
+The update test checksum is not valid.	更新测试校验和无效。
+Skip Intro	跳过开场动画
+Controller Rumble	手柄震动
+Off disables controller vibration.	关闭后手柄不再震动。
+Off disables controller vibration. Applies at the next game start.	关闭后手柄不再震动。下次启动游戏时生效。
+Skip the startup logo and go straight to the title screen	跳过开机 LOGO，直接进入标题画面
+Skips the startup logo and starts at the title screen.	跳过开机 LOGO，直接从标题画面开始。
+Unlock Gallery	解锁画廊
+Unlocks all Gallery content while enabled without changing save progress	开启后解锁全部画廊内容，不改动存档进度
+Unlocks all Gallery content while enabled without changing save progress.	开启后解锁全部画廊内容，不改动存档进度。
+Japanese Menu Buttons	日版菜单按键
+Off: %s confirms and %s cancels in menus. On: %s confirms and %s cancels, as in the Japanese release. Combat controls do not change. Applies at the next game start.	关闭时菜单里用 %s 确认、%s 取消；开启后按日版布局，用 %s 确认、%s 取消。战斗按键不变。下次启动游戏时生效。
+Swaps Confirm and Cancel in the menus, as in the Japanese release. Combat controls do not change.	按日版习惯对调菜单里的「确认」与「取消」。战斗按键不变。
+Cross	× 键（Cross）
+Circle	○ 键（Circle）
+60 FPS is the original game rate. Faster targets show the last frame again; game speed does not change.	60 FPS 是原版帧率。设定更高时会重复显示上一帧，游戏速度不变。
+Borderless Fullscreen fills the monitor. F11 also switches it.	无边框全屏会铺满整个显示器，也可按 F11 切换。
+Enlarges the picture to a bigger window with AMD FidelityFX Super Resolution 1.	用 AMD FSR 1 超分把画面放大到更大的窗口。
+How the picture fits a window or display with a different aspect ratio.	画面在宽高比不同的窗口或显示器上的适配方式。
+Keyboard bindings, port hotkeys and controller prompts are launcher-only.	键盘映射、端口热键和手柄按键提示仅在启动器中设置。
+Language and Arachnophobia Safe Mode are launcher-only.	语言与蜘蛛恐惧症安全模式仅在启动器中设置。
+Lets new characters choose whether to begin the tutorial.	新建角色时可选择是否进入新手教学。
+Offers the game's built-in story skip when creating a new character.	新建角色时提供游戏自带的剧情跳过选项。
+Online name, friends and friend requests are managed in the launcher.	联机昵称、好友与好友申请在启动器中管理。
+Renderer, render resolution and texture filtering apply after a restart.	渲染器、渲染分辨率与贴图过滤需重启后生效。
+Vulkan is the supported renderer. OpenGL is experimental. Auto uses OpenGL only when Vulkan cannot run.	Vulkan 为正式支持的渲染器，OpenGL 为实验性。选「自动」时仅在 Vulkan 无法运行时改用 OpenGL。
+Vulkan is the supported renderer. OpenGL and Direct3D 11 are experimental. Direct3D 11 is intended mainly for Windows systems where Vulkan or OpenGL has problems. Auto uses OpenGL only when Vulkan cannot run.	Vulkan 为正式支持的渲染器；OpenGL 与 Direct3D 11 为实验性，Direct3D 11 主要给 Vulkan/OpenGL 有问题的 Windows 系统使用。选「自动」时仅在 Vulkan 无法运行时改用 OpenGL。
+The shape the game renders in. The saved window width follows it.	游戏画面的形状（宽高比），保存的窗口宽度会随之调整。
+SMAA smooths jagged edges on the finished picture, at a small cost in speed.	SMAA 平滑最终画面的锯齿，会略微损失速度。
+Sharpens the final picture (AMD RCAS), alone or together with FSR 1 in a bigger window.	用 AMD RCAS 锐化最终画面，可单独开启，也可与放大窗口用的 FSR 1 一起开启。
+Sharper textures seen at an angle. Game uses the game's own filtering.	让斜视角下的贴图更清晰；选「游戏自带」则沿用游戏原有过滤。
+Shows the frame rate and frame time in a corner of the game. F2 also switches it for this session.	在游戏画面角落显示帧率与帧生成时间；本次运行也可按 F2 切换。
+Shows the frame rate in the window title.	在窗口标题栏显示帧率。
+Shows the game's render resolution in the window title.	在窗口标题栏显示游戏渲染分辨率。
+Window size, Monitor and Graphics card are launcher-only: change them before pressing Play.	窗口大小、显示器与显卡仅在启动器中设置，请在点「开始游戏」前改好。
+Game files missing	游戏文件缺失
+Windows could not start it (error %s).	Windows 无法启动程序（错误 %s）。
+No player has that friend code.	没有玩家使用该好友码。
+That is not a valid friend code.	好友码格式无效。
+Too many friends or pending requests.	好友或待处理申请数量已达上限。
+The online service did not answer. Try again.	联机服务无响应，请重试。
+The online service refused the request (%s).	联机服务拒绝了请求（%s）。
+Request sent to %s.	已向 %s 发送好友申请。
+%s is now your friend.	%s 已成为你的好友。
+Connected · %s ms	已连接 · %s ms
+UDP endpoint available. Direct peer connectivity will be verified when joining a match	UDP 端点可用。加入联机房间时会验证点对点直连。
+UDP endpoint available on UDP port %s. Direct peer connectivity will be verified when joining a match	UDP 端口 %s 上的端点可用。加入联机房间时会验证点对点直连。
+UDP endpoint probably available. Direct peer connectivity will be verified when joining a match	UDP 端点可能可用。加入联机房间时会验证点对点直连。
+UDP endpoint probably available on UDP port %s. Direct peer connectivity will be verified when joining a match	UDP 端口 %s 上的端点可能可用。加入联机房间时会验证点对点直连。
+UDP endpoint available through your router. Direct peer connectivity will be verified when joining a match	已通过路由器映射获得可用的 UDP 端点。加入联机房间时会验证点对点直连。
+UDP endpoint available through your router on UDP port %s. Direct peer connectivity will be verified when joining a match	已通过路由器映射获得 UDP 端口 %s 上的可用端点。加入联机房间时会验证点对点直连。
+May be blocked by your network or firewall.	可能被你的网络或防火墙拦截。
+May be blocked by your network or firewall on UDP port %s.	UDP 端口 %s 可能被你的网络或防火墙拦截。
+Your router may stop some players from connecting to you on UDP port %s.	路由器可能导致部分玩家无法通过 UDP 端口 %s 连入。
+Cannot open UDP port %s. Another program may already be using it, or network security may be blocking it.	无法打开 UDP 端口 %s：可能已被其他程序占用，或被网络安全软件拦截。
+Could not start the download.	无法开始下载。
+Could not reach the server. Check your internet connection and try again.	无法连接服务器，请检查网络后重试。
+The server answered %s.	服务器返回 %s。
+Cancelled.	已取消。
+The server took too long to answer.	服务器响应超时。
+The server sent more data than expected.	服务器返回的数据超出预期大小。
+The download was interrupted.	下载已中断。
+The download failed. Check your internet connection and try again.	下载失败，请检查网络后重试。
+Cannot write %s.	无法写入 %s。
+Cannot read the downloaded update.	无法读取已下载的更新包。
+The downloaded update is not a valid ZIP archive.	下载的更新包不是有效的 ZIP 压缩包。
+The downloaded update is too large.	下载的更新包过大。
+The update archive is damaged.	更新压缩包已损坏。
+The update archive is empty.	更新压缩包为空。
+The update archive is too large when unpacked.	更新压缩包解包后体积过大。
+The update archive holds too many files.	更新压缩包内文件数量过多。
+Cannot create the update staging folder.	无法创建更新暂存文件夹。
+Cannot read the update staging folder.	无法读取更新暂存文件夹。
+Cannot write the update file %s.	无法写入更新文件 %s。
+Cannot write the update job.	无法写入更新任务。
+Could not prepare the program environment.	无法准备程序运行环境。
+Could not start the program (%s).	无法启动程序（%s）。
+Automatic updates are only available in the Linux AppImage build.	自动更新仅适用于 Linux AppImage 版本。
+Cannot back up the installed AppImage.	无法备份已安装的 AppImage。
+Cannot read the installed AppImage.	无法读取已安装的 AppImage。
+Cannot replace the installed AppImage.	无法替换已安装的 AppImage。
+Cannot write the updated AppImage next to the installed one.	无法在已安装 AppImage 旁写入更新后的文件。
+Cannot make the updated AppImage executable.	无法为更新后的 AppImage 添加可执行权限。
+The updated AppImage could not be verified.	更新后的 AppImage 校验失败。
+The downloaded AppImage or the installed AppImage is missing.	下载或已安装的 AppImage 文件缺失。
+Hidden Trophy	隐藏奖杯
+Unlock this trophy to see what it is.	解锁该奖杯后可查看内容。
+All files	所有文件
+Bug Report	问题反馈
+Report a problem and send it with one game log.	反馈问题，并附上一份游戏日志。
+No personal user data is intentionally included.	不会主动附带任何个人用户数据。
+Before anything is sent, the launcher takes addresses, user and computer names, private folders, passwords, online secrets and other players' details out of the selected log. Automatic filtering cannot promise to catch everything, so open the preview if you want to check what goes out.	发送前，启动器会从所选日志中移除地址、用户名与计算机名、私人文件夹、密码、联机密钥以及其他玩家的信息。自动过滤无法保证百分百覆盖，如需确认外发内容，请打开预览查看。
+1. Report the problem	1. 描述问题
+2. Choose one game log	2. 选择一份游戏日志
+3. Preview what will be sent	3. 预览将要发送的内容
+4. Send	4. 发送
+What were you doing, what went wrong, and does it happen every time?	当时在做什么、出了什么问题、是否每次都能复现？
+No game log is available yet, so a report cannot be sent. Start the game once and try again. With Detailed logging off on the About page, only sessions that crashed keep a log.	目前还没有游戏日志，无法发送反馈。请先启动一次游戏再试。若在「关于」页关闭了详细日志，则只有崩溃的那次运行会留下日志。
+The newest logs of the game, most recent first. Only the one you choose is sent.	按时间倒序列出最新的游戏日志，只会发送你选中的那一份。
+Send this log	发送此日志
+Selected log	已选日志
+Last written	最后写入时间
+Size	大小
+View selected log	查看所选日志
+Preview	预览
+Shows exactly what will be sent, after the privacy filter.	显示经过隐私过滤后实际发送的内容。
+Please describe the problem, minimum 10 characters	请描述问题，至少 10 个字符
+There is no game log to send.	没有可发送的游戏日志。
+Current launcher session	当前启动器会话
+Current session · Launcher + gameplay	本次会话 · 启动器 + 游戏
+My reports	我的反馈
+Only reports sent from this PC are listed here.	这里只列出从本机发送过的反馈。
+No reports sent from this PC	本机尚未发送过反馈
+New	新建
+Investigating	排查中
+Fixed	已修复
+Cannot reproduce	无法复现
+Duplicate	重复反馈
+Not a bug	非缺陷
+Closed	已关闭
+Fixed in version	修复版本
+Message from developer	开发者留言
+Updated	更新时间
+Refresh	刷新
+Checking...	正在检查…
+Could not check for updates. The last known status is shown.	无法检查更新，当前显示的是上次记录的状态。
+View details	查看详情
+Hide details	收起详情
+Report ID	反馈编号
+Submitted	提交时间
+Status	状态
+Status updated	状态更新时间
+What was sent	已发送内容
+Hide report	隐藏此反馈
+Loading...	正在加载…
+This report is no longer available online.	该反馈已无法从在线服务获取。
+Remove from this PC	从本机移除
+Removes it from this list only. The report stays with the developer.	仅从本机列表移除，开发者那边仍保留该反馈。
+Remove this report from this PC?	确定从本机移除这条反馈？
+A report has an update	有一条反馈状态更新
+Its status changed since you last looked.	自上次查看后状态发生了变化。
+A report has a new reply	有一条反馈收到新回复
+The developer replied to one of your reports.	开发者回复了你的某条反馈。
+New reply	新回复
+No longer available	已不可用
+This report was removed from the online service. The last known status is shown.	该反馈已从在线服务移除，当前显示的是上次记录的状态。
+Show	显示
+The report was sent, but it could not be added to My reports on this PC.	反馈已发送，但未能加入本机的「我的反馈」列表。
+Last gameplay	上次游玩
+Gameplay session	游戏会话
+Launcher only	仅启动器
+Open preview	打开预览
+Close preview	关闭预览
+That log could not be read. Choose another one and try again.	无法读取该日志，请换一份重试。
+Send report	发送反馈
+Sends the selected log after the privacy filter is applied.	对所选日志做隐私过滤后发送。
+Sending...	正在发送…
+Sending your report...	正在发送反馈…
+This takes a few seconds.	需要几秒钟。
+Report ID:	反馈编号：
+Report sent successfully	反馈发送成功
+Copy report ID	复制反馈编号
+Report ID copied.	反馈编号已复制。
+Daily report limit reached	已达当日反馈上限
+Too many reports were sent recently	近期发送的反馈过多
+Please try again later	请稍后再试
+Cannot reach the online service	无法连接在线服务
+Check your connection and press Send report again; your text is kept.	请检查网络后重新点击「发送反馈」，已填写的内容会保留。
+The report was not accepted	反馈未被接受
+Change the description or choose another log, then send it again.	请修改描述或换一份日志后重新发送。
+The online service could not take the report	在线服务无法接收该反馈
+This is not your fault. Try again in a few minutes; your text is kept.	这不是你的问题，几分钟后重试即可，已填写的内容会保留。
+Description	问题描述
+Launcher version	启动器版本
+Game build	游戏构建
+Game version	游戏版本
+CUSA	CUSA 编号
+Operating system	操作系统
+Log shortened to its end	日志已截断，仅保留末尾
+Log after privacy filtering	隐私过滤后的日志

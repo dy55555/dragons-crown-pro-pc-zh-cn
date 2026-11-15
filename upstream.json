@@ -1,0 +1,12 @@
+{
+  "upstream": "https://github.com/saulob/dragons-crown-pro-pc",
+  "upstream_author": "saulob",
+  "upstream_license": "GPL-2.0",
+  "based_on_version": "v1.2.0",
+  "based_on_commit": "fc6acdb5a11febb0206bc895afb0ae2ca3035a13",
+  "based_on_date": "2026-11-13",
+  "translation": "zh-CN",
+  "language_pack_entries": 736,
+  "license": "GPL-2.0",
+  "note": "非官方项目。本仓库不含游戏本体、不含上游 exe，只提供界面译文与一个本地补丁脚本。"
+}
