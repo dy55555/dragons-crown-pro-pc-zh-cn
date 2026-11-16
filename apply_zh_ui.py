@@ -446,9 +446,13 @@ def do_check(exe: Path, orig: Path, data: bytes, rdra: int, rd_end: int,
         print(f"定点 {en:<8}: {state}")
     print()
     if patched and data.count(b"segoeui.") > 0:
-        print("提醒：还有 Segoe UI 字体名没换掉，游戏内 F1 菜单会是方块。")
+        print("提醒：还有 Segoe UI 字体名没换掉，启动器界面会是方块。")
     elif patched:
-        print("启动器界面与游戏内 F1 菜单的字体都已换好。")
+        print("启动器界面字体已换好。")
+    print()
+    print("注意：游戏内 F1 选项/金手指菜单由游戏本体的另一套 ImGui 渲染，")
+    print("      用的是内嵌 ProggyClean 字体（纯拉丁），本工具改不到它。")
+    print("      该菜单里的中文仍可能显示为方块，这是上游本身的限制。")
     return 0
 
 
