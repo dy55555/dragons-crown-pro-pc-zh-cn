@@ -231,12 +231,17 @@ def patch_font_literals(buf: bytearray) -> int:
 
 
 def patch_glyph_range(buf: bytearray, pe: PE):
-    """ImGui GetGlyphRangesDefault 的 {0x20,0xFF,0} → {0x20,0x9FFF,0}"""
+    """ImGui GetGlyphRangesDefault 的 {0x20,0xFF,0} → {0x20,0x9FFF,0}
+
+    这是 u16 数组：低界 0x20、高界 0xFF、结尾 0。高界是小端 u16，必须整体
+    写成 0x9FFF（字节 FF 9F）。曾误写成只改一个字节 9F，得到高界 0x009F，
+    中文字形不在范围内 → F1 菜单全是菱形缺字符。
+    """
     name, va, vsz, ra, rsz = pe.sec(".rdata")
     i = buf.find(b"\x20\x00\xff\x00\x00\x00", ra, ra + rsz)
     if i < 0:
         return False
-    buf[i + 2] = 0x9F
+    struct.pack_into("<H", buf, i + 2, 0x9FFF)
     return True
 
 
@@ -422,8 +427,10 @@ def do_check(exe: Path, orig: Path, data: bytes, rdra: int, rd_end: int,
     print(f"字体名     : simhei {data.count(b'simhei.t')} 处，"
           f"Segoe UI 残留 {data.count(b'segoeui.')} 处")
     rng = "0x20–0xFF（未扩展，中文会是方块）"
-    if data.find(b"\x20\x00\x9f\x00\x00\x00", rdra, rd_end) >= 0:
+    if data.find(b"\x20\x00\xff\x9f\x00\x00", rdra, rd_end) >= 0:
         rng = "0x20–0x9FFF（已扩展）"
+    elif data.find(b"\x20\x00\x9f\x00\x00\x00", rdra, rd_end) >= 0:
+        rng = "0x20–0x9F（改错了！高界只写了单字节，中文仍是方块）"
     print(f"字形范围   : {rng}")
     # 三处定点补丁：锚点本身含会汉化的词，英文锚点消失即说明补丁已落地
     pe = PE(data)
