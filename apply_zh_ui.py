@@ -55,6 +55,22 @@ SKIP_EXACT = {
 # 这三个词由锚点定点补丁处理，不能走通用替换（原因见 patch_special 注释）
 SKIP_SPECIAL = {"play", "about", "russian"}
 
+# 内部键保护：这些位置的 "Cheats" 是代码拿来比较/分类的键，不是界面文字。
+# 血泪教训：把它们也译成「作弊」后，launcher/feature_sites.cpp 的
+# `std::string_view(spec.feature) != "Cheats"` 恒成立 → 全部金手指站点被跳过
+# → 日志 "cheat set sites: incomplete" → 游戏内金手指全军覆没（按钮变「不可用」）。
+# 用整段上下文做锚点而不是写死偏移，exe 升级后只要诊断串结构没大改仍能命中。
+# 每条 = (定位锚点, 受保护的英文串)。锚点里须含该英文串。
+INTERNAL_KEY_ANCHORS = (
+    # --- Cheats: 签名表 SiteSpec.feature / 诊断分类键（改了金手指全废）---
+    (b"49 89 fe\x00Cheats\x00hook: damage", b"Cheats"),
+    (b"last %s\x00Cheats\x00Japanese NPC voices", b"Cheats"),
+    (b"locators\x00%s\x00Cheats\x00site\x00", b"Cheats"),
+    # --- 联机连接测试：connection_test.cpp:80 用 label == 这两串判断该显示哪条建议 ---
+    (b"\x00Direct connections\x00", b"Direct connections"),
+    (b"\x00Router configuration\x00", b"Router configuration"),
+)
+
 # 定点补丁：(英文锚点, 汉化后锚点, 目标串在英文锚点内的偏移, 英文原文, 中文译文)
 # 用整段上下文做锚点，而不是写死文件偏移 —— 这样 exe 升级后只要界面结构没大改，
 # 锚点仍能命中，一键汉化可跨版本复用。
@@ -107,6 +123,28 @@ class PE:
             if va <= rva < va + max(vsz, rsz):
                 return ra + (rva - va)
         return None
+
+
+def internal_key_spans(data: bytes) -> set[int]:
+    """返回「内部键」字节串的起始偏移集合，这些位置禁止汉化。
+
+    目前是针对 Cheats 的三处：源码把它们当比较键 / 诊断分类键，
+    一旦译成中文，金手指签名的按 feature 筛选就会全部落空。
+    """
+    spans: set[int] = set()
+    for anchor, word in INTERNAL_KEY_ANCHORS:
+        wb = word.encode() if isinstance(word, str) else word
+        word_off = anchor.find(wb)
+        if word_off < 0:
+            continue
+        i = 0
+        while True:
+            i = data.find(anchor, i)
+            if i < 0:
+                break
+            spans.add(i + word_off)
+            i += 1
+    return spans
 
 
 def unescape(s: str) -> str:
@@ -355,14 +393,18 @@ def bulk_copy_sites(pe: PE) -> dict[int, list[int]]:
 
 
 def inline_tail_caps(pe: PE, jobs, sites) -> dict[str, list[tuple[int, int]]]:
-    """找出「位置固定由代码拼装」的字符串。
+    """找出「由代码拼装」的字符串副本位置。
 
-    返回 {英文原文: [(安全上限, 立即数所在文件偏移), ...]}。上限 = 该串前多少个字节
-    真正来自 .rdata；剩下的字节由代码里的 8 字节立即数补上，所以要一并改。
+    返回 {英文原文: [(该副本文件偏移, 安全上限, 立即数文件偏移), ...]}。
+    上限 = 该副本前多少字节真正来自 .rdata，其余由代码里的 8 字节立即数补上。
+
+    ★ 关键：必须按「副本位置」分别记录。同一个词在 exe 里常有多份副本，
+    只有个别副本是拼接的，其余是完整串。若把拼接头套到所有副本，就会把
+    完整串也写残（如 "无边框全" + 残留 "llscreen"）。这是曾经的 bug。
     """
     _n, tva, _vs, tra, trsz = pe.sec(".text")
     code = pe.data[tra:tra + trsz]
-    caps: dict[str, list[tuple[int, int]]] = {}
+    caps: dict[str, list[tuple[int, int, int]]] = {}
     for en, eb, _zb, pos in jobs:
         for off in pos:
             rva = pe.off2rva(off)
@@ -378,7 +420,7 @@ def inline_tail_caps(pe: PE, jobs, sites) -> dict[str, list[tuple[int, int]]]:
                     while k > 0:
                         if k <= len(eb) - 8:
                             imm_off = tra + w0 + j + 2
-                            caps.setdefault(en, []).append((k, imm_off))
+                            caps.setdefault(en, []).append((off, k, imm_off))
                             found = True
                         k = eb.find(imm, k + 1)
                 if found:
@@ -508,6 +550,22 @@ def do_check(exe: Path, orig: Path, data: bytes, rdra: int, rd_end: int,
         rng = "0x20–0x9F（改错了！高界只写了单字节，中文仍是方块）"
     print(f"字形范围   : {rng}")
     print(f"F1/F10 字体: {overlay_font_state(data)}")
+    # 内部键：这些位置必须保持英文，一旦变成中文功能就坏
+    kept = 0
+    for anchor, word in INTERNAL_KEY_ANCHORS:
+        wb = word.encode() if isinstance(word, str) else word
+        wo = anchor.find(wb)
+        if wo < 0:
+            continue
+        i = 0
+        while True:
+            i = data.find(anchor, i)
+            if i < 0:
+                break
+            if data[i + wo:i + wo + len(wb)] == wb:
+                kept += 1
+            i += 1
+    print(f"内部键保护 : {kept} 处保持英文（Cheats×3 / 联机诊断×2；被改会导致金手指失效）")
     # 三处定点补丁：锚点本身含会汉化的词，英文锚点消失即说明补丁已落地
     pe = PE(data)
     _n, _va, _vsz, rdra, rdrsz = pe.sec(".rdata")
@@ -560,6 +618,11 @@ def do_apply(exe: Path, restore: bool, check: bool):
         print("SHA-256:", sha256(exe))
         return 0
 
+    # 内部键位置：这些是本该保持英文的比较键/诊断键，全表统一跳过
+    protected = internal_key_spans(data)
+    if protected:
+        print(f"内部键保护 : {len(protected)} 处（如 Cheats 签名筛选键，防止金手指失效）")
+
     # 逐条收集：字符串副本位置
     jobs = []
     for en, zh in table.items():
@@ -575,7 +638,7 @@ def do_apply(exe: Path, restore: bool, check: bool):
             # 只认真正的字符串起点：前一个字节必须是 NUL。
             # 否则会撞进更长的串内部，例如导入名 SDL_Quit 里的 Quit、
             # 或 "Cheats: disabled for Online Play" 里的 Play，改坏后 exe 直接加载失败。
-            if i == rdra or data[i - 1] == 0:
+            if (i == rdra or data[i - 1] == 0) and i not in protected:
                 pos.append(i)
             i += 1
         if pos:
@@ -593,44 +656,49 @@ def do_apply(exe: Path, restore: bool, check: bool):
     need_reloc = []
     skipped = []
     for en, eb, zb, pos in jobs:
-        pairs = caps.get(en)
-        if not pairs:
-            tail_cap, imm_offs = None, []
-        else:
-            ks = {k for k, _o in pairs}
-            if len(ks) != 1:
-                skipped.append((en, zb, min(ks), "同一串有多处拼装点，上限不一致"))
-                continue
-            tail_cap = ks.pop()
-            imm_offs = [o for _k, o in pairs]
+        # 按副本位置分离：只有真正被代码拼装的副本才用分段写法，
+        # 其余副本是完整串，直接整段写，绝不能套用拼接头。
+        pairs = caps.get(en) or []          # [(pos, cap, imm_off), ...]
+        tail_by_pos: dict[int, tuple[int, int]] = {}
+        for poff, cap, imm_off in pairs:
+            tail_by_pos.setdefault(poff, (cap, imm_off))
 
+        plain_pos = [p for p in pos if p not in tail_by_pos]
         total = len(eb) + 1
-        if tail_cap is None:
-            if len(zb) <= len(eb):
-                for off in pos:
-                    buf[off:off + len(zb)] = zb
-                    buf[off + len(zb):off + total] = b"\0" * (total - len(zb))
-                    n_inplace += 1
-            else:
-                need_reloc.append((en, zb, pos))
-            continue
 
-        # 有代码尾巴：中文长度要么塞进前缀，要么「前缀 + 立即数」两段拼起来
-        if len(zb) < tail_cap:
-            for off in pos:
+        # --- 普通副本：整段写，超长则走迁移 ---
+        for off in plain_pos:
+            if len(zb) <= len(eb):
                 buf[off:off + len(zb)] = zb
                 buf[off + len(zb):off + total] = b"\0" * (total - len(zb))
                 n_inplace += 1
-        elif len(zb) <= tail_cap + 8 and tail_cap >= 8 and len(eb) <= tail_cap + 8:
-            payload = zb[tail_cap:].ljust(8, b"\0")[:8]
-            for off in pos:
-                buf[off:off + tail_cap] = zb[:tail_cap]
-            for io in imm_offs:
-                buf[io:io + 8] = payload
-            n_inplace += len(pos)
-            n_tail += 1
-        else:
-            skipped.append((en, zb, tail_cap, None))
+            else:
+                need_reloc.append((en, zb, [off]))
+
+        # --- 拼接副本：逐位置按各自的 cap 处理 ---
+        for off, (cap, imm_off) in tail_by_pos.items():
+            if len(zb) < cap:
+                # 中文短于前缀槽：整段写进 .rdata，立即数清掉（避免残留英文尾巴）
+                buf[off:off + len(zb)] = zb
+                buf[off + len(zb):off + total] = b"\0" * (total - len(zb))
+                buf[imm_off:imm_off + 8] = b"\0" * 8
+                n_inplace += 1
+            elif len(zb) <= cap + 8 and cap >= 8 and len(eb) <= cap + 8:
+                # 「前缀 + 立即数」两段：前 cap 字节写 .rdata，剩余写立即数
+                payload = zb[cap:].ljust(8, b"\0")[:8]
+                buf[off:off + cap] = zb[:cap]
+                buf[cap + off:off + total] = b"\0" * (total - cap)
+                buf[imm_off:imm_off + 8] = payload
+                n_inplace += 1
+                n_tail += 1
+            else:
+                # 放不下：保留英文原串，不动立即数（宁可不译，也不写残）
+                skipped.append((en, zb, cap, "超出拼接槽"))
+            # 通用保险：无论走哪条分支，中文末尾到原串末尾一律清零。
+            # 若 cap 是误判（该副本其实是完整串），这一步能抹掉任何残留英文半截。
+            tail = off + min(len(zb), total)
+            if tail < off + total:
+                buf[tail:off + total] = b"\0" * (off + total - tail)
 
     # 2) 超长的写入空闲区 + 改引用
     total_need = sum(len(zb) + 1 for _e, zb, _p in need_reloc)

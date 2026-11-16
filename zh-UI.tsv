@@ -119,7 +119,7 @@ PS4 packages (*.pkg)	PS4 PKG (*.pkg)
 Display mode	显示模式
 Borderless Fullscreen fills the monitor. F11 switches while playing.	无边框全屏会铺满显示器，游戏中按 F11 可切换。
 Windowed	窗口
-Borderless Fullscreen	无边框全屏
+Borderless Fullscreen	无边框
 Window size	窗大小
 The game window's size in pixels in Windowed mode. The picture keeps its shape: other window shapes get black bars.	窗口模式下的游戏窗口像素尺寸。画面保持原比例，其他比例会出现黑边。
 Monitor	屏幕
@@ -275,7 +275,7 @@ Puts the keyboard controls and the port hotkeys back to their defaults.	把键�
 Reset to defaults	恢复默认
 Put every key back to its default?	把所有按键恢复为默认？
 Reset	复
-Keys reset to defaults.	按键已恢复默认
+Keys reset to defaults.	按键已重置
 Keyboard controls	键盘按键
 Port hotkeys	热键
 Click a key, then press the new one. Esc cancels. A key can be used for more than one control.	点一个按键，再按下新键。Esc 取消。同一个键可以绑定多个操作。
@@ -349,7 +349,7 @@ Unpacking the game files...	正在解包游戏文件…
 Checking the game files...	检查游戏文件中…
 Unpacking the update...	解包更新中…
 Copying the game files...	复制游戏文件…
-Checking the package...	正在检查 PKG…
+Checking the package...	检查安装包
 Checking the game folder...	检查游戏目录中…
 Cancelled	已取消
 Could not change the game files	无法修改游戏文件
