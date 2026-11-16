@@ -12,6 +12,9 @@
    `lea reg,[rip+xxx]` 指令改成指向新地址。
 2. 界面字体名 Segoe UI → 系统中文字体（否则中文显示为方块）。
 3. ImGui 默认字形范围由 Latin 扩到 0x20–0x9FFF（让中文字形被光栅化）。
+4. 把游戏内 F1 选项 / F10 金手指菜单用的内嵌字体 DejaVuSans.ttf
+   换成随包提供的中文子集 zh-overlay.ttf —— 否则这两个菜单里的
+   中文因为没有字形而显示成方块（文字其实早已汉化，只是画不出来）。
 
 **不改**：游戏内语言设置（user/dcp.ini 的 text_language）、金手指、
 联机、存档、任何选项默认值与逻辑分支。
@@ -35,8 +38,16 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 TABLE = HERE / "zh-UI.tsv"
+OVERLAY_FONT = HERE / "zh-overlay.ttf"   # F1/F10 菜单用的中文子集字体
 BACKUP_SUFFIX = ".zhcn-orig"
 FONT_SLOT = b"simhei.ttf"          # 10 字符 + NUL，正好填满 11 字节槽
+
+# exe 内嵌的 DejaVuSans.ttf 特征：sfnt 头 + numTables=0x13 + head 表标签。
+# 用「字体头 + 固定长度 + 紧跟 18.0f 立即数」三重校验，避免误伤别处数据。
+DEJAVU_SIG = bytes.fromhex("000100000013010000040030")
+DEJAVU_LEN = 759676                       # 官方原值（源码 third_party/fonts/DejaVuSans.ttf）
+FLOAT_18 = bytes.fromhex("00009041")      # 18.0f，紧跟字体之后（AddFontFromMemoryTTF 的 size 参数）
+ZH_FONT_SIG = bytes.fromhex("000100000012010000040020")  # 我们的子集：numTables=18(0x12)
 # 跳过：小写配置键 / 明显是取值而非界面文字
 SKIP_EXACT = {
     "ok", "on", "off", "auto", "yes", "no", "none", "true", "false",
@@ -245,6 +256,47 @@ def patch_glyph_range(buf: bytearray, pe: PE):
     return True
 
 
+def patch_overlay_font(buf: bytearray) -> bool:
+    """把 F1/F10 菜单的内嵌字体 DejaVuSans.ttf 换成中文子集。
+
+    源码 gpu/shim/dcp_overlay.cpp 用 asm .incbin 把 DejaVuSans.ttf 原样
+    嵌进 exe，再 AddFontFromMemoryTTF 加载。这个字体只有拉丁/西里尔字形，
+    菜单里的中文自然画成方块。这里就地把它替换成 zh-overlay.ttf（含全部
+    译文汉字 + ASCII），补零到原长度，不动任何指针和偏移。
+
+    三重校验确保只改这一处：字体头签名 + 原长度 + 紧随其后的 18.0f。
+    已替换过则直接返回 True（幂等）。
+    """
+    i = buf.find(DEJAVU_SIG)
+    if i < 0:
+        return False
+    # 已汉化：该位置现在应是我们的中文字体头，不再是 DejaVu 签名
+    # （函数只在原版数据上调用，这里保留分支以防重复应用）
+    end = i + DEJAVU_LEN
+    if end + 4 > len(buf):
+        return False
+    if buf[end:end + 4] != FLOAT_18:
+        # 长度不符说明 exe 版本不同，拒绝盲改
+        return False
+    if not OVERLAY_FONT.exists():
+        raise SystemExit(f"找不到 F1/F10 菜单字体资源：{OVERLAY_FONT}")
+    font = OVERLAY_FONT.read_bytes()
+    if len(font) > DEJAVU_LEN:
+        raise SystemExit(f"中文字体 {len(font)} 字节 > 原字体 {DEJAVU_LEN} 字节，无法就地替换")
+    buf[i:end] = font + b"\0" * (DEJAVU_LEN - len(font))
+    return True
+
+
+def overlay_font_state(data: bytes) -> str:
+    """返回 F1/F10 字体状态描述。"""
+    i = data.find(DEJAVU_SIG)
+    if i >= 0 and i + DEJAVU_LEN + 4 <= len(data) and data[i + DEJAVU_LEN:i + DEJAVU_LEN + 4] == FLOAT_18:
+        return "DejaVuSans 原版 → F1/F10 中文会显示方块"
+    if data.find(ZH_FONT_SIG) >= 0:
+        return "中文子集 zh-overlay.ttf → F1/F10 中文可显示"
+    return "未知（exe 结构可能已变）"
+
+
 # --------------------------------------------------------------- 代码拼接串
 # 少数界面文字不是整串放在 .rdata，而是「.rdata 里的前缀 + 代码里的 8 字节立即数」
 # 在运行时拼出来的。例如：
@@ -406,8 +458,14 @@ def patch_special(buf: bytearray, pe: PE) -> list[tuple[str, int]]:
 
 # --------------------------------------------------------------- 状态检查
 def is_patched(data: bytes) -> bool:
-    """字体名已被换成 simhei.ttf 就算已汉化（官方原版绝不会出现这个串）"""
-    return b"simhei.ttf" in data or b"simhei.t" in data
+    """完整汉化 = 启动器字体已换 + F1/F10 内嵌字体也已换。
+
+    只有启动器字体换了、F1/F10 字体还是 DejaVu 的，是旧版汉化，
+    返回 False 让流程补上字体补丁（其余步骤天然幂等，重复无害）。
+    """
+    launcher_done = b"simhei.t" in data
+    overlay_done = data.find(ZH_FONT_SIG) >= 0
+    return launcher_done and overlay_done
 
 
 def do_check(exe: Path, orig: Path, data: bytes, rdra: int, rd_end: int,
@@ -432,6 +490,7 @@ def do_check(exe: Path, orig: Path, data: bytes, rdra: int, rd_end: int,
     elif data.find(b"\x20\x00\x9f\x00\x00\x00", rdra, rd_end) >= 0:
         rng = "0x20–0x9F（改错了！高界只写了单字节，中文仍是方块）"
     print(f"字形范围   : {rng}")
+    print(f"F1/F10 字体: {overlay_font_state(data)}")
     # 三处定点补丁：锚点本身含会汉化的词，英文锚点消失即说明补丁已落地
     pe = PE(data)
     _n, _va, _vsz, rdra, rdrsz = pe.sec(".rdata")
@@ -450,9 +509,11 @@ def do_check(exe: Path, orig: Path, data: bytes, rdra: int, rd_end: int,
     elif patched:
         print("启动器界面字体已换好。")
     print()
-    print("注意：游戏内 F1 选项/金手指菜单由游戏本体的另一套 ImGui 渲染，")
-    print("      用的是内嵌 ProggyClean 字体（纯拉丁），本工具改不到它。")
-    print("      该菜单里的中文仍可能显示为方块，这是上游本身的限制。")
+    if data.find(ZH_FONT_SIG) < 0:
+        print("提醒：F1 选项 / F10 金手指菜单的内嵌字体还没换，")
+        print("      这两个菜单里的中文会显示成方块。请重跑一次一键汉化。")
+    else:
+        print("F1 选项 / F10 金手指菜单的中文也已能正常显示。")
     return 0
 
 
@@ -575,9 +636,10 @@ def do_apply(exe: Path, restore: bool, check: bool):
                     buf[disp_off:disp_off + 4] = struct.pack("<i", d)
                     n_reloc += 1
 
-    # 3) 字体与字形范围
+    # 3) 字体与字形范围（启动器字体 + F1/F10 内嵌字体 + 字形范围）
     fonts = patch_fonts(buf)
     glyph = patch_glyph_range(buf, pe)
+    overlay = patch_overlay_font(buf)
 
     # 4) 保险：导入名一个字节都不许变
     broken = [(o, data[o:o + n], bytes(buf[o:o + n]))
@@ -604,8 +666,9 @@ def do_apply(exe: Path, restore: bool, check: bool):
         for en, zb, cap, why in skipped:
             print(f"           上限 {cap:>3} 字节 / 需要 {len(zb):>3}：{en}"
                   + (f"  [{why}]" if why else ""))
-    print(f"字体替换 : {', '.join(fonts) if fonts else '已处理'}")
-    print(f"字形范围 : {'0x20–0x9FFF' if glyph else '未找到（可能已处理）'}")
+    print(f"启动器字体: {', '.join(fonts) if fonts else '已处理'}")
+    print(f"字形范围  : {'0x20–0x9FFF' if glyph else '未找到（可能已处理）'}")
+    print(f"F1/F10字体: {'已换成中文子集' if overlay else '已是中文或结构已变（详见 --check）'}")
     print(f"新 SHA-256: {sha256(exe)}")
     return 0
 
