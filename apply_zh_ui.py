@@ -42,6 +42,23 @@ SKIP_EXACT = {
     "ok", "on", "off", "auto", "yes", "no", "none", "true", "false",
     "xbox", "playstation", "windowed", "fullscreen", "borderless",
 }
+# 这三个词由锚点定点补丁处理，不能走通用替换（原因见 patch_special 注释）
+SKIP_SPECIAL = {"play", "about", "russian"}
+
+# 定点补丁：(英文锚点, 汉化后锚点, 目标串在英文锚点内的偏移, 英文原文, 中文译文)
+# 用整段上下文做锚点，而不是写死文件偏移 —— 这样 exe 升级后只要界面结构没大改，
+# 锚点仍能命中，一键汉化可跨版本复用。
+# 两份锚点供 --check 精确判断：只看目标词是否落地，不会因别处出现同字而误报。
+SPECIAL_ANCHORS = (
+    # Play 紧贴 "Generic PnP Moni" 尾部，"前一字节必须是 NUL" 的规则会漏掉它
+    (b"Generic PnP MoniPlay\x00", b"Generic PnP Moni" + "玩".encode(),
+     16, "Play", "玩"),
+    # About 5 字符槽装不下 6 字节的「关于」，但紧邻的下一个字节本来就是 NUL，可借 1 字节
+    (b"Bug Report\x00About\x00", "反馈".encode() + b"\x00" * 5 + "关于".encode(),
+     11, "About", "关于"),
+    # 语言显示名：小写 russian 是内部键（绝不能动），紧跟的才是显示名
+    (b"russian\x00Russian\x00", b"russian\x00" + "俄语".encode(), 8, "Russian", "俄语"),
+)
 
 
 # --------------------------------------------------------------------------- PE
@@ -340,6 +357,48 @@ def import_name_spans(pe: PE) -> list[tuple[int, int]]:
     return spans
 
 
+# --------------------------------------------------------------- 定点补丁
+def patch_special(buf: bytearray, pe: PE) -> list[tuple[str, int]]:
+    """处理通用替换覆盖不到的少数界面词。
+
+    这三处都是「定长槽 + 紧邻 NUL」结构，直接就地写，绝不移动任何字节：
+      1. Play    —— 前一字节不是 NUL（Generic PnP Moni|Play），通用规则跳过
+      2. About   —— 译文 6 字节比原文 5 字节长，通用规则会走迁移分支，
+                    但导航块没有 lea 引用，迁移后 UI 仍读旧地址。实际槽后
+                    紧邻一个空闲 NUL，借来即可，不移动任何东西。
+      3. Russian —— 表里原先没有；小写 russian 是内部语言键不能改，
+                    只改紧跟其后的显示名。
+
+    返回 [(英文, 命中处数), ...] 便于输出。
+    """
+    _n, _va, _vsz, ra, rsz = pe.sec(".rdata")
+    end = ra + rsz
+    done = []
+    for anchor, _zh_anchor, disp, en, zh in SPECIAL_ANCHORS:
+        zb = zh.encode()
+        hit = 0
+        i = ra
+        while True:
+            i = buf.find(anchor, i, end)
+            if i < 0:
+                break
+            p = i + disp                      # 目标串起点
+            slot = len(en) + 1                # 原英文 + NUL 的槽长
+            need = len(zb) + 1                # 中文 + NUL
+            # 中文比槽长时，借用紧邻的 NUL；若紧邻不是 NUL 则放弃，避免踩坏下一个串
+            if need > slot:
+                extra = need - slot
+                if any(buf[p + slot + k] != 0 for k in range(extra)):
+                    i += 1
+                    continue
+            buf[p:p + need] = zb + b"\0"
+            hit += 1
+            i += len(anchor)
+        if hit:
+            done.append((en, hit))
+    return done
+
+
 # --------------------------------------------------------------- 状态检查
 def is_patched(data: bytes) -> bool:
     """字体名已被换成 simhei.ttf 就算已汉化（官方原版绝不会出现这个串）"""
@@ -366,6 +425,18 @@ def do_check(exe: Path, orig: Path, data: bytes, rdra: int, rd_end: int,
     if data.find(b"\x20\x00\x9f\x00\x00\x00", rdra, rd_end) >= 0:
         rng = "0x20–0x9FFF（已扩展）"
     print(f"字形范围   : {rng}")
+    # 三处定点补丁：锚点本身含会汉化的词，英文锚点消失即说明补丁已落地
+    pe = PE(data)
+    _n, _va, _vsz, rdra, rdrsz = pe.sec(".rdata")
+    end = rdra + rdrsz
+    for anchor, zh_anchor, disp, en, zh in SPECIAL_ANCHORS:
+        if data.find(anchor, rdra, end) >= 0:
+            state = "未汉化"
+        elif data.find(zh_anchor, rdra, end) >= 0:
+            state = "已汉化"
+        else:
+            state = "（两者都找不到，界面结构可能已变）"
+        print(f"定点 {en:<8}: {state}")
     print()
     if patched and data.count(b"segoeui.") > 0:
         print("提醒：还有 Segoe UI 字体名没换掉，游戏内 F1 菜单会是方块。")
@@ -403,7 +474,7 @@ def do_apply(exe: Path, restore: bool, check: bool):
     # 逐条收集：字符串副本位置
     jobs = []
     for en, zh in table.items():
-        if en.lower() in SKIP_EXACT:
+        if en.lower() in SKIP_EXACT or en.lower() in SKIP_SPECIAL:
             continue
         eb, zb = en.encode(), zh.encode()
         pos = []
@@ -422,6 +493,9 @@ def do_apply(exe: Path, restore: bool, check: bool):
             jobs.append((en, eb, zb, pos))
 
     buf = bytearray(data)
+
+    # 0) 定点补丁：三处通用规则处理不了的词（Play / About / Russian）
+    special = patch_special(buf, pe)
 
     # 1) 就地替换；代码拼装的串连立即数一起改
     caps = inline_tail_caps(pe, jobs, bulk_copy_sites(pe))
@@ -508,6 +582,8 @@ def do_apply(exe: Path, restore: bool, check: bool):
         print(f"已备份官方原版 → {orig.name}")
 
     exe.write_bytes(buf)
+    if special:
+        print(f"定点补丁 : " + ", ".join(f"{en}×{n}" for en, n in special))
     print(f"就地替换 : {n_inplace} 处")
     if n_tail:
         print(f"拼接改写 : {n_tail} 条（文字由代码拼装，已连同指令立即数一起改）")
