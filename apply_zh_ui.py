@@ -47,7 +47,6 @@ FONT_SLOT = b"simhei.ttf"          # 10 字符 + NUL，正好填满 11 字节槽
 DEJAVU_SIG = bytes.fromhex("000100000013010000040030")
 DEJAVU_LEN = 759676                       # 官方原值（源码 third_party/fonts/DejaVuSans.ttf）
 FLOAT_18 = bytes.fromhex("00009041")      # 18.0f，紧跟字体之后（AddFontFromMemoryTTF 的 size 参数）
-ZH_FONT_SIG = bytes.fromhex("000100000012010000040020")  # 我们的子集：numTables=18(0x12)
 # 跳过：小写配置键 / 明显是取值而非界面文字
 SKIP_EXACT = {
     "ok", "on", "off", "auto", "yes", "no", "none", "true", "false",
@@ -287,13 +286,31 @@ def patch_overlay_font(buf: bytearray) -> bool:
     return True
 
 
+def overlay_font_is_original(data: bytes) -> bool:
+    """原版 DejaVu 字体是否还在（签名 + 长度 + 18.0f 三重校验）。
+
+    换成中文子集后 DejaVu 签名消失，此函数返回 False。
+    不依赖具体中文字体签名 —— 以后重做子集 / 换字体源也照样判定。
+    """
+    i = data.find(DEJAVU_SIG)
+    return i >= 0 and i + DEJAVU_LEN + 4 <= len(data) and data[i + DEJAVU_LEN:i + DEJAVU_LEN + 4] == FLOAT_18
+
+
 def overlay_font_state(data: bytes) -> str:
     """返回 F1/F10 字体状态描述。"""
-    i = data.find(DEJAVU_SIG)
-    if i >= 0 and i + DEJAVU_LEN + 4 <= len(data) and data[i + DEJAVU_LEN:i + DEJAVU_LEN + 4] == FLOAT_18:
+    if overlay_font_is_original(data):
         return "DejaVuSans 原版 → F1/F10 中文会显示方块"
-    if data.find(ZH_FONT_SIG) >= 0:
-        return "中文子集 zh-overlay.ttf → F1/F10 中文可显示"
+    # 已替换：DejaVu 签名消失，但字体槽位后仍应紧跟 18.0f。
+    # 槽位起点 = 18.0f 位置 - DEJAVU_LEN；逐个候选校验其 sfnt 头，避免撞到别处的 18.0f。
+    pos = 0
+    while True:
+        pos = data.find(FLOAT_18, pos)
+        if pos < 0:
+            break
+        start = pos - DEJAVU_LEN
+        if start >= 0 and data[start:start + 4] == b"\x00\x01\x00\x00":
+            return "中文子集 zh-overlay.ttf → F1/F10 中文可显示（含 ‹ › 箭头）"
+        pos += 1
     return "未知（exe 结构可能已变）"
 
 
@@ -464,7 +481,7 @@ def is_patched(data: bytes) -> bool:
     返回 False 让流程补上字体补丁（其余步骤天然幂等，重复无害）。
     """
     launcher_done = b"simhei.t" in data
-    overlay_done = data.find(ZH_FONT_SIG) >= 0
+    overlay_done = not overlay_font_is_original(data)
     return launcher_done and overlay_done
 
 
@@ -509,7 +526,7 @@ def do_check(exe: Path, orig: Path, data: bytes, rdra: int, rd_end: int,
     elif patched:
         print("启动器界面字体已换好。")
     print()
-    if data.find(ZH_FONT_SIG) < 0:
+    if overlay_font_is_original(data):
         print("提醒：F1 选项 / F10 金手指菜单的内嵌字体还没换，")
         print("      这两个菜单里的中文会显示成方块。请重跑一次一键汉化。")
     else:
