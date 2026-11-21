@@ -742,3 +742,170 @@ CUSA	CUSA
 Operating system	操作系统
 Log shortened to its end	日志只保留末尾
 Log after privacy filtering	隐私过滤后的日志
+Save keeps the launcher settings. Play saves them and starts the game.	保存仅存设置，游玩存设置并启动游戏。
+Freezes local human players' current health	冻结本地玩家当前生命
+Scales the damage local human players take	调整本地玩家受到的伤害
+Mouse	鼠标
+Mouse Controls	鼠标控制
+Enables mouse buttons, wheel and pointer controls during gameplay.	游戏中启用鼠标按键、滚轮与指针控制。
+Used together with the keyboard and the controller while Mouse Controls is On. Click a row, then press the mouse button to use. Esc cancels. Holding the Pointer Control button hides the cursor and moves the game's pointer with the mouse; the interaction button then performs the pointer interaction.	鼠标控制开启时可与键盘、手柄同用。点一行后按鼠标键指定；Esc 取消。按住指针控制键会隐藏光标并用鼠标移动游戏指针，交互键随即执行指针交互。
+Mouse defaults	鼠标默认设置
+Puts the mouse buttons, wheel and pointer sensitivity back to their defaults.	将鼠标按键、滚轮与指针灵敏度恢复默认。
+Put every mouse control back to its default?	要将所有鼠标控制恢复默认吗？
+Mouse controls reset to defaults.	鼠标控制已恢复默认。
+Primary action	主要动作
+Secondary action	次要动作
+Pointer Control	指针控制
+Pointer Interaction	指针交互
+The button for the Square (X) action, the main attack.	对应方块（X）动作的按键，即主攻击。
+The button for the Circle (B) action.	对应圆圈（B）动作的按键。
+Hold this button and move the mouse to control the game's pointer. Releasing it goes back to normal play.	按住此键并移动鼠标可控制游戏指针，松开即恢复正常游玩。
+While Pointer Control is active, this button performs the pointer interaction. It cannot be the same button as Pointer Control.	指针控制生效时，此键执行指针交互，不能与指针控制用同一个键。
+Pointer Control and Pointer Interaction need two different mouse buttons.	指针控制与指针交互需使用两个不同的鼠标键。
+Mouse Sensitivity	鼠标灵敏度
+Controls how fast mouse movement moves the game's pointer.	控制鼠标移动带动游戏指针的速度。
+Default	默认
+Wheel up	滚轮上
+Wheel down	滚轮下
+The button a wheel step presses. Off by default.	滚轮每格触发的按键，默认关闭。
+Clear	清除
+Press a mouse button...  (Esc cancels)	请按一个鼠标键…（Esc 取消）
+Left Mouse	鼠标左键
+Right Mouse	鼠标右键
+Middle Mouse	鼠标中键
+Mouse 4	鼠标键4
+Mouse 5	鼠标键5
+Comms Wheel	交流轮盘
+Enable Boss Battle	启用头目战
+Not available for this build yet: its executable has not been checked.	此版本暂不可用：其可执行文件尚未校验。
+Adds Boss Battle to the Dragon's Haven Inn menu, after Report adventurers. Fights there never change campaign progress. Online, only the host needs this option; guests with a compatible version join automatically.	在酒馆「汇报冒险者」之后加入头目战。对战不改变战役进度。联机时仅房主需开启此选项，兼容版本的客机自动加入。
+Adds Boss Battle to the Dragon's Haven Inn menu, after Report adventurers. Applies the next time the Inn menu opens. Fights there never change campaign progress. Online, only the host needs this option.	在酒馆「汇报冒险者」之后加入头目战，下次打开酒馆菜单时生效。对战不改变战役进度。联机时仅房主需开启此选项。
+Boss Battle	头目战
+Unlock Labyrinth of Chaos	解锁混沌迷宫
+Unlock Ultimate + Tower of Mirages	解锁终极＋幻影之塔
+Opens the Labyrinth of Chaos as soon as the Stables are available. Floors, rewards and progress stay the game's own.	马厩可用后即开启混沌迷宫，层数、奖励与进度均沿用游戏原样。
+Lets the Temple change the difficulty to Ultimate as soon as the Stables are available. On Ultimate, the Stables lead to the Tower of Mirages. Nothing is marked as cleared. A character on Ultimate stays on it when this is turned Off: change back to Normal at the Temple first.	马厩可用后即可在神殿将难度调为终极。终极下马厩通往幻影之塔，不会标记为已通关。关闭此选项后，终极角色仍留在终极：需先在神殿调回普通。
+Attempts	挑战次数
+Return to Dragon's Haven Inn.	返回龙之守望酒馆。
+Boss Battle is not available for this game build.	此游戏版本不支持头目战。
+Fight All stopped: a safety check failed. The character progression saved so far is kept.	连战中止：安全检查失败。已保存的角色进度保留。
+Online Boss Battle is not available yet.	联机头目战暂不可用。
+Boss Battle did not start: the campaign save could not be protected. Try again.	头目战未启动：无法保护战役存档，请重试。
+Boss Battle did not start: the campaign state could not be kept.	头目战未启动：无法保留战役状态。
+Boss Battle: the game did not start the battle.	头目战：游戏未开启对战。
+Boss Battle: the game did not enter the boss arena.	头目战：游戏未进入头目场地。
+Boss Battle could not put the campaign back. Saving keeps your progress from before the fight; restart the game before playing on.	头目战未能恢复战役。存档保留对战前的进度，请重启游戏后再继续。
+Editor	编辑
+Save Data	存档数据
+Appearance	外观
+Apply Changes	应用更改
+Unsaved changes	有未保存的更改
+You have unsaved changes. Apply them, discard them, or cancel.	有未保存的更改。请应用、放弃或取消。
+None	无
+Current	当前
+Characters	角色
+unknown error	未知错误
+Destination	目标
+Select a character to edit it. Nothing is written until Apply Changes.	选择一个角色进行编辑。应用更改前不会写入任何内容。
+Back to Characters	返回角色列表
+Lv	等级
+Name	名字
+Slot	槽位
+Character Editor	角色编辑器
+The character's name, up to 8 letters.	角色名字，最多 8 个字母。
+Level	等级
+Skill Points	技能点
+Current HP	当前生命
+Max HP	最大生命
+Select a character first.	请先选择角色。
+The changes are not valid and were not saved.	更改无效，未保存。
+Could not create a backup; the save was not changed.	无法创建备份，存档未改动。
+Could not write the save; the original was left untouched.	无法写入存档，原文件未改动。
+Changes applied.	更改已应用。
+Changes discarded.	更改已放弃。
+Discard Changes	放弃更改
+The Editor has unapplied changes. Use Apply Changes or Discard Changes on the Editor page first.	编辑器有未应用的更改，请先在编辑页应用或放弃更改。
+Asset unavailable	资源不可用
+Reset Part	重置部件
+Hiding it can show areas the game never paints.	隐藏后可显示游戏从不绘制的区域。
+Saved custom looks could not be read.	无法读取已保存的自定外观。
+Armor	护甲
+Engraved Trim	雕花镶边
+Crest	纹章
+Crest Accent	纹章点缀
+Face	面部
+Hood	兜帽
+Horns	角
+Sword	剑
+Shield	盾
+Shield Accent	盾牌点缀
+Axe	斧
+Bow	弓
+Hammers	锤
+Staff	法杖
+Eyes	双眼
+Bust Lace	胸衣花边
+Sleeve Frills	袖口褶边
+Random	随机
+All Colors Random	全部颜色随机
+Gives every part a new color; visibility and the base color stay.	为每个部件随机新颜色，可见性与底色不变。
+Leather	皮革
+Skin	皮肤
+Boots & Gauntlets	靴子与护手
+Bikini	比基尼
+Hood & Cape	兜帽与披风
+Tunic	束腰衣
+Collar	衣领
+Shorts	短裤
+Laces & Trim	系带与镶边
+Quiver	箭袋
+Arrows	箭
+Boots	靴子
+Accessories	饰品
+Beard	胡须
+Cape	披风
+Helmet	头盔
+Wrist Guards	护腕
+Belt	腰带
+Dress	连衣裙
+Hat	帽子
+Bodice	紧身胸衣
+Eye	眼睛
+Hat Band	帽带
+Robe	长袍
+Trousers	长裤
+Pendant	吊坠
+Gloves	手套
+Base Color	底色
+The native color the custom changes are drawn over.	自定颜色叠加于其上的原色。
+Selected Part	所选部件
+Click the character, or choose a part here.	点击角色，或在此选择部件。
+Recolors the part and keeps its painted shading.	为部件重新着色并保留其明暗。
+Part Visibility	部件可见性
+Part Color	部件颜色
+Edit Appearance	编辑外观
+Loading appearance...	正在载入外观…
+Installed game	已安装的游戏
+save found	个存档
+saves found	个存档
+Install the game first to edit characters	请先安装游戏再编辑角色
+character	个角色
+characters	个角色
+No saves found for the installed game	已安装的游戏未找到存档
+This save could not be loaded.	无法载入此存档。
+Unable to load appearance	无法载入外观
+Back to Character Editor	返回角色编辑器
+Reset Custom	重置自定
+Removes every custom change and shows the base color again.	移除全部自定更改，重新显示底色。
+Remove every custom change of this character?	要移除此角色的全部自定更改吗？
+Remove changes	移除更改
+Keep changes	保留更改
+Could not write the custom appearance; nothing was applied.	无法写入自定外观，未应用任何更改。
+Hair	头发
+Tattoo	纹身
+Feather	羽毛
+Valid	有效
+Invalid appearance value	外观数值无效
+A character has an invalid appearance value. Pick a color for it, then Apply Changes.	某角色的外观数值无效。请为其选择颜色，再应用更改。
+The preview draws the default weapon, not the equipped one.	预览显示的是默认武器，而非已装备的武器。
+Character art unavailable	角色图像不可用
