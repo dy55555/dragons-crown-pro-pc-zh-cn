@@ -30,6 +30,7 @@ class App:
         self.path = tk.StringVar(value=str(se.DEFAULT_SAVE))
         self.data = None
         self.names = se.load_names(se.ITEMS_TSV)
+        self.mods = se.load_names(se.MODS_TSV)
         self.item_list = sorted(self.names.items())
         self.item_choices = [f"{v:04X}  {n}" for v, n in self.item_list]
         self.choice_to_id = {f"{v:04X}  {n}": v for v, n in self.item_list}
@@ -97,10 +98,12 @@ class App:
 
     def refresh_tree(self):
         self.tree.delete(*self.tree.get_children())
+        self.node_tag = {}   # node id -> ("item"|"char"|"bag"|"slot", ...)
         for slot in range(se.DATA_SLOT_COUNT):
             gold = self.effective_u32(slot * se.DATA_SLOT_STRIDE + se.GOLD_OFFSET)
             snode = self.tree.insert("", "end", text=f"DATA {slot+1}   金币 {gold}",
-                                     values=(("slot", slot),), open=(slot == 0))
+                                     open=(slot == 0))
+            self.node_tag[snode] = ("slot", slot)
             for ci in range(se.CHAR_COUNT):
                 o = se.char_offset(slot, ci)
                 if not se.present(self.data, o):
@@ -108,18 +111,24 @@ class App:
                 nm = se.cname(self.data, o)
                 lvl = self.effective_u8(o + se.F_LEVEL) + 1
                 cls = se.CLASSES.get(self.effective_u8(o + se.F_CLASS), "?")
-                cnode = self.tree.insert(snode, "end", text=f"  {nm}  {cls}  Lv{lvl}",
-                                         values=(("char", slot, ci),))
+                cnode = self.tree.insert(snode, "end", text=f"  {nm}  {cls}  Lv{lvl}")
+                self.node_tag[cnode] = ("char", slot, ci)
                 for bag in (0, 1):
                     bnode = self.tree.insert(cnode, "end", text=f"    {se.BAG_NAMES[bag]}",
-                                             values=(("bag", slot, ci, bag),), open=(bag == 0))
+                                             open=(bag == 0))
+                    self.node_tag[bnode] = ("bag", slot, ci, bag)
                     for si in range(se.BAG_SLOT_COUNT):
                         bo = se.bag_offset(o, bag, si)
                         iid = self.effective_u16(bo)
-                        txt = se.item_name(iid, self.names) or ("" if iid == 0 else "?")
-                        self.tree.insert(bnode, "end",
-                                         text=f"      [{si}] {iid:#05x} {txt}",
-                                         values=(("item", slot, ci, bag, si),))
+                        if iid == se.CONSUMABLE_ID:
+                            qo = bo + se.QTY_OFFSET
+                            q = self.effective_u16(qo) & 0xFF
+                            txt = f"消耗品 x{q}"
+                        else:
+                            txt = se.item_name(iid, self.names) or ("" if iid == 0 else "?")
+                        inode = self.tree.insert(bnode, "end",
+                                                 text=f"      [{si}] {iid:#05x} {txt}")
+                        self.node_tag[inode] = ("item", slot, ci, bag, si)
 
     # ---------- 有效值（含未保存改动）----------
     # edits[offset] = (value, width)，width ∈ {1,2,4}
@@ -145,7 +154,9 @@ class App:
         sel = self.tree.selection()
         if not sel:
             return
-        tag = self.tree.item(sel[0], "values")[0]
+        tag = self.node_tag.get(sel[0])
+        if not tag:
+            return
         for w in list(self.detail_inner.winfo_children()):
             w.destroy()
         if tag[0] == "item":
@@ -154,9 +165,37 @@ class App:
             self.show_char(*tag[1:])
         elif tag[0] == "slot":
             self.show_slot(tag[1])
+        elif tag[0] == "bag":
+            self.show_bag(sel[0], *tag[1:])
         else:
             ttk.Label(self.detail_inner, text="选择左侧任一角色或装备格进行编辑",
                       foreground="#666").pack(anchor="w")
+
+    def select_item(self, node):
+        self.tree.selection_set(node)
+        self.tree.focus(node)
+        self.tree.see(node)
+        self.on_select(None)
+
+    def show_bag(self, node, slot, ci, bag):
+        ttk.Label(self.detail_inner,
+                  text=f"DATA {slot+1} / 角色{ci} / {se.BAG_NAMES[bag]} —— 整栏一览",
+                  font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 6))
+        ttk.Label(self.detail_inner,
+                  text="点每行的【编辑】即可选中该格并修改；也可直接双击左侧具体格子。",
+                  foreground="#666", wraplength=740, justify="left").pack(anchor="w", pady=(0, 10))
+        for si, child in enumerate(self.tree.get_children(node)):
+            bo = se.bag_offset(se.char_offset(slot, ci), bag, si)
+            iid = self.effective_u16(bo)
+            if iid == se.CONSUMABLE_ID:
+                q = self.effective_u16(bo + se.QTY_OFFSET) & 0xFF
+                lab = "特殊物品(非堆叠)" if q == 0xFF else f"消耗品 x{q}"
+            else:
+                lab = se.item_name(iid, self.names) or ("(空)" if iid == 0 else "?")
+            row = ttk.Frame(self.detail_inner)
+            row.pack(anchor="w", pady=2, fill="x")
+            ttk.Label(row, text=f"[{si}] {iid:#05x}  {lab}", width=34).pack(side="left")
+            ttk.Button(row, text="编辑", command=lambda c=child: self.select_item(c)).pack(side="left")
 
     def show_item(self, slot, ci, bag, si):
         o = se.bag_offset(se.char_offset(slot, ci), bag, si)
@@ -188,10 +227,62 @@ class App:
             self.update_changes()
 
         combo.bind("<<ComboboxSelected>>", on_combo)
-        ttk.Label(self.detail_inner,
-                  text="说明：只改物品ID这2字节，装备的耐久/词条等其余字节原样保留。\n"
-                       "换上不存在的物品ID可能被游戏忽略；建议从下拉里选。",
-                  foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(14, 0))
+
+        if cur == se.CONSUMABLE_ID:
+            ttk.Label(self.detail_inner, text="消耗品（这一格攒的是消耗品，不是装备）",
+                      font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(10, 4))
+            qo = o + se.QTY_OFFSET
+            rawq = self.effective_u16(qo)
+            qrow = ttk.Frame(self.detail_inner)
+            qrow.pack(anchor="w")
+            ttk.Label(qrow, text="数量 (0-255)", width=16).pack(side="left")
+            qvar = tk.StringVar(value=str(rawq & 0xFF))
+            ttk.Entry(qrow, textvariable=qvar, width=8).pack(side="left")
+            ttk.Label(qrow, text=f"@{qo:#x}  u16 低字节", foreground="#888").pack(side="left", padx=6)
+
+            def apply_qty():
+                try:
+                    q = int(qvar.get())
+                except ValueError:
+                    return
+                if not (0 <= q <= 255):
+                    messagebox.showwarning("超出范围", "数量必须在 0-255 之间")
+                    return
+                self.edits[qo] = ((rawq & 0xFF00) | q, 2)
+                self.refresh_tree()
+                self.update_changes()
+            ttk.Button(qrow, text="应用", command=apply_qty).pack(side="left", padx=4)
+            ttk.Label(self.detail_inner,
+                      text=f"种类ID: {se.consumable_kind(self.data, o):#06x} "
+                           "（游戏内具体 item 名尚未标定，先按原值保留）",
+                      foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=4)
+        else:
+            ttk.Label(self.detail_inner, text="附加字段 1-5（上游 CustomItem 索引）",
+                      font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(10, 4))
+            for idx, off in enumerate(se.MOD_OFFSETS):
+                mo = o + off
+                v = self.effective_u16(mo)
+                mrow = ttk.Frame(self.detail_inner)
+                mrow.pack(anchor="w", pady=2, fill="x")
+                ttk.Label(mrow, text=f"附加{idx+1}", width=8).pack(side="left")
+                var = tk.StringVar(value=f"{v:04X}")
+                ttk.Entry(mrow, textvariable=var, width=8).pack(side="left")
+                ttk.Label(mrow, text=self.mods.get(v, ""), width=40, foreground="#666").pack(side="left", padx=6)
+                ttk.Label(mrow, text=f"@{mo:#x}", foreground="#aaa").pack(side="left")
+
+                def apply_mod(_e=None, mo=mo, var=var):
+                    try:
+                        nv = int(var.get(), 16) & 0xFFFF
+                    except ValueError:
+                        return
+                    self.edits[mo] = (nv, 2)
+                    self.refresh_tree()
+                    self.update_changes()
+                ttk.Button(mrow, text="应用", command=apply_mod).pack(side="left", padx=4)
+            ttk.Label(self.detail_inner,
+                      text="说明：附加ID的英文名取自上游 v1.4.0 表；中文显示名需进游戏核对后才可定稿。\n"
+                           "只改这几处 2 字节字段，耐久等其余字节原样保留。",
+                      foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(10, 0))
 
     def show_char(self, slot, ci):
         o = se.char_offset(slot, ci)

@@ -1,0 +1,5239 @@
+# CustomItem index -> upstream English name (v1.4.0)
+0000	Poison enemy @c(15)%d％@/c chance
+0001	Ignite enemy @c(15)%d％@/c chance
+0002	Freeze enemy @c(15)%d％@/c chance
+0003	Petrify enemy @c(15)%d％@/c chance
+0004	Counter with fire @c(15)%d％@/c chance
+0005	Counter with ice @c(15)%d％@/c chance
+0006	Counter with lightning @c(15)%d％@/c chance
+0007	Counter with magic @c(15)%d％@/c chance
+0008	@c(15)%d％@/c of DMG taken converted to MP
+0009	DMG up if spell repeated @c(15)+%d％@/c
+000A	MP charge speed @c(15)+%d％@/c
+000B	MP used & DMG @c(15)-%d％@/c 
+000C	MP used & DMG @c(15)+%d％@/c
+000D	@c(15)%d%@/c chance to resist knockback when casting
+000E	Max MP @c(15)+%d@/c
+000F	Fire damage @c(15)+%d％@/c
+0010	Ice damage @c(15)+%d％@/c
+0011	Lightning damage @c(15)+%d％@/c
+0012	Magic damage @c(15)+%d％@/c
+0013	Power Smash damage @c(15)+%d％@/c
+0014	No effect
+0015	No effect
+0016	Kick attack damage @c(15)+%d％@/c
+0017	Barefisted damage @c(15)+%d％@/c
+0018	DMG taken while barefisted @c(15)-%d％@/c
+0019	Barefisted knockback @c(15)+%d@/c
+001A	Magic Missiles @c(15)+%d@/c
+001B	Magic Shot damage @c(15)+%d％@/c
+001C	No effect
+001D	@c(15)%d％@/c chance of throw explosion
+001E	Throw damage @c(15)+%d％@/c
+001F	@c(15)%d％@/c chance to take 1/2 damage
+0020	Max HP @c(15)+%d@/c
+0021	Damage dealt @c(15)+%d％@/c
+0022	Damage taken @c(15)-%d％@/c
+0023	Critical rate @c(15)+%d％@/c
+0024	At low HP, item healing @c(15)+%d％@/c
+0025	At low HP, speed @c(15)+%d％@/c
+0026	At low HP, DMG dealt @c(15)+%d％@/c
+0027	Ignore armor @c(15)%d％@/c chance
+0028	@c(15)%d％@/c of dropping coins each hit
+0029	Stun chance @c(15)+%d％@/c
+002A	Knockdown chance @c(15)+%d％@/c
+002B	Knockback chance @c(15)+%d％@/c
+002C	@c(15)%d％@/c chance of fire retribution
+002D	@c(15)%d％@/c chance of ice retribution
+002E	@c(15)%d％@/c chance of lightning retribution
+002F	@c(15)%d％@/c chance of magic retribution
+0030	DMG @c(15)+%d％@/c, @c(16)durability down@/c
+0031	DMG @c(15)+%d％@/c, @c(16)durability drops@/c
+0032	DMG @c(15)+%d％@/c, @c(16)durability way down@/c
+0033	Bonus @c(15)%d％@/c as fire DMG
+0034	Bonus @c(15)%d％@/c as ice DMG
+0035	Bonus @c(15)%d％@/c as lightning DMG
+0036	DMG to human foes @c(15)+%d％@/c
+0037	DMG to natural foes @c(15)+%d％@/c
+0038	DMG to undead foes @c(15)+%d％@/c
+0039	DMG to demonic foes @c(15)+%d％@/c
+003A	DMG to draconic foes @c(15)+%d％@/c
+003B	DMG to objects @c(15)+%d％@/c
+003C	When LP is 0, DMG dealt @c(15)+%d％@/c
+003D	When LP is 0, DMG taken @c(15)-%d％@/c
+003E	Item degradation reduced by @c(15)%d％@/c
+003F	Enemy item drop rate @c(15)+%d％@/c
+0040	Sliding damage @c(15)+%d％@/c
+0041	@c(15)+%d％@/c damage to downed enemies
+0042	While extending, HP recovers @c(15)%d％@/c
+0043	Status ailments removed after extending
+0044	Recover @c(15)%d@/c HP when picking up coins
+0045	Obtain score @c(15)%d％@/c of coins obtained
+0046	Stun time reduced by @c(15)%d％@/c
+0047	@c(15)+%d@/c arrows on stage transition
+0048	When changing stages, recover @c(15)%d％@/c HP
+0049	No effect
+004A	Grants immunity to poison
+004B	Decrease poison duration by @c(15)%d％@/c
+004C	No effect
+004D	Grants immunity to burning
+004E	Decrease burning duration by @c(15)%d％@/c
+004F	No effect
+0050	Grants immunity to freezing
+0051	Decrease freezing duration by @c(15)%d％@/c
+0052	No effect
+0053	Grants immunity to petrification
+0054	Decrease petrification duration by @c(15)%d％@/c
+0055	Fire resistance @c(15)+%d％@/c
+0056	Ice resistance @c(15)+%d％@/c
+0057	Lightning resistance @c(15)+%d％@/c
+0058	Physical resistance @c(15)+%d％@/c
+0059	Magic resistance @c(15)+%d％@/c
+005A	Stun resistance @c(15)+%d％@/c
+005B	Knockdown resistance @c(15)+%d％@/c
+005C	Knockback resistance @c(15)+%d％@/c
+005D	DMG from human foes @c(15)-%d％@/c
+005E	DMG from natural foes @c(15)-%d％@/c
+005F	DMG from undead foes @c(15)-%d％@/c
+0060	DMG from demonic foes @c(15)-%d％@/c
+0061	DMG from draconic foes @c(15)-%d％@/c
+0062	DMG from objects @c(15)-%d％@/c
+0063	DMG from traps @c(15)-%d％@/c
+0064	HP recovery effect @c(15)+%d％@/c
+0065	At low HP, consumed MP @c(15)-%d％@/c
+0066	@c(15)LUC/15@/c chance to null damage taken
+0067	@c(15)DEX/10@/c chance to ignore enemy defense
+0068	STR @c(15)+%d@/c
+0069	INT @c(15)+%d@/c
+006A	CON @c(15)+%d@/c
+006B	MGR @c(15)+%d@/c
+006C	DEX @c(15)+%d@/c
+006D	LUC @c(15)+%d@/c
+006E	No effect
+006F	STR @c(15)+%d@/c
+0070	INT @c(15)+%d@/c
+0071	CON @c(15)+%d@/c
+0072	MGR @c(15)+%d@/c
+0073	DEX @c(15)+%d@/c
+0074	LUC @c(15)+%d@/c
+0075	@c(20)MP takes %d％ of damage@/c
+0076	@c(20)Dash attack damage +%d％@/c
+0077	@c(20)Normal attack speed +%d％@/c
+0078	@c(20)%d％ chance to guard during kick@/c
+0079	@c(20)%d％ chance to resist knockback when kicking@/c
+007A	@c(20)Regain %d％ of last damage taken every second@/c
+007B	@c(20)%d％ chance to null back attack@/c
+007C	@c(20)%d％ chance of guard break@/c
+007D	@c(20)No knockback with %d％ of HP@/c
+007E	@c(20)DMG dealt +%d％ to enemies with status ailments@/c
+007F	@c(20)Score +%d％, DMG taken +%d％@/c
+0080	@c(20)Gold obtained +%d％, DMG dealt -%d％@/c
+0081	@c(20)When recovering HP, also recover %d％ as MP@/c
+0082	@c(20)%d％ chance that 0 MP will be consumed when casting@/c
+0083	@c(20)Status ailment duration decreased by %d％@/c
+0084	@c(20)When HP is at max, dealt physical damage +%d％@/c
+0085	@c(20)When HP is at max, dealt magical damage +%d％@/c
+0086	@c(20)When HP is above %d％, withstand one-hit KO@/c
+0087	@c(20)Fire, ice, and lightning DMG becomes non-elemental DMG@/c
+0088	@c(20)When HP is max, damage taken -%d％@/c
+0089	@c(20)While airborne, damage taken -%d％@/c
+008A	@c(20)Damage dealt +%d％ to enemy in the air@/c
+008B	@c(20)Effect of Bash +%d％@/c
+008C	@c(20)Power of Rebuke +%d％@/c
+008D	@c(20)Power of Missile Reflect +%d％@/c
+008E	@c(20)Power of Brutal Drive +%d％@/c
+008F	@c(20)Power of Grand Smash +%d％@/c
+0090	@c(20)Power of Power Shot +%d％@/c
+0091	@c(20)Effect of Concentrate +%d％@/c
+0092	@c(20)Effect of Mental Absorb +%d％@/c
+0093	@c(20)Power of Judgement +%d％@/c
+0094	@c(20)Power of Parry +%d％@/c
+0095	@c(20)Effect of Rock Skin +%d％@/c
+0096	@c(20)Power of Elemental Lore +%d％@/c
+0097	@c(20)Effect of Slow +%d％@/c
+0098	@c(20)Effect of Protection +%d％@/c
+0099	@c(20)Power of Tempest Edge +%d％@/c
+009A	@c(20)Power of Brandish +%d％@/c
+009B	@c(20)Power of Frenzy +%d％@/c
+009C	@c(20)Power of Clone Strikes +%d％@/c
+009D	@c(20)Power of spells +%d％@/c
+009E	No effect
+009F	@c(15)%d％@/c chance of enemy jewel drop per attack
+00A0	No effect
+00A1	No effect
+00A2	No effect
+00A3	No effect
+00A4	No effect
+00A5	No effect
+00A6	No effect
+00A7	No effect
+00A8	No effect
+00A9	No effect
+00AA	No effect
+00AB	No effect
+00AC	No effect
+00AD	No effect
+00AE	No effect
+00AF	No effect
+00B0	No effect
+00B1	No effect
+00B2	No effect
+00B3	No effect
+00B4	No effect
+00B5	No effect
+00B6	No effect
+00B7	No effect
+00B8	No effect
+00B9	Toxic
+00BA	Igniting
+00BB	Wintry
+00BC	Basilisk's
+00BD	Dragon's
+00BE	Jotun's
+00BF	Valkyrie's
+00C0	Butcher's
+00C1	Simple
+00C2	Relentless
+00C3	Priest's
+00C4	Efficient
+00C5	Flooding
+00C6	Simple
+00C7	Priest's
+00C8	Igniting
+00C9	Wintry
+00CA	Sparking
+00CB	Imp's
+00CC	Slamming
+00CD	Illegal
+00CE	Illegal
+00CF	Simple
+00D0	Simple
+00D1	Simple
+00D2	Simple
+00D3	Arcane
+00D4	Arcane
+00D5	Illegal
+00D6	Sapper's
+00D7	Sapper's
+00D8	Covering
+00D9	Hale
+00DA	Aware
+00DB	Stout
+00DC	Sharpened
+00DD	Simple
+00DE	Simple
+00DF	Simple
+00E0	Vacuum
+00E1	Cutpurse's
+00E2	Crushing
+00E3	Crushing
+00E4	Crushing
+00E5	Dragon's
+00E6	Jotun's
+00E7	Valkyrie's
+00E8	Butcher's
+00E9	Devil's
+00EA	Devil's
+00EB	Devil's
+00EC	Igniting
+00ED	Wintry
+00EE	Sparking
+00EF	Knave's
+00F0	Trapper's
+00F1	Purifying
+00F2	Blessed
+00F3	Wyrmsbane
+00F4	Deleterious
+00F5	Simple
+00F6	Simple
+00F7	Dependable
+00F8	Auspicious
+00F9	Simple
+00FA	Executing
+00FB	Simple
+00FC	Simple
+00FD	Simple
+00FE	Simple
+00FF	Unbroken
+0100	Hunter's
+0101	Simple
+0102	Illegal
+0103	Pristine
+0104	Booster
+0105	Illegal
+0106	Branding
+0107	Smothering
+0108	Illegal
+0109	Simmering
+010A	Convective
+010B	Illegal
+010C	Gorgon's
+010D	Ethereal
+010E	Smothering
+010F	Convective
+0110	Resistant
+0111	Stone Wall
+0112	Sage's
+0113	Unbroken
+0114	Unbroken
+0115	Mighty
+0116	Knave's
+0117	Trapper's
+0118	Purifying
+0119	Blessed
+011A	Wyrmsbane
+011B	Deleterious
+011C	Fool's
+011D	Healing
+011E	---
+011F	---
+0120	---
+0121	Empowering
+0122	Astute
+0123	Vibrant
+0124	Rebuffing
+0125	Deft
+0126	Auspicious
+0127	Supreme
+0128	Supreme
+0129	Monk's
+012A	Champion's
+012B	Warding
+012C	Mercurial
+012D	Fortunate
+012E	Cerebral
+012F	Trampling
+0130	Swift
+0131	Violent
+0132	Wrathful
+0133	Reverent
+0134	Attentive
+0135	Inviolable
+0136	Impervious
+0137	Vigilant
+0138	Egotist's
+0139	Mercenary
+013A	Sacrosanct
+013B	Salubrious
+013C	Conquering
+013D	Valiant
+013E	Ordained
+013F	Impervious
+0140	Celestial
+0141	Persevering
+0142	Despairing
+0143	Abasing
+0144	Brutal
+0145	Desolating
+0146	Tenacious
+0147	Crushing
+0148	Ionic
+0149	Cannon
+014A	Augurer
+014B	Sprightly
+014C	Vanguard's
+014D	Lonely
+014E	Colossal
+014F	Able
+0150	Hindering
+0151	Divine
+0152	Cyclonic
+0153	Psychotic
+0154	Rampaging
+0155	Mimic's
+0156	Overlord's
+0157	Supreme
+0158	Alchemist's
+0159	Illegal
+015A	Illegal
+015B	Illegal
+015C	Illegal
+015D	Illegal
+015E	Illegal
+015F	Illegal
+0160	Illegal
+0161	Illegal
+0162	Illegal
+0163	Illegal
+0164	Illegal
+0165	Illegal
+0166	Illegal
+0167	Illegal
+0168	Illegal
+0169	Illegal
+016A	Illegal
+016B	Illegal
+016C	Simple
+016D	Hunter's
+016E	Bat's
+016F	Glorious
+0170	Simple
+0171	Simple
+0172	Toxic
+0173	Igniting
+0174	Wintry
+0175	Basilisk's
+0176	Dragon's
+0177	Jotun's
+0178	Valkyrie's
+0179	Butcher's
+017A	Unassuming
+017B	Relentless
+017C	Priest's
+017D	Efficient
+017E	Flooding
+017F	Unassuming
+0180	Priest's
+0181	Igniting
+0182	Wintry
+0183	Sparking
+0184	Imp's
+0185	Slamming
+0186	Illegal
+0187	Illegal
+0188	Unassuming
+0189	Unassuming
+018A	Unassuming
+018B	Unassuming
+018C	Arcane
+018D	Arcane
+018E	Illegal
+018F	Sapper's
+0190	Sapper's
+0191	Covering
+0192	Hale
+0193	Aware
+0194	Stout
+0195	Sharpened
+0196	Unassuming
+0197	Unassuming
+0198	Unassuming
+0199	Vacuum
+019A	Cutpurse's
+019B	Crushing
+019C	Crushing
+019D	Crushing
+019E	Dragon's
+019F	Jotun's
+01A0	Valkyrie's
+01A1	Butcher's
+01A2	Devil's
+01A3	Devil's
+01A4	Devil's
+01A5	Igniting
+01A6	Wintry
+01A7	Sparking
+01A8	Knave's
+01A9	Trapper's
+01AA	Purifying
+01AB	Blessed
+01AC	Wyrmsbane
+01AD	Deleterious
+01AE	Unassuming
+01AF	Unassuming
+01B0	Dependable
+01B1	Auspicious
+01B2	Unassuming
+01B3	Executing
+01B4	Unassuming
+01B5	Unassuming
+01B6	Unassuming
+01B7	Unassuming
+01B8	Unbroken
+01B9	Hunter's
+01BA	Unassuming
+01BB	Illegal
+01BC	Pristine
+01BD	Booster
+01BE	Illegal
+01BF	Branding
+01C0	Smothering
+01C1	Illegal
+01C2	Simmering
+01C3	Convective
+01C4	Illegal
+01C5	Gorgon's
+01C6	Ethereal
+01C7	Smothering
+01C8	Convective
+01C9	Resistant
+01CA	Stone Wall
+01CB	Sage's
+01CC	Unbroken
+01CD	Unbroken
+01CE	Mighty
+01CF	Knave's
+01D0	Trapper's
+01D1	Purifying
+01D2	Blessed
+01D3	Wyrmsbane
+01D4	Deleterious
+01D5	Fool's
+01D6	Healing
+01D7	---
+01D8	---
+01D9	---
+01DA	Empowering
+01DB	Astute
+01DC	Vibrant
+01DD	Rebuffing
+01DE	Deft
+01DF	Auspicious
+01E0	Supreme
+01E1	Supreme
+01E2	Monk's
+01E3	Champion's
+01E4	Warding
+01E5	Mercurial
+01E6	Fortunate
+01E7	Cerebral
+01E8	Trampling
+01E9	Swift
+01EA	Violent
+01EB	Wrathful
+01EC	Reverent
+01ED	Attentive
+01EE	Inviolable
+01EF	Impervious
+01F0	Vigilant
+01F1	Egotist's
+01F2	Mercenary
+01F3	Sacrosanct
+01F4	Salubrious
+01F5	Conquering
+01F6	Valiant
+01F7	Ordained
+01F8	Impervious
+01F9	Celestial
+01FA	Persevering
+01FB	Despairing
+01FC	Abasing
+01FD	Brutal
+01FE	Desolating
+01FF	Tenacious
+0200	Crushing
+0201	Ionic
+0202	Cannon
+0203	Augurer
+0204	Sprightly
+0205	Vanguard's
+0206	Lonely
+0207	Colossal
+0208	Able
+0209	Hindering
+020A	Divine
+020B	Cyclonic
+020C	Psychotic
+020D	Rampaging
+020E	Mimic's
+020F	Overlord's
+0210	Supreme
+0211	Alchemist's
+0212	Illegal
+0213	Illegal
+0214	Illegal
+0215	Illegal
+0216	Illegal
+0217	Illegal
+0218	Illegal
+0219	Illegal
+021A	Illegal
+021B	Illegal
+021C	Illegal
+021D	Illegal
+021E	Illegal
+021F	Illegal
+0220	Illegal
+0221	Illegal
+0222	Illegal
+0223	Illegal
+0224	Illegal
+0225	Unassuming
+0226	Hunter's
+0227	Bat's
+0228	Glorious
+0229	Unassuming
+022A	Unassuming
+022B	Envenomed
+022C	Scorching
+022D	Gelid
+022E	Basilisk's
+022F	Dragon's
+0230	Jotun's
+0231	Valkyrie's
+0232	Butcher's
+0233	Solid
+0234	Smiting
+0235	Saint's
+0236	Stingy
+0237	Deluging
+0238	Solid
+0239	Saint's
+023A	Fervid
+023B	Frigid
+023C	Charged
+023D	Fiend's
+023E	Quaking
+023F	Illegal
+0240	Illegal
+0241	Solid
+0242	Solid
+0243	Solid
+0244	Solid
+0245	Occult
+0246	Occult
+0247	Illegal
+0248	Bomber's
+0249	Bomber's
+024A	Protective
+024B	Robust
+024C	Warrior's
+024D	Stalwart
+024E	Honed
+024F	Solid
+0250	Solid
+0251	Solid
+0252	Phasing
+0253	Bandit's
+0254	Punishing
+0255	Punishing
+0256	Punishing
+0257	Dragon's
+0258	Jotun's
+0259	Valkyrie's
+025A	Butcher's
+025B	Devil's
+025C	Devil's
+025D	Devil's
+025E	Scorching
+025F	Gelid
+0260	Plasmic
+0261	Slayer's
+0262	Artificial
+0263	Cleansing
+0264	Holy
+0265	Wyrmslayer
+0266	Ruinous
+0267	Solid
+0268	Solid
+0269	Inherited
+026A	Fortuitous
+026B	Solid
+026C	Merciful
+026D	Solid
+026E	Solid
+026F	Solid
+0270	Solid
+0271	Unfazed
+0272	Ranger's
+0273	Solid
+0274	Illegal
+0275	Pristine
+0276	Booster
+0277	Illegal
+0278	Branding
+0279	Smothering
+027A	Illegal
+027B	Simmering
+027C	Convective
+027D	Illegal
+027E	Gorgon's
+027F	Ethereal
+0280	Smothering
+0281	Convective
+0282	Resistant
+0283	Iron Wall
+0284	Sage's
+0285	Unfazed
+0286	Unfazed
+0287	Inviolable
+0288	Slayer's
+0289	Artificial
+028A	Cleansing
+028B	Holy
+028C	Wyrmslayer
+028D	Ruinous
+028E	Explorer's
+028F	Knight's
+0290	---
+0291	---
+0292	---
+0293	Rugged
+0294	Apt
+0295	Unbowed
+0296	Renitent
+0297	Nimble
+0298	Propitious
+0299	Supreme
+029A	Supreme
+029B	Monk's
+029C	Champion's
+029D	Warding
+029E	Mercurial
+029F	Fortunate
+02A0	Cerebral
+02A1	Trampling
+02A2	Swift
+02A3	Violent
+02A4	Wrathful
+02A5	Reverent
+02A6	Attentive
+02A7	Inviolable
+02A8	Impervious
+02A9	Vigilant
+02AA	Egotist's
+02AB	Mercenary
+02AC	Sacrosanct
+02AD	Salubrious
+02AE	Conquering
+02AF	Valiant
+02B0	Ordained
+02B1	Impervious
+02B2	Celestial
+02B3	Persevering
+02B4	Despairing
+02B5	Abasing
+02B6	Brutal
+02B7	Desolating
+02B8	Tenacious
+02B9	Crushing
+02BA	Ionic
+02BB	Cannon
+02BC	Augurer
+02BD	Sprightly
+02BE	Vanguard's
+02BF	Lonely
+02C0	Colossal
+02C1	Able
+02C2	Hindering
+02C3	Divine
+02C4	Cyclonic
+02C5	Psychotic
+02C6	Rampaging
+02C7	Mimic's
+02C8	Overlord's
+02C9	Supreme
+02CA	Alchemist's
+02CB	Illegal
+02CC	Illegal
+02CD	Illegal
+02CE	Illegal
+02CF	Illegal
+02D0	Illegal
+02D1	Illegal
+02D2	Illegal
+02D3	Illegal
+02D4	Illegal
+02D5	Illegal
+02D6	Illegal
+02D7	Illegal
+02D8	Illegal
+02D9	Illegal
+02DA	Illegal
+02DB	Illegal
+02DC	Illegal
+02DD	Illegal
+02DE	Solid
+02DF	Ranger's
+02E0	Leech's
+02E1	Challenger's
+02E2	Solid
+02E3	Solid
+02E4	Envenomed
+02E5	Scorching
+02E6	Gelid
+02E7	Gorgon's
+02E8	Dragon's
+02E9	Jotun's
+02EA	Valkyrie's
+02EB	Butcher's
+02EC	Fine
+02ED	Smiting
+02EE	Saint's
+02EF	Stingy
+02F0	Deluging
+02F1	Fine
+02F2	Saint's
+02F3	Fervid
+02F4	Frigid
+02F5	Charged
+02F6	Fiend's
+02F7	Quaking
+02F8	Illegal
+02F9	Illegal
+02FA	Fine
+02FB	Fine
+02FC	Fine
+02FD	Fine
+02FE	Occult
+02FF	Occult
+0300	Illegal
+0301	Bomber's
+0302	Bomber's
+0303	Protective
+0304	Robust
+0305	Warrior's
+0306	Stalwart
+0307	Honed
+0308	Fine
+0309	Fine
+030A	Fine
+030B	Phasing
+030C	Bandit's
+030D	Punishing
+030E	Punishing
+030F	Punishing
+0310	Dragon's
+0311	Jotun's
+0312	Valkyrie's
+0313	Butcher's
+0314	Devil's
+0315	Devil's
+0316	Devil's
+0317	Scorching
+0318	Gelid
+0319	Plasmic
+031A	Slayer's
+031B	Artificial
+031C	Cleansing
+031D	Holy
+031E	Wyrmslayer
+031F	Ruinous
+0320	Fine
+0321	Fine
+0322	Inherited
+0323	Fortuitous
+0324	Fine
+0325	Merciful
+0326	Fine
+0327	Fine
+0328	Fine
+0329	Fine
+032A	Unfazed
+032B	Ranger's
+032C	Fine
+032D	Illegal
+032E	Pristine
+032F	Immunizing
+0330	Illegal
+0331	Branding
+0332	Fireproof
+0333	Illegal
+0334	Simmering
+0335	Iceproof
+0336	Illegal
+0337	Gorgon's
+0338	Intangible
+0339	Fireproof
+033A	Iceproof
+033B	Insulated
+033C	Iron Wall
+033D	Sage's
+033E	Unfazed
+033F	Unfazed
+0340	Inviolable
+0341	Slayer's
+0342	Artificial
+0343	Cleansing
+0344	Holy
+0345	Wyrmslayer
+0346	Ruinous
+0347	Explorer's
+0348	Knight's
+0349	---
+034A	---
+034B	---
+034C	Rugged
+034D	Apt
+034E	Unbowed
+034F	Renitent
+0350	Nimble
+0351	Propitious
+0352	Supreme
+0353	Supreme
+0354	Monk's
+0355	Champion's
+0356	Warding
+0357	Mercurial
+0358	Fortunate
+0359	Cerebral
+035A	Trampling
+035B	Swift
+035C	Violent
+035D	Wrathful
+035E	Reverent
+035F	Attentive
+0360	Inviolable
+0361	Impervious
+0362	Vigilant
+0363	Egotist's
+0364	Mercenary
+0365	Sacrosanct
+0366	Salubrious
+0367	Conquering
+0368	Valiant
+0369	Ordained
+036A	Impervious
+036B	Celestial
+036C	Persevering
+036D	Despairing
+036E	Abasing
+036F	Brutal
+0370	Desolating
+0371	Tenacious
+0372	Crushing
+0373	Ionic
+0374	Cannon
+0375	Augurer
+0376	Sprightly
+0377	Vanguard's
+0378	Lonely
+0379	Colossal
+037A	Able
+037B	Hindering
+037C	Divine
+037D	Cyclonic
+037E	Psychotic
+037F	Rampaging
+0380	Mimic's
+0381	Overlord's
+0382	Supreme
+0383	Alchemist's
+0384	Illegal
+0385	Illegal
+0386	Illegal
+0387	Illegal
+0388	Illegal
+0389	Illegal
+038A	Illegal
+038B	Illegal
+038C	Illegal
+038D	Illegal
+038E	Illegal
+038F	Illegal
+0390	Illegal
+0391	Illegal
+0392	Illegal
+0393	Illegal
+0394	Illegal
+0395	Illegal
+0396	Illegal
+0397	Fine
+0398	Ranger's
+0399	Leech's
+039A	Challenger's
+039B	Fine
+039C	Fine
+039D	Envenomed
+039E	Scorching
+039F	Gelid
+03A0	Gorgon's
+03A1	Dragon's
+03A2	Jotun's
+03A3	Valkyrie's
+03A4	Butcher's
+03A5	Exquisite
+03A6	Perpetual
+03A7	Goddess's
+03A8	Miserly
+03A9	Torrential
+03AA	Exquisite
+03AB	Goddess's
+03AC	Torrid
+03AD	Glacial
+03AE	Arcing
+03AF	Demon's
+03B0	Seismic
+03B1	Illegal
+03B2	Illegal
+03B3	Exquisite
+03B4	Exquisite
+03B5	Exquisite
+03B6	Exquisite
+03B7	Recondite
+03B8	Recondite
+03B9	Illegal
+03BA	Petardier's
+03BB	Petardier's
+03BC	Sheltering
+03BD	Supernal
+03BE	Veteran's
+03BF	Unyielding
+03C0	Keen
+03C1	Exquisite
+03C2	Exquisite
+03C3	Exquisite
+03C4	Infinite
+03C5	Raider's
+03C6	Mauling
+03C7	Mauling
+03C8	Mauling
+03C9	Dragon's
+03CA	Jotun's
+03CB	Valkyrie's
+03CC	Butcher's
+03CD	Devil's
+03CE	Devil's
+03CF	Devil's
+03D0	Immolating
+03D1	Frozen
+03D2	Anionic
+03D3	Murderer's
+03D4	Mechanical
+03D5	Venerating
+03D6	Godly
+03D7	Wyrmreaper
+03D8	Wrackful
+03D9	Exquisite
+03DA	Exquisite
+03DB	Ancient
+03DC	Miraculous
+03DD	Exquisite
+03DE	Finishing
+03DF	Exquisite
+03E0	Exquisite
+03E1	Exquisite
+03E2	Exquisite
+03E3	Unbowed
+03E4	Volley
+03E5	Exquisite
+03E6	Illegal
+03E7	Pristine
+03E8	Immunizing
+03E9	Illegal
+03EA	Branding
+03EB	Fireproof
+03EC	Illegal
+03ED	Simmering
+03EE	Iceproof
+03EF	Illegal
+03F0	Gorgon's
+03F1	Intangible
+03F2	Fireproof
+03F3	Iceproof
+03F4	Insulated
+03F5	Great Wall
+03F6	Deity's
+03F7	Unbowed
+03F8	Unbowed
+03F9	Impervious
+03FA	Murderer's
+03FB	Mechanical
+03FC	Venerating
+03FD	Godly
+03FE	Wyrmreaper
+03FF	Wrackful
+0400	Wanderer's
+0401	Paladin's
+0402	---
+0403	---
+0404	---
+0405	Supreme
+0406	Monk's
+0407	Champion's
+0408	Warding
+0409	Mercurial
+040A	Fortunate
+040B	Supreme
+040C	Supreme
+040D	Monk's
+040E	Champion's
+040F	Warding
+0410	Mercurial
+0411	Fortunate
+0412	Cerebral
+0413	Trampling
+0414	Swift
+0415	Violent
+0416	Wrathful
+0417	Reverent
+0418	Attentive
+0419	Inviolable
+041A	Impervious
+041B	Vigilant
+041C	Egotist's
+041D	Mercenary
+041E	Sacrosanct
+041F	Salubrious
+0420	Conquering
+0421	Valiant
+0422	Ordained
+0423	Impervious
+0424	Celestial
+0425	Persevering
+0426	Despairing
+0427	Abasing
+0428	Brutal
+0429	Desolating
+042A	Tenacious
+042B	Crushing
+042C	Ionic
+042D	Cannon
+042E	Augurer
+042F	Sprightly
+0430	Vanguard's
+0431	Lonely
+0432	Colossal
+0433	Able
+0434	Hindering
+0435	Divine
+0436	Cyclonic
+0437	Psychotic
+0438	Rampaging
+0439	Mimic's
+043A	Overlord's
+043B	Supreme
+043C	Alchemist's
+043D	Illegal
+043E	Illegal
+043F	Illegal
+0440	Illegal
+0441	Illegal
+0442	Illegal
+0443	Illegal
+0444	Illegal
+0445	Illegal
+0446	Illegal
+0447	Illegal
+0448	Illegal
+0449	Illegal
+044A	Illegal
+044B	Illegal
+044C	Illegal
+044D	Illegal
+044E	Illegal
+044F	Illegal
+0450	Exquisite
+0451	Volley
+0452	Vampire's
+0453	Epic
+0454	Exquisite
+0455	Exquisite
+0456	Poison enemy @c(15)%d％@/c chance
+0457	Ignite enemy @c(15)%d％@/c chance
+0458	Freeze enemy @c(15)%d％@/c chance
+0459	Petrify enemy @c(15)%d％@/c chance
+045A	Counter with fire @c(15)%d％@/c chance
+045B	Counter with ice @c(15)%d％@/c chance
+045C	Counter with lightning @c(15)%d％@/c chance
+045D	Counter with magic @c(15)%d％@/c chance
+045E	@c(15)+%d％@/c of DMG taken converted to MP
+045F	DMG up if spell repeated @c(15)+%d％@/c
+0460	MP charge speed @c(15)+%d％@/c
+0461	MP used & DMG @c(15)-%d％@/c
+0462	MP used & DMG @c(15)+%d％@/c
+0463	@c(15)%d%@/c chance to resist knockback when casting
+0464	Max MP @c(15)+%d@/c
+0465	Fire damage @c(15)+%d％@/c
+0466	Ice damage @c(15)+%d％@/c
+0467	Lightning damage @c(15)+%d％@/c
+0468	Magic damage @c(15)+%d％@/c
+0469	Power Smash damage @c(15)+%d％@/c
+046A	No effect
+046B	No effect
+046C	Kick attack damage @c(15)+%d％@/c
+046D	Barefisted damage @c(15)+%d％@/c
+046E	DMG taken while barefisted @c(15)-%d％@/c
+046F	Barefisted knockback @c(15)+%d@/c
+0470	Magic Missiles @c(15)+%d％@/c
+0471	Magic Shot damage @c(15)+%d％@/c
+0472	No effect
+0473	@c(15)%d％@/c chance of throw explosion
+0474	Throw damage @c(15)+%d％@/c
+0475	@c(15)%d％@/c chance to take 1/2 damage
+0476	Max HP @c(15)+%d@/c
+0477	Damage dealt @c(15)+%d％@/c
+0478	Damage taken @c(15)-%d％@/c
+0479	Critical rate @c(15)+%d％@/c
+047A	At low HP, item healing @c(15)+%d％@/c
+047B	At low HP, speed @c(15)+%d％@/c
+047C	At low HP, DMG dealt @c(15)+%d％@/c
+047D	Ignore armor @c(15)%d％@/c chance
+047E	@c(15)%d％@/c of dropping coins each hit
+047F	Stun chance @c(15)+%d％@/c
+0480	Knockdown chance @c(15)+%d％@/c
+0481	Knockback chance @c(15)+%d％@/c
+0482	@c(15)%d％@/c chance of fire retribution
+0483	@c(15)%d％@/c chance of ice retribution
+0484	@c(15)%d％@/c chance of lightning retribution
+0485	@c(15)%d％@/c chance of magic retribution
+0486	DMG @c(15)+%d％@/c, @c(16)durability down@/c
+0487	DMG @c(15)+%d％@/c, @c(16)durability drops@/c
+0488	DMG @c(15)+%d％@/c, @c(16)durability way down@/c
+0489	Bonus @c(15)%d％@/c as fire DMG
+048A	Bonus @c(15)%d％@/c as ice DMG
+048B	Bonus @c(15)%d％@/c as lightning DMG
+048C	DMG to human foes @c(15)+%d％@/c
+048D	DMG to natural foes @c(15)+%d％@/c
+048E	DMG to undead foes @c(15)+%d％@/c
+048F	DMG to demonic foes @c(15)+%d％@/c
+0490	DMG to draconic foes @c(15)+%d％@/c
+0491	DMG to objects @c(15)+%d％@/c
+0492	When LP is 0, DMG dealt @c(15)+%d％@/c
+0493	When LP is 0, DMG taken @c(15)-%d％@/c
+0494	Item degradation reduced by @c(15)%d％@/c
+0495	Enemy item drop rate @c(15)+%d％@/c
+0496	Slide damage @c(15)+%d％@/c
+0497	@c(15)+%d％@/c damage to downed enemies
+0498	While extending, HP recovers @c(15)%d％@/c
+0499	Status ailments removed after extending
+049A	Recover @c(15)%d@/c HP when picking up coins
+049B	Obtain score @c(15)%d％@/c of coins obtained
+049C	Stun time reduced by @c(15)%d％@/c
+049D	@c(15)+%d@/c arrows on stage transition
+049E	@c(15)+%d％@/c HP on stage transition
+049F	No effect
+04A0	Grants immunity to poison
+04A1	Decrease poison duration by @c(15)%d％@/c
+04A2	No effect
+04A3	Grants immunity to burning
+04A4	Decrease burning duration by @c(15)%d％@/c
+04A5	No effect
+04A6	Grants immunity to freezing
+04A7	Decrease freezing duration by @c(15)%d％@/c
+04A8	No effect
+04A9	Grants immunity to petrification
+04AA	Decrease petrification duration by @c(15)%d％@/c
+04AB	Fire resistance @c(15)+%d％@/c
+04AC	Ice resistance @c(15)+%d％@/c
+04AD	Lightning resistance @c(15)+%d％@/c
+04AE	Physical resistance @c(15)+%d％@/c
+04AF	Magic resistance @c(15)+%d％@/c
+04B0	Stun resistance @c(15)+%d％@/c
+04B1	Knockdown resistance @c(15)+%d％@/c
+04B2	Knockback resistance @c(15)+%d％@/c
+04B3	DMG from human foes @c(15)-%d％@/c
+04B4	DMG from natural foes @c(15)-%d％@/c
+04B5	DMG from undead foes @c(15)-%d％@/c
+04B6	DMG from demonic foes @c(15)-%d％@/c
+04B7	DMG from draconic foes @c(15)-%d％@/c
+04B8	DMG from objects @c(15)-%d％@/c
+04B9	DMG from traps @c(15)-%d％@/c
+04BA	HP recovery effect @c(15)+%d％@/c
+04BB	At low HP, consumed MP @c(15)-%d％@/c
+04BC	@c(15)LUC/15@/c chance to null damage taken
+04BD	@c(15)DEX/10@/c chance to ignore enemy defense
+04BE	STR @c(15)+%d@/c
+04BF	INT @c(15)+%d@/c
+04C0	CON @c(15)+%d@/c
+04C1	MGR @c(15)+%d@/c
+04C2	DEX @c(15)+%d@/c
+04C3	LUC @c(15)+%d@/c
+04C4	No effect
+04C5	STR @c(15)+%d@/c
+04C6	INT @c(15)+%d@/c
+04C7	CON @c(15)+%d@/c
+04C8	MGR @c(15)+%d@/c
+04C9	DEX @c(15)+%d@/c
+04CA	LUC @c(15)+%d@/c
+04CB	@c(20)+%d％ chance release lightning during physical attack@/c
+04CC	@c(20)Recover %d HP per attack hit@/c
+04CD	@c(20)Move speed +%d％ up@/c
+04CE	@c(20)MP takes %d％ of damage@/c
+04CF	@c(20)Dash attack damage +%d％@/c
+04D0	@c(20)Normal attack speed +%d％@/c
+04D1	@c(20)%d％ chance to guard during kick@/c
+04D2	@c(20)%d％ chance to resist knockback when kicking@/c
+04D3	@c(20)Regain %d％ of last damage taken every second@/c
+04D4	@c(20)%d％ chance to null back attack@/c
+04D5	@c(20)%d％ chance of guard break@/c
+04D6	@c(20)No knockback with %d％ of HP@/c
+04D7	@c(20)DMG dealt +%d％ to enemies with status ailments@/c
+04D8	@c(20)Score +%d％, DMG taken +%d％@/c
+04D9	@c(20)Gold obtained +%d％, DMG dealt -%d％@/c
+04DA	@c(20)When recovering HP, also recover %d％ as MP@/c
+04DB	@c(20)%d％ chance that 0 MP will be consumed when casting@/c
+04DC	@c(20)Status ailment duration decreased by %d％@/c
+04DD	@c(20)When HP is at max, dealt physical damage +%d％@/c
+04DE	@c(20)When HP is at max, dealt magical damage +%d％@/c
+04DF	@c(20)When HP is above %d％, withstand one-hit KO@/c
+04E0	@c(20)Fire, ice, and lightning DMG becomes non-elemental DMG@/c
+04E1	@c(20)When HP is max, damage taken -%d％@/c
+04E2	@c(20)While airborne, damage taken -%d％@/c
+04E3	@c(20)Damage dealt +%d％ to enemy in the air@/c
+04E4	@c(20)Effect of Bash +%d％@/c
+04E5	@c(20)Power of Rebuke +%d％@/c
+04E6	@c(20)Power of Missile Reflect +%d％@/c
+04E7	@c(20)Power of Brutal Drive +%d％@/c
+04E8	@c(20)Power of Grand Smash +%d％@/c
+04E9	@c(20)Power of Power Shot +%d％@/c
+04EA	@c(20)Effect of Concentrate +%d％@/c
+04EB	@c(20)Effect of Mental Absorb +%d％@/c
+04EC	@c(20)Power of Judgement +%d％@/c
+04ED	@c(20)Power of Parry +%d％@/c
+04EE	@c(20)Effect of Rock Skin +%d％@/c
+04EF	@c(20)Power of Elemental Lore +%d％@/c
+04F0	@c(20)Effect of Slow +%d％@/c
+04F1	@c(20)Effect of Protection +%d％@/c
+04F2	@c(20)Power of Tempest Edge +%d％@/c
+04F3	@c(20)Power of Brandish +%d％@/c
+04F4	@c(20)Power of Frenzy +%d％@/c
+04F5	@c(20)Power of Clone Strikes +%d％@/c
+04F6	@c(20)Power of spells +%d％@/c
+04F7	No effect
+04F8	No effect
+04F9	No effect
+04FA	No effect
+04FB	No effect
+04FC	No effect
+04FD	No effect
+04FE	No effect
+04FF	No effect
+0500	No effect
+0501	No effect
+0502	No effect
+0503	No effect
+0504	No effect
+0505	No effect
+0506	No effect
+0507	No effect
+0508	No effect
+0509	No effect
+050A	No effect
+050B	No effect
+050C	No effect
+050D	No effect
+050E	No effect
+050F	No effect
+0510	No effect
+0511	No effect
+0512	Toxic
+0513	Scorching
+0514	Gelid
+0515	Basilisk's
+0516	Charring
+0517	Icicle
+0518	Voltaic
+0519	Thaumic
+051A	Mental
+051B	Simple
+051C	Simple
+051D	Simple
+051E	Simple
+051F	Thoughtful
+0520	Priest's
+0521	Igniting
+0522	Wintry
+0523	Sparking
+0524	Simple
+0525	Simple
+0526	Illegal
+0527	Illegal
+0528	Horse's
+0529	Horse's
+052A	Horse's
+052B	Horse's
+052C	Simple
+052D	Simple
+052E	Illegal
+052F	Explosive
+0530	Sapper's
+0531	Covering
+0532	Hale
+0533	Aware
+0534	Stout
+0535	Sharpened
+0536	Despairing
+0537	Scrappy
+0538	Scrappy
+0539	Vacuum
+053A	Cutpurse's
+053B	Simple
+053C	Simple
+053D	Simple
+053E	Dragon's
+053F	Jotun's
+0540	Valkyrie's
+0541	Butcher's
+0542	Ceramic
+0543	Zirconic
+0544	Crystal
+0545	Igniting
+0546	Wintry
+0547	Sparking
+0548	Knave's
+0549	Trapper's
+054A	Purifying
+054B	Blessed
+054C	Wyrmsbane
+054D	Deleterious
+054E	Foolhardy
+054F	Foolhardy
+0550	Dependable
+0551	Auspicious
+0552	Lamprey's
+0553	Merciful
+0554	Exalted
+0555	Exalted
+0556	Pillaging
+0557	Pillaging
+0558	Unbroken
+0559	Simple
+055A	Pioneer's
+055B	Illegal
+055C	Pristine
+055D	Booster
+055E	Illegal
+055F	Branding
+0560	Smothering
+0561	Illegal
+0562	Simmering
+0563	Convective
+0564	Illegal
+0565	Gorgon's
+0566	Ethereal
+0567	Smothering
+0568	Convective
+0569	Resistant
+056A	Stone Wall
+056B	Sage's
+056C	Unbroken
+056D	Unbroken
+056E	Mighty
+056F	Knave's
+0570	Trapper's
+0571	Purifying
+0572	Blessed
+0573	Wyrmsbane
+0574	Deleterious
+0575	Fool's
+0576	Healing
+0577	Lonely
+0578	Exalted
+0579	Accurate
+057A	Empowering
+057B	Astute
+057C	Vibrant
+057D	Rebuffing
+057E	Deft
+057F	Auspicious
+0580	Supreme
+0581	Supreme
+0582	Monk's
+0583	Champion's
+0584	Warding
+0585	Mercurial
+0586	Fortunate
+0587	Plasmic
+0588	Favored
+0589	Beatified
+058A	Cerebral
+058B	Trampling
+058C	Swift
+058D	Violent
+058E	Wrathful
+058F	Reverent
+0590	Attentive
+0591	Inviolable
+0592	Impervious
+0593	Vigilant
+0594	Egotist's
+0595	Mercenary
+0596	Sacrosanct
+0597	Salubrious
+0598	Conquering
+0599	Valiant
+059A	Ordained
+059B	Impervious
+059C	Celestial
+059D	Persevering
+059E	Despairing
+059F	Abasing
+05A0	Brutal
+05A1	Desolating
+05A2	Tenacious
+05A3	Crushing
+05A4	Ionic
+05A5	Cannon
+05A6	Augurer
+05A7	Sprightly
+05A8	Vanguard's
+05A9	Lonely
+05AA	Colossal
+05AB	Able
+05AC	Hindering
+05AD	Divine
+05AE	Cyclonic
+05AF	Psychotic
+05B0	Rampaging
+05B1	Mimic's
+05B2	Overlord's
+05B3	Supreme
+05B4	Illegal
+05B5	Illegal
+05B6	Illegal
+05B7	Illegal
+05B8	Illegal
+05B9	Illegal
+05BA	Illegal
+05BB	Illegal
+05BC	Illegal
+05BD	Illegal
+05BE	Illegal
+05BF	Illegal
+05C0	Illegal
+05C1	Illegal
+05C2	Illegal
+05C3	Illegal
+05C4	Illegal
+05C5	Illegal
+05C6	Illegal
+05C7	Illegal
+05C8	Illegal
+05C9	Illegal
+05CA	Illegal
+05CB	Illegal
+05CC	Illegal
+05CD	Illegal
+05CE	Toxic
+05CF	Scorching
+05D0	Gelid
+05D1	Basilisk's
+05D2	Charring
+05D3	Icicle
+05D4	Voltaic
+05D5	Thaumic
+05D6	Mental
+05D7	Unassuming
+05D8	Unassuming
+05D9	Unassuming
+05DA	Unassuming
+05DB	Thoughtful
+05DC	Priest's
+05DD	Igniting
+05DE	Wintry
+05DF	Sparking
+05E0	Unassuming
+05E1	Unassuming
+05E2	Illegal
+05E3	Illegal
+05E4	Horse's
+05E5	Horse's
+05E6	Horse's
+05E7	Horse's
+05E8	Unassuming
+05E9	Unassuming
+05EA	Illegal
+05EB	Explosive
+05EC	Sapper's
+05ED	Covering
+05EE	Hale
+05EF	Aware
+05F0	Stout
+05F1	Sharpened
+05F2	Despairing
+05F3	Scrappy
+05F4	Scrappy
+05F5	Vacuum
+05F6	Cutpurse's
+05F7	Unassuming
+05F8	Unassuming
+05F9	Unassuming
+05FA	Dragon's
+05FB	Jotun's
+05FC	Valkyrie's
+05FD	Butcher's
+05FE	Ceramic
+05FF	Zirconic
+0600	Crystal
+0601	Scalding
+0602	Frigid
+0603	Arcing
+0604	Knave's
+0605	Trapper's
+0606	Purifying
+0607	Blessed
+0608	Wyrmsbane
+0609	Deleterious
+060A	Foolhardy
+060B	Foolhardy
+060C	Dependable
+060D	Auspicious
+060E	Lamprey's
+060F	Merciful
+0610	Exalted
+0611	Exalted
+0612	Pillaging
+0613	Pillaging
+0614	Unbroken
+0615	Unassuming
+0616	Pioneer's
+0617	Illegal
+0618	Pristine
+0619	Booster
+061A	Illegal
+061B	Branding
+061C	Smothering
+061D	Illegal
+061E	Simmering
+061F	Convective
+0620	Illegal
+0621	Gorgon's
+0622	Ethereal
+0623	Smothering
+0624	Convective
+0625	Resistant
+0626	Stone Wall
+0627	Sage's
+0628	Unbroken
+0629	Unbroken
+062A	Mighty
+062B	Knave's
+062C	Trapper's
+062D	Purifying
+062E	Blessed
+062F	Wyrmsbane
+0630	Deleterious
+0631	Fool's
+0632	Healing
+0633	Lonely
+0634	Exalted
+0635	Accurate
+0636	Empowering
+0637	Astute
+0638	Vibrant
+0639	Rebuffing
+063A	Deft
+063B	Auspicious
+063C	Supreme
+063D	Supreme
+063E	Monk's
+063F	Champion's
+0640	Warding
+0641	Mercurial
+0642	Fortunate
+0643	Plasmic
+0644	Favored
+0645	Beatified
+0646	Cerebral
+0647	Trampling
+0648	Swift
+0649	Violent
+064A	Wrathful
+064B	Reverent
+064C	Attentive
+064D	Inviolable
+064E	Impervious
+064F	Vigilant
+0650	Egotist's
+0651	Mercenary
+0652	Sacrosanct
+0653	Salubrious
+0654	Conquering
+0655	Valiant
+0656	Ordained
+0657	Impervious
+0658	Celestial
+0659	Persevering
+065A	Despairing
+065B	Abasing
+065C	Brutal
+065D	Desolating
+065E	Tenacious
+065F	Crushing
+0660	Ionic
+0661	Cannon
+0662	Augurer
+0663	Sprightly
+0664	Vanguard's
+0665	Lonely
+0666	Colossal
+0667	Able
+0668	Hindering
+0669	Divine
+066A	Cyclonic
+066B	Psychotic
+066C	Rampaging
+066D	Mimic's
+066E	Overlord's
+066F	Supreme
+0670	Illegal
+0671	Illegal
+0672	Illegal
+0673	Illegal
+0674	Illegal
+0675	Illegal
+0676	Illegal
+0677	Illegal
+0678	Illegal
+0679	Illegal
+067A	Illegal
+067B	Illegal
+067C	Illegal
+067D	Illegal
+067E	Illegal
+067F	Illegal
+0680	Illegal
+0681	Illegal
+0682	Illegal
+0683	Illegal
+0684	Illegal
+0685	Illegal
+0686	Illegal
+0687	Illegal
+0688	Illegal
+0689	Illegal
+068A	Toxic
+068B	Scorching
+068C	Gelid
+068D	Basilisk's
+068E	Charring
+068F	Icicle
+0690	Voltaic
+0691	Thaumic
+0692	Mental
+0693	Solid
+0694	Solid
+0695	Solid
+0696	Solid
+0697	Focused
+0698	Saint's
+0699	Fervid
+069A	Frigid
+069B	Charged
+069C	Solid
+069D	Solid
+069E	Illegal
+069F	Illegal
+06A0	Horse's
+06A1	Horse's
+06A2	Horse's
+06A3	Horse's
+06A4	Solid
+06A5	Solid
+06A6	Illegal
+06A7	Explosive
+06A8	Sapper's
+06A9	Protective
+06AA	Robust
+06AB	Warrior's
+06AC	Stalwart
+06AD	Honed
+06AE	Urgent
+06AF	Defiant
+06B0	Defiant
+06B1	Phasing
+06B2	Bandit's
+06B3	Solid
+06B4	Solid
+06B5	Solid
+06B6	Dragon's
+06B7	Jotun's
+06B8	Valkyrie's
+06B9	Butcher's
+06BA	Ceramic
+06BB	Zirconic
+06BC	Crystal
+06BD	Searing
+06BE	Frosty
+06BF	Charged
+06C0	Slayer's
+06C1	Butcher's
+06C2	Cleansing
+06C3	Holy
+06C4	Wyrmslayer
+06C5	Ruinous
+06C6	Dauntless
+06C7	Dauntless
+06C8	Inherited
+06C9	Fortuitous
+06CA	Lamprey's
+06CB	Finishing
+06CC	Hallowed
+06CD	Hallowed
+06CE	Plundering
+06CF	Plundering
+06D0	Unfazed
+06D1	Solid
+06D2	Paradise
+06D3	Illegal
+06D4	Pristine
+06D5	Booster
+06D6	Illegal
+06D7	Branding
+06D8	Smothering
+06D9	Illegal
+06DA	Simmering
+06DB	Convective
+06DC	Illegal
+06DD	Gorgon's
+06DE	Ethereal
+06DF	Smothering
+06E0	Convective
+06E1	Resistant
+06E2	Iron Wall
+06E3	Sage's
+06E4	Unfazed
+06E5	Unfazed
+06E6	Inviolable
+06E7	Slayer's
+06E8	Artificial
+06E9	Cleansing
+06EA	Holy
+06EB	Wyrmslayer
+06EC	Ruinous
+06ED	Explorer's
+06EE	Exemplar's
+06EF	Survivor's
+06F0	Hallowed
+06F1	Precise
+06F2	Rugged
+06F3	Apt
+06F4	Unbowed
+06F5	Renitent
+06F6	Nimble
+06F7	Propitious
+06F8	Supreme
+06F9	Supreme
+06FA	Monk's
+06FB	Champion's
+06FC	Warding
+06FD	Mercurial
+06FE	Fortunate
+06FF	Plasmic
+0700	Favored
+0701	Beatified
+0702	Cerebral
+0703	Trampling
+0704	Swift
+0705	Violent
+0706	Wrathful
+0707	Reverent
+0708	Attentive
+0709	Inviolable
+070A	Impervious
+070B	Vigilant
+070C	Egotist's
+070D	Mercenary
+070E	Sacrosanct
+070F	Salubrious
+0710	Conquering
+0711	Valiant
+0712	Ordained
+0713	Impervious
+0714	Celestial
+0715	Persevering
+0716	Despairing
+0717	Abasing
+0718	Brutal
+0719	Desolating
+071A	Tenacious
+071B	Crushing
+071C	Ionic
+071D	Cannon
+071E	Augurer
+071F	Sprightly
+0720	Vanguard's
+0721	Lonely
+0722	Colossal
+0723	Able
+0724	Hindering
+0725	Divine
+0726	Cyclonic
+0727	Psychotic
+0728	Rampaging
+0729	Mimic's
+072A	Overlord's
+072B	Supreme
+072C	Illegal
+072D	Illegal
+072E	Illegal
+072F	Illegal
+0730	Illegal
+0731	Illegal
+0732	Illegal
+0733	Illegal
+0734	Illegal
+0735	Illegal
+0736	Illegal
+0737	Illegal
+0738	Illegal
+0739	Illegal
+073A	Illegal
+073B	Illegal
+073C	Illegal
+073D	Illegal
+073E	Illegal
+073F	Illegal
+0740	Illegal
+0741	Illegal
+0742	Illegal
+0743	Illegal
+0744	Illegal
+0745	Illegal
+0746	Toxic
+0747	Scorching
+0748	Gelid
+0749	Basilisk's
+074A	Charring
+074B	Icicle
+074C	Voltaic
+074D	Thaumic
+074E	Phrenic
+074F	Fine
+0750	Fine
+0751	Fine
+0752	Fine
+0753	Focused
+0754	Saint's
+0755	Fervid
+0756	Frigid
+0757	Charged
+0758	Fine
+0759	Fine
+075A	Illegal
+075B	Illegal
+075C	Master's
+075D	Master's
+075E	Master's
+075F	Master's
+0760	Fine
+0761	Fine
+0762	Illegal
+0763	Explosive
+0764	Sapper's
+0765	Protective
+0766	Robust
+0767	Warrior's
+0768	Stalwart
+0769	Honed
+076A	Urgent
+076B	Defiant
+076C	Defiant
+076D	Phasing
+076E	Bandit's
+076F	Fine
+0770	Fine
+0771	Fine
+0772	Dragon's
+0773	Jotun's
+0774	Valkyrie's
+0775	Butcher's
+0776	Ceramic
+0777	Zirconic
+0778	Crystal
+0779	Branding
+077A	Icebound
+077B	Ionic
+077C	Slayer's
+077D	Butcher's
+077E	Cleansing
+077F	Holy
+0780	Wyrmslayer
+0781	Ruinous
+0782	Dauntless
+0783	Dauntless
+0784	Inherited
+0785	Fortuitous
+0786	Feral
+0787	Finishing
+0788	Hallowed
+0789	Hallowed
+078A	Plundering
+078B	Plundering
+078C	Unfazed
+078D	Fine
+078E	Paradise
+078F	Illegal
+0790	Pristine
+0791	Immunizing
+0792	Illegal
+0793	Branding
+0794	Fireproof
+0795	Illegal
+0796	Simmering
+0797	Iceproof
+0798	Illegal
+0799	Gorgon's
+079A	Intangible
+079B	Fireproof
+079C	Iceproof
+079D	Insulated
+079E	Iron Wall
+079F	Sage's
+07A0	Unfazed
+07A1	Unfazed
+07A2	Inviolable
+07A3	Slayer's
+07A4	Artificial
+07A5	Cleansing
+07A6	Holy
+07A7	Wyrmslayer
+07A8	Ruinous
+07A9	Explorer's
+07AA	Exemplar's
+07AB	Survivor's
+07AC	Hallowed
+07AD	Precise
+07AE	Rugged
+07AF	Apt
+07B0	Unbowed
+07B1	Renitent
+07B2	Nimble
+07B3	Propitious
+07B4	Supreme
+07B5	Supreme
+07B6	Monk's
+07B7	Champion's
+07B8	Warding
+07B9	Mercurial
+07BA	Fortunate
+07BB	Plasmic
+07BC	Favored
+07BD	Beatified
+07BE	Cerebral
+07BF	Trampling
+07C0	Swift
+07C1	Violent
+07C2	Wrathful
+07C3	Reverent
+07C4	Attentive
+07C5	Inviolable
+07C6	Impervious
+07C7	Vigilant
+07C8	Egotist's
+07C9	Mercenary
+07CA	Sacrosanct
+07CB	Salubrious
+07CC	Conquering
+07CD	Valiant
+07CE	Ordained
+07CF	Impervious
+07D0	Celestial
+07D1	Persevering
+07D2	Despairing
+07D3	Abasing
+07D4	Brutal
+07D5	Desolating
+07D6	Tenacious
+07D7	Crushing
+07D8	Ionic
+07D9	Cannon
+07DA	Augurer
+07DB	Sprightly
+07DC	Vanguard's
+07DD	Lonely
+07DE	Colossal
+07DF	Able
+07E0	Hindering
+07E1	Divine
+07E2	Cyclonic
+07E3	Psychotic
+07E4	Rampaging
+07E5	Mimic's
+07E6	Overlord's
+07E7	Supreme
+07E8	Illegal
+07E9	Illegal
+07EA	Illegal
+07EB	Illegal
+07EC	Illegal
+07ED	Illegal
+07EE	Illegal
+07EF	Illegal
+07F0	Illegal
+07F1	Illegal
+07F2	Illegal
+07F3	Illegal
+07F4	Illegal
+07F5	Illegal
+07F6	Illegal
+07F7	Illegal
+07F8	Illegal
+07F9	Illegal
+07FA	Illegal
+07FB	Illegal
+07FC	Illegal
+07FD	Illegal
+07FE	Illegal
+07FF	Illegal
+0800	Illegal
+0801	Illegal
+0802	Toxic
+0803	Scorching
+0804	Gelid
+0805	Basilisk's
+0806	Charring
+0807	Icicle
+0808	Voltaic
+0809	Thaumic
+080A	Phrenic
+080B	Exquisite
+080C	Exquisite
+080D	Exquisite
+080E	Exquisite
+080F	Fanatical
+0810	Goddess's
+0811	Torrid
+0812	Glacial
+0813	Arcing
+0814	Exquisite
+0815	Exquisite
+0816	Illegal
+0817	Illegal
+0818	Master's
+0819	Master's
+081A	Master's
+081B	Master's
+081C	Exquisite
+081D	Exquisite
+081E	Illegal
+081F	Explosive
+0820	Sapper's
+0821	Sheltering
+0822	Supernal
+0823	Veteran's
+0824	Unyielding
+0825	Keen
+0826	Desperate
+0827	Gladiator's
+0828	Gladiator's
+0829	Infinite
+082A	Raider's
+082B	Exquisite
+082C	Exquisite
+082D	Exquisite
+082E	Dragon's
+082F	Jotun's
+0830	Valkyrie's
+0831	Butcher's
+0832	Ceramic
+0833	Zirconic
+0834	Crystal
+0835	Immolating
+0836	Frozen
+0837	Anionic
+0838	Murderer's
+0839	Poacher's
+083A	Venerating
+083B	Godly
+083C	Wyrmreaper
+083D	Wrackful
+083E	Last Stand
+083F	Last Stand
+0840	Ancient
+0841	Miraculous
+0842	Feral
+0843	Denouement
+0844	Unnatural
+0845	Unnatural
+0846	Embezzling
+0847	Embezzling
+0848	Unbowed
+0849	Exquisite
+084A	Conquering
+084B	Illegal
+084C	Pristine
+084D	Immunizing
+084E	Illegal
+084F	Branding
+0850	Fireproof
+0851	Illegal
+0852	Simmering
+0853	Iceproof
+0854	Illegal
+0855	Gorgon's
+0856	Intangible
+0857	Fireproof
+0858	Iceproof
+0859	Insulated
+085A	Great Wall
+085B	Deity's
+085C	Unbowed
+085D	Unbowed
+085E	Impervious
+085F	Murderer's
+0860	Mechanical
+0861	Venerating
+0862	Godly
+0863	Wyrmreaper
+0864	Wrackful
+0865	Wanderer's
+0866	Paragon's
+0867	Soloist's
+0868	Warping
+0869	Banishing
+086A	Supreme
+086B	Monk's
+086C	Champion's
+086D	Warding
+086E	Mercurial
+086F	Fortunate
+0870	Supreme
+0871	Supreme
+0872	Monk's
+0873	Champion's
+0874	Warding
+0875	Mercurial
+0876	Fortunate
+0877	Plasmic
+0878	Favored
+0879	Beatified
+087A	Cerebral
+087B	Trampling
+087C	Swift
+087D	Violent
+087E	Wrathful
+087F	Reverent
+0880	Attentive
+0881	Inviolable
+0882	Impervious
+0883	Vigilant
+0884	Egotist's
+0885	Mercenary
+0886	Sacrosanct
+0887	Salubrious
+0888	Conquering
+0889	Valiant
+088A	Ordained
+088B	Impervious
+088C	Celestial
+088D	Persevering
+088E	Despairing
+088F	Abasing
+0890	Brutal
+0891	Desolating
+0892	Tenacious
+0893	Crushing
+0894	Ionic
+0895	Cannon
+0896	Augurer
+0897	Sprightly
+0898	Vanguard's
+0899	Lonely
+089A	Colossal
+089B	Able
+089C	Hindering
+089D	Divine
+089E	Cyclonic
+089F	Psychotic
+08A0	Rampaging
+08A1	Mimic's
+08A2	Overlord's
+08A3	Supreme
+08A4	Illegal
+08A5	Illegal
+08A6	Illegal
+08A7	Illegal
+08A8	Illegal
+08A9	Illegal
+08AA	Illegal
+08AB	Illegal
+08AC	Illegal
+08AD	Illegal
+08AE	Illegal
+08AF	Illegal
+08B0	Illegal
+08B1	Illegal
+08B2	Illegal
+08B3	Illegal
+08B4	Illegal
+08B5	Illegal
+08B6	Illegal
+08B7	Illegal
+08B8	Illegal
+08B9	Illegal
+08BA	Illegal
+08BB	Illegal
+08BC	Illegal
+08BD	Illegal
+08BE	Summon Beast Scroll
+08BF	Summon Dragon Scroll
+08C0	Heal Potion (L)
+08C1	雷のオーブ
+08C2	呪いのオーブ
+08C3	凍結のオーブ
+08C4	氷河のオーブ
+08C5	竜巻のオーブ
+08C6	魔弾のオーブ
+08C7	指輪アイテム判定用
+08C8	Fire Ring
+08C9	Flame Ring
+08CA	Blaze Ring
+08CB	Ice Ring
+08CC	Frost Ring
+08CD	Glacial Ring
+08CE	Bolt Ring
+08CF	Storm Ring
+08D0	Electric Ring
+08D1	Poison Ring
+08D2	Venom Ring
+08D3	Toxic Ring
+08D4	Heal Ring
+08D5	Emergency Ring
+08D6	Miracle Ring
+08D7	指輪アイテム判定用
+08D8	巻物アイテム判定用
+08D9	Meteorite Scroll
+08DA	Blizzard Scroll
+08DB	Vortex Scroll
+08DC	Acid Scroll
+08DD	Rebirth Scroll
+08DE	巻物アイテム判定用
+08DF	ポーションアイテム判定用
+08E0	Heal Potion (S)
+08E1	Heal Potion (S)
+08E2	Heal Potion (S)
+08E3	Heal Potion (M)
+08E4	Heal Potion (L)
+08E5	Elixir
+08E6	Resist Brew (S)
+08E7	Resist Brew (M)
+08E8	Resist Brew (L)
+08E9	Invigorating Dram (S)
+08EA	Invigorating Dram (M)
+08EB	Invigorating Dram (L)
+08EC	Strong Draught (S)
+08ED	Strong Draught (M)
+08EE	Strong Draught (L)
+08EF	Defense Tonic (S)
+08F0	Defense Tonic (M)
+08F1	Defense Tonic (L)
+08F2	Stalwart Spirits (S)
+08F3	Stalwart Spirits (M)
+08F4	Stalwart Spirits (L)
+08F5	Blood of the Ogre (S)
+08F6	Blood of the Ogre (M)
+08F7	Blood of the Ogre (L)
+08F8	Liquid Luck (S)
+08F9	Liquid Luck (M)
+08FA	Liquid Luck (L)
+08FB	Explosive (S)
+08FC	Explosive (M)
+08FD	Explosive (L)
+08FE	ポーションアイテム判定用
+08FF	Runestone A
+0900	Runestone B
+0901	Runestone C
+0902	Runestone D
+0903	Runestone E
+0904	Runestone F
+0905	Runestone G
+0906	Runestone H
+0907	Runestone I
+0908	Runestone J
+0909	Runestone K
+090A	Runestone L
+090B	Runestone M
+090C	Runestone N
+090D	Runestone O
+090E	Runestone P
+090F	Runestone Q
+0910	Runestone R
+0911	Runestone S
+0912	Runestone T
+0913	Runestone U
+0914	Runestone V
+0915	Runestone W
+0916	Runestone X
+0917	Runestone Y
+0918	Runestone Z
+0919	アビリティアイテム判定用
+091A	Sacrifice
+091B	Distraction
+091C	War Paint
+091D	Iron Will
+091E	Incite Rage
+091F	Fire Barrel
+0920	Bomb Satchel
+0921	Lava Bracer
+0922	Salamander Oil
+0923	Toxic Extract
+0924	Holdout Dagger
+0925	Spell: Storm
+0926	Spell: Rock Crusher
+0927	Spell: Thunderhead
+0928	Spell: Blizzard
+0929	Spell: Ice Prison
+092A	Spell: Gravity
+092B	Spell: Flame Burst
+092C	Spell: Protection
+092D	Spell: Fire Ward
+092E	Spell: Thunderbolt
+092F	Spell: Curse
+0930	Spell: Create Food
+0931	Spell: Petrification
+0932	Spell: Meteor Swarm
+0933	Spell: Storm
+0934	Spell: Rock Press
+0935	Spell: Thunderhead
+0936	Spell: Blizzard
+0937	Spell: Flame Burst
+0938	Spell: Blaze
+0939	Spell: Protection
+093A	Spell: Fire Ward
+093B	Spell: Thunderbolt
+093C	Spell: Curse
+093D	Spell: Create Food
+093E	Spell: Petrification
+093F	Spell: Meteor Swarm
+0940	Spell: Slow
+0941	Spell: Extinction
+0942	アビリティアイテム判定用
+0943	Gazer Soul Catcher Urn
+0944	Ritual Amazon Armor
+0945	依頼書「%s」
+0946	かばんアイテム判定用
+0947	##(CUSTOMSET)
+0948	##(CUSTOMSET)
+0949	##(CUSTOMSET)
+094A	##(CUSTOMSET)
+094B	##(CUSTOMSET)
+094C	##(CUSTOMSET)
+094D	##(CUSTOMSET)
+094E	##(CUSTOMSET)
+094F	##(CUSTOMSET)
+0950	かばんアイテム判定用
+0951	---
+0952	##(SKILL_RESETITEM)
+0953	Seal of the Conqueror
+0954	---
+0955	---
+0956	Narration Voice: ##(FIGHTER)
+0957	Narration Voice: ##(AMAZON)
+0958	Narration Voice: ##(ELF)
+0959	Narration Voice: ##(DWARF)
+095A	Narration Voice: ##(SORCERESS)
+095B	Narration Voice: ##(WIZARD)
+095C	---
+095D	Summons a Sabertooth
+095E	Summons a Dragonlisk
+095F	Restores 70％ of HP
+0960	サンダーを発動する
+0961	カースを発動する
+0962	フロストクラウドを発動する
+0963	グラシアルスパイクを発動する
+0964	ストームを発動する
+0965	マジックミサイルを発動する
+0966	指輪アイテム判定用
+0967	Shoots fireballs
+0968	Shoots strong fireballs
+0969	Shoots devastating fireballs
+096A	Forms ice pillars
+096B	Forms strong ice pillars
+096C	Forms chilling ice pillars
+096D	Shoots a bolt of lightning
+096E	Shoots a strong bolt of lightning
+096F	Shoots a crackling bolt of lightning
+0970	Disperse a poison cloud
+0971	Disperse a strong poison cloud
+0972	Disperse a lethal poison cloud
+0973	Restores a bit of all allies' HP
+0974	Restores some of all allies' HP
+0975	Fully restores all allies' HP
+0976	指輪アイテム判定用
+0977	巻物アイテム判定用
+0978	Fireballs rain down from heaven
+0979	Unleashes a flurry of ice attacks
+097A	Summons a slashing tornado
+097B	Disgorges a spray of acid
+097C	Raises all allies, restores all HP
+097D	巻物アイテム判定用
+097E	ポーションアイテム判定用
+097F	Restores 30％ of HP
+0980	Restores 30％ of HP
+0981	Restores 30％ of HP
+0982	Restores 50％ of HP
+0983	Restores 70％ of HP
+0984	Restores all HP and brief invulnerability
+0985	Wards off status ailments for 20s
+0986	Wards off status ailments for 40s
+0987	Wards off status ailments for 60s
+0988	Regenerate HP for 30s
+0989	Regenerate HP for 60s
+098A	Regenerate HP for 120s
+098B	Increases damage dealt for 30s
+098C	Increases damage dealt for 60s
+098D	Increases damage dealt for 120s
+098E	Reduces damage taken for 30s
+098F	Reduces damage taken for 60s
+0990	Reduces damage taken for 120s
+0991	Immune to knockback for 20s
+0992	Immune to knockback for 40s
+0993	Immune to knockback for 60s
+0994	Boosts knockback ability for 20s
+0995	Boosts knockback ability for 40s
+0996	Boosts knockback ability for 60s
+0997	Increases item drop rate for 60s
+0998	Increases item drop rate for 180s
+0999	Increases item drop rate for 300s
+099A	Causes a small explosion when hurled
+099B	Causes a big explosion when hurled
+099C	Causes a grand explosion when hurled
+099D	ポーションアイテム判定用
+099E	A stone that holds a strange power
+099F	A stone that holds a strange power
+09A0	A stone that holds a strange power
+09A1	A stone that holds a strange power
+09A2	A stone that holds a strange power
+09A3	A stone that holds a strange power
+09A4	A stone that holds a strange power
+09A5	A stone that holds a strange power
+09A6	A stone that holds a strange power
+09A7	A stone that holds a strange power
+09A8	A stone that holds a strange power
+09A9	A stone that holds a strange power
+09AA	A stone that holds a strange power
+09AB	A stone that holds a strange power
+09AC	A stone that holds a strange power
+09AD	A stone that holds a strange power
+09AE	A stone that holds a strange power
+09AF	A stone that holds a strange power
+09B0	A stone that holds a strange power
+09B1	A stone that holds a strange power
+09B2	A stone that holds a strange power
+09B3	A stone that holds a strange power
+09B4	A stone that holds a strange power
+09B5	A stone that holds a strange power
+09B6	A stone that holds a strange power
+09B7	A stone that holds a strange power
+09B8	アビリティアイテム判定用
+09B9	Take an ally's damage for them
+09BA	Attract enemy attention
+09BB	Create clones of yourself
+09BC	Prevent knockback
+09BD	Use HP to go into Berserker mode
+09BE	Produce a barrel filled with gunpowder
+09BF	Produce a bomb
+09C0	Fire properties added to normal attacks
+09C1	Grants fire properties to arrows and daggers
+09C2	Grants poison properties to arrows and daggers
+09C3	Use a spare dagger
+09C4	Summon a slashing tornado
+09C5	Drop a large stone on your foes
+09C6	Summon a small lightning cloud
+09C7	Freeze your foes with a blizzard
+09C8	Trap enemy in a frozen prison
+09C9	Alter gravity to pull enemies in
+09CA	Rain fire down upon your foes
+09CB	Decrease damage received for all allies
+09CC	Protect party against fire
+09CD	Electrocute all foes in an area
+09CE	Force your target to live as a frog
+09CF	Make food materialize
+09D0	Turn target to stone
+09D1	Drop stones from space on your foes
+09D2	Summon a slashing tornado
+09D3	Drop a large stone on your foes
+09D4	Summon a small lightning cloud
+09D5	Freeze your foes with a blizzard
+09D6	Rain fire down upon your foes
+09D7	A long-burning fire attack
+09D8	Decrease damage received by all allies
+09D9	Increase fire DMG dealt, reduce fire DMG taken
+09DA	Electrocute all foes in an area
+09DB	Force your target to live as a frog
+09DC	Make food materialize
+09DD	Turn target to stone
+09DE	Drop stones from space on your foes
+09DF	Dilate time to slow enemy movement
+09E0	Instakill a non-boss enemy
+09E1	アビリティアイテム判定用
+09E2	 Quest item for "Soul Gazing" Must be equipped in ##(COLOR_CUSTOMSET)
+09E3	Quest item for "Rite of Passage" Must be equipped in ##(COLOR_CUSTOMSET)
+09E4	使うことで依頼内容が確認できる
+09E5	かばんアイテム判定用
+09E6	A ##(COLOR_CUSTOMSET) to carry your items. You can buy multiple ##(COLOR_CUSTOMSET)@c(13)s@/c.
+09E7	A ##(COLOR_CUSTOMSET) to carry your items. You can buy multiple ##(COLOR_CUSTOMSET)@c(13)s@/c.
+09E8	A ##(COLOR_CUSTOMSET) to carry your items. You can buy multiple ##(COLOR_CUSTOMSET)@c(13)s@/c.
+09E9	A ##(COLOR_CUSTOMSET) to carry your items. You can buy multiple ##(COLOR_CUSTOMSET)@c(13)s@/c.
+09EA	A ##(COLOR_CUSTOMSET) to carry your items. You can buy multiple ##(COLOR_CUSTOMSET)@c(13)s@/c.
+09EB	A ##(COLOR_CUSTOMSET) to carry your items. You can buy multiple ##(COLOR_CUSTOMSET)@c(13)s@/c.
+09EC	A ##(COLOR_CUSTOMSET) to carry your items. You can buy multiple ##(COLOR_CUSTOMSET)@c(13)s@/c.
+09ED	A ##(COLOR_CUSTOMSET) to carry your items. You can buy multiple ##(COLOR_CUSTOMSET)@c(13)s@/c.
+09EE	A ##(COLOR_CUSTOMSET) to carry your items. You can buy multiple ##(COLOR_CUSTOMSET)@c(13)s@/c.
+09EF	かばんアイテム判定用
+09F0	---
+09F1	Forget all ##(ABILITY)s learned thus far and reassign ##(ABILITY) points. You can use them at the ##(COLOR_P_GUILD).
+09F2	This is a legendary trinket that enhances various combat skills the farther you venture in the ##(COLOR_R_RD).  This item must be set in your ##(COLOR_CUSTOMSET). Valid for ##(MDLV4) and higher difficulty.
+09F3	For checking special items. You rock, Testerperson!
+09F4	Use this option to test the character voiceover thangamabobs. Yes, "thangamabobs".
+09F5	You will now be able to choose "Fighter" for the narration voice in the Option  menu on the title screen.
+09F6	You will now be able to choose "Amazon" for the narration voice in the Option  menu on the title screen.
+09F7	You will now be able to choose "Elf" for the narration voice in the Option menu on the title screen.
+09F8	You will now be able to choose "Dwarf" for the narration voice in the Option menu on the title screen.
+09F9	You will now be able to choose  "Sorceress" for the narration voice in the Option menu on the title screen.
+09FA	You will now be able to choose "Wizard" for the narration voice in the Option menu on the title screen.
+09FB	---
+09FC	No effect
+09FD	@c(21)+%d power lightning strike during evasion@/c
+09FE	@c(21)+%d explosion damage added to dash attack@/c
+09FF	@c(21)+%d explosion damage added to diving attack@/c
+0A00	@c(21)Summoned Skeleton's dealt damage +%d％@/c
+0A01	@c(21)Summoned Wood Golem's dealt damage +%d％@/c
+0A02	@c(21)Arrow attacks penetrate %d enemies@/c
+0A03	@c(21)%d％ chance of arrow attack without consumption@/c
+0A04	@c(21)Dealt damage +%d％ during critical hit@/c
+0A05	@c(21)Dealt damage and taken damage +%d％@/c
+0A06	@c(21)Power Smash activates Gravity@/c
+0A07	@c(21)Power Smash activates Slow@/c
+0A08	@c(21)Shortens spell casting time %d％@/c
+0A09	@c(21)Raises spell casting time and power %d％@/c
+0A0A	@c(21)Teleport MP cost -%d％@/c
+0A0B	@c(21)Negates Slow and Gravity effects@/c
+0A0C	@c(21)While extending, all use items recover +1@/c
+0A0D	@c(21)While extending, all equipment durability recovers %d％@/c
+0A0E	@c(21)Recover %d MP per second@/c
+0A0F	@c(21)Dealt damage +%d％ when HP at 999@/c
+0A10	@c(21)Negates all status ailments when HP at 999@/c
+0A11	@c(21)Changes magic attack element from Fire to Ice@/c
+0A12	@c(21)Changes magic attack element from Ice to Fire@/c
+0A13	@c(21)%d％ of STR added to magic attack damage@/c
+0A14	@c(21)%d％ chance of using ring magic without consumption@/c
+0A15	@c(21)%d％ chance of using spell book without consumption@/c
+0A16	@c(21)INT increases by number of rings in bag X %d@/c
+0A17	@c(21)While mounted, additional action added@/c
+0A18	@c(21)While mounted, HP recovers %d％ per enemy defeated@/c
+0A19	@c(21)While mounted, immune to knockdowns@/c
+0A1A	@c(21)While mounted, damage taken -%d％@/c
+0A1B	@c(21)While mounted, damage dealt +%d％@/c
+0A1C	@c(21)While shield guarding, durability consumed to recover %d HP per second@/c
+0A1D	@c(21)All attacks are either critical hits or 1 damage@/c
+0A1E	@c(21)%d％ chance of magic shot per coin pickup@/c
+0A1F	@c(21)Damage dealt +%d％ on back attacks@/c
+0A20	@c(21)%d％ chance of one-hit KO a "stoned" enemy@/c
+0A21	@c(21)Dealt damage +%d％ to "frogged" enemy@/c
+0A22	@c(21)Adds Fire damage to attacks@/c
+0A23	@c(21)Adds Ice damage to attacks@/c
+0A24	@c(21)Adds Lightning damage to attacks@/c
+0A25	@c(21)Lightning attacks of Grand Smash become Ice@/c
+0A26	@c(21)Eagle Dive bombs +%d@/c
+0A27	@c(21)Evasion invincibility time +%d％@/c
+0A28	@c(21)While evasion invincibility active, dealt damage +%d％@/c
+0A29	@c(21)%d％ chance of additional fire shot when attacking burning enemies@/c
+0A2A	@c(21)Ring effect +%d％@/c
+0A2B	@c(21)During magic boost, damage taken -%d％@/c
+0A2C	@c(21)During magic boost, MP cost -%d％@/c
+0A2D	No effect
+0A2E	No effect
+0A2F	@c(20)MP takes %d％ of damage@/c
+0A30	@c(20)Dash attack damage +%d％@/c
+0A31	@c(20)Normal attack speed +%d％@/c
+0A32	@c(20)%d％ chance to guard during kick@/c
+0A33	@c(20)%d％ chance to resist knockback when kicking@/c
+0A34	@c(20)Regain %d％ of last damage taken every second@/c
+0A35	@c(20)%d％ chance to null back attack@/c
+0A36	@c(20)%d％ chance of guard break@/c
+0A37	@c(20)No knockback with %d％ of HP@/c
+0A38	@c(20)DMG dealt +%d％ to enemies with status ailments@/c
+0A39	@c(20)Score +%d％, DMG taken +%d％@/c
+0A3A	@c(20)Gold obtained +%d％, DMG dealt -%d％@/c
+0A3B	@c(20)When recovering HP, also recover %d％ as MP@/c
+0A3C	@c(20)%d％ chance that 0 MP will be consumed when casting@/c
+0A3D	@c(20)Status ailment duration decreased by %d％@/c
+0A3E	@c(20)When HP is at max, dealt physical damage +%d％@/c
+0A3F	@c(20)When HP is at max, dealt magical damage +%d％@/c
+0A40	@c(20)When HP is above %d％, withstand one-hit KO@/c
+0A41	@c(20)Fire, ice, and lightning DMG becomes non-elemental DMG@/c
+0A42	@c(20)When HP is max, damage taken -%d％@/c
+0A43	@c(20)While airborne, damage taken -%d％@/c
+0A44	@c(20)Damage dealt +%d％ to enemy in the air@/c
+0A45	@c(20)Effect of Bash +%d％@/c
+0A46	@c(20)Power of Rebuke +%d％@/c
+0A47	@c(20)Power of Missile Reflect +%d％@/c
+0A48	@c(20)Power of Brutal Drive +%d％@/c
+0A49	@c(20)Power of Grand Smash +%d％@/c
+0A4A	@c(20)Power of Power Shot +%d％@/c
+0A4B	@c(20)Effect of Concentrate +%d％@/c
+0A4C	@c(20)Effect of Mental Absorb +%d％@/c
+0A4D	@c(20)Power of Judgement +%d％@/c
+0A4E	@c(20)Power of Parry +%d％@/c
+0A4F	@c(20)Effect of Rock Skin +%d％@/c
+0A50	@c(20)Power of Elemental Lore +%d％@/c
+0A51	@c(20)Effect of Slow +%d％@/c
+0A52	@c(20)Effect of Protection +%d％@/c
+0A53	@c(20)Power of Tempest Edge +%d％@/c
+0A54	@c(20)Power of Brandish +%d％@/c
+0A55	@c(20)Power of Frenzy +%d％@/c
+0A56	@c(20)Power of Clone Strikes +%d％@/c
+0A57	@c(20)Power of spells +%d％@/c
+0A58	No effect
+0A59	@c(20)CD2 Weapon Effect 0080@/c
+0A5A	@c(20)CD2 Weapon Effect 0081@/c
+0A5B	@c(20)CD2 Weapon Effect 0082@/c
+0A5C	@c(20)CD2 Weapon Effect 0083@/c
+0A5D	@c(20)CD2 Weapon Effect 0084@/c
+0A5E	@c(20)CD2 Weapon Effect 0085@/c
+0A5F	@c(20)CD2 Weapon Effect 0086@/c
+0A60	@c(20)CD2 Weapon Effect 0087@/c
+0A61	@c(20)CD2 Weapon Effect 0088@/c
+0A62	@c(20)CD2 Weapon Effect 0089@/c
+0A63	@c(20)CD2 Weapon Effect 0090@/c
+0A64	@c(20)CD2 Weapon Effect 0091@/c
+0A65	@c(20)CD2 Weapon Effect 0092@/c
+0A66	@c(20)CD2 Weapon Effect 0093@/c
+0A67	@c(20)CD2 Weapon Effect 0094@/c
+0A68	@c(20)CD2 Weapon Effect 0095@/c
+0A69	@c(20)CD2 Weapon Effect 0096@/c
+0A6A	@c(20)CD2 Weapon Effect 0097@/c
+0A6B	@c(20)CD2 Weapon Effect 0098@/c
+0A6C	START ELITE WEAPONS FROM HERE
+0A6D	@c(22)Add Fire to sliding attack@/c
+0A6E	@c(22)Add Ice to sliding attack@/c
+0A6F	@c(22)Add Lightning to sliding attack@/c
+0A70	@c(22)Add explosion with %d damage to Power Smash@/c
+0A71	@c(22)Add Fire Pillar with %d damage to Power Smash@/c
+0A72	@c(22)Add Ice Pillar with %d damage to Power Smash@/c
+0A73	@c(22)Add Lightning with %d damage to Power Smash@/c
+0A74	@c(22)Add Storm with %d damage to Power Smash@/c
+0A75	@c(22)Add Poison with %d damage to Power Smash@/c
+0A76	@c(22)While extending, self destruct@/c
+0A77	@c(22)Elemetal Lore activation speed +%d％@/c
+0A78	@c(22)Apply heal effects of all potions to party@/c
+0A79	@c(22)Knockback and knockdown +%d％@/c
+0A7A	@c(22)STR and CON +%d@/c
+0A7B	@c(22)INT and MGR +%d@/c
+0A7C	@c(22)%d％ of dealt damage added as Fire and Ice damage@/c
+0A7D	@c(22)%d％ of dealt damage added as Ice and Lightning damage@/c
+0A7E	@c(22)%d％ of dealt damage added as Lightning and Fire damage@/c
+0A7F	@c(22)Decrease %d％ of Fire, Ice, Lightning damage taken@/c
+0A80	@c(22)Ground attack speed +%d％, power +%d％@/c
+0A81	@c(22)Hitting enemies during their attack will cause knockback@/c
+0A82	@c(22)Power of Cyclone Masher +%d％@/c
+0A83	@c(22)Power of Shockwave +%d％@/c
+0A84	@c(22)Damage increase effect of Distraction +%d％@/c
+0A85	@c(22)Power of Neck Splitter +%d％@/c
+0A86	@c(22)Power of Deadly Revolution +%d％@/c
+0A87	@c(22)War Paint duration +%d％@/c
+0A88	@c(22)Damage increase effect of Power Bomb +%d％@/c
+0A89	@c(22)Effect of Lethal Fists +%d％@/c
+0A8A	@c(22)Effect of Powder Mastery +%d％@/c
+0A8B	@c(22)Arrow count of Rapid Fire +%d@/c
+0A8C	@c(22)Effect of Deadly Boots +%d％@/c
+0A8D	@c(22)Effect of Backstab +%d％@/c
+0A8E	@c(22)Effect of Extract +%d％@/c
+0A8F	@c(22)Effect of Ice Prison +%d％@/c
+0A90	@c(22)Effect of Petrification +%d％@/c
+0A91	@c(22)Effect of Fire Ward +%d％@/c
+0A92	@c(22)Damage increase effect of Levitation +%d％@/c
+0A93	@c(22)While teleporting, release Fire Pillar with %d damage@/c
+0A94	@c(22)While teleporting, release Ice Pillar with %d damage@/c
+0A95	@c(22)While teleporting, release lightning bolt with %d damage@/c
+0A96	@c(22)Change Storm element to Ice@/c
+0A97	@c(22)Change Toxic Extract element to Ice@/c
+0A98	@c(22)Power of bombs +%d％@/c
+0A99	@c(22)Enhance dagger power@/c
+0A9A	@c(22)Enhance crossbow power@/c
+0A9B	@c(22)Dealt damage +%d％ during Pump Up@/c
+0A9C	@c(22)Dealt damage +%d％ to shield attacks@/c
+0A9D	@c(22)Power %d damage bomb released on death@/c
+0A9E	END ELITE WEAPONS
+0A9F	ELT Weapon Effect 0045
+0AA0	ELT Weapon Effect 0046
+0AA1	ELT Weapon Effect 0047
+0AA2	ELT Weapon Effect 0048
+0AA3	ELT Weapon Effect 0049
+0AA4	ELT Weapon Effect 0050
+0AA5	ELT Weapon Effect 0051
+0AA6	ELT Weapon Effect 0052
+0AA7	ELT Weapon Effect 0053
+0AA8	ELT Weapon Effect 0054
+0AA9	ELT Weapon Effect 0055
+0AAA	ELT Weapon Effect 0056
+0AAB	ELT Weapon Effect 0057
+0AAC	ELT Weapon Effect 0058
+0AAD	ELT Weapon Effect 0059
+0AAE	ELT Weapon Effect 0060
+0AAF	ELT Weapon Effect 0061
+0AB0	ELT Weapon Effect 0062
+0AB1	ELT Weapon Effect 0063
+0AB2	ELT Weapon Effect 0064
+0AB3	ELT Weapon Effect 0065
+0AB4	ELT Weapon Effect 0066
+0AB5	ELT Weapon Effect 0067
+0AB6	ELT Weapon Effect 0068
+0AB7	ELT Weapon Effect 0069
+0AB8	ELT Weapon Effect 0070
+0AB9	ELT Weapon Effect 0071
+0ABA	ELT Weapon Effect 0072
+0ABB	ELT Weapon Effect 0073
+0ABC	ELT Weapon Effect 0074
+0ABD	ELT Weapon Effect 0075
+0ABE	ELT Weapon Effect 0076
+0ABF	ELT Weapon Effect 0077
+0AC0	ELT Weapon Effect 0078
+0AC1	ELT Weapon Effect 0079
+0AC2	ELT Weapon Effect 0080
+0AC3	ELT Weapon Effect 0081
+0AC4	ELT Weapon Effect 0082
+0AC5	ELT Weapon Effect 0083
+0AC6	ELT Weapon Effect 0084
+0AC7	ELT Weapon Effect 0085
+0AC8	ELT Weapon Effect 0086
+0AC9	ELT Weapon Effect 0087
+0ACA	ELT Weapon Effect 0088
+0ACB	ELT Weapon Effect 0089
+0ACC	ELT Weapon Effect 0090
+0ACD	ELT Weapon Effect 0091
+0ACE	ELT Weapon Effect 0092
+0ACF	ELT Weapon Effect 0093
+0AD0	ELT Weapon Effect 0094
+0AD1	ELT Weapon Effect 0095
+0AD2	ELT Weapon Effect 0096
+0AD3	ELT Weapon Effect 0097
+0AD4	ELT Weapon Effect 0098
+0AD5	ELT Weapon Effect 0099
+0AD6	ELT Weapon Effect 0100
+0AD7	Illegal
+0AD8	Thunderclap
+0AD9	Detonating
+0ADA	Detonating
+0ADB	Summoner's
+0ADC	Summoner's
+0ADD	Showdown
+0ADE	Rainbow
+0ADF	Cavalry
+0AE0	Gambler's
+0AE1	Dark Knight's
+0AE2	Dark Knight's
+0AE3	Cardinal's
+0AE4	Grand Mage's
+0AE5	Hermit's
+0AE6	Dimensional
+0AE7	Merchant's
+0AE8	Helical
+0AE9	Angelic
+0AEA	King's
+0AEB	Moonlight
+0AEC	Runed
+0AED	Runed
+0AEE	Demonic
+0AEF	Worshiper's
+0AF0	Heavenly
+0AF1	Enchanting
+0AF2	Beastmaster's
+0AF3	Beastmaster's
+0AF4	Beastmaster's
+0AF5	Beastmaster's
+0AF6	Beastmaster's
+0AF7	Paladin's
+0AF8	Fallen
+0AF9	Twilight
+0AFA	Assassin's
+0AFB	Massive
+0AFC	Serpent-eyed
+0AFD	Wyvern's
+0AFE	Frozen
+0AFF	Thunderous
+0B00	Ice Storm
+0B01	Bombing
+0B02	Epic
+0B03	Condemned
+0B04	Volcanic
+0B05	Darkness
+0B06	Savior's
+0B07	Savior's
+0B08	Illegal
+0B09	Illegal
+0B0A	Cerebral
+0B0B	Trampling
+0B0C	Swift
+0B0D	Violent
+0B0E	Wrathful
+0B0F	Reverent
+0B10	Attentive
+0B11	Inviolable
+0B12	Impervious
+0B13	Vigilant
+0B14	Egotist's
+0B15	Mercenary
+0B16	Sacrosanct
+0B17	Salubrious
+0B18	Conquering
+0B19	Valiant
+0B1A	Ordained
+0B1B	Impervious
+0B1C	Celestial
+0B1D	Persevering
+0B1E	Despairing
+0B1F	Abasing
+0B20	Brutal
+0B21	Desolating
+0B22	Tenacious
+0B23	Crushing
+0B24	Ionic
+0B25	Cannon
+0B26	Augurer
+0B27	Sprightly
+0B28	Vanguard's
+0B29	Lonely
+0B2A	Colossal
+0B2B	Able
+0B2C	Hindering
+0B2D	Divine
+0B2E	Cyclonic
+0B2F	Psychotic
+0B30	Rampaging
+0B31	Mimic's
+0B32	Overlord's
+0B33	Illegal
+0B34	Mirage
+0B35	Mirage
+0B36	Mirage
+0B37	Mirage
+0B38	Mirage
+0B39	Mirage
+0B3A	Mirage
+0B3B	Mirage
+0B3C	Mirage
+0B3D	Mirage
+0B3E	Mirage
+0B3F	Mirage
+0B40	Mirage
+0B41	Mirage
+0B42	Mirage
+0B43	Mirage
+0B44	Mirage
+0B45	Mirage
+0B46	Mirage
+0B47	Illegal
+0B48	Flame-red
+0B49	Crystalline
+0B4A	Electrifying
+0B4B	Detonating
+0B4C	Flame-red
+0B4D	Crystalline
+0B4E	Electrifying
+0B4F	Gusty
+0B50	Sunless
+0B51	Bursting
+0B52	Spiritual
+0B53	Chemist's
+0B54	Ballistic
+0B55	Legendary
+0B56	Wizard's
+0B57	Exorcist's
+0B58	Exorcist's
+0B59	Exorcist's
+0B5A	Containment
+0B5B	Master's
+0B5C	Aggressive
+0B5D	Sand Blast
+0B5E	Impulsive
+0B5F	Duelist's
+0B60	Executioner's
+0B61	Sky High
+0B62	Traditional
+0B63	Stormrising
+0B64	Fearless
+0B65	Red-hot
+0B66	Whirlwind
+0B67	Rumbling
+0B68	Killer's
+0B69	Phantom
+0B6A	Ice Crusted
+0B6B	Abyssal
+0B6C	Flame-gated
+0B6D	Flying
+0B6E	Draconic
+0B6F	Neptune
+0B70	Flash
+0B71	Arctic
+0B72	Cometary
+0B73	Miner's
+0B74	Acrobat's
+0B75	Mystical
+0B76	Infernal
+0B77	Guardian's
+0B78	Lamented
+0B79	Illegal
+0B7A	Mirage
+0B7B	Mirage
+0B7C	Mirage
+0B7D	Mirage
+0B7E	Mirage
+0B7F	Mirage
+0B80	Mirage
+0B81	Mirage
+0B82	Mirage
+0B83	Mirage
+0B84	Mirage
+0B85	Mirage
+0B86	Mirage
+0B87	Mirage
+0B88	Mirage
+0B89	Mirage
+0B8A	Mirage
+0B8B	Mirage
+0B8C	Mirage
+0B8D	Mirage
+0B8E	Mirage
+0B8F	Mirage
+0B90	Mirage
+0B91	Mirage
+0B92	Mirage
+0B93	Mirage
+0B94	Mirage
+0B95	Mirage
+0B96	Mirage
+0B97	Mirage
+0B98	Mirage
+0B99	Mirage
+0B9A	Mirage
+0B9B	Mirage
+0B9C	Mirage
+0B9D	Mirage
+0B9E	Mirage
+0B9F	Mirage
+0BA0	Mirage
+0BA1	Mirage
+0BA2	Mirage
+0BA3	Mirage
+0BA4	Mirage
+0BA5	Mirage
+0BA6	Mirage
+0BA7	Mirage
+0BA8	Mirage
+0BA9	Mirage
+0BAA	Mirage
+0BAB	Mirage
+0BAC	Mirage
+0BAD	Mirage
+0BAE	Mirage
+0BAF	Mirage
+0BB0	Mirage
+0BB1	Mirage
+0BB2	Illegal
+0BB3	Thunderclap
+0BB4	Detonating
+0BB5	Detonating
+0BB6	Summoner's
+0BB7	Summoner's
+0BB8	Showdown
+0BB9	Rainbow
+0BBA	Cavalry
+0BBB	Gambler's
+0BBC	Dark Knight's
+0BBD	Dark Knight's
+0BBE	Cardinal's
+0BBF	Grand Mage's
+0BC0	Hermit's
+0BC1	Dimensional
+0BC2	Merchant's
+0BC3	Helical
+0BC4	Angelic
+0BC5	King's
+0BC6	Moonlight
+0BC7	Runed
+0BC8	Runed
+0BC9	Demonic
+0BCA	Worshiper's
+0BCB	Heavenly
+0BCC	Enchanting
+0BCD	Beastmaster's
+0BCE	Beastmaster's
+0BCF	Beastmaster's
+0BD0	Beastmaster's
+0BD1	Beastmaster's
+0BD2	Paladin's
+0BD3	Fallen
+0BD4	Twilight
+0BD5	Assassin's
+0BD6	Massive
+0BD7	Serpent-eyed
+0BD8	Wyvern's
+0BD9	Frozen
+0BDA	Thunderous
+0BDB	Ice Storm
+0BDC	Bombing
+0BDD	Epic
+0BDE	Condemned
+0BDF	Volcanic
+0BE0	Darkness
+0BE1	Savior's
+0BE2	Savior's
+0BE3	Illegal
+0BE4	Illegal
+0BE5	Cerebral
+0BE6	Trampling
+0BE7	Swift
+0BE8	Violent
+0BE9	Wrathful
+0BEA	Reverent
+0BEB	Attentive
+0BEC	Inviolable
+0BED	Impervious
+0BEE	Vigilant
+0BEF	Egotist's
+0BF0	Mercenary
+0BF1	Sacrosanct
+0BF2	Salubrious
+0BF3	Conquering
+0BF4	Valiant
+0BF5	Ordained
+0BF6	Impervious
+0BF7	Celestial
+0BF8	Persevering
+0BF9	Despairing
+0BFA	Abasing
+0BFB	Brutal
+0BFC	Desolating
+0BFD	Tenacious
+0BFE	Crushing
+0BFF	Ionic
+0C00	Cannon
+0C01	Augurer
+0C02	Sprightly
+0C03	Vanguard's
+0C04	Lonely
+0C05	Colossal
+0C06	Able
+0C07	Hindering
+0C08	Divine
+0C09	Cyclonic
+0C0A	Psychotic
+0C0B	Rampaging
+0C0C	Mimic's
+0C0D	Overlord's
+0C0E	Illegal
+0C0F	Mirage
+0C10	Mirage
+0C11	Mirage
+0C12	Mirage
+0C13	Mirage
+0C14	Mirage
+0C15	Mirage
+0C16	Mirage
+0C17	Mirage
+0C18	Mirage
+0C19	Mirage
+0C1A	Mirage
+0C1B	Mirage
+0C1C	Mirage
+0C1D	Mirage
+0C1E	Mirage
+0C1F	Mirage
+0C20	Mirage
+0C21	Mirage
+0C22	Illegal
+0C23	Flame-red
+0C24	Crystalline
+0C25	Electrifying
+0C26	Detonating
+0C27	Flame-red
+0C28	Crystalline
+0C29	Electrifying
+0C2A	Gusty
+0C2B	Sunless
+0C2C	Bursting
+0C2D	Spiritual
+0C2E	Chemist's
+0C2F	Ballistic
+0C30	Legendary
+0C31	Wizard's
+0C32	Exorcist's
+0C33	Exorcist's
+0C34	Exorcist's
+0C35	Containment
+0C36	Master's
+0C37	Aggressive
+0C38	Sand Blast
+0C39	Impulsive
+0C3A	Duelist's
+0C3B	Executioner's
+0C3C	Sky High
+0C3D	Traditional
+0C3E	Stormrising
+0C3F	Fearless
+0C40	Red-hot
+0C41	Whirlwind
+0C42	Rumbling
+0C43	Killer's
+0C44	Phantom
+0C45	Ice Crusted
+0C46	Abyssal
+0C47	Flame-gated
+0C48	Flying
+0C49	Draconic
+0C4A	Neptune
+0C4B	Flash
+0C4C	Arctic
+0C4D	Cometary
+0C4E	Miner's
+0C4F	Acrobat's
+0C50	Mystical
+0C51	Infernal
+0C52	Guardian's
+0C53	Lamented
+0C54	Illegal
+0C55	Mirage
+0C56	Mirage
+0C57	Mirage
+0C58	Mirage
+0C59	Mirage
+0C5A	Mirage
+0C5B	Mirage
+0C5C	Mirage
+0C5D	Mirage
+0C5E	Mirage
+0C5F	Mirage
+0C60	Mirage
+0C61	Mirage
+0C62	Mirage
+0C63	Mirage
+0C64	Mirage
+0C65	Mirage
+0C66	Mirage
+0C67	Mirage
+0C68	Mirage
+0C69	Mirage
+0C6A	Mirage
+0C6B	Mirage
+0C6C	Mirage
+0C6D	Mirage
+0C6E	Mirage
+0C6F	Mirage
+0C70	Mirage
+0C71	Mirage
+0C72	Mirage
+0C73	Mirage
+0C74	Mirage
+0C75	Mirage
+0C76	Mirage
+0C77	Mirage
+0C78	Mirage
+0C79	Mirage
+0C7A	Mirage
+0C7B	Mirage
+0C7C	Mirage
+0C7D	Mirage
+0C7E	Mirage
+0C7F	Mirage
+0C80	Mirage
+0C81	Mirage
+0C82	Mirage
+0C83	Mirage
+0C84	Mirage
+0C85	Mirage
+0C86	Mirage
+0C87	Mirage
+0C88	Mirage
+0C89	Mirage
+0C8A	Mirage
+0C8B	Mirage
+0C8C	Mirage
+0C8D	Illegal
+0C8E	Thunderclap
+0C8F	Detonating
+0C90	Detonating
+0C91	Summoner's
+0C92	Summoner's
+0C93	Showdown
+0C94	Rainbow
+0C95	Cavalry
+0C96	Gambler's
+0C97	Dark Knight's
+0C98	Dark Knight's
+0C99	Cardinal's
+0C9A	Grand Mage's
+0C9B	Hermit's
+0C9C	Dimensional
+0C9D	Merchant's
+0C9E	Helical
+0C9F	Angelic
+0CA0	King's
+0CA1	Moonlight
+0CA2	Runed
+0CA3	Runed
+0CA4	Demonic
+0CA5	Worshiper's
+0CA6	Heavenly
+0CA7	Enchanting
+0CA8	Beastmaster's
+0CA9	Beastmaster's
+0CAA	Beastmaster's
+0CAB	Beastmaster's
+0CAC	Beastmaster's
+0CAD	Paladin's
+0CAE	Fallen
+0CAF	Twilight
+0CB0	Assassin's
+0CB1	Massive
+0CB2	Serpent-eyed
+0CB3	Wyvern's
+0CB4	Frozen
+0CB5	Thunderous
+0CB6	Ice Storm
+0CB7	Bombing
+0CB8	Epic
+0CB9	Condemned
+0CBA	Volcanic
+0CBB	Darkness
+0CBC	Savior's
+0CBD	Savior's
+0CBE	Illegal
+0CBF	Illegal
+0CC0	Cerebral
+0CC1	Trampling
+0CC2	Swift
+0CC3	Violent
+0CC4	Wrathful
+0CC5	Reverent
+0CC6	Attentive
+0CC7	Inviolable
+0CC8	Impervious
+0CC9	Vigilant
+0CCA	Egotist's
+0CCB	Mercenary
+0CCC	Sacrosanct
+0CCD	Salubrious
+0CCE	Conquering
+0CCF	Valiant
+0CD0	Ordained
+0CD1	Impervious
+0CD2	Celestial
+0CD3	Persevering
+0CD4	Despairing
+0CD5	Abasing
+0CD6	Brutal
+0CD7	Desolating
+0CD8	Tenacious
+0CD9	Crushing
+0CDA	Ionic
+0CDB	Cannon
+0CDC	Augurer
+0CDD	Sprightly
+0CDE	Vanguard's
+0CDF	Lonely
+0CE0	Colossal
+0CE1	Able
+0CE2	Hindering
+0CE3	Divine
+0CE4	Cyclonic
+0CE5	Psychotic
+0CE6	Rampaging
+0CE7	Mimic's
+0CE8	Overlord's
+0CE9	Illegal
+0CEA	Mirage
+0CEB	Mirage
+0CEC	Mirage
+0CED	Mirage
+0CEE	Mirage
+0CEF	Mirage
+0CF0	Mirage
+0CF1	Mirage
+0CF2	Mirage
+0CF3	Mirage
+0CF4	Mirage
+0CF5	Mirage
+0CF6	Mirage
+0CF7	Mirage
+0CF8	Mirage
+0CF9	Mirage
+0CFA	Mirage
+0CFB	Mirage
+0CFC	Mirage
+0CFD	Illegal
+0CFE	Flame-red
+0CFF	Crystalline
+0D00	Electrifying
+0D01	Detonating
+0D02	Flame-red
+0D03	Crystalline
+0D04	Electrifying
+0D05	Gusty
+0D06	Sunless
+0D07	Bursting
+0D08	Spiritual
+0D09	Chemist's
+0D0A	Ballistic
+0D0B	Legendary
+0D0C	Wizard's
+0D0D	Exorcist's
+0D0E	Exorcist's
+0D0F	Exorcist's
+0D10	Containment
+0D11	Master's
+0D12	Aggressive
+0D13	Sand Blast
+0D14	Impulsive
+0D15	Duelist's
+0D16	Executioner's
+0D17	Sky High
+0D18	Traditional
+0D19	Stormrising
+0D1A	Fearless
+0D1B	Red-hot
+0D1C	Whirlwind
+0D1D	Rumbling
+0D1E	Killer's
+0D1F	Phantom
+0D20	Ice Crusted
+0D21	Abyssal
+0D22	Flame-gated
+0D23	Flying
+0D24	Draconic
+0D25	Neptune
+0D26	Flash
+0D27	Arctic
+0D28	Cometary
+0D29	Miner's
+0D2A	Acrobat's
+0D2B	Mystical
+0D2C	Infernal
+0D2D	Guardian's
+0D2E	Lamented
+0D2F	Illegal
+0D30	Mirage
+0D31	Mirage
+0D32	Mirage
+0D33	Mirage
+0D34	Mirage
+0D35	Mirage
+0D36	Mirage
+0D37	Mirage
+0D38	Mirage
+0D39	Mirage
+0D3A	Mirage
+0D3B	Mirage
+0D3C	Mirage
+0D3D	Mirage
+0D3E	Mirage
+0D3F	Mirage
+0D40	Mirage
+0D41	Mirage
+0D42	Mirage
+0D43	Mirage
+0D44	Mirage
+0D45	Mirage
+0D46	Mirage
+0D47	Mirage
+0D48	Mirage
+0D49	Mirage
+0D4A	Mirage
+0D4B	Mirage
+0D4C	Mirage
+0D4D	Mirage
+0D4E	Mirage
+0D4F	Mirage
+0D50	Mirage
+0D51	Mirage
+0D52	Mirage
+0D53	Mirage
+0D54	Mirage
+0D55	Mirage
+0D56	Mirage
+0D57	Mirage
+0D58	Mirage
+0D59	Mirage
+0D5A	Mirage
+0D5B	Mirage
+0D5C	Mirage
+0D5D	Mirage
+0D5E	Mirage
+0D5F	Mirage
+0D60	Mirage
+0D61	Mirage
+0D62	Mirage
+0D63	Mirage
+0D64	Mirage
+0D65	Mirage
+0D66	Mirage
+0D67	Mirage
+0D68	Illegal
+0D69	Thunderclap
+0D6A	Detonating
+0D6B	Detonating
+0D6C	Summoner's
+0D6D	Summoner's
+0D6E	Showdown
+0D6F	Rainbow
+0D70	Cavalry
+0D71	Gambler's
+0D72	Dark Knight's
+0D73	Dark Knight's
+0D74	Cardinal's
+0D75	Grand Mage's
+0D76	Hermit's
+0D77	Dimensional
+0D78	Merchant's
+0D79	Helical
+0D7A	Angelic
+0D7B	King's
+0D7C	Moonlight
+0D7D	Runed
+0D7E	Runed
+0D7F	Demonic
+0D80	Worshiper's
+0D81	Heavenly
+0D82	Enchanting
+0D83	Beastmaster's
+0D84	Beastmaster's
+0D85	Beastmaster's
+0D86	Beastmaster's
+0D87	Beastmaster's
+0D88	Paladin's
+0D89	Fallen
+0D8A	Twilight
+0D8B	Assassin's
+0D8C	Massive
+0D8D	Serpent-eyed
+0D8E	Wyvern's
+0D8F	Frozen
+0D90	Thunderous
+0D91	Ice Storm
+0D92	Bombing
+0D93	Epic
+0D94	Condemned
+0D95	Volcanic
+0D96	Darkness
+0D97	Savior's
+0D98	Savior's
+0D99	Illegal
+0D9A	Illegal
+0D9B	Cerebral
+0D9C	Trampling
+0D9D	Swift
+0D9E	Violent
+0D9F	Wrathful
+0DA0	Reverent
+0DA1	Attentive
+0DA2	Inviolable
+0DA3	Impervious
+0DA4	Vigilant
+0DA5	Egotist's
+0DA6	Mercenary
+0DA7	Sacrosanct
+0DA8	Salubrious
+0DA9	Conquering
+0DAA	Valiant
+0DAB	Ordained
+0DAC	Impervious
+0DAD	Celestial
+0DAE	Persevering
+0DAF	Despairing
+0DB0	Abasing
+0DB1	Brutal
+0DB2	Desolating
+0DB3	Tenacious
+0DB4	Crushing
+0DB5	Ionic
+0DB6	Cannon
+0DB7	Augurer
+0DB8	Sprightly
+0DB9	Vanguard's
+0DBA	Lonely
+0DBB	Colossal
+0DBC	Able
+0DBD	Hindering
+0DBE	Divine
+0DBF	Cyclonic
+0DC0	Psychotic
+0DC1	Rampaging
+0DC2	Mimic's
+0DC3	Overlord's
+0DC4	Illegal
+0DC5	Mirage
+0DC6	Mirage
+0DC7	Mirage
+0DC8	Mirage
+0DC9	Mirage
+0DCA	Mirage
+0DCB	Mirage
+0DCC	Mirage
+0DCD	Mirage
+0DCE	Mirage
+0DCF	Mirage
+0DD0	Mirage
+0DD1	Mirage
+0DD2	Mirage
+0DD3	Mirage
+0DD4	Mirage
+0DD5	Mirage
+0DD6	Mirage
+0DD7	Mirage
+0DD8	Illegal
+0DD9	Flame-red
+0DDA	Crystalline
+0DDB	Electrifying
+0DDC	Detonating
+0DDD	Flame-red
+0DDE	Crystalline
+0DDF	Electrifying
+0DE0	Gusty
+0DE1	Sunless
+0DE2	Bursting
+0DE3	Spiritual
+0DE4	Chemist's
+0DE5	Ballistic
+0DE6	Legendary
+0DE7	Wizard's
+0DE8	Exorcist's
+0DE9	Exorcist's
+0DEA	Exorcist's
+0DEB	Containment
+0DEC	Master's
+0DED	Aggressive
+0DEE	Sand Blast
+0DEF	Impulsive
+0DF0	Duelist's
+0DF1	Executioner's
+0DF2	Sky High
+0DF3	Traditional
+0DF4	Stormrising
+0DF5	Fearless
+0DF6	Red-hot
+0DF7	Whirlwind
+0DF8	Rumbling
+0DF9	Killer's
+0DFA	Phantom
+0DFB	Ice Crusted
+0DFC	Abyssal
+0DFD	Flame-gated
+0DFE	Flying
+0DFF	Draconic
+0E00	Neptune
+0E01	Flash
+0E02	Arctic
+0E03	Cometary
+0E04	Miner's
+0E05	Acrobat's
+0E06	Mystical
+0E07	Infernal
+0E08	Guardian's
+0E09	Lamented
+0E0A	Illegal
+0E0B	Mirage
+0E0C	Mirage
+0E0D	Mirage
+0E0E	Mirage
+0E0F	Mirage
+0E10	Mirage
+0E11	Mirage
+0E12	Mirage
+0E13	Mirage
+0E14	Mirage
+0E15	Mirage
+0E16	Mirage
+0E17	Mirage
+0E18	Mirage
+0E19	Mirage
+0E1A	Mirage
+0E1B	Mirage
+0E1C	Mirage
+0E1D	Mirage
+0E1E	Mirage
+0E1F	Mirage
+0E20	Mirage
+0E21	Mirage
+0E22	Mirage
+0E23	Mirage
+0E24	Mirage
+0E25	Mirage
+0E26	Mirage
+0E27	Mirage
+0E28	Mirage
+0E29	Mirage
+0E2A	Mirage
+0E2B	Mirage
+0E2C	Mirage
+0E2D	Mirage
+0E2E	Mirage
+0E2F	Mirage
+0E30	Mirage
+0E31	Mirage
+0E32	Mirage
+0E33	Mirage
+0E34	Mirage
+0E35	Mirage
+0E36	Mirage
+0E37	Mirage
+0E38	Mirage
+0E39	Mirage
+0E3A	Mirage
+0E3B	Mirage
+0E3C	Mirage
+0E3D	Mirage
+0E3E	Mirage
+0E3F	Mirage
+0E40	Mirage
+0E41	Mirage
+0E42	Mirage
+0E43	Illegal
+0E44	Thunderclap
+0E45	Detonating
+0E46	Detonating
+0E47	Summoner's
+0E48	Summoner's
+0E49	Showdown
+0E4A	Rainbow
+0E4B	Cavalry
+0E4C	Gambler's
+0E4D	Dark Knight's
+0E4E	Dark Knight's
+0E4F	Cardinal's
+0E50	Grand Mage's
+0E51	Hermit's
+0E52	Dimensional
+0E53	Merchant's
+0E54	Helical
+0E55	Angelic
+0E56	King's
+0E57	Moonlight
+0E58	Runed
+0E59	Runed
+0E5A	Demonic
+0E5B	Worshiper's
+0E5C	Heavenly
+0E5D	Enchanting
+0E5E	Beastmaster's
+0E5F	Beastmaster's
+0E60	Beastmaster's
+0E61	Beastmaster's
+0E62	Beastmaster's
+0E63	Paladin's
+0E64	Fallen
+0E65	Twilight
+0E66	Assassin's
+0E67	Massive
+0E68	Serpent-eyed
+0E69	Wyvern's
+0E6A	Frozen
+0E6B	Thunderous
+0E6C	Ice Storm
+0E6D	Bombing
+0E6E	Epic
+0E6F	Condemned
+0E70	Volcanic
+0E71	Darkness
+0E72	Savior's
+0E73	Savior's
+0E74	Illegal
+0E75	Illegal
+0E76	Cerebral
+0E77	Trampling
+0E78	Swift
+0E79	Violent
+0E7A	Wrathful
+0E7B	Reverent
+0E7C	Attentive
+0E7D	Inviolable
+0E7E	Impervious
+0E7F	Vigilant
+0E80	Egotist's
+0E81	Mercenary
+0E82	Sacrosanct
+0E83	Salubrious
+0E84	Conquering
+0E85	Valiant
+0E86	Ordained
+0E87	Impervious
+0E88	Celestial
+0E89	Persevering
+0E8A	Despairing
+0E8B	Abasing
+0E8C	Brutal
+0E8D	Desolating
+0E8E	Tenacious
+0E8F	Crushing
+0E90	Ionic
+0E91	Cannon
+0E92	Augurer
+0E93	Sprightly
+0E94	Vanguard's
+0E95	Lonely
+0E96	Colossal
+0E97	Able
+0E98	Hindering
+0E99	Divine
+0E9A	Cyclonic
+0E9B	Psychotic
+0E9C	Rampaging
+0E9D	Mimic's
+0E9E	Overlord's
+0E9F	Illegal
+0EA0	Mirage
+0EA1	Mirage
+0EA2	Mirage
+0EA3	Mirage
+0EA4	Mirage
+0EA5	Mirage
+0EA6	Mirage
+0EA7	Mirage
+0EA8	Mirage
+0EA9	Mirage
+0EAA	Mirage
+0EAB	Mirage
+0EAC	Mirage
+0EAD	Mirage
+0EAE	Mirage
+0EAF	Mirage
+0EB0	Mirage
+0EB1	Mirage
+0EB2	Mirage
+0EB3	Illegal
+0EB4	Flame-red
+0EB5	Crystalline
+0EB6	Electrifying
+0EB7	Detonating
+0EB8	Flame-red
+0EB9	Crystalline
+0EBA	Electrifying
+0EBB	Gusty
+0EBC	Sunless
+0EBD	Bursting
+0EBE	Spiritual
+0EBF	Chemist's
+0EC0	Ballistic
+0EC1	Legendary
+0EC2	Wizard's
+0EC3	Exorcist's
+0EC4	Exorcist's
+0EC5	Exorcist's
+0EC6	Containment
+0EC7	Master's
+0EC8	Aggressive
+0EC9	Sand Blast
+0ECA	Impulsive
+0ECB	Duelist's
+0ECC	Executioner's
+0ECD	Sky High
+0ECE	Traditional
+0ECF	Stormrising
+0ED0	Fearless
+0ED1	Red-hot
+0ED2	Whirlwind
+0ED3	Rumbling
+0ED4	Killer's
+0ED5	Phantom
+0ED6	Ice Crusted
+0ED7	Abyssal
+0ED8	Flame-gated
+0ED9	Flying
+0EDA	Draconic
+0EDB	Neptune
+0EDC	Flash
+0EDD	Arctic
+0EDE	Cometary
+0EDF	Miner's
+0EE0	Acrobat's
+0EE1	Mystical
+0EE2	Infernal
+0EE3	Guardian's
+0EE4	Lamented
+0EE5	Illegal
+0EE6	Mirage
+0EE7	Mirage
+0EE8	Mirage
+0EE9	Mirage
+0EEA	Mirage
+0EEB	Mirage
+0EEC	Mirage
+0EED	Mirage
+0EEE	Mirage
+0EEF	Mirage
+0EF0	Mirage
+0EF1	Mirage
+0EF2	Mirage
+0EF3	Mirage
+0EF4	Mirage
+0EF5	Mirage
+0EF6	Mirage
+0EF7	Mirage
+0EF8	Mirage
+0EF9	Mirage
+0EFA	Mirage
+0EFB	Mirage
+0EFC	Mirage
+0EFD	Mirage
+0EFE	Mirage
+0EFF	Mirage
+0F00	Mirage
+0F01	Mirage
+0F02	Mirage
+0F03	Mirage
+0F04	Mirage
+0F05	Mirage
+0F06	Mirage
+0F07	Mirage
+0F08	Mirage
+0F09	Mirage
+0F0A	Mirage
+0F0B	Mirage
+0F0C	Mirage
+0F0D	Mirage
+0F0E	Mirage
+0F0F	Mirage
+0F10	Mirage
+0F11	Mirage
+0F12	Mirage
+0F13	Mirage
+0F14	Mirage
+0F15	Mirage
+0F16	Mirage
+0F17	Mirage
+0F18	Mirage
+0F19	Mirage
+0F1A	Mirage
+0F1B	Mirage
+0F1C	Mirage
+0F1D	Mirage
+0F1E	No effect
+0F1F	@c(21)+%d power lightning strike during evasion@/c
+0F20	@c(21)+%d explosion damage added to dash attack@/c
+0F21	@c(21)+%d explosion damage added to diving attack@/c
+0F22	@c(21)Summoned Skeleton's dealt damage +%d％@/c
+0F23	@c(21)Summoned Wood Golem's dealt damage +%d％@/c
+0F24	@c(21)Arrow attacks penetrate %d enemies@/c
+0F25	@c(21)%d％ chance of arrow attack without consumption@/c
+0F26	@c(21)Dealt damage +%d％ during critical hit@/c
+0F27	@c(21)Dealt damage and taken damage +%d％@/c
+0F28	@c(21)Power Smash activates Gravity@/c
+0F29	@c(21)Power Smash activates Slow@/c
+0F2A	@c(21)Shortens spell casting time %d％@/c
+0F2B	@c(21)Raises spell casting time and power %d％@/c
+0F2C	@c(21)Teleport MP cost -%d％@/c
+0F2D	@c(21)Negates Slow and Gravity effects@/c
+0F2E	@c(21)While extending, all use items recover +1@/c
+0F2F	@c(21)While extending, all equipment durability recovers %d％@/c
+0F30	@c(21)Recover %d MP per second@/c
+0F31	@c(21)Dealt damage +%d％ when HP at 999@/c
+0F32	@c(21)Negates all status ailments when HP at 999@/c
+0F33	@c(21)Changes magic attack element from Fire to Ice@/c
+0F34	@c(21)Changes magic attack element from Ice to Fire@/c
+0F35	@c(21)%d％ of STR added to magic attack damage@/c
+0F36	@c(21)%d％ chance of using ring magic without consumption@/c
+0F37	@c(21)%d％ chance of using spell book without consumption@/c
+0F38	@c(21)INT increases by number of rings in bag X %d@/c
+0F39	@c(21)While mounted, additional action added@/c
+0F3A	@c(21)While mounted, HP recovers %d％ per enemy defeated@/c
+0F3B	@c(21)While mounted, immune to knockdowns@/c
+0F3C	@c(21)While mounted, damage taken -%d％@/c
+0F3D	@c(21)While mounted, damage dealt +%d％@/c
+0F3E	@c(21)While shield guarding, durability consumed to recover %d HP per second@/c
+0F3F	@c(21)All attacks are either critical hits or 1 damage@/c
+0F40	@c(21)%d％ chance of magic shot per coin pickup@/c
+0F41	@c(21)Damage dealt +%d％ on back attacks@/c
+0F42	@c(21)%d％ chance of one-hit KO a "stoned" enemy@/c
+0F43	@c(21)Dealt damage +%d％ to "frogged" enemy@/c
+0F44	@c(21)Adds Fire damage to attacks@/c
+0F45	@c(21)Adds Ice damage to attacks@/c
+0F46	@c(21)Adds Lightning damage to attacks@/c
+0F47	@c(21)Lightning attacks of Grand Smash becomes Ice@/c
+0F48	@c(21)Eagle Dive bombs +%d@/c
+0F49	@c(21)Evasion invincibility time +%d％@/c
+0F4A	@c(21)While evasion invincibility active, dealt damage +%d％@/c
+0F4B	@c(21)%d％ chance of additional fire shot when attacking burning enemies@/c
+0F4C	@c(21)Ring effect +%d％@/c
+0F4D	@c(21)During magic boost, damage taken -%d％@/c
+0F4E	@c(21)During magic boost, MP cost -%d％@/c
+0F4F	No effect
+0F50	No effect
+0F51	@c(20)MP takes %d％ of damage@/c
+0F52	@c(20)Dash attack damage +%d％@/c
+0F53	@c(20)Normal attack speed +%d％@/c
+0F54	@c(20)%d％ chance to guard during kick@/c
+0F55	@c(20)%d％ chance to resist knockback when kicking@/c
+0F56	@c(20)Regain %d％ of last damage taken every second@/c
+0F57	@c(20)%d％ chance to null back attack@/c
+0F58	@c(20)%d％ chance of guard break@/c
+0F59	@c(20)No knockback with %d％ of HP@/c
+0F5A	@c(20)DMG dealt +%d％ to enemies with status ailments@/c
+0F5B	@c(20)Score +%d％, DMG taken +%d％@/c
+0F5C	@c(20)Gold obtained +%d％, DMG dealt -%d％@/c
+0F5D	@c(20)When recovering HP, also recover %d％ as MP@/c
+0F5E	@c(20)%d％ chance that 0 MP will be consumed when casting@/c
+0F5F	@c(20)Status ailment duration decreased by %d％@/c
+0F60	@c(20)When HP is at max, dealt physical damage +%d％@/c
+0F61	@c(20)When HP is at max, dealt magical damage +%d％@/c
+0F62	@c(20)When HP is above %d％, withstand one-hit KO@/c
+0F63	@c(20)Fire, ice, and lightning DMG becomes non-elemental DMG@/c
+0F64	@c(20)When HP is max, damage taken -%d％@/c
+0F65	@c(20)While airborne, damage taken -%d％@/c
+0F66	@c(20)Damage dealt +%d％ to enemy in the air@/c
+0F67	@c(20)Effect of Bash +%d％@/c
+0F68	@c(20)Power of Rebuke +%d％@/c
+0F69	@c(20)Power of Missile Reflect +%d％@/c
+0F6A	@c(20)Power of Brutal Drive +%d％@/c
+0F6B	@c(20)Power of Grand Smash +%d％@/c
+0F6C	@c(20)Power of Power Shot +%d％@/c
+0F6D	@c(20)Effect of Concentrate +%d％@/c
+0F6E	@c(20)Effect of Mental Absorb +%d％@/c
+0F6F	@c(20)Power of Judgement +%d％@/c
+0F70	@c(20)Power of Parry +%d％@/c
+0F71	@c(20)Effect of Rock Skin +%d％@/c
+0F72	@c(20)Power of Elemental Lore +%d％@/c
+0F73	@c(20)Effect of Slow +%d％@/c
+0F74	@c(20)Effect of Protection +%d％@/c
+0F75	@c(20)Power of Tempest Edge +%d％@/c
+0F76	@c(20)Power of Brandish +%d％@/c
+0F77	@c(20)Power of Frenzy +%d％@/c
+0F78	@c(20)Power of Clone Strikes +%d％@/c
+0F79	@c(20)Power of spells +%d％@/c
+0F7A	No effect
+0F7B	CD2 アクセ効果 0067
+0F7C	CD2 アクセ効果 0068
+0F7D	CD2 アクセ効果 0069
+0F7E	CD2 アクセ効果 0070
+0F7F	CD2 アクセ効果 0071
+0F80	CD2 アクセ効果 0072
+0F81	CD2 アクセ効果 0073
+0F82	CD2 アクセ効果 0074
+0F83	CD2 アクセ効果 0075
+0F84	CD2 アクセ効果 0076
+0F85	CD2 アクセ効果 0077
+0F86	CD2 アクセ効果 0078
+0F87	CD2 アクセ効果 0079
+0F88	CD2 アクセ効果 0080
+0F89	CD2 アクセ効果 0081
+0F8A	CD2 アクセ効果 0082
+0F8B	CD2 アクセ効果 0083
+0F8C	CD2 アクセ効果 0084
+0F8D	CD2 アクセ効果 0085
+0F8E	CD2 アクセ効果 0086
+0F8F	CD2 アクセ効果 0087
+0F90	CD2 アクセ効果 0088
+0F91	CD2 アクセ効果 0089
+0F92	CD2 アクセ効果 0090
+0F93	CD2 アクセ効果 0091
+0F94	CD2 アクセ効果 0092
+0F95	CD2 アクセ効果 0093
+0F96	CD2 アクセ効果 0094
+0F97	CD2 アクセ効果 0095
+0F98	CD2 アクセ効果 0096
+0F99	CD2 アクセ効果 0097
+0F9A	CD2 アクセ効果 0098
+0F9B	START ELETE ACCESSORIES FROM HERE
+0F9C	@c(22)Add Fire to sliding attack@/c
+0F9D	@c(22)Add Ice to sliding attack@/c
+0F9E	@c(22)Add Lightning to sliding attack@/c
+0F9F	@c(22)Add explosion with %d damage to Power Smash@/c
+0FA0	@c(22)Add Fire Pillar with %d damage to Power Smash@/c
+0FA1	@c(22)Add Ice Pillar with %d damage to Power Smash@/c
+0FA2	@c(22)Add Lightning with %d damage to Power Smash@/c
+0FA3	@c(22)Add Storm with %d damage to Power Smash@/c
+0FA4	@c(22)Add Poison with %d damage to Power Smash@/c
+0FA5	@c(22)While extending, self destruct@/c
+0FA6	@c(22)Elemetal Lore activation speed +%d％@/c
+0FA7	@c(22)Apply heal effects of all potions to party@/c
+0FA8	@c(22)Knockback and knockdown +%d％@/c
+0FA9	@c(22)STR and CON +%d@/c
+0FAA	@c(22)INT and MGR +%d@/c
+0FAB	@c(22)%d％ of dealt damage added as Fire and Ice damage@/c
+0FAC	@c(22)%d％ of dealt damage added as Ice and Lightning damage@/c
+0FAD	@c(22)%d％ of dealt damage added as Lightning and Fire damage@/c
+0FAE	@c(22)Decrease %d％ of Fire, Ice, Lightning damage taken@/c
+0FAF	@c(22)Ground attack speed +%d％, power +%d％@/c
+0FB0	@c(22)Hitting enemies during their attack will cause knockback@/c
+0FB1	@c(22)Power of Cyclone Masher +%d％@/c
+0FB2	@c(22)Power of Shockwave +%d％@/c
+0FB3	@c(22)Damage increase effect of Distraction +%d％@/c
+0FB4	@c(22)Power of Neck Splitter +%d％@/c
+0FB5	@c(22)Power of Deadly Revolution +%d％@/c
+0FB6	@c(22)War Paint duration +%d％@/c
+0FB7	@c(22)Damage increase effect of Power Bomb +%d％@/c
+0FB8	@c(22)Effect of Lethal Fists +%d％@/c
+0FB9	@c(22)Effect of Powder Mastery +%d％@/c
+0FBA	@c(22)Arrow count of Rapid Fire +%d@/c
+0FBB	@c(22)Effect of Deadly Boots +%d％@/c
+0FBC	@c(22)Effect of Backstab +%d％@/c
+0FBD	@c(22)Effect of Extract +%d％@/c
+0FBE	@c(22)Effect of Ice Prison +%d％@/c
+0FBF	@c(22)Effect of Petrification +%d％@/c
+0FC0	@c(22)Effect of Fire Ward +%d％@/c
+0FC1	@c(22)Damage increase effect of Levitation +%d％@/c
+0FC2	@c(22)While teleporting, release Fire Pillar with %d damage@/c
+0FC3	@c(22)While teleporting, release Ice Pillar with %d damage@/c
+0FC4	@c(22)While teleporting, release lightning bolt with %d damage@/c
+0FC5	@c(22)Change Storm element to Ice@/c
+0FC6	@c(22)Change Toxic Extract element to Ice@/c
+0FC7	@c(22)Power of bombs +%d％@/c
+0FC8	@c(22)Enhance dagger power@/c
+0FC9	@c(22)Enhance crossbow power@/c
+0FCA	@c(22)Dealt damage +%d％ during Pump Up@/c
+0FCB	@c(22)Dealt damage +%d％ to shield attacks@/c
+0FCC	@c(22)Power %d damage bomb released on death@/c
+0FCD	END ELITE WEAPONS
+0FCE	ELT アクセ効果 0008
+0FCF	ELT アクセ効果 0009
+0FD0	ELT アクセ効果 0010
+0FD1	ELT アクセ効果 0011
+0FD2	ELT アクセ効果 0012
+0FD3	ELT アクセ効果 0013
+0FD4	ELT アクセ効果 0014
+0FD5	ELT アクセ効果 0015
+0FD6	ELT アクセ効果 0016
+0FD7	ELT アクセ効果 0017
+0FD8	ELT アクセ効果 0018
+0FD9	ELT アクセ効果 0019
+0FDA	ELT アクセ効果 0020
+0FDB	ELT アクセ効果 0021
+0FDC	ELT アクセ効果 0022
+0FDD	ELT アクセ効果 0023
+0FDE	ELT アクセ効果 0024
+0FDF	ELT アクセ効果 0025
+0FE0	ELT アクセ効果 0026
+0FE1	ELT アクセ効果 0027
+0FE2	ELT アクセ効果 0028
+0FE3	ELT アクセ効果 0029
+0FE4	ELT アクセ効果 0030
+0FE5	ELT アクセ効果 0031
+0FE6	ELT アクセ効果 0032
+0FE7	ELT アクセ効果 0033
+0FE8	ELT アクセ効果 0034
+0FE9	ELT アクセ効果 0035
+0FEA	ELT アクセ効果 0036
+0FEB	ELT アクセ効果 0037
+0FEC	ELT アクセ効果 0038
+0FED	ELT アクセ効果 0039
+0FEE	ELT アクセ効果 0040
+0FEF	ELT アクセ効果 0041
+0FF0	ELT アクセ効果 0042
+0FF1	ELT アクセ効果 0043
+0FF2	ELT アクセ効果 0044
+0FF3	ELT アクセ効果 0045
+0FF4	ELT アクセ効果 0046
+0FF5	ELT アクセ効果 0047
+0FF6	ELT アクセ効果 0048
+0FF7	ELT アクセ効果 0049
+0FF8	ELT アクセ効果 0050
+0FF9	ELT アクセ効果 0051
+0FFA	ELT アクセ効果 0052
+0FFB	ELT アクセ効果 0053
+0FFC	ELT アクセ効果 0054
+0FFD	ELT アクセ効果 0055
+0FFE	ELT アクセ効果 0056
+0FFF	ELT アクセ効果 0057
+1000	ELT アクセ効果 0058
+1001	ELT アクセ効果 0059
+1002	Supreme
+1003	Thunderclap
+1004	Detonating
+1005	Detonating
+1006	Summoner's
+1007	Summoner's
+1008	Showdown
+1009	Rainbow
+100A	Cavalry
+100B	Gambler's
+100C	Dark Knight's
+100D	Dark Knight's
+100E	Cardinal's
+100F	Grand Mage's
+1010	Hermit's
+1011	Dimensional
+1012	Merchant's
+1013	Helical
+1014	Angelic
+1015	King's
+1016	Moonlight
+1017	Runed
+1018	Runed
+1019	Demonic
+101A	Worshiper's
+101B	Heavenly
+101C	Enchanting
+101D	Beastmaster's
+101E	Beastmaster's
+101F	Beastmaster's
+1020	Beastmaster's
+1021	Beastmaster's
+1022	Paladin's
+1023	Fallen
+1024	Twilight
+1025	Assassin's
+1026	Massive
+1027	Serpent-eyed
+1028	Wyvern's
+1029	Frozen
+102A	Thunderous
+102B	Ice Storm
+102C	Bombing
+102D	Epic
+102E	Condemned
+102F	Volcanic
+1030	Darkness
+1031	Savior's
+1032	Savior's
+1033	Supreme
+1034	Illegal
+1035	Cerebral
+1036	Trampling
+1037	Swift
+1038	Violent
+1039	Wrathful
+103A	Reverent
+103B	Attentive
+103C	Inviolable
+103D	Impervious
+103E	Vigilant
+103F	Egotist's
+1040	Mercenary
+1041	Sacrosanct
+1042	Salubrious
+1043	Conquering
+1044	Valiant
+1045	Ordained
+1046	Impervious
+1047	Celestial
+1048	Persevering
+1049	Despairing
+104A	Abasing
+104B	Brutal
+104C	Desolating
+104D	Tenacious
+104E	Crushing
+104F	Ionic
+1050	Cannon
+1051	Augurer
+1052	Sprightly
+1053	Vanguard's
+1054	Lonely
+1055	Colossal
+1056	Able
+1057	Hindering
+1058	Divine
+1059	Cyclonic
+105A	Psychotic
+105B	Rampaging
+105C	Mimic's
+105D	Overlord's
+105E	Illegal
+105F	Mirage
+1060	Mirage
+1061	Mirage
+1062	Mirage
+1063	Mirage
+1064	Mirage
+1065	Mirage
+1066	Mirage
+1067	Mirage
+1068	Mirage
+1069	Mirage
+106A	Mirage
+106B	Mirage
+106C	Mirage
+106D	Mirage
+106E	Mirage
+106F	Mirage
+1070	Mirage
+1071	Mirage
+1072	Mirage
+1073	Mirage
+1074	Mirage
+1075	Mirage
+1076	Mirage
+1077	Mirage
+1078	Mirage
+1079	Mirage
+107A	Mirage
+107B	Mirage
+107C	Mirage
+107D	Mirage
+107E	Mirage
+107F	Supreme
+1080	Flame-red
+1081	Crystalline
+1082	Electrifying
+1083	Detonating
+1084	Flame-red
+1085	Crystalline
+1086	Electrifying
+1087	Gusty
+1088	Sunless
+1089	Bursting
+108A	Spiritual
+108B	Chemist's
+108C	Ballistic
+108D	Legendary
+108E	Wizard's
+108F	Exorcist's
+1090	Exorcist's
+1091	Exorcist's
+1092	Containment
+1093	Master's
+1094	Aggressive
+1095	Sand Blast
+1096	Impulsive
+1097	Duelist's
+1098	Executioner's
+1099	Sky High
+109A	Traditional
+109B	Stormrising
+109C	Fearless
+109D	Red-hot
+109E	Whirlwind
+109F	Rumbling
+10A0	Killer's
+10A1	Phantom
+10A2	Ice Crusted
+10A3	Abyssal
+10A4	Flame-gated
+10A5	Flying
+10A6	Draconic
+10A7	Neptune
+10A8	Flash
+10A9	Arctic
+10AA	Cometary
+10AB	Miner's
+10AC	Acrobat's
+10AD	Mystical
+10AE	Infernal
+10AF	Guardian's
+10B0	Lamented
+10B1	Supreme
+10B2	Mirage
+10B3	Mirage
+10B4	Mirage
+10B5	Mirage
+10B6	Mirage
+10B7	Mirage
+10B8	Mirage
+10B9	Mirage
+10BA	Mirage
+10BB	Mirage
+10BC	Mirage
+10BD	Mirage
+10BE	Mirage
+10BF	Mirage
+10C0	Mirage
+10C1	Mirage
+10C2	Mirage
+10C3	Mirage
+10C4	Mirage
+10C5	Mirage
+10C6	Mirage
+10C7	Mirage
+10C8	Mirage
+10C9	Mirage
+10CA	Mirage
+10CB	Mirage
+10CC	Mirage
+10CD	Mirage
+10CE	Mirage
+10CF	Mirage
+10D0	Mirage
+10D1	Mirage
+10D2	Mirage
+10D3	Mirage
+10D4	Mirage
+10D5	Mirage
+10D6	Mirage
+10D7	Mirage
+10D8	Mirage
+10D9	Mirage
+10DA	Mirage
+10DB	Mirage
+10DC	Mirage
+10DD	Mirage
+10DE	Mirage
+10DF	Mirage
+10E0	Mirage
+10E1	Mirage
+10E2	Mirage
+10E3	Mirage
+10E4	Mirage
+10E5	Mirage
+10E6	Supreme
+10E7	Thunderclap
+10E8	Detonating
+10E9	Detonating
+10EA	Summoner's
+10EB	Summoner's
+10EC	Showdown
+10ED	Rainbow
+10EE	Cavalry
+10EF	Gambler's
+10F0	Dark Knight's
+10F1	Dark Knight's
+10F2	Cardinal's
+10F3	Grand Mage's
+10F4	Hermit's
+10F5	Dimensional
+10F6	Merchant's
+10F7	Helical
+10F8	Angelic
+10F9	King's
+10FA	Moonlight
+10FB	Runed
+10FC	Runed
+10FD	Demonic
+10FE	Worshiper's
+10FF	Heavenly
+1100	Enchanting
+1101	Beastmaster's
+1102	Beastmaster's
+1103	Beastmaster's
+1104	Beastmaster's
+1105	Beastmaster's
+1106	Paladin's
+1107	Fallen
+1108	Twilight
+1109	Assassin's
+110A	Massive
+110B	Serpent-eyed
+110C	Wyvern's
+110D	Frozen
+110E	Thunderous
+110F	Ice Storm
+1110	Bombing
+1111	Epic
+1112	Condemned
+1113	Volcanic
+1114	Darkness
+1115	Savior's
+1116	Savior's
+1117	Supreme
+1118	Illegal
+1119	Cerebral
+111A	Trampling
+111B	Swift
+111C	Violent
+111D	Wrathful
+111E	Reverent
+111F	Attentive
+1120	Inviolable
+1121	Impervious
+1122	Vigilant
+1123	Egotist's
+1124	Mercenary
+1125	Sacrosanct
+1126	Salubrious
+1127	Conquering
+1128	Valiant
+1129	Ordained
+112A	Impervious
+112B	Celestial
+112C	Persevering
+112D	Despairing
+112E	Abasing
+112F	Brutal
+1130	Desolating
+1131	Tenacious
+1132	Crushing
+1133	Ionic
+1134	Cannon
+1135	Augurer
+1136	Sprightly
+1137	Vanguard's
+1138	Lonely
+1139	Colossal
+113A	Able
+113B	Hindering
+113C	Divine
+113D	Cyclonic
+113E	Psychotic
+113F	Rampaging
+1140	Mimic's
+1141	Overlord's
+1142	Illegal
+1143	Mirage
+1144	Mirage
+1145	Mirage
+1146	Mirage
+1147	Mirage
+1148	Mirage
+1149	Mirage
+114A	Mirage
+114B	Mirage
+114C	Mirage
+114D	Mirage
+114E	Mirage
+114F	Mirage
+1150	Mirage
+1151	Mirage
+1152	Mirage
+1153	Mirage
+1154	Mirage
+1155	Mirage
+1156	Mirage
+1157	Mirage
+1158	Mirage
+1159	Mirage
+115A	Mirage
+115B	Mirage
+115C	Mirage
+115D	Mirage
+115E	Mirage
+115F	Mirage
+1160	Mirage
+1161	Mirage
+1162	Mirage
+1163	Supreme
+1164	Flame-red
+1165	Crystalline
+1166	Electrifying
+1167	Detonating
+1168	Flame-red
+1169	Crystalline
+116A	Electrifying
+116B	Gusty
+116C	Sunless
+116D	Bursting
+116E	Spiritual
+116F	Chemist's
+1170	Ballistic
+1171	Legendary
+1172	Wizard's
+1173	Exorcist's
+1174	Exorcist's
+1175	Exorcist's
+1176	Containment
+1177	Master's
+1178	Aggressive
+1179	Sand Blast
+117A	Impulsive
+117B	Duelist's
+117C	Executioner's
+117D	Sky High
+117E	Traditional
+117F	Stormrising
+1180	Fearless
+1181	Red-hot
+1182	Whirlwind
+1183	Rumbling
+1184	Killer's
+1185	Phantom
+1186	Ice Crusted
+1187	Abyssal
+1188	Flame-gated
+1189	Flying
+118A	Draconic
+118B	Neptune
+118C	Flash
+118D	Arctic
+118E	Cometary
+118F	Miner's
+1190	Acrobat's
+1191	Mystical
+1192	Infernal
+1193	Guardian's
+1194	Lamented
+1195	Supreme
+1196	Mirage
+1197	Mirage
+1198	Mirage
+1199	Mirage
+119A	Mirage
+119B	Mirage
+119C	Mirage
+119D	Mirage
+119E	Mirage
+119F	Mirage
+11A0	Mirage
+11A1	Mirage
+11A2	Mirage
+11A3	Mirage
+11A4	Mirage
+11A5	Mirage
+11A6	Mirage
+11A7	Mirage
+11A8	Mirage
+11A9	Mirage
+11AA	Mirage
+11AB	Mirage
+11AC	Mirage
+11AD	Mirage
+11AE	Mirage
+11AF	Mirage
+11B0	Mirage
+11B1	Mirage
+11B2	Mirage
+11B3	Mirage
+11B4	Mirage
+11B5	Mirage
+11B6	Mirage
+11B7	Mirage
+11B8	Mirage
+11B9	Mirage
+11BA	Mirage
+11BB	Mirage
+11BC	Mirage
+11BD	Mirage
+11BE	Mirage
+11BF	Mirage
+11C0	Mirage
+11C1	Mirage
+11C2	Mirage
+11C3	Mirage
+11C4	Mirage
+11C5	Mirage
+11C6	Mirage
+11C7	Mirage
+11C8	Mirage
+11C9	Mirage
+11CA	Supreme
+11CB	Thunderclap
+11CC	Detonating
+11CD	Detonating
+11CE	Summoner's
+11CF	Summoner's
+11D0	Showdown
+11D1	Rainbow
+11D2	Cavalry
+11D3	Gambler's
+11D4	Dark Knight's
+11D5	Dark Knight's
+11D6	Cardinal's
+11D7	Grand Mage's
+11D8	Hermit's
+11D9	Dimensional
+11DA	Merchant's
+11DB	Helical
+11DC	Angelic
+11DD	King's
+11DE	Moonlight
+11DF	Runed
+11E0	Runed
+11E1	Demonic
+11E2	Worshiper's
+11E3	Heavenly
+11E4	Enchanting
+11E5	Beastmaster's
+11E6	Beastmaster's
+11E7	Beastmaster's
+11E8	Beastmaster's
+11E9	Beastmaster's
+11EA	Paladin's
+11EB	Fallen
+11EC	Twilight
+11ED	Assassin's
+11EE	Massive
+11EF	Serpent-eyed
+11F0	Wyvern's
+11F1	Frozen
+11F2	Thunderous
+11F3	Ice Storm
+11F4	Bombing
+11F5	Epic
+11F6	Condemned
+11F7	Volcanic
+11F8	Darkness
+11F9	Savior's
+11FA	Savior's
+11FB	Supreme
+11FC	Illegal
+11FD	Cerebral
+11FE	Trampling
+11FF	Swift
+1200	Violent
+1201	Wrathful
+1202	Reverent
+1203	Attentive
+1204	Inviolable
+1205	Impervious
+1206	Vigilant
+1207	Egotist's
+1208	Mercenary
+1209	Sacrosanct
+120A	Salubrious
+120B	Conquering
+120C	Valiant
+120D	Ordained
+120E	Impervious
+120F	Celestial
+1210	Persevering
+1211	Despairing
+1212	Abasing
+1213	Brutal
+1214	Desolating
+1215	Tenacious
+1216	Crushing
+1217	Ionic
+1218	Cannon
+1219	Augurer
+121A	Sprightly
+121B	Vanguard's
+121C	Lonely
+121D	Colossal
+121E	Able
+121F	Hindering
+1220	Divine
+1221	Cyclonic
+1222	Psychotic
+1223	Rampaging
+1224	Mimic's
+1225	Overlord's
+1226	Illegal
+1227	Mirage
+1228	Mirage
+1229	Mirage
+122A	Mirage
+122B	Mirage
+122C	Mirage
+122D	Mirage
+122E	Mirage
+122F	Mirage
+1230	Mirage
+1231	Mirage
+1232	Mirage
+1233	Mirage
+1234	Mirage
+1235	Mirage
+1236	Mirage
+1237	Mirage
+1238	Mirage
+1239	Mirage
+123A	Mirage
+123B	Mirage
+123C	Mirage
+123D	Mirage
+123E	Mirage
+123F	Mirage
+1240	Mirage
+1241	Mirage
+1242	Mirage
+1243	Mirage
+1244	Mirage
+1245	Mirage
+1246	Mirage
+1247	Supreme
+1248	Flame-red
+1249	Crystalline
+124A	Electrifying
+124B	Detonating
+124C	Flame-red
+124D	Crystalline
+124E	Electrifying
+124F	Gusty
+1250	Sunless
+1251	Bursting
+1252	Spiritual
+1253	Chemist's
+1254	Ballistic
+1255	Legendary
+1256	Wizard's
+1257	Exorcist's
+1258	Exorcist's
+1259	Exorcist's
+125A	Containment
+125B	Master's
+125C	Aggressive
+125D	Sand Blast
+125E	Impulsive
+125F	Duelist's
+1260	Executioner's
+1261	Sky High
+1262	Traditional
+1263	Stormrising
+1264	Fearless
+1265	Red-hot
+1266	Whirlwind
+1267	Rumbling
+1268	Killer's
+1269	Phantom
+126A	Ice Crusted
+126B	Abyssal
+126C	Flame-gated
+126D	Flying
+126E	Draconic
+126F	Neptune
+1270	Flash
+1271	Arctic
+1272	Cometary
+1273	Miner's
+1274	Acrobat's
+1275	Mystical
+1276	Infernal
+1277	Guardian's
+1278	Lamented
+1279	Supreme
+127A	Mirage
+127B	Mirage
+127C	Mirage
+127D	Mirage
+127E	Mirage
+127F	Mirage
+1280	Mirage
+1281	Mirage
+1282	Mirage
+1283	Mirage
+1284	Mirage
+1285	Mirage
+1286	Mirage
+1287	Mirage
+1288	Mirage
+1289	Mirage
+128A	Mirage
+128B	Mirage
+128C	Mirage
+128D	Mirage
+128E	Mirage
+128F	Mirage
+1290	Mirage
+1291	Mirage
+1292	Mirage
+1293	Mirage
+1294	Mirage
+1295	Mirage
+1296	Mirage
+1297	Mirage
+1298	Mirage
+1299	Mirage
+129A	Mirage
+129B	Mirage
+129C	Mirage
+129D	Mirage
+129E	Mirage
+129F	Mirage
+12A0	Mirage
+12A1	Mirage
+12A2	Mirage
+12A3	Mirage
+12A4	Mirage
+12A5	Mirage
+12A6	Mirage
+12A7	Mirage
+12A8	Mirage
+12A9	Mirage
+12AA	Mirage
+12AB	Mirage
+12AC	Mirage
+12AD	Mirage
+12AE	Supreme
+12AF	Thunderclap
+12B0	Detonating
+12B1	Detonating
+12B2	Summoner's
+12B3	Summoner's
+12B4	Showdown
+12B5	Rainbow
+12B6	Cavalry
+12B7	Gambler's
+12B8	Dark Knight's
+12B9	Dark Knight's
+12BA	Cardinal's
+12BB	Grand Mage's
+12BC	Hermit's
+12BD	Dimensional
+12BE	Merchant's
+12BF	Helical
+12C0	Angelic
+12C1	King's
+12C2	Moonlight
+12C3	Runed
+12C4	Runed
+12C5	Demonic
+12C6	Worshiper's
+12C7	Heavenly
+12C8	Enchanting
+12C9	Beastmaster's
+12CA	Beastmaster's
+12CB	Beastmaster's
+12CC	Beastmaster's
+12CD	Beastmaster's
+12CE	Paladin's
+12CF	Fallen
+12D0	Twilight
+12D1	Assassin's
+12D2	Massive
+12D3	Serpent-eyed
+12D4	Wyvern's
+12D5	Frozen
+12D6	Thunderous
+12D7	Ice Storm
+12D8	Bombing
+12D9	Epic
+12DA	Condemned
+12DB	Volcanic
+12DC	Darkness
+12DD	Savior's
+12DE	Savior's
+12DF	Supreme
+12E0	Illegal
+12E1	Cerebral
+12E2	Trampling
+12E3	Swift
+12E4	Violent
+12E5	Wrathful
+12E6	Reverent
+12E7	Attentive
+12E8	Inviolable
+12E9	Impervious
+12EA	Vigilant
+12EB	Egotist's
+12EC	Mercenary
+12ED	Sacrosanct
+12EE	Salubrious
+12EF	Conquering
+12F0	Valiant
+12F1	Ordained
+12F2	Impervious
+12F3	Celestial
+12F4	Persevering
+12F5	Despairing
+12F6	Abasing
+12F7	Brutal
+12F8	Desolating
+12F9	Tenacious
+12FA	Crushing
+12FB	Ionic
+12FC	Cannon
+12FD	Augurer
+12FE	Sprightly
+12FF	Vanguard's
+1300	Lonely
+1301	Colossal
+1302	Able
+1303	Hindering
+1304	Divine
+1305	Cyclonic
+1306	Psychotic
+1307	Rampaging
+1308	Mimic's
+1309	Overlord's
+130A	Illegal
+130B	Mirage
+130C	Mirage
+130D	Mirage
+130E	Mirage
+130F	Mirage
+1310	Mirage
+1311	Mirage
+1312	Mirage
+1313	Mirage
+1314	Mirage
+1315	Mirage
+1316	Mirage
+1317	Mirage
+1318	Mirage
+1319	Mirage
+131A	Mirage
+131B	Mirage
+131C	Mirage
+131D	Mirage
+131E	Mirage
+131F	Mirage
+1320	Mirage
+1321	Mirage
+1322	Mirage
+1323	Mirage
+1324	Mirage
+1325	Mirage
+1326	Mirage
+1327	Mirage
+1328	Mirage
+1329	Mirage
+132A	Mirage
+132B	Supreme
+132C	Flame-red
+132D	Crystalline
+132E	Electrifying
+132F	Detonating
+1330	Flame-red
+1331	Crystalline
+1332	Electrifying
+1333	Gusty
+1334	Sunless
+1335	Bursting
+1336	Spiritual
+1337	Chemist's
+1338	Ballistic
+1339	Legendary
+133A	Wizard's
+133B	Exorcist's
+133C	Exorcist's
+133D	Exorcist's
+133E	Containment
+133F	Master's
+1340	Aggressive
+1341	Sand Blast
+1342	Impulsive
+1343	Duelist's
+1344	Executioner's
+1345	Sky High
+1346	Traditional
+1347	Stormrising
+1348	Fearless
+1349	Red-hot
+134A	Whirlwind
+134B	Rumbling
+134C	Killer's
+134D	Phantom
+134E	Ice Crusted
+134F	Abyssal
+1350	Flame-gated
+1351	Flying
+1352	Draconic
+1353	Neptune
+1354	Flash
+1355	Arctic
+1356	Cometary
+1357	Miner's
+1358	Acrobat's
+1359	Mystical
+135A	Infernal
+135B	Guardian's
+135C	Lamented
+135D	Supreme
+135E	Mirage
+135F	Mirage
+1360	Mirage
+1361	Mirage
+1362	Mirage
+1363	Mirage
+1364	Mirage
+1365	Mirage
+1366	Mirage
+1367	Mirage
+1368	Mirage
+1369	Mirage
+136A	Mirage
+136B	Mirage
+136C	Mirage
+136D	Mirage
+136E	Mirage
+136F	Mirage
+1370	Mirage
+1371	Mirage
+1372	Mirage
+1373	Mirage
+1374	Mirage
+1375	Mirage
+1376	Mirage
+1377	Mirage
+1378	Mirage
+1379	Mirage
+137A	Mirage
+137B	Mirage
+137C	Mirage
+137D	Mirage
+137E	Mirage
+137F	Mirage
+1380	Mirage
+1381	Mirage
+1382	Mirage
+1383	Mirage
+1384	Mirage
+1385	Mirage
+1386	Mirage
+1387	Mirage
+1388	Mirage
+1389	Mirage
+138A	Mirage
+138B	Mirage
+138C	Mirage
+138D	Mirage
+138E	Mirage
+138F	Mirage
+1390	Mirage
+1391	Mirage
+1392	Supreme
+1393	Thunderclap
+1394	Detonating
+1395	Detonating
+1396	Summoner's
+1397	Summoner's
+1398	Showdown
+1399	Rainbow
+139A	Cavalry
+139B	Gambler's
+139C	Dark Knight's
+139D	Dark Knight's
+139E	Cardinal's
+139F	Grand Mage's
+13A0	Hermit's
+13A1	Dimensional
+13A2	Merchant's
+13A3	Helical
+13A4	Angelic
+13A5	King's
+13A6	Moonlight
+13A7	Runed
+13A8	Runed
+13A9	Demonic
+13AA	Worshiper's
+13AB	Heavenly
+13AC	Enchanting
+13AD	Beastmaster's
+13AE	Beastmaster's
+13AF	Beastmaster's
+13B0	Beastmaster's
+13B1	Beastmaster's
+13B2	Paladin's
+13B3	Fallen
+13B4	Twilight
+13B5	Assassin's
+13B6	Massive
+13B7	Serpent-eyed
+13B8	Wyvern's
+13B9	Frozen
+13BA	Thunderous
+13BB	Ice Storm
+13BC	Bombing
+13BD	Epic
+13BE	Condemned
+13BF	Volcanic
+13C0	Darkness
+13C1	Savior's
+13C2	Savior's
+13C3	Supreme
+13C4	Illegal
+13C5	Cerebral
+13C6	Trampling
+13C7	Swift
+13C8	Violent
+13C9	Wrathful
+13CA	Reverent
+13CB	Attentive
+13CC	Inviolable
+13CD	Impervious
+13CE	Vigilant
+13CF	Egotist's
+13D0	Mercenary
+13D1	Sacrosanct
+13D2	Salubrious
+13D3	Conquering
+13D4	Valiant
+13D5	Ordained
+13D6	Impervious
+13D7	Celestial
+13D8	Persevering
+13D9	Despairing
+13DA	Abasing
+13DB	Brutal
+13DC	Desolating
+13DD	Tenacious
+13DE	Crushing
+13DF	Ionic
+13E0	Cannon
+13E1	Augurer
+13E2	Sprightly
+13E3	Vanguard's
+13E4	Lonely
+13E5	Colossal
+13E6	Able
+13E7	Hindering
+13E8	Divine
+13E9	Cyclonic
+13EA	Psychotic
+13EB	Rampaging
+13EC	Mimic's
+13ED	Overlord's
+13EE	Illegal
+13EF	Mirage
+13F0	Mirage
+13F1	Mirage
+13F2	Mirage
+13F3	Mirage
+13F4	Mirage
+13F5	Mirage
+13F6	Mirage
+13F7	Mirage
+13F8	Mirage
+13F9	Mirage
+13FA	Mirage
+13FB	Mirage
+13FC	Mirage
+13FD	Mirage
+13FE	Mirage
+13FF	Mirage
+1400	Mirage
+1401	Mirage
+1402	Mirage
+1403	Mirage
+1404	Mirage
+1405	Mirage
+1406	Mirage
+1407	Mirage
+1408	Mirage
+1409	Mirage
+140A	Mirage
+140B	Mirage
+140C	Mirage
+140D	Mirage
+140E	Mirage
+140F	Supreme
+1410	Flame-red
+1411	Crystalline
+1412	Electrifying
+1413	Detonating
+1414	Flame-red
+1415	Crystalline
+1416	Electrifying
+1417	Gusty
+1418	Sunless
+1419	Bursting
+141A	Spiritual
+141B	Chemist's
+141C	Ballistic
+141D	Legendary
+141E	Wizard's
+141F	Exorcist's
+1420	Exorcist's
+1421	Exorcist's
+1422	Containment
+1423	Master's
+1424	Aggressive
+1425	Sand Blast
+1426	Impulsive
+1427	Duelist's
+1428	Executioner's
+1429	Sky High
+142A	Traditional
+142B	Stormrising
+142C	Fearless
+142D	Red-hot
+142E	Whirlwind
+142F	Rumbling
+1430	Killer's
+1431	Phantom
+1432	Ice Crusted
+1433	Abyssal
+1434	Flame-gated
+1435	Flying
+1436	Draconic
+1437	Neptune
+1438	Flash
+1439	Arctic
+143A	Cometary
+143B	Miner's
+143C	Acrobat's
+143D	Mystical
+143E	Infernal
+143F	Guardian's
+1440	Lamented
+1441	Supreme
+1442	Mirage
+1443	Mirage
+1444	Mirage
+1445	Mirage
+1446	Mirage
+1447	Mirage
+1448	Mirage
+1449	Mirage
+144A	Mirage
+144B	Mirage
+144C	Mirage
+144D	Mirage
+144E	Mirage
+144F	Mirage
+1450	Mirage
+1451	Mirage
+1452	Mirage
+1453	Mirage
+1454	Mirage
+1455	Mirage
+1456	Mirage
+1457	Mirage
+1458	Mirage
+1459	Mirage
+145A	Mirage
+145B	Mirage
+145C	Mirage
+145D	Mirage
+145E	Mirage
+145F	Mirage
+1460	Mirage
+1461	Mirage
+1462	Mirage
+1463	Mirage
+1464	Mirage
+1465	Mirage
+1466	Mirage
+1467	Mirage
+1468	Mirage
+1469	Mirage
+146A	Mirage
+146B	Mirage
+146C	Mirage
+146D	Mirage
+146E	Mirage
+146F	Mirage
+1470	Mirage
+1471	Mirage
+1472	Mirage
+1473	Mirage
+1474	Mirage
+1475	Mirage

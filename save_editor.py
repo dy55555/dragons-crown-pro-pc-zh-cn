@@ -59,11 +59,18 @@ MAX_GOLD = 99999999
 BAG_STRIDE = 0x54          # 与上游 kBagItemSize 一致，实测槽间距
 BAG_SLOT_COUNT = 10
 BAG_OFFSET_MAIN = 0x288    # 角色记录内第一组装备栏起点
-BAG_OFFSET_ALT = 0x630     # 第二组（备用/套装）
+BAG_OFFSET_ALT = 0x5DC     # 第二组（备用/套装）起点：0x630 是旧的错误值，会漏掉第一格
 ITEM_ID_OFFSET = 0x00      # 槽首 u16 LE = 物品ID
 # 实测块首之后 2 字节是「类型标记」(0x0068/0x006a/0x0022/0x0020)，不动
 ITEM_ITEMID_MIN = 0x00BB
 ITEM_ITEMID_MAX = 0x01E8
+
+# 消耗品槽：物品ID 固定 0x0070，真实种类和数量在下面两个字段
+CONSUMABLE_ID = 0x0070
+QTY_OFFSET = 0x0C          # u16 低字节 = 数量（实测 x20/x8/x4/x7 全部吻合）
+KIND_OFFSET = 0x14         # u16 = 上游 CustomItem 索引，区分是哪一种消耗品
+# 装备块里 5 个附加ID（上游 CustomItem 索引），游戏按这些显示前缀/附加效果
+MOD_OFFSETS = (0x14, 0x1C, 0x24, 0x2C, 0x34)
 
 CLASSES = {0: "Fighter/战士", 1: "Amazon/亚马逊", 2: "Elf/精灵",
            3: "Dwarf/矮人", 4: "Sorceress/女巫", 5: "Wizard/法师"}
@@ -73,6 +80,7 @@ DEFAULT_SAVE = Path("D:/GAMES/DragonsCrownPro/user/savedata/1/CUSA10209/SAVEDATA
 HERE = Path(__file__).resolve().parent
 ITEMS_TSV = HERE / "save_items.tsv"
 AFFIX_TSV = HERE / "save_affixes.tsv"
+MODS_TSV = HERE / "save_mods.tsv"
 
 
 def load_names(path: Path) -> dict[int, str]:
@@ -101,6 +109,32 @@ def item_name(item_id: int, names: dict[int, str]) -> str:
     if item_id == 0:
         return "(空)"
     return ""
+
+
+def mod_names() -> dict[int, str]:
+    """上游 CustomItem 表：附加ID -> 英文原名（中文名需游戏内核实）。"""
+    return load_names(MODS_TSV)
+
+
+def consumable_qty(data, o: int) -> int:
+    """消耗品数量：u16 的低字节。实测 x20/x8/x4/x7 与游戏显示一致。"""
+    return read_u16(data, o + QTY_OFFSET) & 0xFF
+
+
+def consumable_kind(data, o: int) -> int:
+    return read_u16(data, o + KIND_OFFSET)
+
+
+def item_label(data, o: int, names: dict[int, str]) -> str:
+    iid = read_u16(data, o)
+    if iid == CONSUMABLE_ID:
+        q = consumable_qty(data, o)
+        return "特殊物品(非堆叠)" if q == 0xFF else f"消耗品 x{q}"
+    return item_name(iid, names) or ("" if iid == 0 else "?")
+
+
+def mod_values(data, o: int) -> list[int]:
+    return [read_u16(data, o + off) for off in MOD_OFFSETS]
 
 
 def crc32(data: bytes) -> int:
@@ -191,7 +225,12 @@ def cmd_list(args, data, names):
                     bo = bag_offset(o, bag, si)
                     iid = read_u16(data, bo)
                     if iid:
-                        items.append(f"[{si}]{iid:#05x} {item_name(iid, names)}")
+                        lab = item_label(data, bo, names)
+                        if iid != CONSUMABLE_ID:
+                            mv = [v for v in mod_values(data, bo) if v != 0xFFFF]
+                            if mv:
+                                lab += "  附加:" + "/".join(f"{v:#05x}" for v in mv)
+                        items.append(f"[{si}]{iid:#05x} {lab}")
                 print(f"      {BAG_NAMES[bag]}: " + " | ".join(items) if items else f"      {BAG_NAMES[bag]}: (空)")
         print()
 
@@ -213,7 +252,7 @@ def atomic_write(path: Path, data: bytes, backup: bool = True):
 def cmd_set_item(args, data, names):
     o = bag_offset(char_offset(args.slot, args.char), args.bag, args.slot_idx)
     old = read_u16(data, o)
-    if not (ITEM_ITEMID_MIN <= args.id <= ITEM_ITEMID_MAX):
+    if args.id != CONSUMABLE_ID and not (ITEM_ITEMID_MIN <= args.id <= ITEM_ITEMID_MAX):
         raise SystemExit(f"物品ID {args.id:#x} 超出装备范围 {ITEM_ITEMID_MIN:#x}-{ITEM_ITEMID_MAX:#x}")
     print(f"改装备: DATA{args.slot+1} 角色{args.char} {BAG_NAMES[args.bag]}[{args.slot_idx}] @{o:#x}")
     print(f"  {old:#05x} {item_name(old, names)}  ->  {args.id:#05x} {item_name(args.id, names)}")
@@ -224,6 +263,51 @@ def cmd_set_item(args, data, names):
         out = Path(args.out) if args.out else Path("SAVE0.modified.DAT")
         out.write_bytes(buf)
         print(f"[演练] 已写出到 {out}（原存档未动） SHA {sha256(buf)}")
+    else:
+        atomic_write(args.save, bytes(buf), backup=not args.no_backup)
+    return 0
+
+
+def cmd_set_consumable(args, data, names):
+    o = bag_offset(char_offset(args.slot, args.char), args.bag, args.slot_idx)
+    if read_u16(data, o) != CONSUMABLE_ID:
+        raise SystemExit(f"该格不是消耗品（物品ID {read_u16(data, o):#x}）")
+    if not (0 <= args.qty <= 255):
+        raise SystemExit("数量必须在 0-255")
+    qo = o + QTY_OFFSET
+    old = read_u16(data, qo)
+    new = (old & 0xFF00) | args.qty
+    print(f"改数量: DATA{args.slot+1} 角色{args.char} {BAG_NAMES[args.bag]}[{args.slot_idx}] "
+          f"@{qo:#x}  {old & 0xFF} -> {args.qty}")
+    buf = bytearray(data)
+    write_u16(buf, qo, new)
+    seal(buf)
+    if args.dry_run:
+        out = Path(args.out) if args.out else Path("SAVE0.modified.DAT")
+        out.write_bytes(buf)
+        print(f"[演练] 已写出到 {out}（原存档未动）")
+    else:
+        atomic_write(args.save, bytes(buf), backup=not args.no_backup)
+    return 0
+
+
+def cmd_set_mod(args, data, names):
+    o = bag_offset(char_offset(args.slot, args.char), args.bag, args.slot_idx)
+    if not (0 <= args.index < len(MOD_OFFSETS)):
+        raise SystemExit(f"附加字段序号必须是 0-{len(MOD_OFFSETS)-1}")
+    mo = o + MOD_OFFSETS[args.index]
+    old = read_u16(data, mo)
+    mods = mod_names()
+    print(f"改附加ID: DATA{args.slot+1} 角色{args.char} {BAG_NAMES[args.bag]}[{args.slot_idx}] "
+          f"第{args.index+1}项 @{mo:#x}  {old:#06x} {mods.get(old,'')} -> "
+          f"{args.id:#06x} {mods.get(args.id,'')}")
+    buf = bytearray(data)
+    write_u16(buf, mo, args.id)
+    seal(buf)
+    if args.dry_run:
+        out = Path(args.out) if args.out else Path("SAVE0.modified.DAT")
+        out.write_bytes(buf)
+        print(f"[演练] 已写出到 {out}（原存档未动）")
     else:
         atomic_write(args.save, bytes(buf), backup=not args.no_backup)
     return 0
@@ -266,6 +350,29 @@ def main():
     p.add_argument("--dry-run", action="store_true", help="只写副本，不改原存档")
     p.add_argument("--no-backup", action="store_true")
     p.set_defaults(func=cmd_set_item)
+
+    p = sub.add_parser("set-qty", help="改消耗品数量（该格必须是 0x0070）")
+    p.add_argument("--slot", type=int, required=True)
+    p.add_argument("--char", type=int, required=True)
+    p.add_argument("--bag", type=int, required=True, choices=[0, 1])
+    p.add_argument("--slot-idx", type=int, required=True)
+    p.add_argument("--qty", type=int, required=True, help="0-255")
+    p.add_argument("--out")
+    p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--no-backup", action="store_true")
+    p.set_defaults(func=cmd_set_consumable)
+
+    p = sub.add_parser("set-mod", help="改装备第 N 个附加ID（0-4）")
+    p.add_argument("--slot", type=int, required=True)
+    p.add_argument("--char", type=int, required=True)
+    p.add_argument("--bag", type=int, required=True, choices=[0, 1])
+    p.add_argument("--slot-idx", type=int, required=True)
+    p.add_argument("--index", type=int, required=True)
+    p.add_argument("--id", type=lambda s: int(s, 0), required=True)
+    p.add_argument("--out")
+    p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--no-backup", action="store_true")
+    p.set_defaults(func=cmd_set_mod)
 
     p = sub.add_parser("set-gold", help="改金币")
     p.add_argument("--slot", type=int, required=True)
