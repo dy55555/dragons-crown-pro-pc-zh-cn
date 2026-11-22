@@ -37,8 +37,9 @@ class App:
         self.item_list = sorted(self.names.items())
         self.item_choices = [f"{v:04X}  {n}" for v, n in self.item_list]
         self.choice_to_id = {f"{v:04X}  {n}": v for v, n in self.item_list}
-        # 消耗品单列一项：物品ID 恒为 0x70，具体是哪种由「词条1=种类ID」决定
-        self.consumable_key = f"{se.CONSUMABLE_ID:04X}  消耗品/道具（名称看种类ID）"
+        # 道具单列一项：+0x00 恒为 0x0070（"可堆叠道具"这一个基础条目），
+        # 具体是哪件看词条槽0 的效果ID
+        self.consumable_key = f"{se.CONSUMABLE_ID:04X}  道具（种类看效果ID，见下方）"
         self.item_choices.append(self.consumable_key)
         self.choice_to_id[self.consumable_key] = se.CONSUMABLE_ID
         self.edits = {}          # (byte_offset) -> new_value
@@ -307,10 +308,10 @@ class App:
         self.status.config(text=f"已还原 {n} 处未保存改动（其他改动仍保留）" if n else "该字段没有未保存的改动")
 
     def _render_mod_rows(self, o, only_first=False, hint=True):
-        """渲染词条 1-8 的编辑行。only_first=True 时只画词条1（消耗种类就是它）。"""
+        """渲染词条 1-8 的编辑行。only_first=True 时只画词条1（道具的效果ID就是它）。"""
         ttk.Label(self.detail_inner,
                   text="附加词条 1-8（填 FFFF 即清空该条）" if not only_first
-                  else "种类（就是词条1那个槽）",
+                  else "效果ID（就是词条1那个槽，换道具改这里）",
                   font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(12, 4))
         if hint:
             ttk.Label(self.detail_inner,
@@ -625,9 +626,12 @@ class App:
         ttk.Button(srow, text="用此ID", command=apply_manual).pack(side="left")
 
         if cur == se.CONSUMABLE_ID:
-            ttk.Label(self.detail_inner,
-                      text=f"消耗品：{se.consumable_label(self.data, o, self.cons)}  "
-                           f"（种类ID {se.consumable_kind(self.data, o):#06x}）",
+            kind = se.consumable_kind(self.data, o)
+            sec = se.prop_section(kind)
+            head = f"道具：{se.consumable_label(self.data, o, self.cons)}　效果ID {kind:#06x}"
+            if sec:
+                head += f"（{sec}）"
+            ttk.Label(self.detail_inner, text=head,
                       font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(10, 4))
             qo = o + se.QTY_OFFSET
             rawq = self.effective_u16(qo)
@@ -653,8 +657,9 @@ class App:
             ttk.Button(qrow, text="还原", width=5,
                        command=lambda: self.revert_field(qo)).pack(side="left")
             ttk.Label(self.detail_inner,
-                      text="数量改低字节即可。要换种类就改下面这个词条1——"
-                           "消耗品的种类就存在这个词条槽里。",
+                      text="数量改低字节即可。要换道具就改下面这个词条1——\n"
+                           "存档里所有道具的物品ID(+0x00) 都是 0070，那只是「可堆叠道具」这个条目；"
+                           "真正决定是哪件道具的，就是这个效果ID。",
                       foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=4)
             self._render_mod_rows(o, only_first=True)
         else:
@@ -775,7 +780,7 @@ class App:
         ttk.Label(self.detail_inner, text="技能列表",
                   font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(12, 4))
         ttk.Label(self.detail_inner,
-                  text="技能是装备到行囊里的道具（种类ID 0x1D1–0x1F8，界面标 [技能]），"
+                  text="技能是装备到行囊里的道具（效果ID 0x1D1 起，界面标 [技能]），"
                        "受已有技能加点上限约束，随意改写会冲突，因此只读取显示、不提供修改。",
                   foreground="#666", wraplength=740, justify="left").pack(anchor="w")
 
@@ -814,7 +819,8 @@ class App:
             if iid == se.CONSUMABLE_ID:
                 kind = se.consumable_kind(self.data, o)
                 q = self.effective_u16(o + se.QTY_OFFSET) & 0xFF
-                tag = "[技能]" if se.is_skill_kind(kind) else ""
+                tag = "[技能]" if se.is_skill_kind(kind) else (
+                    f"[{se.prop_section(kind)}]" if se.prop_section(kind) else "")
                 name = f"{tag}{se.consumable_label(self.data, o, self.cons)} x{q}"
             elif 0xBB <= iid <= 0x1E8:
                 ms = se.active_mods(self.data, o)
@@ -919,17 +925,20 @@ class App:
         self._render_item_picker(o, iid, equip_type)
         if consumable:
             kind = se.consumable_kind(self.data, o)
+            sec = se.prop_section(kind)
             q = self.effective_u16(o + se.QTY_OFFSET) & 0xFF
-            ttk.Label(self.detail_inner,
-                      text=f"消耗品：{se.consumable_label(self.data, o, self.cons)}  "
-                           f"种类ID {kind:#06x}  数量 {q}",
+            head = f"道具：{se.consumable_label(self.data, o, self.cons)}　效果ID {kind:#06x}"
+            if sec:
+                head += f"（{sec}）"
+            ttk.Label(self.detail_inner, text=f"{head}　数量 {q}",
                       font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(6, 4))
             ttk.Label(self.detail_inner,
-                      text="种类就在「词条1」那个槽里，下面可以输中文搜；数量改低字节。",
+                      text="所有道具的物品ID(+0x00) 都是 0070，真正区分是哪件道具的是「词条1」"
+                           "里的效果ID，下面可以输中文搜；数量改低字节。",
                       foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(0, 4))
             row = ttk.Frame(self.detail_inner)
             row.pack(anchor="w", pady=4)
-            ttk.Label(row, text="数量(0-255)", width=14).pack(side="left")
+            ttk.Label(row, text="数量 (0-255)", width=14).pack(side="left")
             qv = tk.StringVar(value=str(q))
             ttk.Entry(row, textvariable=qv, width=8).pack(side="left")
 
@@ -1063,7 +1072,9 @@ class App:
             if iid == se.CONSUMABLE_ID:
                 kind = se.consumable_kind(self.data, o)
                 q = self.effective_u16(o + se.QTY_OFFSET) & 0xFF
-                name = f"{se.consumable_label(self.data, o, self.cons)} x{q}"
+                sec = se.prop_section(kind)
+                tag = "[技能]" if se.is_skill_kind(kind) else (f"[{sec}]" if sec else "")
+                name = f"{tag}{se.consumable_label(self.data, o, self.cons)} x{q}"
             else:
                 name = f"iid={iid:#06x} type={se.read_u16(self.data, o + 2):#06x}"
             row = ttk.Frame(self.detail_inner)

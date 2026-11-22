@@ -72,14 +72,27 @@ ITEM_ITEMID_MIN = 0x00BB
 ITEM_ITEMID_MAX = 0x01E8
 # 允许写入的物品ID范围（比名称表宽）：名称表 0xBB-0x1E8 是游戏全部 302 件装备，
 # 且实测连续无空洞；这里再放宽到 0x0001-0x01FF，方便试表外 ID（会显示「未收录」）。
-# 0x0070 单独表示消耗品（种类存于词条槽0，不在这里枚举）。
+# 0x0070 单独表示道具（＝「可堆叠道具」这一个条目，具体是哪件看词条槽0 的效果ID）。
 ITEM_ID_ALLOW_MIN = 0x0001
 ITEM_ID_ALLOW_MAX = 0x01FF
 
-# 消耗品槽：物品ID 固定 0x0070，真实种类和数量在下面两个字段
-CONSUMABLE_ID = 0x0070
+# ---- 道具/消耗品的两层结构（别把 +0x00 当成种类）------------------------
+# 物品记录永远是这个形状，装备和道具共用同一套 0x54 字节：
+#   +0x00  基础物品ID（同一张物品表里的一行）
+#          装备：每件一个（0xBB–0x1E8，逐号连续）
+#          道具：全部固定 0x0070 —— 0x70 是"可堆叠道具"这一个基础条目，
+#                不是具体种类。所以存档里几百个道具的 +0x00 看着都一样，正常。
+#   词条槽0 才是真正的种类：装备放词条ID（0x20–0x11C），
+#          道具放效果ID（0x17F 起：戒指→卷轴→药水→技能）。
+# 实测两段永不重叠：本机存档里装备词条最大 0x11C，道具效果最小 0x17F。
+CONSUMABLE_ID = 0x0070     # 基础物品ID：代表"一个可堆叠道具"
 QTY_OFFSET = 0x0C          # u16 低字节 = 数量（实测 x20/x8/x4/x7 全部吻合）
-KIND_OFFSET = 0x00         # 消耗品种类ID就是"附加字段1"，见下
+KIND_OFFSET = 0x00         # 仅作说明用：种类不在这里，在词条槽0
+# 道具效果ID 段位（供界面显示"这是戒指还是药水"）
+PROP_EFFECT_RING = (0x017F, 0x018D)    # 戒指：火/冰/雷/毒/治疗 各三档
+PROP_EFFECT_SCROLL = (0x0190, 0x0194)  # 卷轴
+PROP_EFFECT_POTION = (0x019C, 0x01B4)  # 药水：每类三档
+PROP_EFFECT_SKILL_MIN = 0x01D1         # 技能道具起点
 # 附加字段（前缀/词条）实际位于物品ID往前 0x40 处，共 8 个 8 字节槽。
 # 旧版误读成物品ID往后 0x14，正好读到下一件装备的附加字段，才会两件都显示 5 条。
 MOD_BASE_SHIFT = 0x40
@@ -128,11 +141,14 @@ def box_used(data, o: int) -> bool:
     return read_u16(data, o + 0x02) != BOX_EMPTY_TYPE
 
 # ---- 技能道具判定（上游 dcp_cheats.h IsSkillItem 官方掩码）--------------
-# 第一个词条(种类)ID 落在 0x1D1..0x1F8 且命中掩码 => 该消耗品是「技能」
+# 第一个词条(效果)ID 落在 0x1D1..0x1F8 且命中掩码 => 该道具是「技能」
 # 技能是装备上去使用的，受技能点上限约束，本编辑器只读显示、不提供修改。
 SKILL_FIRST_EFFECT = 0x1D1
 SKILL_EFFECT_COUNT = 0x28
 SKILL_EFFECT_MASK = 0xE362E5F7FF
+# 掩码只有 40 位（0x1D1–0x1F8），实测 0x1FB「亚马逊仪式护甲」同样是技能，
+# 落在掩码范围外一位，单独补进来。
+SKILL_EXTRA = frozenset({0x01FB})
 
 # ---- 人物状态候选字段（只读；上游无静态存档定义，未标定，禁止写入）------
 # 职业+等级由游戏查表重算属性(write_stats)，SAVE0.DAT 内没有独立的 STR/VIT/INT/LUC 字段。
@@ -156,7 +172,7 @@ def load_names(path: Path) -> dict[int, str]:
     out = {}
     if not path.exists():
         return out
-    for line in path.read_text(encoding="utf-8").splitlines():
+    for line in path.read_text(encoding="utf-8-sig").splitlines():
         if not line.strip() or line.startswith("#"):
             continue
         parts = line.split("\t", 1)
@@ -250,13 +266,37 @@ def consumable_names() -> dict[int, str]:
 
 
 def consumable_qty(data, o: int) -> int:
-    """消耗品数量：u16 的低字节。实测 x20/x8/x4/x7 与游戏显示一致。"""
+    """道具数量：u16 的低字节。实测 x20/x8/x4/x7 与游戏显示一致。
+
+    只对道具有效：装备在同一位置放的是别的字段（+0x0C 恒 0x0100），
+    所以先确认 +0x00 是道具再读，免得把装备的字段当数量显示。
+    """
+    if read_u16(data, o) != CONSUMABLE_ID:
+        return 0
     return read_u16(data, o + QTY_OFFSET) & 0xFF
 
 
 def consumable_kind(data, o: int) -> int:
-    """消耗品种类ID就是第一个附加字段。"""
+    """道具的效果ID（存在词条槽0）。
+
+    注意这不是「物品ID」：所有道具的 +0x00 都是 0x0070，真正区分是哪件道具
+    靠这个效果ID。它和装备词条共用一套编号空间，但取值范围不重叠：
+    装备词条 0x20–0x11C，道具效果 0x17F 起。
+    """
     return read_u16(data, o + MOD_OFFSETS[0])
+
+
+def prop_section(kind: int) -> str:
+    """效果ID 落在哪一段，用于界面提示「戒指/卷轴/药水/技能」。"""
+    if PROP_EFFECT_RING[0] <= kind <= PROP_EFFECT_RING[1]:
+        return "戒指"
+    if PROP_EFFECT_SCROLL[0] <= kind <= PROP_EFFECT_SCROLL[1]:
+        return "卷轴"
+    if PROP_EFFECT_POTION[0] <= kind <= PROP_EFFECT_POTION[1]:
+        return "药水"
+    if kind >= PROP_EFFECT_SKILL_MIN:
+        return "技能"
+    return ""
 
 
 def active_mods(data, o: int) -> list[tuple[int, int, int, int, float]]:
@@ -320,11 +360,12 @@ def mod_names_cached() -> dict[int, str]:
 
 
 def consumable_label(data, o: int, cons: dict[int, str] | None = None) -> str:
-    """消耗品显示名。
+    """道具显示名。
 
-    种类ID 和词条ID 共用一套编号：有实机核对过的物品名就用物品名（save_consumables.tsv），
-    否则退回词条表里的效果描述（如 0x19E -> 「免疫異常狀態，持續60秒」）。
-    词条表里那些「XX的」是前缀形容词，当物品名没意义，跳过。
+    名字表（save_consumables.tsv）有就用名字，如 0x190 -> 「陨石卷轴」。
+    没有就退回词条表的效果描述，但要加「效果#」前缀——词条表写的是"这东西干什么"
+    （0x190 -> 「從天空降下大量火球雨」），不是道具名，不加前缀会让人误以为是名字。
+    以「的」结尾的是前缀形容词（如 0x197「朴素的」），当名字没意义，直接跳过。
     """
     kind = consumable_kind(data, o)
     if cons is None:
@@ -334,8 +375,8 @@ def consumable_label(data, o: int, cons: dict[int, str] | None = None) -> str:
         return name
     eff = mod_names_cached().get(kind, "")
     if eff and not eff.endswith("的"):
-        return eff
-    return f"消耗品(种类{kind:#05x})"
+        return f"效果#{kind:04x} {eff}"
+    return f"未收录效果#{kind:04x}"
 
 
 def item_label(data, o: int, names: dict[int, str], cons=None) -> str:
@@ -472,7 +513,9 @@ def search_items(keyword: str, names: dict[int, str], limit: int = 200) -> list[
 
 
 def is_skill_kind(kind: int) -> bool:
-    """种类ID是否为技能道具（上游 IsSkillItem 的判定核心）。"""
+    """效果ID是否为技能道具（上游 IsSkillItem 的判定核心 + 实测补漏）。"""
+    if kind in SKILL_EXTRA:
+        return True
     index = kind - SKILL_FIRST_EFFECT
     return 0 <= index < SKILL_EFFECT_COUNT and ((SKILL_EFFECT_MASK >> index) & 1) != 0
 
@@ -625,7 +668,7 @@ def cmd_set_consumable(args, data, names):
 
 
 def cmd_set_box(args, data, names):
-    """修改通用道具箱某格：装备可改物品ID/词条/等级/攻击/耐久，消耗品改种类/数量。"""
+    """修改通用道具箱某格：装备可改物品ID/词条/等级/攻击/耐久，道具改效果ID/数量。"""
     if not (0 <= args.index < BOX_SLOT_COUNT):
         raise SystemExit(f"道具箱格号必须是 0-{BOX_SLOT_COUNT - 1}")
     o = box_offset(args.slot, args.index)
@@ -644,8 +687,8 @@ def cmd_set_box(args, data, names):
 
     if iid == CONSUMABLE_ID:
         if args.kind is not None:
-            mo = o + MOD_OFFSETS[0]      # 消耗品种类 = 词条槽0
-            print(f"改消耗品种类: [{args.index}] @{mo:#x}  {read_u16(data,mo):#06x} -> {args.kind:#06x}")
+            mo = o + MOD_OFFSETS[0]      # 道具效果ID = 词条槽0
+            print(f"改道具效果ID: [{args.index}] @{mo:#x}  {read_u16(data,mo):#06x} -> {args.kind:#06x}")
             write_u16(buf, mo, args.kind)
         if args.qty is not None:
             if not (0 <= args.qty <= 255):
@@ -801,7 +844,7 @@ def cmd_set_pouch(args, data, names):
             print(f"  该格原为 {iid:#06x}，已补成消耗品格（iid=0x70, 类型=0x2200）")
             iid = CONSUMABLE_ID
         mo = o + MOD_OFFSETS[0]
-        print(f"改快捷栏种类: DATA{args.slot+1} [{args.index}] @{mo:#x}  "
+        print(f"改快捷栏效果ID: DATA{args.slot+1} [{args.index}] @{mo:#x}  "
               f"{read_u16(data, mo):#06x} -> {args.kind:#06x}")
         write_u16(buf, mo, args.kind)
     if args.qty is not None:
@@ -902,7 +945,7 @@ def main():
     p.add_argument("--slot", type=int, required=True, help="DATA slot 0-2")
     p.add_argument("--index", type=int, required=True, help=f"道具箱格 0-{BOX_SLOT_COUNT-1}")
     p.add_argument("--item", type=lambda s: int(s, 0), help="换成装备：物品ID, 如 0x105")
-    p.add_argument("--kind", type=lambda s: int(s, 0), help="消耗品种类ID, 如 0x190")
+    p.add_argument("--kind", type=lambda s: int(s, 0), help="道具效果ID, 如 0x190=陨石卷轴")
     p.add_argument("--qty", type=int, help="消耗品数量 0-255")
     p.add_argument("--field", choices=["level", "atkmin", "atkmax", "durcur", "durmax"],
                    help="装备字段")
@@ -917,7 +960,7 @@ def main():
     p = sub.add_parser("set-pouch", help=f"改随身携带道具/快捷栏某格（0-{POUCH_SLOT_COUNT-1}）")
     p.add_argument("--slot", type=int, required=True, help="DATA slot 0-2")
     p.add_argument("--index", type=int, required=True, help=f"格号 0-{POUCH_SLOT_COUNT-1}")
-    p.add_argument("--kind", type=lambda s: int(s, 0), help="消耗品种类ID, 如 0x190")
+    p.add_argument("--kind", type=lambda s: int(s, 0), help="道具效果ID, 如 0x190=陨石卷轴")
     p.add_argument("--qty", type=int, help="数量 0-255")
     p.add_argument("--out")
     p.add_argument("--dry-run", action="store_true")
