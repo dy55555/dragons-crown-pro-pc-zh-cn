@@ -13,6 +13,7 @@
 from __future__ import annotations
 
 import hashlib
+import re
 import struct
 import sys
 import tkinter as tk
@@ -84,6 +85,9 @@ class App:
         self._inner_win = self.detail_canvas.create_window((0, 0), window=self.detail_inner,
                                                            anchor="nw")
         self.detail_inner.bind("<Configure>", self._on_detail_configure)
+        # 画布自身尺寸变化（窗口缩放）也要重算内框宽度，否则内框会卡在旧宽度上，
+        # 窗口一缩右侧按钮就被挤出可视区。
+        self.detail_canvas.bind("<Configure>", self._on_detail_configure)
         # 鼠标滚轮（Windows / Linux）
         self.detail_canvas.bind_all("<MouseWheel>", self._on_mousewheel)
         self.detail_canvas.bind_all("<Button-4>", lambda e: self.detail_canvas.yview_scroll(-1, "units"))
@@ -139,12 +143,17 @@ class App:
         self.update_changes()
 
     def refresh_tree(self):
+        """重建左侧树。节点用固定 iid（s0 / s0c2b1i3 …），刷新后能原样恢复选中与展开。"""
+        sel = self.tree.selection()
+        keep = sel[0] if sel else None
+        opened = [i for i in self._iter_nodes() if self.tree.item(i, "open")]
         self.tree.delete(*self.tree.get_children())
-        self.node_tag = {}   # node id -> ("item"|"char"|"bag"|"slot", ...)
+        self.node_tag = {}   # iid -> ("slot"|"char"|"bag"|"item"|"box"|"pouch", ...)
         for slot in range(se.DATA_SLOT_COUNT):
             gold = self.effective_u32(slot * se.DATA_SLOT_STRIDE + se.GOLD_OFFSET)
-            snode = self.tree.insert("", "end", text=f"DATA {slot+1}   金币 {gold}",
-                                     open=(slot == 0))
+            snode = f"s{slot}"
+            self.tree.insert("", "end", iid=snode, text=f"DATA {slot+1}   金币 {gold}",
+                             open=(slot == 0))
             self.node_tag[snode] = ("slot", slot)
             for ci in range(se.CHAR_COUNT):
                 o = se.char_offset(slot, ci)
@@ -153,14 +162,16 @@ class App:
                 nm = se.cname(self.data, o)
                 lvl = self.effective_u8(o + se.F_LEVEL) + 1
                 cls = se.CLASSES.get(self.effective_u8(o + se.F_CLASS), "?")
-                cnode = self.tree.insert(snode, "end", text=f"  {nm}  {cls}  Lv{lvl}")
+                cnode = f"s{slot}c{ci}"
+                self.tree.insert(snode, "end", iid=cnode, text=f"  {nm}  {cls}  Lv{lvl}")
                 self.node_tag[cnode] = ("char", slot, ci)
                 for bag in range(se.BAG_CONFIG_COUNT):
                     cnt = sum(1 for si in range(se.BAG_SLOT_COUNT)
                               if self.effective_u16(se.bag_offset(o, bag, si)))
-                    bnode = self.tree.insert(cnode, "end",
-                                             text=f"    {se.BAG_NAMES[bag]}  ({cnt}件)",
-                                             open=(bag == 0))
+                    bnode = f"s{slot}c{ci}b{bag}"
+                    self.tree.insert(cnode, "end", iid=bnode,
+                                     text=f"    {se.BAG_NAMES[bag]}  ({cnt}件)",
+                                     open=(bag == 0))
                     self.node_tag[bnode] = ("bag", slot, ci, bag)
                     for si in range(se.BAG_SLOT_COUNT):
                         bo = se.bag_offset(o, bag, si)
@@ -176,15 +187,35 @@ class App:
                             txt = se.item_name(iid, self.names) or ("" if iid == 0 else "?")
                             if iid:
                                 txt = f"{se.grade(len(ms))}级 {txt}"
-                        inode = self.tree.insert(bnode, "end",
-                                                 text=f"      [{si}] {iid:#05x} {txt}")
+                        inode = f"s{slot}c{ci}b{bag}i{si}"
+                        self.tree.insert(bnode, "end", iid=inode,
+                                         text=f"      [{si}] {iid:#05x} {txt}")
                         self.node_tag[inode] = ("item", slot, ci, bag, si)
             # 通用道具箱节点（该 DATA slot 所有角色共用）
             boxcnt = sum(1 for bi in range(se.BOX_SLOT_COUNT)
                          if se.box_used(self.data, se.box_offset(slot, bi)))
-            xnode = self.tree.insert(snode, "end",
-                                     text=f"  [通用道具箱]  {boxcnt}/{se.BOX_SLOT_COUNT}格（所有角色共用）")
+            xnode = f"s{slot}x"
+            self.tree.insert(snode, "end", iid=xnode,
+                             text=f"  [通用道具箱]  {boxcnt}/{se.BOX_SLOT_COUNT}格（所有角色共用）")
             self.node_tag[xnode] = ("box", slot)
+            # 随身携带道具/快捷栏（18 格，实测全是消耗品）
+            pcnt = sum(1 for pi in range(se.POUCH_SLOT_COUNT)
+                       if se.pouch_used(self.data, se.pouch_offset(slot, pi)))
+            pnode = f"s{slot}p"
+            self.tree.insert(snode, "end", iid=pnode,
+                             text=f"  [随身携带道具]  {pcnt}/{se.POUCH_SLOT_COUNT}格（快捷栏）")
+            self.node_tag[pnode] = ("pouch", slot)
+        for i in opened:
+            if self.tree.exists(i):
+                self.tree.item(i, open=True)
+        if keep and self.tree.exists(keep):
+            self.tree.selection_set(keep)
+            self.tree.focus(keep)
+
+    def _iter_nodes(self, parent=""):
+        for i in self.tree.get_children(parent):
+            yield i
+            yield from self._iter_nodes(i)
 
     # ---------- 有效值（含未保存改动）----------
     # edits[offset] = (value, width)，width ∈ {1,2,4}
@@ -213,23 +244,215 @@ class App:
         tag = self.node_tag.get(sel[0])
         if not tag:
             return
-        for w in list(self.detail_inner.winfo_children()):
-            w.destroy()
-        if tag[0] == "item":
+        # 树刷新后会自动恢复选中并再触发一次本事件；视图没变就别重绘，
+        # 否则正在编辑的输入框、展开的候选列表、滚动位置全被冲掉。
+        if tag == getattr(self, "_rendered_tag", None) and self.detail_inner.winfo_children():
+            return
+        self._sel_node = sel[0]
+        self._render_view(lambda t=tag: self._dispatch(t), tag=tag)
+
+    def _dispatch(self, tag):
+        kind = tag[0]
+        if kind == "item":
             self.show_item(*tag[1:])
-        elif tag[0] == "char":
+        elif kind == "char":
             self.show_char(*tag[1:])
-        elif tag[0] == "slot":
+        elif kind == "slot":
             self.show_slot(tag[1])
-        elif tag[0] == "bag":
-            self.show_bag(sel[0], *tag[1:])
-        elif tag[0] == "box":
+        elif kind == "bag":
+            self.show_bag(*tag[1:])
+        elif kind == "box":
             self.show_box(tag[1])
+        elif kind == "pouch":
+            self.show_pouch(tag[1])
         else:
             ttk.Label(self.detail_inner, text="选择左侧任一角色或装备格进行编辑",
                       foreground="#666").pack(anchor="w")
-        self.detail_canvas.yview_moveto(0)   # 切换项后滚回顶部
+
+    def _render_view(self, fn, tag=None, to_top=True):
+        """清空详情面板并渲染；记住重绘函数与对应节点，供「还原」后刷新。"""
+        self._rendered_tag = tag
+        self._view_fn = fn
+        pos = 0.0
+        if not to_top:
+            try:
+                pos = self.detail_canvas.yview()[0]
+            except (tk.TclError, IndexError):
+                pos = 0.0
+        for w in list(self.detail_inner.winfo_children()):
+            w.destroy()
+        fn()
+        self.detail_canvas.yview_moveto(pos)
         self._on_detail_configure()
+
+    def rerender(self, to_top=False):
+        fn = getattr(self, "_view_fn", None)
+        if fn:
+            self._render_view(fn, tag=getattr(self, "_rendered_tag", None), to_top=to_top)
+
+    def revert_field(self, *offs):
+        """撤销若干字段的未保存改动并重绘当前视图（还原按钮统一走这里）。"""
+        n = 0
+        for off in offs:
+            if self.edits.pop(off, None) is not None:
+                n += 1
+        self.refresh_tree()
+        self.update_changes()
+        self.rerender()
+        self.status.config(text=f"已还原 {n} 处未保存改动（其他改动仍保留）" if n else "该字段没有未保存的改动")
+
+    def _render_mod_rows(self, o, only_first=False, hint=True):
+        """渲染词条 1-8 的编辑行。only_first=True 时只画词条1（消耗种类就是它）。"""
+        ttk.Label(self.detail_inner,
+                  text="附加词条 1-8（填 FFFF 即清空该条）" if not only_first
+                  else "种类（就是词条1那个槽）",
+                  font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(12, 4))
+        if hint:
+            ttk.Label(self.detail_inner,
+                      text="两种填法：填ID（如 0021），或输中文关键字（如 攻击）从下方候选点选。",
+                      foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(0, 6))
+        for idx, off in enumerate(se.MOD_OFFSETS):
+            if only_first and idx > 0:
+                break
+            mo = o + off
+            v = self.effective_u16(mo)
+            mframe = ttk.Frame(self.detail_inner)
+            mframe.pack(anchor="w", pady=2, fill="x")
+            row = ttk.Frame(mframe)
+            row.pack(anchor="w", fill="x")
+            ttk.Label(row, text=f"词条{idx+1}", width=9).pack(side="left")
+            var = tk.StringVar(value=f"{v:04X}")
+            ttk.Entry(row, textvariable=var, width=10).pack(side="left")
+            nametext = tk.StringVar()
+            ttk.Label(row, textvariable=nametext, foreground="#555",
+                      width=26, anchor="w").pack(side="left", padx=6)
+            ttk.Label(row, text=f"@{mo:#x}", foreground="#aaa").pack(side="left")
+            self._wire_mod_row(mframe, row, var, nametext, mo)
+
+    def _revert_btn(self, row, offs):
+        """在 apply 按钮旁边生成【还原】按钮。offs 可给多个偏移（如消耗品的 iid+类型）。"""
+        return ttk.Button(row, text="还原", width=5,
+                          command=lambda: self.revert_field(*offs))
+
+    def _fix_type_for(self, o, old_id, new_id, equip_type):
+        """换物品时同步类型标记(+0x02)：消耗品与装备互转必须改，否则游戏不认这格。"""
+        if old_id == new_id:
+            return
+        if new_id == se.CONSUMABLE_ID:
+            self.edits[o + 2] = (se.ITEM_TYPE_CONSUMABLE, 2)
+        elif old_id == se.CONSUMABLE_ID:
+            self.edits[o + 2] = (equip_type, 2)
+
+    def _scroll_to(self, widget, margin=48):
+        """把详情滚动面板滚到某控件附近（展开候选列表后保证看得见）。"""
+        try:
+            self.detail_canvas.update_idletasks()
+            y = widget.winfo_rooty() - self.detail_inner.winfo_rooty()
+            bb = self.detail_canvas.bbox("all")
+            total = max(1, (bb[3] - bb[1]) if bb else 1)
+            self.detail_canvas.yview_moveto(max(0.0, (y - margin) / total))
+        except tk.TclError:
+            pass
+
+    def _wire_mod_row(self, host, row, var, nametext, mo):
+        """词条输入框：实时显示名字；输入中文关键字时在下方列出候选，选中自动填 ID。
+
+        host 是这一词条的外层竖排容器，候选列表就展开在输入行下方。
+        """
+        hits_box = ttk.Frame(host)
+
+        def close_hits():
+            for w in hits_box.winfo_children():
+                w.destroy()
+            hits_box.pack_forget()
+
+        def sync_name(*_):
+            t = var.get().strip()
+            if not t:
+                nametext.set("")
+                return
+            try:
+                nv = int(t, 16)
+            except ValueError:
+                nametext.set("↓ 从下面候选里点一条")
+                return
+            if nv == se.MOD_EMPTY:
+                nametext.set("（空槽）")
+            else:
+                nametext.set(self.mods.get(nv) or "（未收录词条）")
+
+        def pick(k):
+            var.set(f"{k:04X}")
+            close_hits()
+            self._on_detail_configure()
+
+        def show_hits(kw):
+            other = getattr(self, "_hit_closer", None)
+            if other and other is not close_hits:
+                other()
+            for w in hits_box.winfo_children():
+                w.destroy()
+            hits = se.search_mods(kw, self.mods, limit=40)
+            if not hits:
+                nametext.set("（没有匹配的词条）")
+                hits_box.pack_forget()
+                return
+            box = tk.Frame(hits_box, bd=1, relief="solid")
+            box.pack(fill="x")
+            lb = tk.Listbox(box, height=min(7, len(hits)), width=54,
+                            font=("Consolas", 10), exportselection=False)
+            for k, n in hits:
+                lb.insert("end", f" {k:04X}  {n}")
+            lb.pack(side="left", fill="both", expand=True)
+            sb = ttk.Scrollbar(box, orient="vertical", command=lb.yview)
+            sb.pack(side="right", fill="y")
+            lb.configure(yscrollcommand=sb.set)
+            ttk.Label(hits_box, text=f"匹配 {len(hits)} 条 · 单击即填入词条ID",
+                      foreground="#888").pack(anchor="w")
+
+            def on_pick(_e=None):
+                cs = lb.curselection()
+                if cs:
+                    pick(hits[cs[0]][0])
+
+            lb.bind("<<ListboxSelect>>", on_pick)
+            hits_box.pack(anchor="w", fill="x", pady=(2, 4))
+            self._hit_closer = close_hits
+            self._scroll_to(hits_box)
+
+        def on_write(*_):
+            t = var.get().strip()
+            if not t:
+                close_hits()
+                sync_name()
+                return
+            if re.fullmatch(r"[0-9A-Fa-f]{0,4}", t):
+                close_hits()          # 纯十六进制，当ID处理
+                sync_name()
+                return
+            sync_name()
+            show_hits(t)              # 含中文/非hex字符 -> 模糊匹配
+
+        var.trace_add("write", on_write)
+
+        def apply_mod(_e=None):
+            try:
+                nv = int(var.get().strip(), 16) & 0xFFFF
+            except ValueError:
+                messagebox.showwarning(
+                    "格式不对",
+                    "词条格要填十六进制ID（如 0021）；\n"
+                    "也可以直接输入中文关键字，从下方候选里点一条。")
+                return
+            self.edits[mo] = (nv, 2)
+            self.refresh_tree()
+            self.update_changes()
+            self.rerender()
+
+        ttk.Button(row, text="应用", command=apply_mod).pack(side="left", padx=2)
+        ttk.Button(row, text="还原", width=5,
+                   command=lambda: self.revert_field(mo)).pack(side="left")
+        sync_name()
 
     def select_item(self, node):
         self.tree.selection_set(node)
@@ -237,14 +460,14 @@ class App:
         self.tree.see(node)
         self.on_select(None)
 
-    def show_bag(self, node, slot, ci, bag):
+    def show_bag(self, slot, ci, bag):
         ttk.Label(self.detail_inner,
                   text=f"DATA {slot+1} / 角色{ci} / {se.BAG_NAMES[bag]} —— 整栏一览",
                   font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 6))
         ttk.Label(self.detail_inner,
                   text="点每行的【编辑】即可选中该格并修改；也可直接双击左侧具体格子。",
                   foreground="#666", wraplength=740, justify="left").pack(anchor="w", pady=(0, 10))
-        for si, child in enumerate(self.tree.get_children(node)):
+        for si in range(se.BAG_SLOT_COUNT):
             bo = se.bag_offset(se.char_offset(slot, ci), bag, si)
             iid = self.effective_u16(bo)
             if iid == se.CONSUMABLE_ID:
@@ -256,10 +479,11 @@ class App:
                 lab = se.item_name(iid, self.names) or ("(空)" if iid == 0 else "?")
                 if iid:
                     lab = f"{se.grade(len(ms))}级 {lab}"
+            node = f"s{slot}c{ci}b{bag}i{si}"
             row = ttk.Frame(self.detail_inner)
             row.pack(anchor="w", pady=2, fill="x")
             ttk.Label(row, text=f"[{si}] {iid:#05x}  {lab}", width=34).pack(side="left")
-            ttk.Button(row, text="编辑", command=lambda c=child: self.select_item(c)).pack(side="left")
+            ttk.Button(row, text="编辑", command=lambda n=node: self.select_item(n)).pack(side="left")
 
     def show_item(self, slot, ci, bag, si):
         o = se.bag_offset(se.char_offset(slot, ci), bag, si)
@@ -268,13 +492,15 @@ class App:
                   font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 8))
         ttk.Label(self.detail_inner, text=f"文件偏移: {o:#x}    字段: u16 小端 = 物品ID").pack(anchor="w")
         row = ttk.Frame(self.detail_inner)
-        row.pack(anchor="w", pady=10)
+        row.pack(anchor="w", pady=10, fill="x")
         ttk.Label(row, text="物品:").pack(side="left", padx=(0, 6))
-        combo = ttk.Combobox(row, values=self.item_choices, width=58, state="readonly")
+        combo = ttk.Combobox(row, values=self.item_choices, width=44, state="readonly")
         key = f"{cur:04X}  {se.item_name(cur, self.names)}"
         if key in self.choice_to_id:
             combo.set(key)
         combo.pack(side="left")
+        ttk.Button(row, text="还原", width=5,
+                   command=lambda: self.revert_field(o, o + 2)).pack(side="left", padx=(6, 0))
         hint = ttk.Label(self.detail_inner, text="", foreground="#666", wraplength=760, justify="left")
         hint.pack(anchor="w", pady=4)
 
@@ -286,11 +512,75 @@ class App:
                 self.edits.pop(o, None)
             else:
                 self.edits[o] = (v, 2)   # 物品ID = u16
+                self._fix_type_for(o, cur, v, se.ITEM_TYPE_BAG_WEAPON)
             hint.config(text=f"将改成 {v:#06x}  {self.names.get(v, '')}")
             self.refresh_tree()
             self.update_changes()
 
         combo.bind("<<ComboboxSelected>>", on_combo)
+
+        # 装备名搜索 + 手填任意ID（把可改范围放到整张表以外也行）
+        srow = ttk.Frame(self.detail_inner)
+        srow.pack(anchor="w", pady=(0, 2), fill="x")
+        ttk.Label(srow, text="搜装备:").pack(side="left")
+        svar = tk.StringVar()
+        sent = ttk.Entry(srow, textvariable=svar, width=18)
+        sent.pack(side="left", padx=4)
+        ttk.Label(srow, text="  手填ID(16进制):").pack(side="left", padx=(10, 0))
+        mvar = tk.StringVar()
+        ttk.Entry(srow, textvariable=mvar, width=8).pack(side="left", padx=4)
+
+        ibox = ttk.Frame(self.detail_inner)
+
+        def set_item(nv):
+            """换物品：写物品ID，必要时同步类型标记，然后原地重绘。"""
+            self.edits[o] = (nv, 2)
+            self._fix_type_for(o, cur, nv, se.ITEM_TYPE_BAG_WEAPON)
+            self.refresh_tree()
+            self.update_changes()
+            self.rerender()
+
+        def close_ibox():
+            for w in ibox.winfo_children():
+                w.destroy()
+            ibox.pack_forget()
+
+        def do_item_search(_e=None):
+            kw = svar.get().strip()
+            close_ibox()
+            if not kw:
+                return
+            hits = se.search_items(kw, self.names, limit=60)
+            if not hits:
+                hitlab.config(text=f"没有名字匹配「{kw}」的装备")
+                ibox.pack(anchor="w", fill="x", pady=(2, 4))
+                return
+            hitlab.config(text=f"匹配 {len(hits)} 件 · 单击即换成该装备")
+            ibox.pack(anchor="w", fill="x", pady=(2, 4))
+            for k, n in hits:
+                r = ttk.Frame(ibox)
+                r.pack(fill="x")
+                ttk.Button(r, text=f"{k:04X}  {n}", anchor="w",
+                           command=lambda kk=k: set_item(kk)).pack(side="left", fill="x", expand=True)
+
+        hitlab = ttk.Label(ibox, foreground="#888")
+        hitlab.pack(anchor="w")
+        sent.bind("<Return>", do_item_search)
+        ttk.Button(srow, text="查", width=4, command=do_item_search).pack(side="left")
+
+        def apply_manual():
+            raw = mvar.get().strip().replace("0x", "").replace("0X", "")
+            try:
+                nv = int(raw, 16)
+            except ValueError:
+                messagebox.showwarning("格式不对", "手填ID 用十六进制，例如 105 或 0x105")
+                return
+            if not (0 <= nv <= 0xFFFF):
+                messagebox.showwarning("超出范围", "物品ID 必须在 0x0000 – 0xFFFF")
+                return
+            set_item(nv)
+
+        ttk.Button(srow, text="用此ID", command=apply_manual).pack(side="left")
 
         if cur == se.CONSUMABLE_ID:
             ttk.Label(self.detail_inner,
@@ -318,9 +608,13 @@ class App:
                 self.refresh_tree()
                 self.update_changes()
             ttk.Button(qrow, text="应用", command=apply_qty).pack(side="left", padx=4)
+            ttk.Button(qrow, text="还原", width=5,
+                       command=lambda: self.revert_field(qo)).pack(side="left")
             ttk.Label(self.detail_inner,
-                      text="种类由词条1决定，已按实机截图命名；数量改低字节即可。",
+                      text="数量改低字节即可。要换种类就改下面这个词条1——"
+                           "消耗品的种类就存在这个词条槽里。",
                       foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=4)
+            self._render_mod_rows(o, only_first=True)
         else:
             ms = se.active_mods(self.data, o)
             lo, hi = se.item_atk(self.data, o)
@@ -351,6 +645,7 @@ class App:
                     self.refresh_tree()
                     self.update_changes()
                 ttk.Button(row, text="应用", command=apply).pack(side="left", padx=4)
+                self._revert_btn(row, (off,)).pack(side="left")
 
             num_field("装备等级", o + se.F_ITEM_LEVEL, 1,
                       lambda: se.item_level(self.data, o),
@@ -370,32 +665,11 @@ class App:
                       lambda v: v * se.DUR_SCALE + se.read_u32(self.data, o + se.F_DUR_MAX) % se.DUR_SCALE,
                       "存值=显示×100")
 
-            ttk.Label(self.detail_inner, text="附加词条 1-8（填 FFFF 即清空该条）",
-                      font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(12, 4))
-            for idx, off in enumerate(se.MOD_OFFSETS):
-                mo = o + off
-                v = self.effective_u16(mo)
-                mrow = ttk.Frame(self.detail_inner)
-                mrow.pack(anchor="w", pady=2, fill="x")
-                ttk.Label(mrow, text=f"词条{idx+1}", width=9).pack(side="left")
-                var = tk.StringVar(value=f"{v:04X}")
-                ttk.Entry(mrow, textvariable=var, width=8).pack(side="left")
-                disp = se.mod_display(self.data, o, idx, self.mods) if v != 0xFFFF else ""
-                ttk.Label(mrow, text=disp, foreground="#666").pack(side="left", padx=6)
-                ttk.Label(mrow, text=f"@{mo:#x}", foreground="#aaa").pack(side="left")
-
-                def apply_mod(_e=None, mo=mo, var=var):
-                    try:
-                        nv = int(var.get(), 16) & 0xFFFF
-                    except ValueError:
-                        return
-                    self.edits[mo] = (nv, 2)
-                    self.refresh_tree()
-                    self.update_changes()
-                ttk.Button(mrow, text="应用", command=apply_mod).pack(side="left", padx=4)
+            self._render_mod_rows(o)
             ttk.Label(self.detail_inner,
-                      text="说明：中文名按 xlsx/日式游戏惯用译法直译，数值可能与本版本略有出入，"
-                           "意思对得上就行；以后发现差太多再逐条改。",
+                      text="说明：中文名按 xlsx/日式游戏惯用译法直译，意思对得上就行；"
+                           "发现差太多再逐条改。词条ID决定属性种类，"
+                           "存档里另有一个 float 参数决定幅度，目前不在此处开放。",
                       foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(10, 0))
 
     def show_char(self, slot, ci):
@@ -434,6 +708,7 @@ class App:
                 self.update_changes()
             ent.bind("<Return>", apply)
             ttk.Button(row, text="应用", command=apply).pack(side="left", padx=4)
+            self._revert_btn(row, (off,)).pack(side="left")
 
         # 人物状态候选：只读观察，未标定
         ttk.Label(self.detail_inner, text="人物状态候选值（只读）",
@@ -498,7 +773,7 @@ class App:
                 kind = se.consumable_kind(self.data, o)
                 q = self.effective_u16(o + se.QTY_OFFSET) & 0xFF
                 tag = "[技能]" if se.is_skill_kind(kind) else ""
-                name = f"{tag}{self.cons.get(kind, f'种类{kind:#06x}')} x{q}"
+                name = f"{tag}{se.consumable_label(self.data, o, self.cons)} x{q}"
             elif 0xBB <= iid <= 0x1E8:
                 ms = se.active_mods(self.data, o)
                 name = f"{se.grade(len(ms))}级 {se.item_name(iid, self.names)} " \
@@ -507,11 +782,11 @@ class App:
                 name = f"未鉴定? iid={iid:#06x} type={typ:#06x}"
             row = ttk.Frame(self.detail_inner)
             row.pack(anchor="w", pady=1, fill="x")
-            row.columnconfigure(0, weight=1)   # 名称可伸缩
-            ttk.Label(row, text=f"[{bi:3}] @{o:#x}  {name}", anchor="w").grid(
-                row=0, column=0, sticky="ew")
-            ttk.Button(row, text="编辑", command=lambda b=bi: self.select_box_item(slot, b)).grid(
-                row=0, column=1, padx=4)
+            # 先摆右侧按钮再摆左侧文本，否则长名字会把按钮挤出可视区
+            ttk.Button(row, text="编辑", command=lambda b=bi: self.select_box_item(slot, b)).pack(
+                side="right", padx=4)
+            ttk.Label(row, text=f"[{bi:3}] @{o:#x}  {name}", anchor="w").pack(
+                side="left", fill="x", expand=True)
 
         # 翻页控件：两行 grid，窄窗口也不挤掉按钮
         nav = ttk.Frame(self.detail_inner)
@@ -536,69 +811,113 @@ class App:
                 pass
         jent.bind("<Return>", lambda _e: do_jump())
         ttk.Button(nav, text="页 转到", command=do_jump).grid(row=1, column=2, sticky="w", padx=2)
+        self._on_detail_configure()   # 直接调用（翻页）时也要把内框宽度对齐画布
 
     def select_box_item(self, slot, bi):
         """选中道具箱某格，用统一详情面板编辑（复用 show_item 的装备/消耗品逻辑）。"""
-        o = se.box_offset(slot, bi)
+        def view():
+            o = se.box_offset(slot, bi)
+            for w in list(self.detail_inner.winfo_children()):
+                w.destroy()
+            # 返回上一级：回到道具箱列表并停在原页
+            back = ttk.Frame(self.detail_inner)
+            back.pack(anchor="w", pady=(0, 6), fill="x")
+            ttk.Button(back, text="← 返回道具箱列表",
+                       command=lambda: self.show_box(slot, getattr(self, "_box_page", 0))).pack(side="left")
+            iid = self.effective_u16(o)
+            if iid == se.CONSUMABLE_ID:
+                self._render_item_editor(o, consumable=True)
+            elif se.ITEM_ITEMID_MIN <= iid <= se.ITEM_ITEMID_MAX:
+                self._render_item_editor(o, consumable=False)
+            else:
+                ttk.Label(self.detail_inner,
+                          text=f"道具箱[{bi}] 未鉴定/异常装备  @{o:#x}",
+                          font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 8))
+                ttk.Label(self.detail_inner,
+                          text=f"物品ID={iid:#06x}  类型标记={se.read_u16(self.data, o + 2):#06x}。"
+                               "这类格子数据没标定（多半是未鉴定装备），"
+                               "建议不要在这里改；真要处理请用命令行 set-box。",
+                          foreground="#666", wraplength=760, justify="left").pack(anchor="w")
+                self._render_item_picker(o, iid, se.ITEM_TYPE_BOX_EQUIP)
         self._box_mode = (slot, bi)
-        for w in list(self.detail_inner.winfo_children()):
-            w.destroy()
-        self.detail_canvas.yview_moveto(0)
-        # 返回上一级：回到道具箱列表并停在原页
-        back = ttk.Frame(self.detail_inner)
-        back.pack(anchor="w", pady=(0, 6), fill="x")
-        ttk.Button(back, text="← 返回道具箱列表",
-                   command=lambda: self.show_box(slot, getattr(self, "_box_page", 0))).pack(side="left")
-        iid = self.effective_u16(o)
-        if iid == se.CONSUMABLE_ID:
-            self._render_item_editor(o, consumable=True)
-        elif 0xBB <= iid <= 0x1E8:
-            self._render_item_editor(o, consumable=False)
-        else:
-            ttk.Label(self.detail_inner,
-                      text=f"道具箱[{bi}] 未鉴定/异常装备  @{o:#x}",
-                      font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 8))
-            ttk.Label(self.detail_inner,
-                      text=f"物品ID={iid:#06x}  类型标记={se.read_u16(self.data, o+2):#06x}。"
-                           "此类格子数据未标定，建议不要在界面改；如需处理请用命令行 set-box。",
-                      foreground="#666", wraplength=760, justify="left").pack(anchor="w")
+        self._render_view(view, tag=("box", slot))
 
-    def _render_item_editor(self, o, consumable):
-        """道具箱格子的装备/消耗品编辑器（与行囊 show_item 相同的字段）。"""
+    def _render_item_picker(self, o, iid, equip_type):
+        """物品ID 下拉 + 还原：道具箱/快捷栏里换装备或换成消耗品都走这里。"""
+        irow = ttk.Frame(self.detail_inner)
+        irow.pack(anchor="w", pady=(6, 4), fill="x")
+        ttk.Label(irow, text="物品:", width=10).pack(side="left")
+        combo = ttk.Combobox(irow, values=self.item_choices, width=40, state="readonly")
+        key = f"{iid:04X}  {se.item_name(iid, self.names)}"
+        if key in self.choice_to_id:
+            combo.set(key)
+        combo.pack(side="left")
+        ttk.Button(irow, text="还原", width=5,
+                   command=lambda: self.revert_field(o, o + 2)).pack(side="left", padx=4)
+
+        def on_combo(_e):
+            v = self.choice_to_id.get(combo.get())
+            if v is None or v == iid:
+                return
+            self.edits[o] = (v, 2)
+            self._fix_type_for(o, iid, v, equip_type)
+            self.refresh_tree()
+            self.update_changes()
+            self.rerender()
+
+        combo.bind("<<ComboboxSelected>>", on_combo)
+
+    def _render_item_editor(self, o, consumable, where="道具箱格", equip_type=None):
+        """道具箱/快捷栏格子的装备/消耗品编辑器（与行囊 show_item 相同的字段）。"""
         iid = self.effective_u16(o)
-        ttk.Label(self.detail_inner, text=f"道具箱格 @{o:#x}",
+        if equip_type is None:
+            equip_type = se.ITEM_TYPE_BOX_EQUIP
+        ttk.Label(self.detail_inner, text=f"{where} @{o:#x}",
                   font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 8))
+        self._render_item_picker(o, iid, equip_type)
         if consumable:
             kind = se.consumable_kind(self.data, o)
             q = self.effective_u16(o + se.QTY_OFFSET) & 0xFF
             ttk.Label(self.detail_inner,
-                      text=f"消耗品：{self.cons.get(kind, f'种类{kind:#06x}')}  "
+                      text=f"消耗品：{se.consumable_label(self.data, o, self.cons)}  "
                            f"种类ID {kind:#06x}  数量 {q}",
                       font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(6, 4))
+            ttk.Label(self.detail_inner,
+                      text="种类就在「词条1」那个槽里，下面可以输中文搜；数量改低字节。",
+                      foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(0, 4))
             row = ttk.Frame(self.detail_inner)
             row.pack(anchor="w", pady=4)
             ttk.Label(row, text="数量(0-255)", width=14).pack(side="left")
             qv = tk.StringVar(value=str(q))
             ttk.Entry(row, textvariable=qv, width=8).pack(side="left")
+
             def apply_q():
                 try:
                     v = int(qv.get())
                 except ValueError:
                     return
-                if 0 <= v <= 255:
-                    self.edits[o + se.QTY_OFFSET] = ((se.read_u16(self.data, o+se.QTY_OFFSET) & 0xFF00) | v, 2)
-                    self.update_changes()
-                    messagebox.showinfo("已暂存", "数量已暂存，点底部【保存改动】写入。")
+                if not (0 <= v <= 255):
+                    messagebox.showwarning("超出范围", "数量必须在 0-255 之间")
+                    return
+                self.edits[o + se.QTY_OFFSET] = (
+                    (se.read_u16(self.data, o + se.QTY_OFFSET) & 0xFF00) | v, 2)
+                self.update_changes()
+                messagebox.showinfo("已暂存", "数量已暂存，点底部【保存改动】写入。")
+
             ttk.Button(row, text="应用", command=apply_q).pack(side="left", padx=4)
+            ttk.Button(row, text="还原", width=5,
+                       command=lambda: self.revert_field(o + se.QTY_OFFSET)).pack(side="left")
+            self._render_mod_rows(o, only_first=True)
         else:
             ms = se.active_mods(self.data, o)
             lo, hi = se.item_atk(self.data, o)
             dcur, dmax = se.durability(self.data, o)
             ttk.Label(self.detail_inner,
                       text=f"{se.grade(len(ms))}级 {se.item_name(iid, self.names)}  "
-                           f"LV{se.item_level(self.data,o)}  "
+                           f"LV{se.item_level(self.data, o)}  "
                            f"ATK {lo}-{hi}  耐久 {int(dcur)}/{int(dmax)}",
                       font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(8, 2))
+
             def numf(label, off, width, get, store, note=""):
                 row = ttk.Frame(self.detail_inner)
                 row.pack(anchor="w", pady=2, fill="x")
@@ -606,42 +925,46 @@ class App:
                 var = tk.StringVar(value=str(get()))
                 ttk.Entry(row, textvariable=var, width=8).pack(side="left")
                 ttk.Label(row, text=note or f"@{off:#x}", foreground="#888").pack(side="left", padx=6)
+
                 def apply(_e=None, off=off, var=var, store=store):
                     try:
                         self.edits[off] = (store(int(var.get())), width)
                         self.update_changes()
                     except ValueError:
                         pass
+
                 ttk.Button(row, text="应用", command=apply).pack(side="left", padx=4)
-            numf("装备等级", o+se.F_ITEM_LEVEL, 1, lambda: se.item_level(self.data,o),
-                 lambda v: max(0, min(254, v-1)), "存值+1")
-            numf("攻击下限", o+se.F_ITEM_ATK_MIN, 1, lambda: se.item_atk(self.data,o)[0], lambda v: max(0,min(255,v)))
-            numf("攻击上限", o+se.F_ITEM_ATK_MAX, 1, lambda: se.item_atk(self.data,o)[1], lambda v: max(0,min(255,v)))
-            numf("耐久当前", o+se.F_DUR_CUR, 4, lambda: int(se.durability(self.data,o)[0]),
-                 lambda v: v*se.DUR_SCALE + se.read_u32(self.data,o+se.F_DUR_CUR)%se.DUR_SCALE)
-            numf("耐久最大", o+se.F_DUR_MAX, 4, lambda: int(se.durability(self.data,o)[1]),
-                 lambda v: v*se.DUR_SCALE + se.read_u32(self.data,o+se.F_DUR_MAX)%se.DUR_SCALE)
-            ttk.Label(self.detail_inner, text="词条 1-8（FFFF=清空）",
-                      font=("Tahoma",10,"bold")).pack(anchor="w", pady=(10,4))
+                self._revert_btn(row, (off,)).pack(side="left")
+
+            numf("装备等级", o + se.F_ITEM_LEVEL, 1, lambda: se.item_level(self.data, o),
+                 lambda v: max(0, min(254, v - 1)), "存值+1")
+            numf("攻击下限", o + se.F_ITEM_ATK_MIN, 1, lambda: se.item_atk(self.data, o)[0],
+                 lambda v: max(0, min(255, v)))
+            numf("攻击上限", o + se.F_ITEM_ATK_MAX, 1, lambda: se.item_atk(self.data, o)[1],
+                 lambda v: max(0, min(255, v)))
+            numf("耐久当前", o + se.F_DUR_CUR, 4, lambda: int(se.durability(self.data, o)[0]),
+                 lambda v: v * se.DUR_SCALE + se.read_u32(self.data, o + se.F_DUR_CUR) % se.DUR_SCALE)
+            numf("耐久最大", o + se.F_DUR_MAX, 4, lambda: int(se.durability(self.data, o)[1]),
+                 lambda v: v * se.DUR_SCALE + se.read_u32(self.data, o + se.F_DUR_MAX) % se.DUR_SCALE)
+            ttk.Label(self.detail_inner, text="词条 1-8（FFFF=清空；可输中文关键字模糊匹配）",
+                      font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(10, 4))
             for idx, off in enumerate(se.MOD_OFFSETS):
                 mo = o + off
                 v = self.effective_u16(mo)
-                row = ttk.Frame(self.detail_inner)
-                row.pack(anchor="w", pady=1, fill="x")
+                mframe = ttk.Frame(self.detail_inner)
+                mframe.pack(anchor="w", pady=1, fill="x")
+                row = ttk.Frame(mframe)
+                row.pack(anchor="w", fill="x")
                 ttk.Label(row, text=f"词条{idx+1}", width=8).pack(side="left")
                 var = tk.StringVar(value=f"{v:04X}")
-                ttk.Entry(row, textvariable=var, width=8).pack(side="left")
-                disp = se.mod_display(self.data, o, idx, self.mods) if v != 0xFFFF else ""
-                ttk.Label(row, text=disp, foreground="#666").pack(side="left", padx=6)
-                def apply_mod(_e=None, mo=mo, var=var):
-                    try:
-                        self.edits[mo] = (int(var.get(),16)&0xFFFF, 2)
-                        self.update_changes()
-                    except ValueError:
-                        pass
-                ttk.Button(row, text="应用", command=apply_mod).pack(side="left", padx=4)
+                ttk.Entry(row, textvariable=var, width=10).pack(side="left")
+                nametext = tk.StringVar()
+                ttk.Label(row, textvariable=nametext, foreground="#555",
+                          width=28, anchor="w").pack(side="left", padx=6)
+                ttk.Label(row, text=f"@{mo:#x}", foreground="#aaa").pack(side="left")
+                self._wire_mod_row(mframe, row, var, nametext, mo)
         ttk.Label(self.detail_inner, text="改动已在底部统计，点【保存改动】统一写入并重算 CRC。",
-                  foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(10,0))
+                  foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(10, 0))
 
     def show_slot(self, slot):
         o = slot * se.DATA_SLOT_STRIDE + se.GOLD_OFFSET
@@ -666,7 +989,78 @@ class App:
             self.update_changes()
         ent.bind("<Return>", apply)
         ttk.Button(row, text="应用", command=apply).pack(side="left", padx=4)
+        self._revert_btn(row, (o,)).pack(side="left")
         ttk.Label(self.detail_inner, text=f"@{o:#x}  u32 小端", foreground="#888").pack(anchor="w", pady=6)
+
+    # ---------- 随身携带道具 / 快捷栏 ----------
+    POUCH_PAGE_SIZE = 15
+
+    def show_pouch(self, slot, page=None):
+        """随身携带道具（快捷栏）：18 格，实测全是消耗品。"""
+        used = [pi for pi in range(se.POUCH_SLOT_COUNT)
+                if se.pouch_used(self.data, se.pouch_offset(slot, pi))]
+        total_pages = max(1, (len(used) + self.POUCH_PAGE_SIZE - 1) // self.POUCH_PAGE_SIZE)
+        if page is None:
+            page = getattr(self, "_pouch_page", 0)
+        page = max(0, min(page, total_pages - 1))
+        self._pouch_page = page
+        ttk.Label(self.detail_inner,
+                  text=f"DATA {slot+1} / 随身携带道具（快捷栏）—— "
+                       f"{len(used)}/{se.POUCH_SLOT_COUNT} 格占用",
+                  font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 6))
+        ttk.Label(self.detail_inner,
+                  text=f"起点 @{se.pouch_offset(slot, 0):#x}，18 格 × 0x54。"
+                       "这块就是游戏里随身带着、开局就能直接用的道具，和通用道具箱分开存。"
+                       "点【编辑】改某格。",
+                  foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(0, 8))
+        start = page * self.POUCH_PAGE_SIZE
+        page_items = used[start:start + self.POUCH_PAGE_SIZE]
+        for pi in page_items:
+            o = se.pouch_offset(slot, pi)
+            iid = self.effective_u16(o)
+            if iid == se.CONSUMABLE_ID:
+                kind = se.consumable_kind(self.data, o)
+                q = self.effective_u16(o + se.QTY_OFFSET) & 0xFF
+                name = f"{se.consumable_label(self.data, o, self.cons)} x{q}"
+            else:
+                name = f"iid={iid:#06x} type={se.read_u16(self.data, o + 2):#06x}"
+            row = ttk.Frame(self.detail_inner)
+            row.pack(anchor="w", pady=1, fill="x")
+            # 先摆右侧按钮再摆左侧文本，否则长名字会把按钮挤出可视区
+            ttk.Button(row, text="编辑",
+                       command=lambda p=pi: self.select_pouch_item(slot, p)).pack(side="right", padx=4)
+            ttk.Label(row, text=f"[{pi:2}] @{o:#x}  {name}", anchor="w").pack(
+                side="left", fill="x", expand=True)
+        if total_pages > 1:
+            nav = ttk.Frame(self.detail_inner)
+            nav.pack(anchor="w", pady=(8, 2), fill="x")
+            for c in range(3):
+                nav.columnconfigure(c, weight=1)
+            ttk.Button(nav, text="‹ 上一页",
+                       command=lambda: self.show_pouch(slot, page - 1)).grid(
+                row=0, column=0, sticky="ew", padx=2)
+            ttk.Label(nav, text=f"第 {page + 1} / {total_pages} 页", anchor="center").grid(
+                row=0, column=1, sticky="ew", padx=4)
+            ttk.Button(nav, text="下一页 ›",
+                       command=lambda: self.show_pouch(slot, page + 1)).grid(
+                row=0, column=2, sticky="ew", padx=2)
+        self._on_detail_configure()   # 直接调用（翻页）时也要把内框宽度对齐画布
+
+    def select_pouch_item(self, slot, pi):
+        o = se.pouch_offset(slot, pi)
+        self._pouch_mode = (slot, pi)
+
+        def view():
+            for w in list(self.detail_inner.winfo_children()):
+                w.destroy()
+            back = ttk.Frame(self.detail_inner)
+            back.pack(anchor="w", pady=(0, 6), fill="x")
+            ttk.Button(back, text="← 返回随身道具列表",
+                       command=lambda: self.show_pouch(slot, getattr(self, "_pouch_page", 0))).pack(side="left")
+            self._render_item_editor(o, consumable=True, where="随身道具格",
+                                     equip_type=se.ITEM_TYPE_BAG_WEAPON)
+
+        self._render_view(view, tag=("pouch", slot))
 
     # ---------- 保存 ----------
     def save(self):

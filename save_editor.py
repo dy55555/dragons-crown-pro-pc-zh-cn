@@ -70,6 +70,11 @@ ITEM_ID_OFFSET = 0x00      # 槽首 u16 LE = 物品ID
 # 实测块首之后 2 字节是「类型标记」(0x0068/0x006a/0x0022/0x0020)，不动
 ITEM_ITEMID_MIN = 0x00BB
 ITEM_ITEMID_MAX = 0x01E8
+# 允许写入的物品ID范围（比名称表宽）：名称表 0xBB-0x1E8 是游戏全部 302 件装备，
+# 且实测连续无空洞；这里再放宽到 0x0001-0x01FF，方便试表外 ID（会显示「未收录」）。
+# 0x0070 单独表示消耗品（种类存于词条槽0，不在这里枚举）。
+ITEM_ID_ALLOW_MIN = 0x0001
+ITEM_ID_ALLOW_MAX = 0x01FF
 
 # 消耗品槽：物品ID 固定 0x0070，真实种类和数量在下面两个字段
 CONSUMABLE_ID = 0x0070
@@ -102,6 +107,21 @@ BOX_SLOT_COUNT = 500
 # 占用判定：类型标记(+0x02) != 0x2000 即算占用（含未鉴定装备，其 iid 可能为 0）。
 # 实测 typ!=0x2000 的格数 = 343，与游戏界面「343/500」完全一致。
 BOX_EMPTY_TYPE = 0x2000
+
+# 物品头 +0x02 的类型标记（换物品时需同步，否则游戏不认这一格）
+ITEM_TYPE_BAG_WEAPON = 0x6800    # 行囊里的武器
+ITEM_TYPE_BAG_ARMOR = 0x6A00     # 行囊里的防具/饰品
+ITEM_TYPE_BOX_EQUIP = 0x2A00     # 道具箱里的装备
+ITEM_TYPE_CONSUMABLE = 0x2200    # 消耗品 / 道具
+ITEM_TYPE_EMPTY = 0x2000         # 空格
+
+# ---- 随身携带道具 / 快捷栏（DATA slot 末尾，18 格）---------------------
+# 起点 = slot*DATA_SLOT_STRIDE + 0xAF2D4，18 格 × 0x54，实测全部 iid=0x0070、
+# 类型标记 0x2200（消耗品），三个 DATA 结构完全一致（DATA1 满、DATA2 19格、DATA3 空）。
+# 边界依据：0xAF2D4 + 18*0x54 = 0xAF8BC，距 slot 末尾 0xAF8D4 只差 0x18；
+# 若按 20 格取，第 19/20 格起点 0xAF910 已跨入下一 DATA，会改坏别的位置，故只取 18 格。
+POUCH_OFFSET = 0xAF2D4
+POUCH_SLOT_COUNT = 18
 
 
 def box_used(data, o: int) -> bool:
@@ -147,6 +167,66 @@ def load_names(path: Path) -> dict[int, str]:
         except ValueError:
             pass
     return out
+
+
+# ---- 简繁归一化（词条表里简繁混排：既有「攻擊」也有「伤害」）-------------
+# 搜索/比对前把两边都折成简体，用户输简体或繁体都能命中。只收游戏词条用到的字。
+_T2S_PAIRS = (
+    "並并 亂乱 來来 個个 備备 傳传 傷伤 凍冻 擊击 創创 劍剑 効效 動动 喚唤 噴喷 圍围 場场 "
+    "夠够 審审 寶宝 將将 專专 對对 屬属 巻卷 幣币 帶带 幾几 強强 彈弹 弾弹 後后 從从 復复 "
+    "惡恶 態态 憑凭 懲惩 戰战 捲卷 換换 擋挡 擲掷 擺摆 敵敌 數数 於于 昇升 時时 暈晕 暫暂 "
+    "書书 會会 極极 標标 機机 殺杀 毀毁 氷冰 減减 滅灭 滿满 潰溃 瀕濒 灑洒 為为 無无 燒烧 "
+    "爲为 狀状 獄狱 獲获 獸兽 環环 產产 異异 當当 療疗 発发 發发 監监 確确 禦御 竜龙 範范 "
+    "紋纹 級级 結结 緩缓 縮缩 續续 膚肤 與与 藥药 蠻蛮 術术 衝冲 裏里 裝装 製制 視视 計计 "
+    "詛诅 詠咏 話话 認认 識识 護护 變变 讓让 貫贯 賦赋 質质 軸轴 輕轻 輪轮 轉转 迴回 這这 "
+    "連连 進进 邊边 釋释 銳锐 鋒锋 錘锤 錢钱 鐵铁 長长 閃闪 開开 閒闲 間间 隊队 隕陨 雲云 "
+    "電电 霧雾 靈灵 預预 頭头 頼赖 顆颗 題题 額额 風风 颶飓 飛飞 餘余 館馆 騎骑 骷骷 髏髅 "
+    "體体 鷹鹰 齒齿 龍龙 呪咒 聖圣 專专 傳传 傷伤 價价 儀仪 餘余 備备 養养 獸兽 減减 擊击 "
+    "彈弹 準准 濕湿 獨独 獎奖 現现 產产 畢毕 盡尽 確确 種种 積积 稱称 穩稳 窮穷 竪竖 競竞 "
+    "筆笔 簡简 範范 簽签 籃篮 糾纠 紀纪 約约 紅红 純纯 紙纸 素素 紫紫 細细 終终 組组 絕绝 "
+    "統统 絲丝 緊紧 練练 織织 繩绳 繼继 續续 罷罢 羅罗 義义 習习 聯联 聲声 聽听 肅肃 脅胁 "
+    "腦脑 膽胆 臉脸 臨临 舉举 舊旧 艱艰 節节 範范 築筑 簡简 簽签 籌筹 籃篮 類类 顧顾 願愿 "
+    "覺觉 觀观 規规 視视 親亲 戰战 鬥斗 魯鲁 鮮鲜 鳥鸟 鳳凤 鳴鸣 鴻鸿 鵰雕 麗丽 黃黄 黑黑 "
+    "黨党 齊齐 齒齿 龜龟 備备 傷伤 億亿 優优 儲储 兒儿 兩两 冊册 冪幂 劃划 勞劳 勢势 勳勋 "
+    "區区 協协 單单 嚴严 彈弹 徑径 從从 徹彻 恆恒 悅悦 慘惨 慶庆 憂忧 應应 懷怀 戀恋 戶户 "
+    "執执 掃扫 掛挂 採采 揀拣 損损 搖摇 擔担 據据 擬拟 擴扩 擺摆 敗败 斬斩 斷断 曆历 曉晓 "
+    "術术 條条 楊杨 槓杠 槍枪 樓楼 樣样 樹树 橋桥 檢检 檔档 欄栏 權权 歐欧 殘残 氣气 決决 "
+    "沒没 淚泪 淨净 涼凉 測测 湯汤 溝沟 滅灭 溫温 滄沧 滾滚 漁渔 漲涨 漸渐 漿浆 潔洁 潛潜 "
+    "潤润 潭潭 濃浓 濤涛 濫滥 濕湿 濟济 濱滨 濾滤 灘滩 點点 煉炼 煙烟 熱热 燈灯 營营 燦灿 "
+    "燭烛 爐炉 爭争 爺爷 牆墙 狀状 狹狭 獅狮 獎奖 獲获 獵猎 獻献 現现 環环 璽玺 瓊琼 畫画 "
+    "當当 療疗 瘋疯 瘡疮 癒愈 發发 盃杯 盜盗 盤盘 盪荡 睜睁 矚瞩 碼码 磚砖 礎础 禦御 稱称 "
+    "穀谷 窩窝 窮穷 竄窜 筆笔 筍笋 節节 範范 築筑 簡简 簽签 籌筹 籠笼 粵粤 糧粮 糾纠 紀纪 "
+    "紅红 純纯 紙纸 級级 素素 紫紫 細细 終终 組组 結结 絕绝 給给 統统 絲丝 經经 綠绿 維维 "
+    "網网 緊紧 緒绪 線线 練练 縛缚 縣县 縫缝 總总 織织 繩绳 繪绘 繼继 續续 罰罚 罷罢 義义 "
+    "習习 聯联 聲声 聰明 膽胆 臉脸 臨临 舉举 舊旧 艱艰 蘭兰 虎虎 處处 號号 蟲虫 蠻蛮 術术 "
+    "衝冲 補补 裝装 製制 複复 褲裤 襪袜 見见 規规 視视 親亲 覺觉 觀观 計计 訂订 認认 討讨 "
+    "訓训 記记 講讲 許许 論论 設设 訪访 証证 評评 試试 詩诗 話话 該该 詳详 誇夸 誌志 認认 "
+    "語语 誠诚 誤误 說说 誰谁 課课 調调 談谈 請请 諸诸 諾诺 謀谋 謂谓 謎谜 講讲 謝謝 證证 "
+    "識识 譜谱 警警 議议 護护 讀读 變变 讓让 讚赞 谷谷 豐丰 豬猪 貝贝 負负 財财 貢贡 貧贫 "
+    "貨货 販贩 貪贪 責责 貴贵 買买 貸贷 費费 貼贴 貿贸 費费 賀贺 貴贵 買买 賣卖 質质 賬账 "
+    "賭赌 購购 賺赚 賽赛 贊赞 贈赠 贊赞 赤赤 趙赵 足足 跌跌 跡迹 踐践 蹤踪 車车 軌轨 軍军 "
+    "軒轩 軟软 較较 載载 輔辅 輕轻 輛辆 輝辉 輩辈 輪轮 輯辑 輸输 轄辖 轉转 轟轰 辦办 農农 "
+    "迴回 迷迷 迸迸 逕径 連连 週周 進进 遊游 運运 過过 達达 違违 遙遥 遠远 遜逊 適适 選选 "
+    "遷迁 選选 遺遗 遼辽 邁迈 還还 邊边 邏逻 郵邮 鄉乡 鄰邻 醜丑 醫医 釀酿 釋释 里里 重重 "
+    "野野 量量 金金 針针 釘钉 釣钓 鈴铃 銀银 銅铜 銘铭 銷销 鋒锋 鋤锄 鋪铺 鋼钢 錄录 錘锤 "
+    "錢钱 錦锦 錫锡 錬炼 鍵键 鎖锁 鎧铠 鏈链 鏡镜 鐘钟 鐵铁 鑄铸 鑑鉴 鑰钥 镶镶 長长 門门 "
+    "閉闭 開开 閏闰 閑闲 間间 閱阅 闆板 關关 闘斗 阻阻 阿阿 附附 降降 限限 陛陛 院院 陣阵 "
+    "除除 陥陷 院院 陰阴 陳陈 陸陆 陽阳 隊队 階阶 隨随 險险 隱隐 隸隶 隻只 雅雅 集集 雜杂 "
+    "雞鸡 離离 難难 雨雨 雪雪 雲云 電电 需需 靜静 非非 靠靠 面面 靭韧 靴靴 靶靶 音音 頁页 "
+    "頂顶 項项 順顺 須须 預预 頌颂 領领 頭头 頸颈 頻频 顆颗 題题 顏颜 願愿 類类 顧顾 顯显 "
+    "風风 飛飞 食食 飯饭 飲饮 飽饱 餅饼 養养 餐餐 餘余 館馆 饅馒 首首 香香 馬马 駐驻 騎骑 "
+    "騰腾 驅驱 驗验 驚惊 骨骨 骯肮 體体 高高 髮发 鬥斗 魅魅 魔魔 魚鱼 鮮鲜 鳥鸟 鳳凤 鳴鸣 "
+    "鴻鸿 鵬鹏 鷹鹰 鹿鹿 麗丽 麥麦 黃黄 黎黎 黑黑 鼓鼓 鼠鼠 鼻鼻 齊齐 齒齿 龍龙 龜龟"
+)
+_T2S = {}
+for _pair in _T2S_PAIRS.split():
+    if len(_pair) == 2 and _pair[0] != _pair[1]:
+        _T2S[ord(_pair[0])] = _pair[1]
+
+
+def to_simple(text: str) -> str:
+    """繁体折成简体，用于搜索比对（词条表简繁混排）。"""
+    return text.translate(_T2S)
 
 
 def item_name(item_id: int, names: dict[int, str]) -> str:
@@ -203,15 +283,11 @@ def mod_param(data, o: int, idx: int) -> float:
 
 
 def mod_display(data, o: int, idx: int, zh: dict) -> str:
-    """词条显示文本：存档真实参数 + xlsx样本名（明确标注样本非实时值）。"""
+    """词条显示文本：直接给词条中文名（取不到就显示 ID，不当成空）。"""
     v = read_u16(data, o + MOD_OFFSETS[idx])
     if v == MOD_EMPTY:
         return ""
-    param = mod_param(data, o, idx)
-    sample = zh.get(v, "")
-    if sample:
-        return f"参数{param:g}  表样本:{sample}(数值以游戏为准)"
-    return f"参数{param:g}"
+    return zh.get(v) or f"（未收录词条 {v:#06x}）"
 
 
 def item_level(data, o: int) -> int:
@@ -232,11 +308,34 @@ def durability(data, o: int) -> tuple[float, float]:
             read_u32(data, o + F_DUR_MAX) / DUR_SCALE)
 
 
+_MOD_ZH_CACHE: dict[int, str] | None = None
+
+
+def mod_names_cached() -> dict[int, str]:
+    """中文词条表（带缓存，供消耗品名兜底用，避免每次重读 5000 行）。"""
+    global _MOD_ZH_CACHE
+    if _MOD_ZH_CACHE is None:
+        _MOD_ZH_CACHE = mod_names(zh=True)
+    return _MOD_ZH_CACHE
+
+
 def consumable_label(data, o: int, cons: dict[int, str] | None = None) -> str:
+    """消耗品显示名。
+
+    种类ID 和词条ID 共用一套编号：有实机核对过的物品名就用物品名（save_consumables.tsv），
+    否则退回词条表里的效果描述（如 0x19E -> 「免疫異常狀態，持續60秒」）。
+    词条表里那些「XX的」是前缀形容词，当物品名没意义，跳过。
+    """
     kind = consumable_kind(data, o)
     if cons is None:
         cons = consumable_names()
-    return cons.get(kind) or f"消耗品(种类{kind:#05x})"
+    name = cons.get(kind)
+    if name:
+        return name
+    eff = mod_names_cached().get(kind, "")
+    if eff and not eff.endswith("的"):
+        return eff
+    return f"消耗品(种类{kind:#05x})"
 
 
 def item_label(data, o: int, names: dict[int, str], cons=None) -> str:
@@ -313,6 +412,63 @@ def bag_offset(char_base: int, bag: int, slot_idx: int) -> int:
 def box_offset(slot: int, idx: int) -> int:
     """DATA slot 的通用道具箱第 idx 格绝对偏移。"""
     return slot * DATA_SLOT_STRIDE + BOX_OFFSET + idx * BAG_STRIDE
+
+
+def pouch_offset(slot: int, idx: int) -> int:
+    """DATA slot 的随身携带道具(快捷栏)第 idx 格绝对偏移，共 18 格。"""
+    return slot * DATA_SLOT_STRIDE + POUCH_OFFSET + idx * BAG_STRIDE
+
+
+def pouch_used(data, o: int) -> bool:
+    return read_u16(data, o + 0x02) != BOX_EMPTY_TYPE
+
+
+def search_mods(keyword: str, names: dict[int, str], limit: int = 80) -> list[tuple[int, str]]:
+    """按关键字模糊匹配词条：中文名包含关键字即命中，也支持十六进制 ID 片段。
+
+    例：搜「攻击」→ 所有名字里带「攻击/攻擊」的词条（自动简繁归一）；
+    搜「0021」→ 精确那条；空格分隔多个词时要求全部命中。
+    返回 [(ID, 名称)]，按 ID 升序，最多 limit 条。
+    """
+    raw = (keyword or "").strip()
+    if not raw:
+        return []
+    parts = [p for p in raw.split() if p]
+    hexes = []
+    words = []
+    for p in parts:
+        up = p.upper()
+        if all(c in "0123456789ABCDEF" for c in up) and len(up) >= 2:
+            hexes.append(up)
+        else:
+            words.append(to_simple(p.lower()))
+    hits = []
+    for k, name in names.items():
+        sid = f"{k:04X}"
+        nname = to_simple(name).lower()
+        if hexes and not all(h in sid for h in hexes):
+            continue
+        if words and not all(w in nname for w in words):
+            continue
+        if not hexes and not words:
+            continue
+        hits.append((k, name))
+    hits.sort(key=lambda x: x[0])
+    return hits[:limit]
+
+
+def search_items(keyword: str, names: dict[int, str], limit: int = 200) -> list[tuple[int, str]]:
+    """按关键字模糊匹配装备名（简繁归一），用于物品下拉的过滤。"""
+    raw = (keyword or "").strip().lower()
+    if not raw:
+        return []
+    kw = to_simple(raw)
+    hits = []
+    for k, name in names.items():
+        if kw in to_simple(name).lower() or raw in f"{k:04x}":
+            hits.append((k, name))
+    hits.sort(key=lambda x: x[0])
+    return hits[:limit]
 
 
 def is_skill_kind(kind: int) -> bool:
@@ -393,6 +549,21 @@ def cmd_list(args, data, names):
         print(f"  --- 通用道具箱（该存档所有角色共用，{len(box_items)}/{BOX_SLOT_COUNT} 格占用）---")
         for bi in range(0, len(box_items), 2):
             print("      " + "  ".join(box_items[bi:bi + 2]))
+        # 随身携带道具/快捷栏（18 格）
+        pouch_items = []
+        for pi in range(POUCH_SLOT_COUNT):
+            po = pouch_offset(slot, pi)
+            if not pouch_used(data, po):
+                continue
+            iid = read_u16(data, po)
+            if iid == CONSUMABLE_ID:
+                pouch_items.append(f"[{pi}] {consumable_label(data, po, cons)} x{consumable_qty(data, po)}")
+            else:
+                pouch_items.append(f"[{pi}] iid={iid:#06x} type={read_u16(data, po + 2):#06x}")
+        print(f"  --- 随身携带道具/快捷栏（{len(pouch_items)}/{POUCH_SLOT_COUNT} 格占用，@"
+              f"{pouch_offset(slot, 0):#x}）---")
+        for pi in range(0, len(pouch_items), 3):
+            print("      " + "  ".join(pouch_items[pi:pi + 3]))
         print()
 
 
@@ -413,8 +584,9 @@ def atomic_write(path: Path, data: bytes, backup: bool = True):
 def cmd_set_item(args, data, names):
     o = bag_offset(char_offset(args.slot, args.char), args.bag, args.slot_idx)
     old = read_u16(data, o)
-    if args.id != CONSUMABLE_ID and not (ITEM_ITEMID_MIN <= args.id <= ITEM_ITEMID_MAX):
-        raise SystemExit(f"物品ID {args.id:#x} 超出装备范围 {ITEM_ITEMID_MIN:#x}-{ITEM_ITEMID_MAX:#x}")
+    if args.id != CONSUMABLE_ID and not (ITEM_ID_ALLOW_MIN <= args.id <= ITEM_ID_ALLOW_MAX):
+        raise SystemExit(f"物品ID {args.id:#x} 超出可写范围 "
+                         f"{ITEM_ID_ALLOW_MIN:#x}-{ITEM_ID_ALLOW_MAX:#x}（或 0x70 消耗品）")
     print(f"改装备: DATA{args.slot+1} 角色{args.char} {BAG_NAMES[args.bag]}[{args.slot_idx}] @{o:#x}")
     print(f"  {old:#05x} {item_name(old, names)}  ->  {args.id:#05x} {item_name(args.id, names)}")
     buf = bytearray(data)
@@ -461,8 +633,8 @@ def cmd_set_box(args, data, names):
     buf = bytearray(data)
 
     if args.item is not None:
-        if not (ITEM_ITEMID_MIN <= args.item <= ITEM_ITEMID_MAX) and args.item != CONSUMABLE_ID:
-            raise SystemExit(f"物品ID {args.item:#x} 超出装备范围")
+        if not (ITEM_ID_ALLOW_MIN <= args.item <= ITEM_ID_ALLOW_MAX) and args.item != CONSUMABLE_ID:
+            raise SystemExit(f"物品ID {args.item:#x} 超出可写范围")
         if iid == CONSUMABLE_ID and args.item != CONSUMABLE_ID:
             # 从消耗品换成装备：类型标记 0x2200 -> 0x2A00
             write_u16(buf, o + 0x02, 0x2A00)
@@ -612,6 +784,56 @@ def cmd_set_gold(args, data, names):
     return 0
 
 
+def cmd_set_pouch(args, data, names):
+    """改随身携带道具(快捷栏)某格。这块 18 格实测全是消耗品。"""
+    if not (0 <= args.index < POUCH_SLOT_COUNT):
+        raise SystemExit(f"快捷栏格号必须是 0-{POUCH_SLOT_COUNT - 1}")
+    if args.kind is None and args.qty is None:
+        raise SystemExit("至少给一个修改参数（--kind / --qty）")
+    o = pouch_offset(args.slot, args.index)
+    iid = read_u16(data, o)
+    buf = bytearray(data)
+    if args.kind is not None:
+        if iid != CONSUMABLE_ID:
+            # 空格/其他类型改成消耗品：补上物品ID与类型标记
+            write_u16(buf, o, CONSUMABLE_ID)
+            write_u16(buf, o + 0x02, 0x2200)
+            print(f"  该格原为 {iid:#06x}，已补成消耗品格（iid=0x70, 类型=0x2200）")
+            iid = CONSUMABLE_ID
+        mo = o + MOD_OFFSETS[0]
+        print(f"改快捷栏种类: DATA{args.slot+1} [{args.index}] @{mo:#x}  "
+              f"{read_u16(data, mo):#06x} -> {args.kind:#06x}")
+        write_u16(buf, mo, args.kind)
+    if args.qty is not None:
+        if not (0 <= args.qty <= 255):
+            raise SystemExit("数量必须在 0-255")
+        qo = o + QTY_OFFSET
+        print(f"改快捷栏数量: DATA{args.slot+1} [{args.index}] @{qo:#x}  "
+              f"{read_u16(data, qo) & 0xFF} -> {args.qty}")
+        write_u16(buf, qo, (read_u16(data, qo) & 0xFF00) | args.qty)
+    seal(buf)
+    if args.dry_run:
+        out = Path(args.out) if args.out else Path("SAVE0.modified.DAT")
+        out.write_bytes(buf)
+        print(f"[演练] 已写出到 {out}（原存档未动）")
+    else:
+        atomic_write(args.save, bytes(buf), backup=not args.no_backup)
+    return 0
+
+
+def cmd_search_mod(args, data, names):
+    """按关键字模糊搜索词条 ID，列出 ID + 中文名（方便手填词条时查号）。"""
+    zh = mod_names(zh=True)
+    hits = search_mods(args.keyword, zh, limit=args.limit)
+    if not hits:
+        print(f"没有匹配「{args.keyword}」的词条。")
+        return 0
+    print(f"匹配「{args.keyword}」共 {len(hits)} 条（按ID升序，最多 {args.limit} 条）：")
+    for k, n in hits:
+        print(f"  {k:04X}  {n}")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser(description="龙之皇冠 Pro PC 存档编辑器 (SAVE0.DAT)")
     ap.add_argument("--save", default=str(DEFAULT_SAVE), help="存档路径")
@@ -692,7 +914,25 @@ def main():
     p.add_argument("--no-backup", action="store_true")
     p.set_defaults(func=cmd_set_box)
 
+    p = sub.add_parser("set-pouch", help=f"改随身携带道具/快捷栏某格（0-{POUCH_SLOT_COUNT-1}）")
+    p.add_argument("--slot", type=int, required=True, help="DATA slot 0-2")
+    p.add_argument("--index", type=int, required=True, help=f"格号 0-{POUCH_SLOT_COUNT-1}")
+    p.add_argument("--kind", type=lambda s: int(s, 0), help="消耗品种类ID, 如 0x190")
+    p.add_argument("--qty", type=int, help="数量 0-255")
+    p.add_argument("--out")
+    p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--no-backup", action="store_true")
+    p.set_defaults(func=cmd_set_pouch)
+
+    p = sub.add_parser("search-mod", help="按关键字模糊查词条ID（如 攻击 / 幸运 / 0021）")
+    p.add_argument("keyword", help="关键字，支持中文或十六进制ID片段")
+    p.add_argument("--limit", type=int, default=80, help="最多列出多少条，默认 80")
+    p.set_defaults(func=cmd_search_mod)
+
     args = ap.parse_args()
+    if args.cmd == "search-mod":
+        # 纯查表命令，不依赖存档
+        return args.func(args, None, load_names(ITEMS_TSV)) or 0
     save = Path(args.save)
     if not save.exists():
         raise SystemExit(f"找不到存档: {save}")
