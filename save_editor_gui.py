@@ -821,7 +821,8 @@ class App:
                 q = self.effective_u16(o + se.QTY_OFFSET) & 0xFF
                 tag = "[技能]" if se.is_skill_kind(kind) else (
                     f"[{se.prop_section(kind)}]" if se.prop_section(kind) else "")
-                name = f"{tag}{se.consumable_label(self.data, o, self.cons)} x{q}"
+                name = (f"{tag}{se.consumable_label(self.data, o, self.cons)}"
+                        f"{se.consumable_qty_text(self.data, o)}")
             elif 0xBB <= iid <= 0x1E8:
                 ms = se.active_mods(self.data, o)
                 name = f"{se.grade(len(ms))}级 {se.item_name(iid, self.names)} " \
@@ -1074,7 +1075,8 @@ class App:
                 q = self.effective_u16(o + se.QTY_OFFSET) & 0xFF
                 sec = se.prop_section(kind)
                 tag = "[技能]" if se.is_skill_kind(kind) else (f"[{sec}]" if sec else "")
-                name = f"{tag}{se.consumable_label(self.data, o, self.cons)} x{q}"
+                name = (f"{tag}{se.consumable_label(self.data, o, self.cons)}"
+                        f"{se.consumable_qty_text(self.data, o)}")
             else:
                 name = f"iid={iid:#06x} type={se.read_u16(self.data, o + 2):#06x}"
             row = ttk.Frame(self.detail_inner)

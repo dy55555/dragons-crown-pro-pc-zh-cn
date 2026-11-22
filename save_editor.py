@@ -89,10 +89,13 @@ CONSUMABLE_ID = 0x0070     # 基础物品ID：代表"一个可堆叠道具"
 QTY_OFFSET = 0x0C          # u16 低字节 = 数量（实测 x20/x8/x4/x7 全部吻合）
 KIND_OFFSET = 0x00         # 仅作说明用：种类不在这里，在词条槽0
 # 道具效果ID 段位（供界面显示"这是戒指还是药水"）
-PROP_EFFECT_RING = (0x017F, 0x018D)    # 戒指：火/冰/雷/毒/治疗 各三档
-PROP_EFFECT_SCROLL = (0x0190, 0x0194)  # 卷轴
-PROP_EFFECT_POTION = (0x019C, 0x01B4)  # 药水：每类三档
-PROP_EFFECT_SKILL_MIN = 0x01D1         # 技能道具起点
+# 依据：游戏文本表 CustomItem 顺序 = 效果ID + 0x749，逐条核对得来。
+PROP_EFFECT_RING = (0x017F, 0x018D)     # 戒指：火/冰/雷/毒/治疗 各三档
+PROP_EFFECT_SCROLL = (0x0190, 0x0194)   # 卷轴
+PROP_EFFECT_POTION = (0x0197, 0x01B4)   # 药水：治愈/万能药/抗性/活力/强效/防御/坚毅/食人魔/幸运/炸药
+PROP_EFFECT_RUNESTONE = (0x01B6, 0x01CF)  # 符文石 A–Z
+PROP_EFFECT_SKILL = (0x01D1, 0x01F8)    # 技能道具：各职业技能 + 法术
+PROP_EFFECT_SPECIAL = ((0x01FA, 0x01FB), (0x0209, 0x020A))  # 特殊/任务道具（两小段）
 # 附加字段（前缀/词条）实际位于物品ID往前 0x40 处，共 8 个 8 字节槽。
 # 旧版误读成物品ID往后 0x14，正好读到下一件装备的附加字段，才会两件都显示 5 条。
 MOD_BASE_SHIFT = 0x40
@@ -111,12 +114,18 @@ GRADES = "EDCBAS"
 
 # ---- 通用道具箱（每个 DATA slot 一套，该 slot 内所有角色共用）-----------
 # 起点 = slot*DATA_SLOT_STRIDE + 0xAD8（DATA1 实测 0xAD8，DATA2=0xB03AC，DATA3=0x15FC80）
-# 500 格 × 0x54，结构与行囊装备完全相同：物品ID在槽首+0x00、词条在 -0x40、
+# 466 格 × 0x54（见 BOX_SLOT_COUNT 注释），结构与行囊装备完全相同：物品ID在槽首+0x00、词条在 -0x40、
 # 类型标记 +0x02 = 0x2A00(箱中装备)/0x2200(消耗品)/0x2800(法杖)/0x2000(空格)。
 # 游戏界面显示 343/500：装备按件计、消耗品种类按堆叠计。
 # 注意：之前误当成道具箱的 0xAF2D4 起 20 格其实是「随身携带道具/快捷栏」，不是仓库。
 BOX_OFFSET = 0xAD8
-BOX_SLOT_COUNT = 500
+# 格数由下面的硬边界决定，不能按游戏界面显示的「500」取：
+#   道具箱区 = 0xAD8 起，角色记录从 0xA400 开始，
+#   (0xA400 - 0xAD8) // 0x54 = 466，所以只有 466 格（索引 0..465）。
+# 按 500 格算，第 467 格起点 0xA414 已经进角色记录，第 473 格会读到角色名的
+# 中间字节（读出 iid=0x696C，其实就是 "li"）。写这种格子会改坏角色数据。
+BOX_SLOT_COUNT = 466
+BOX_SLOT_COUNT_UI = 500   # 游戏界面显示的上限，仅用于提示，不参与寻址
 # 占用判定：类型标记(+0x02) != 0x2000 即算占用（含未鉴定装备，其 iid 可能为 0）。
 # 实测 typ!=0x2000 的格数 = 343，与游戏界面「343/500」完全一致。
 BOX_EMPTY_TYPE = 0x2000
@@ -146,9 +155,8 @@ def box_used(data, o: int) -> bool:
 SKILL_FIRST_EFFECT = 0x1D1
 SKILL_EFFECT_COUNT = 0x28
 SKILL_EFFECT_MASK = 0xE362E5F7FF
-# 掩码只有 40 位（0x1D1–0x1F8），实测 0x1FB「亚马逊仪式护甲」同样是技能，
-# 落在掩码范围外一位，单独补进来。
-SKILL_EXTRA = frozenset({0x01FB})
+# 掩码覆盖 0x1D1–0x1F8 共 40 位，实测这一段全部是技能/法术道具，无需补漏。
+# 注意 0x1FA（魔眼灵魂捕捉瓮）和 0x1FB（亚马逊仪式护甲）是任务道具，不在技能段。
 
 # ---- 人物状态候选字段（只读；上游无静态存档定义，未标定，禁止写入）------
 # 职业+等级由游戏查表重算属性(write_stats)，SAVE0.DAT 内没有独立的 STR/VIT/INT/LUC 字段。
@@ -286,16 +294,27 @@ def consumable_kind(data, o: int) -> int:
     return read_u16(data, o + MOD_OFFSETS[0])
 
 
+def consumable_qty_text(data, o: int) -> str:
+    """数量后缀。0xFF 表示「不可堆叠/不适用」（任务道具就存这个值），不显示数量。"""
+    q = consumable_qty(data, o)
+    return "" if q == 0xFF else f" x{q}"
+
+
 def prop_section(kind: int) -> str:
-    """效果ID 落在哪一段，用于界面提示「戒指/卷轴/药水/技能」。"""
+    """效果ID 落在哪一段，用于界面提示「戒指/卷轴/药水/符文石/技能/特殊」。"""
     if PROP_EFFECT_RING[0] <= kind <= PROP_EFFECT_RING[1]:
         return "戒指"
     if PROP_EFFECT_SCROLL[0] <= kind <= PROP_EFFECT_SCROLL[1]:
         return "卷轴"
     if PROP_EFFECT_POTION[0] <= kind <= PROP_EFFECT_POTION[1]:
         return "药水"
-    if kind >= PROP_EFFECT_SKILL_MIN:
+    if PROP_EFFECT_RUNESTONE[0] <= kind <= PROP_EFFECT_RUNESTONE[1]:
+        return "符文石"
+    if PROP_EFFECT_SKILL[0] <= kind <= PROP_EFFECT_SKILL[1]:
         return "技能"
+    for lo, hi in PROP_EFFECT_SPECIAL:
+        if lo <= kind <= hi:
+            return "特殊"
     return ""
 
 
@@ -384,7 +403,7 @@ def item_label(data, o: int, names: dict[int, str], cons=None) -> str:
     if iid == CONSUMABLE_ID:
         q = consumable_qty(data, o)
         base = consumable_label(data, o, cons)
-        return base if q == 0xFF else f"{base} x{q}"
+        return base + ("" if q == 0xFF else f" x{q}")
     return item_name(iid, names) or ("" if iid == 0 else "?")
 
 
@@ -513,9 +532,7 @@ def search_items(keyword: str, names: dict[int, str], limit: int = 200) -> list[
 
 
 def is_skill_kind(kind: int) -> bool:
-    """效果ID是否为技能道具（上游 IsSkillItem 的判定核心 + 实测补漏）。"""
-    if kind in SKILL_EXTRA:
-        return True
+    """效果ID是否为技能道具（上游 IsSkillItem 的判定核心）。"""
     index = kind - SKILL_FIRST_EFFECT
     return 0 <= index < SKILL_EFFECT_COUNT and ((SKILL_EFFECT_MASK >> index) & 1) != 0
 
@@ -580,7 +597,8 @@ def cmd_list(args, data, names):
             if iid == CONSUMABLE_ID:
                 kind = consumable_kind(data, bo)
                 tag = "[技能]" if is_skill_kind(kind) else ""
-                box_items.append(f"[{bi}]{tag} {consumable_label(data, bo, cons)} x{consumable_qty(data, bo)}")
+                box_items.append(f"[{bi}]{tag} {consumable_label(data, bo, cons)}"
+                                 f"{consumable_qty_text(data, bo)}")
             elif 0xBB <= iid <= 0x1E8:
                 ms = active_mods(data, bo)
                 lo, hi = item_atk(data, bo)
@@ -600,7 +618,8 @@ def cmd_list(args, data, names):
                 continue
             iid = read_u16(data, po)
             if iid == CONSUMABLE_ID:
-                pouch_items.append(f"[{pi}] {consumable_label(data, po, cons)} x{consumable_qty(data, po)}")
+                pouch_items.append(f"[{pi}] {consumable_label(data, po, cons)}"
+                                  f"{consumable_qty_text(data, po)}")
             else:
                 pouch_items.append(f"[{pi}] iid={iid:#06x} type={read_u16(data, po + 2):#06x}")
         print(f"  --- 随身携带道具/快捷栏（{len(pouch_items)}/{POUCH_SLOT_COUNT} 格占用，@"
