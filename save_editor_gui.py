@@ -277,6 +277,7 @@ class App:
         """清空详情面板并渲染；记住重绘函数与对应节点，供「还原」后刷新。"""
         self._rendered_tag = tag
         self._view_fn = fn
+        self._hit_closer = None      # 旧面板的候选框全部作废，别再引用
         pos = 0.0
         if not to_top:
             try:
@@ -372,9 +373,16 @@ class App:
         hits_box = ttk.Frame(host)
 
         def close_hits():
-            for w in hits_box.winfo_children():
-                w.destroy()
-            hits_box.pack_forget()
+            # 面板重绘后 hits_box 可能已被销毁，这里必须容错：
+            # 一旦抛 TclError，trace 回调就断了，之后所有格子都不再出候选。
+            if getattr(self, "_hit_closer", None) is close_hits:
+                self._hit_closer = None
+            try:
+                for w in hits_box.winfo_children():
+                    w.destroy()
+                hits_box.pack_forget()
+            except tk.TclError:
+                pass
 
         def sync_name(*_):
             t = var.get().strip()
@@ -400,12 +408,10 @@ class App:
             other = getattr(self, "_hit_closer", None)
             if other and other is not close_hits:
                 other()
-            for w in hits_box.winfo_children():
-                w.destroy()
+            close_hits()                  # 清掉自己上一次的内容（已容错）
             hits = se.search_mods(kw, self.mods, limit=40)
             if not hits:
                 nametext.set("（没有匹配的词条）")
-                hits_box.pack_forget()
                 return
             box = tk.Frame(hits_box, bd=1, relief="solid")
             box.pack(fill="x")
@@ -541,6 +547,10 @@ class App:
         ttk.Entry(srow, textvariable=mvar, width=8).pack(side="left", padx=4)
 
         ibox = ttk.Frame(self.detail_inner)
+        hitlab = ttk.Label(ibox, foreground="#888")
+        hitlab.pack(anchor="w")
+        iresults = ttk.Frame(ibox)     # 结果行都挂这里，close 时只清它
+        iresults.pack(fill="x")
 
         def set_item(nv):
             """换物品：写物品ID，必要时同步类型标记，然后原地重绘。"""
@@ -549,32 +559,54 @@ class App:
             self.refresh_tree()
             self.update_changes()
             self.rerender()
+            self.status.config(
+                text=f"已暂存：这格换成 {nv:#06x} {self.names.get(nv, '')}，点【保存改动】才写入")
 
         def close_ibox():
-            for w in ibox.winfo_children():
-                w.destroy()
-            ibox.pack_forget()
+            # 只清结果行，保留 hitlab——它要留着显示下一次的提示文字。
+            # 若连 hitlab 一起销毁，后面 hitlab.config() 会抛 TclError，整个搜索就失效了。
+            try:
+                for w in iresults.winfo_children():
+                    w.destroy()
+                ibox.pack_forget()
+            except tk.TclError:
+                pass
 
         def do_item_search(_e=None):
             kw = svar.get().strip()
-            close_ibox()
-            if not kw:
-                return
-            hits = se.search_items(kw, self.names, limit=60)
-            if not hits:
-                hitlab.config(text=f"没有名字匹配「{kw}」的装备")
-                ibox.pack(anchor="w", fill="x", pady=(2, 4))
-                return
-            hitlab.config(text=f"匹配 {len(hits)} 件 · 单击即换成该装备")
-            ibox.pack(anchor="w", fill="x", pady=(2, 4))
-            for k, n in hits:
-                r = ttk.Frame(ibox)
-                r.pack(fill="x")
-                ttk.Button(r, text=f"{k:04X}  {n}", anchor="w",
-                           command=lambda kk=k: set_item(kk)).pack(side="left", fill="x", expand=True)
+            try:
+                close_ibox()
+                if not kw:
+                    return
+                hits = se.search_items(kw, self.names, limit=60)
+                if not hits:
+                    hitlab.config(text=f"没有名字匹配「{kw}」的装备")
+                else:
+                    hitlab.config(text=f"匹配 {len(hits)} 件 · 单击即换成该装备")
+                    # 固定高度 + 滚动条，别让几十个结果把整个面板撑爆
+                    lb = tk.Listbox(iresults, height=min(9, len(hits)), width=36,
+                                    font=("Consolas", 10), exportselection=False)
+                    for k, n in hits:
+                        lb.insert("end", f" {k:04X}   {n}")
+                    lb.pack(side="left", fill="both", expand=True)
+                    sb = ttk.Scrollbar(iresults, orient="vertical", command=lb.yview)
+                    sb.pack(side="right", fill="y")
+                    lb.configure(yscrollcommand=sb.set)
 
-        hitlab = ttk.Label(ibox, foreground="#888")
-        hitlab.pack(anchor="w")
+                    def on_pick(_e=None):
+                        cs = lb.curselection()
+                        if cs:
+                            set_item(hits[cs[0]][0])
+
+                    lb.bind("<<ListboxSelect>>", on_pick)
+                # after=srow：让它出现在搜索框正下方，而不是面板末尾（那会滚出可视区）
+                ibox.pack(anchor="w", fill="x", pady=(2, 4), after=srow)
+                self._on_detail_configure()
+                self._scroll_to(ibox)
+            except tk.TclError as e:
+                # 不静默吞掉，否则界面看着像"点了没反应"
+                self.status.config(text=f"搜装备出错: {e}")
+
         sent.bind("<Return>", do_item_search)
         ttk.Button(srow, text="查", width=4, command=do_item_search).pack(side="left")
 
