@@ -419,19 +419,34 @@ class App:
                        "受已有技能加点上限约束，随意改写会冲突，因此只读取显示、不提供修改。",
                   foreground="#666", wraplength=740, justify="left").pack(anchor="w")
 
-    def show_box(self, slot):
-        """通用道具箱：该 DATA slot 内所有角色共用，500 格，装备+消耗品+未鉴定。"""
+    BOX_PAGE_SIZE = 40   # 道具箱每页显示条数
+
+    def show_box(self, slot, page=None):
+        """通用道具箱：500 格，装备+消耗品+未鉴定。分页显示，可翻页。"""
+        for w in list(self.detail_inner.winfo_children()):
+            w.destroy()
         used = [bi for bi in range(se.BOX_SLOT_COUNT)
                 if se.box_used(self.data, se.box_offset(slot, bi))]
+        total_pages = max(1, (len(used) + self.BOX_PAGE_SIZE - 1) // self.BOX_PAGE_SIZE)
+        if page is None:
+            page = getattr(self, "_box_page", 0)
+        page = max(0, min(page, total_pages - 1))
+        self._box_page = page      # 记住当前页，编辑后返回用
+        self._box_slot = slot
+
         ttk.Label(self.detail_inner,
                   text=f"DATA {slot+1} / 通用道具箱 —— 该存档所有角色共用"
                        f"（{len(used)}/{se.BOX_SLOT_COUNT} 格占用）",
                   font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 6))
         ttk.Label(self.detail_inner,
-                  text="占用判定 = 类型标记(+0x02)≠0x2000，未鉴定装备也算（其物品ID可能为0）。"
-                       "点【编辑】改该格；装备可改物品ID/词条/等级/攻击/耐久，消耗品改种类/数量。",
-                  foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(0, 10))
-        for bi in used:
+                  text="占用判定 = 类型标记(+0x02)≠0x2000，未鉴定装备也算。"
+                       "点【编辑】改该格，编辑完点【← 返回道具箱】回到此列表。",
+                  foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(0, 8))
+
+        # 本页条目
+        start = page * self.BOX_PAGE_SIZE
+        page_items = used[start:start + self.BOX_PAGE_SIZE]
+        for bi in page_items:
             o = se.box_offset(slot, bi)
             iid = self.effective_u16(o)
             typ = se.read_u16(self.data, o + 2)
@@ -451,12 +466,40 @@ class App:
             ttk.Label(row, text=f"[{bi:3}] @{o:#x}  {name}", width=58).pack(side="left")
             ttk.Button(row, text="编辑", command=lambda b=bi: self.select_box_item(slot, b)).pack(side="left")
 
+        # 翻页控件
+        nav = ttk.Frame(self.detail_inner)
+        nav.pack(anchor="w", pady=(10, 2), fill="x")
+        ttk.Button(nav, text="« 首页", command=lambda: self.show_box(slot, 0)).pack(side="left", padx=2)
+        ttk.Button(nav, text="‹ 上一页", command=lambda: self.show_box(slot, page - 1)).pack(side="left", padx=2)
+        ttk.Label(nav, text=f"  第 {page + 1} / {total_pages} 页  "
+                            f"(第 {start + 1}-{start + len(page_items)} 条)  ",
+                  foreground="#333").pack(side="left", padx=6)
+        ttk.Button(nav, text="下一页 ›", command=lambda: self.show_box(slot, page + 1)).pack(side="left", padx=2)
+        ttk.Button(nav, text="末页 »", command=lambda: self.show_box(slot, total_pages - 1)).pack(side="left", padx=2)
+        # 直接跳页
+        ttk.Label(nav, text="跳至:", foreground="#888").pack(side="left", padx=(12, 2))
+        jump = tk.StringVar(value=str(page + 1))
+        jent = ttk.Entry(nav, textvariable=jump, width=5)
+        jent.pack(side="left")
+        def do_jump():
+            try:
+                self.show_box(slot, int(jump.get()) - 1)
+            except ValueError:
+                pass
+        jent.bind("<Return>", lambda _e: do_jump())
+        ttk.Button(nav, text="转到", command=do_jump).pack(side="left", padx=2)
+
     def select_box_item(self, slot, bi):
         """选中道具箱某格，用统一详情面板编辑（复用 show_item 的装备/消耗品逻辑）。"""
         o = se.box_offset(slot, bi)
         self._box_mode = (slot, bi)
         for w in list(self.detail_inner.winfo_children()):
             w.destroy()
+        # 返回上一级：回到道具箱列表并停在原页
+        back = ttk.Frame(self.detail_inner)
+        back.pack(anchor="w", pady=(0, 6), fill="x")
+        ttk.Button(back, text="← 返回道具箱列表",
+                   command=lambda: self.show_box(slot, getattr(self, "_box_page", 0))).pack(side="left")
         iid = self.effective_u16(o)
         if iid == se.CONSUMABLE_ID:
             self._render_item_editor(o, consumable=True)
