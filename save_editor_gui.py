@@ -140,7 +140,7 @@ class App:
                         self.node_tag[inode] = ("item", slot, ci, bag, si)
             # 通用道具箱节点（该 DATA slot 所有角色共用）
             boxcnt = sum(1 for bi in range(se.BOX_SLOT_COUNT)
-                         if self.effective_u16(se.box_offset(slot, bi)) == se.CONSUMABLE_ID)
+                         if se.box_used(self.data, se.box_offset(slot, bi)))
             xnode = self.tree.insert(snode, "end",
                                      text=f"  [通用道具箱]  {boxcnt}/{se.BOX_SLOT_COUNT}格（所有角色共用）")
             self.node_tag[xnode] = ("box", slot)
@@ -420,49 +420,135 @@ class App:
                   foreground="#666", wraplength=740, justify="left").pack(anchor="w")
 
     def show_box(self, slot):
-        """通用道具箱：该 DATA slot 内所有角色共用，20 格。"""
+        """通用道具箱：该 DATA slot 内所有角色共用，500 格，装备+消耗品+未鉴定。"""
+        used = [bi for bi in range(se.BOX_SLOT_COUNT)
+                if se.box_used(self.data, se.box_offset(slot, bi))]
         ttk.Label(self.detail_inner,
-                  text=f"DATA {slot+1} / 通用道具箱 —— 该存档所有角色共用（{se.BOX_SLOT_COUNT} 格）",
+                  text=f"DATA {slot+1} / 通用道具箱 —— 该存档所有角色共用"
+                       f"（{len(used)}/{se.BOX_SLOT_COUNT} 格占用）",
                   font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 6))
         ttk.Label(self.detail_inner,
-                  text="种类由词条槽1决定；数量是 +0x0C 低字节。[技能] 标记的是技能道具，"
-                       "受技能点上限约束，此处不改。",
-                  foreground="#666", wraplength=740, justify="left").pack(anchor="w", pady=(0, 10))
-        for bi in range(se.BOX_SLOT_COUNT):
+                  text="占用判定 = 类型标记(+0x02)≠0x2000，未鉴定装备也算（其物品ID可能为0）。"
+                       "点【编辑】改该格；装备可改物品ID/词条/等级/攻击/耐久，消耗品改种类/数量。",
+                  foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(0, 10))
+        for bi in used:
             o = se.box_offset(slot, bi)
             iid = self.effective_u16(o)
-            if iid != se.CONSUMABLE_ID:
-                continue
+            typ = se.read_u16(self.data, o + 2)
+            if iid == se.CONSUMABLE_ID:
+                kind = se.consumable_kind(self.data, o)
+                q = self.effective_u16(o + se.QTY_OFFSET) & 0xFF
+                tag = "[技能]" if se.is_skill_kind(kind) else ""
+                name = f"{tag}{self.cons.get(kind, f'种类{kind:#06x}')} x{q}"
+            elif 0xBB <= iid <= 0x1E8:
+                ms = se.active_mods(self.data, o)
+                name = f"{se.grade(len(ms))}级 {se.item_name(iid, self.names)} " \
+                       f"LV{se.item_level(self.data, o)}"
+            else:
+                name = f"未鉴定? iid={iid:#06x} type={typ:#06x}"
+            row = ttk.Frame(self.detail_inner)
+            row.pack(anchor="w", pady=1, fill="x")
+            ttk.Label(row, text=f"[{bi:3}] @{o:#x}  {name}", width=58).pack(side="left")
+            ttk.Button(row, text="编辑", command=lambda b=bi: self.select_box_item(slot, b)).pack(side="left")
+
+    def select_box_item(self, slot, bi):
+        """选中道具箱某格，用统一详情面板编辑（复用 show_item 的装备/消耗品逻辑）。"""
+        o = se.box_offset(slot, bi)
+        self._box_mode = (slot, bi)
+        for w in list(self.detail_inner.winfo_children()):
+            w.destroy()
+        iid = self.effective_u16(o)
+        if iid == se.CONSUMABLE_ID:
+            self._render_item_editor(o, consumable=True)
+        elif 0xBB <= iid <= 0x1E8:
+            self._render_item_editor(o, consumable=False)
+        else:
+            ttk.Label(self.detail_inner,
+                      text=f"道具箱[{bi}] 未鉴定/异常装备  @{o:#x}",
+                      font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 8))
+            ttk.Label(self.detail_inner,
+                      text=f"物品ID={iid:#06x}  类型标记={se.read_u16(self.data, o+2):#06x}。"
+                           "此类格子数据未标定，建议不要在界面改；如需处理请用命令行 set-box。",
+                      foreground="#666", wraplength=760, justify="left").pack(anchor="w")
+
+    def _render_item_editor(self, o, consumable):
+        """道具箱格子的装备/消耗品编辑器（与行囊 show_item 相同的字段）。"""
+        iid = self.effective_u16(o)
+        ttk.Label(self.detail_inner, text=f"道具箱格 @{o:#x}",
+                  font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 8))
+        if consumable:
             kind = se.consumable_kind(self.data, o)
             q = self.effective_u16(o + se.QTY_OFFSET) & 0xFF
-            qo = o + se.QTY_OFFSET
-            mo = o + se.MOD_OFFSETS[0]
-            skill = "[技能] " if se.is_skill_kind(kind) else ""
+            ttk.Label(self.detail_inner,
+                      text=f"消耗品：{self.cons.get(kind, f'种类{kind:#06x}')}  "
+                           f"种类ID {kind:#06x}  数量 {q}",
+                      font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(6, 4))
             row = ttk.Frame(self.detail_inner)
-            row.pack(anchor="w", pady=2, fill="x")
-            name = self.cons.get(kind) or f"种类{kind:#06x}"
-            ttk.Label(row, text=f"[{bi}] {skill}{name}", width=32).pack(side="left")
-            qvar = tk.StringVar(value=str(q))
-            ttk.Entry(row, textvariable=qvar, width=6).pack(side="left")
-            ttk.Label(row, text=f"数量 @{qo:#x}", foreground="#888").pack(side="left", padx=4)
-
-            def apply_qty(_e=None, qo=qo, qvar=qvar, row=row):
+            row.pack(anchor="w", pady=4)
+            ttk.Label(row, text="数量(0-255)", width=14).pack(side="left")
+            qv = tk.StringVar(value=str(q))
+            ttk.Entry(row, textvariable=qv, width=8).pack(side="left")
+            def apply_q():
                 try:
-                    v = int(qvar.get())
+                    v = int(qv.get())
                 except ValueError:
                     return
-                if not (0 <= v <= 255):
-                    messagebox.showwarning("超出范围", "数量必须在 0-255")
-                    return
-                old = se.read_u16(self.data, qo) & 0xFF00
-                self.edits[qo] = (old | v, 2)
-                self.refresh_tree()
-                self.update_changes()
-            if not se.is_skill_kind(kind):
-                ttk.Button(row, text="应用", command=apply_qty).pack(side="left", padx=4)
-            else:
-                ttk.Label(row, text="(技能-只读)", foreground="#999").pack(side="left", padx=4)
-            ttk.Label(row, text=f"种类@{mo:#x}={kind:#06x}", foreground="#aaa").pack(side="left", padx=6)
+                if 0 <= v <= 255:
+                    self.edits[o + se.QTY_OFFSET] = ((se.read_u16(self.data, o+se.QTY_OFFSET) & 0xFF00) | v, 2)
+                    self.update_changes()
+                    messagebox.showinfo("已暂存", "数量已暂存，点底部【保存改动】写入。")
+            ttk.Button(row, text="应用", command=apply_q).pack(side="left", padx=4)
+        else:
+            ms = se.active_mods(self.data, o)
+            lo, hi = se.item_atk(self.data, o)
+            dcur, dmax = se.durability(self.data, o)
+            ttk.Label(self.detail_inner,
+                      text=f"{se.grade(len(ms))}级 {se.item_name(iid, self.names)}  "
+                           f"LV{se.item_level(self.data,o)}  "
+                           f"ATK {lo}-{hi}  耐久 {int(dcur)}/{int(dmax)}",
+                      font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(8, 2))
+            def numf(label, off, width, get, store, note=""):
+                row = ttk.Frame(self.detail_inner)
+                row.pack(anchor="w", pady=2, fill="x")
+                ttk.Label(row, text=label, width=14).pack(side="left")
+                var = tk.StringVar(value=str(get()))
+                ttk.Entry(row, textvariable=var, width=8).pack(side="left")
+                ttk.Label(row, text=note or f"@{off:#x}", foreground="#888").pack(side="left", padx=6)
+                def apply(_e=None, off=off, var=var, store=store):
+                    try:
+                        self.edits[off] = (store(int(var.get())), width)
+                        self.update_changes()
+                    except ValueError:
+                        pass
+                ttk.Button(row, text="应用", command=apply).pack(side="left", padx=4)
+            numf("装备等级", o+se.F_ITEM_LEVEL, 1, lambda: se.item_level(self.data,o),
+                 lambda v: max(0, min(254, v-1)), "存值+1")
+            numf("攻击下限", o+se.F_ITEM_ATK_MIN, 1, lambda: se.item_atk(self.data,o)[0], lambda v: max(0,min(255,v)))
+            numf("攻击上限", o+se.F_ITEM_ATK_MAX, 1, lambda: se.item_atk(self.data,o)[1], lambda v: max(0,min(255,v)))
+            numf("耐久当前", o+se.F_DUR_CUR, 4, lambda: int(se.durability(self.data,o)[0]),
+                 lambda v: v*se.DUR_SCALE + se.read_u32(self.data,o+se.F_DUR_CUR)%se.DUR_SCALE)
+            numf("耐久最大", o+se.F_DUR_MAX, 4, lambda: int(se.durability(self.data,o)[1]),
+                 lambda v: v*se.DUR_SCALE + se.read_u32(self.data,o+se.F_DUR_MAX)%se.DUR_SCALE)
+            ttk.Label(self.detail_inner, text="词条 1-8（FFFF=清空）",
+                      font=("Tahoma",10,"bold")).pack(anchor="w", pady=(10,4))
+            for idx, off in enumerate(se.MOD_OFFSETS):
+                mo = o + off
+                v = self.effective_u16(mo)
+                row = ttk.Frame(self.detail_inner)
+                row.pack(anchor="w", pady=1, fill="x")
+                ttk.Label(row, text=f"词条{idx+1}", width=8).pack(side="left")
+                var = tk.StringVar(value=f"{v:04X}")
+                ttk.Entry(row, textvariable=var, width=8).pack(side="left")
+                ttk.Label(row, text=self.mods.get(v, ""), width=40, foreground="#666").pack(side="left", padx=6)
+                def apply_mod(_e=None, mo=mo, var=var):
+                    try:
+                        self.edits[mo] = (int(var.get(),16)&0xFFFF, 2)
+                        self.update_changes()
+                    except ValueError:
+                        pass
+                ttk.Button(row, text="应用", command=apply_mod).pack(side="left", padx=4)
+        ttk.Label(self.detail_inner, text="改动已在底部统计，点【保存改动】统一写入并重算 CRC。",
+                  foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(10,0))
 
     def show_slot(self, slot):
         o = slot * se.DATA_SLOT_STRIDE + se.GOLD_OFFSET

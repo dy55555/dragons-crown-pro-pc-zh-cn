@@ -92,10 +92,20 @@ DUR_SCALE = 100
 GRADES = "EDCBAS"
 
 # ---- 通用道具箱（每个 DATA slot 一套，该 slot 内所有角色共用）-----------
-# 起点 = slot*DATA_SLOT_STRIDE + GOLD_OFFSET + 0x4C = slot*stride + 0xAF2D4
-# 20 格 × 0x54，结构与行囊消耗品完全相同：iid=0x70，种类=词条0，数量=+0x0C 低字节
-BOX_OFFSET = 0xAF2D4
-BOX_SLOT_COUNT = 20
+# 起点 = slot*DATA_SLOT_STRIDE + 0xAD8（DATA1 实测 0xAD8，DATA2=0xB03AC，DATA3=0x15FC80）
+# 500 格 × 0x54，结构与行囊装备完全相同：物品ID在槽首+0x00、词条在 -0x40、
+# 类型标记 +0x02 = 0x2A00(箱中装备)/0x2200(消耗品)/0x2800(法杖)/0x2000(空格)。
+# 游戏界面显示 343/500：装备按件计、消耗品种类按堆叠计。
+# 注意：之前误当成道具箱的 0xAF2D4 起 20 格其实是「随身携带道具/快捷栏」，不是仓库。
+BOX_OFFSET = 0xAD8
+BOX_SLOT_COUNT = 500
+# 占用判定：类型标记(+0x02) != 0x2000 即算占用（含未鉴定装备，其 iid 可能为 0）。
+# 实测 typ!=0x2000 的格数 = 343，与游戏界面「343/500」完全一致。
+BOX_EMPTY_TYPE = 0x2000
+
+
+def box_used(data, o: int) -> bool:
+    return read_u16(data, o + 0x02) != BOX_EMPTY_TYPE
 
 # ---- 技能道具判定（上游 dcp_cheats.h IsSkillItem 官方掩码）--------------
 # 第一个词条(种类)ID 落在 0x1D1..0x1F8 且命中掩码 => 该消耗品是「技能」
@@ -344,20 +354,28 @@ def cmd_list(args, data, names):
                         items.append(f"[{si}]{grade(len(ms))}级 {item_name(iid, names)}")
                 if items:
                     print(f"      === {BAG_NAMES[bag]} ===  " + " | ".join(items))
-        # 通用道具箱
+        # 通用道具箱（500 格，装装备 + 消耗品）
         box_items = []
         for bi in range(BOX_SLOT_COUNT):
             bo = box_offset(slot, bi)
-            if read_u16(data, bo) != CONSUMABLE_ID:
+            iid = read_u16(data, bo)
+            if not box_used(data, bo):
                 continue
-            kind = consumable_kind(data, bo)
-            tag = "[技能]" if is_skill_kind(kind) else ""
-            box_items.append(f"[{bi}]{tag} {consumable_label(data, bo, cons)} x{consumable_qty(data, bo)}")
-        print(f"  --- 通用道具箱（该存档所有角色共用，{BOX_SLOT_COUNT}格）---")
-        for bi in range(0, BOX_SLOT_COUNT, 2):
-            line = "  ".join(box_items[j] for j in (bi, bi + 1) if j < len(box_items))
-            if line:
-                print("      " + line)
+            if iid == CONSUMABLE_ID:
+                kind = consumable_kind(data, bo)
+                tag = "[技能]" if is_skill_kind(kind) else ""
+                box_items.append(f"[{bi}]{tag} {consumable_label(data, bo, cons)} x{consumable_qty(data, bo)}")
+            elif 0xBB <= iid <= 0x1E8:
+                ms = active_mods(data, bo)
+                lo, hi = item_atk(data, bo)
+                box_items.append(f"[{bi}]{grade(len(ms))}级 {item_name(iid, names)} "
+                                 f"LV{item_level(data, bo)} {lo}-{hi}")
+            else:
+                # 未鉴定/异常态：iid 为 0 或其它，类型标记非空格
+                box_items.append(f"[{bi}]未鉴定? iid={iid:#06x} type={read_u16(data, bo + 2):#06x}")
+        print(f"  --- 通用道具箱（该存档所有角色共用，{len(box_items)}/{BOX_SLOT_COUNT} 格占用）---")
+        for bi in range(0, len(box_items), 2):
+            print("      " + "  ".join(box_items[bi:bi + 2]))
         print()
 
 
@@ -418,25 +436,68 @@ def cmd_set_consumable(args, data, names):
 
 
 def cmd_set_box(args, data, names):
-    """修改通用道具箱某格的种类和/或数量（一次 commit，统一 CRC）。"""
+    """修改通用道具箱某格：装备可改物品ID/词条/等级/攻击/耐久，消耗品改种类/数量。"""
     if not (0 <= args.index < BOX_SLOT_COUNT):
         raise SystemExit(f"道具箱格号必须是 0-{BOX_SLOT_COUNT - 1}")
     o = box_offset(args.slot, args.index)
+    iid = read_u16(data, o)
     buf = bytearray(data)
-    if args.kind is not None:
-        mo = o + MOD_OFFSETS[0]      # 种类 = 词条槽0
-        print(f"改道具箱种类: DATA{args.slot+1}[{args.index}] @{mo:#x}  "
-              f"{read_u16(data, mo):#06x} -> {args.kind:#06x}")
-        write_u16(buf, mo, args.kind)
-    if args.qty is not None:
-        if not (0 <= args.qty <= 255):
-            raise SystemExit("数量必须在 0-255")
-        qo = o + QTY_OFFSET
-        oldq = read_u16(data, qo) & 0xFF
-        print(f"改道具箱数量: DATA{args.slot+1}[{args.index}] @{qo:#x}  {oldq} -> {args.qty}")
-        write_u16(buf, qo, (read_u16(data, qo) & 0xFF00) | args.qty)
-    if args.kind is None and args.qty is None:
-        raise SystemExit("至少要给 --kind 或 --qty 之一")
+
+    if args.item is not None:
+        if not (ITEM_ITEMID_MIN <= args.item <= ITEM_ITEMID_MAX) and args.item != CONSUMABLE_ID:
+            raise SystemExit(f"物品ID {args.item:#x} 超出装备范围")
+        if iid == CONSUMABLE_ID and args.item != CONSUMABLE_ID:
+            # 从消耗品换成装备：类型标记 0x2200 -> 0x2A00
+            write_u16(buf, o + 0x02, 0x2A00)
+        print(f"改道具箱物品ID: [{args.index}] @{o:#x}  {iid:#06x} -> {args.item:#06x}")
+        write_u16(buf, o, args.item)
+        iid = args.item
+
+    if iid == CONSUMABLE_ID:
+        if args.kind is not None:
+            mo = o + MOD_OFFSETS[0]      # 消耗品种类 = 词条槽0
+            print(f"改消耗品种类: [{args.index}] @{mo:#x}  {read_u16(data,mo):#06x} -> {args.kind:#06x}")
+            write_u16(buf, mo, args.kind)
+        if args.qty is not None:
+            if not (0 <= args.qty <= 255):
+                raise SystemExit("数量必须在 0-255")
+            qo = o + QTY_OFFSET
+            print(f"改数量: [{args.index}] @{qo:#x}  {read_u16(data,qo)&0xFF} -> {args.qty}")
+            write_u16(buf, qo, (read_u16(data, qo) & 0xFF00) | args.qty)
+    else:
+        # 装备：复用 set-stat 的字段表
+        fields = {
+            "level": (o + F_ITEM_LEVEL, 1), "atkmin": (o + F_ITEM_ATK_MIN, 1),
+            "atkmax": (o + F_ITEM_ATK_MAX, 1), "durcur": (o + F_DUR_CUR, 4),
+            "durmax": (o + F_DUR_MAX, 4),
+        }
+        if args.field:
+            fo, width = fields[args.field]
+            v = args.value
+            if args.field == "level":
+                if not (1 <= v <= 255):
+                    raise SystemExit("等级必须 1-255")
+                v -= 1
+            elif args.field in ("atkmin", "atkmax"):
+                if not (0 <= v <= 255):
+                    raise SystemExit("攻击力必须 0-255")
+            else:
+                frac = read_u32(data, fo) % DUR_SCALE
+                v = v * DUR_SCALE + frac
+            print(f"改装备{args.field}: [{args.index}] @{fo:#x} -> {args.value}")
+            if width == 1:
+                buf[fo] = v & 0xFF
+            else:
+                write_u32(buf, fo, v)
+        if args.mod_index is not None:
+            mo = o + MOD_OFFSETS[args.mod_index]
+            print(f"改词条{args.mod_index+1}: [{args.index}] @{mo:#x}  "
+                  f"{read_u16(data,mo):#06x} -> {args.mod_id:#06x}")
+            write_u16(buf, mo, args.mod_id)
+
+    if not any((args.item is not None, args.kind is not None, args.qty is not None,
+                args.field, args.mod_index is not None)):
+        raise SystemExit("至少给一个修改参数（--item/--kind/--qty/--field/--mod-index）")
     seal(buf)
     if args.dry_run:
         out = Path(args.out) if args.out else Path("SAVE0.modified.DAT")
@@ -598,11 +659,17 @@ def main():
     p.add_argument("--no-backup", action="store_true")
     p.set_defaults(func=cmd_set_gold)
 
-    p = sub.add_parser("set-box", help="改通用道具箱某格（种类ID/数量）")
+    p = sub.add_parser("set-box", help="改通用道具箱某格（装备/消耗品）")
     p.add_argument("--slot", type=int, required=True, help="DATA slot 0-2")
     p.add_argument("--index", type=int, required=True, help=f"道具箱格 0-{BOX_SLOT_COUNT-1}")
+    p.add_argument("--item", type=lambda s: int(s, 0), help="换成装备：物品ID, 如 0x105")
     p.add_argument("--kind", type=lambda s: int(s, 0), help="消耗品种类ID, 如 0x190")
-    p.add_argument("--qty", type=int, help="数量 0-255")
+    p.add_argument("--qty", type=int, help="消耗品数量 0-255")
+    p.add_argument("--field", choices=["level", "atkmin", "atkmax", "durcur", "durmax"],
+                   help="装备字段")
+    p.add_argument("--value", type=int, help="配合 --field")
+    p.add_argument("--mod-index", type=int, help="装备词条序号 0-7")
+    p.add_argument("--mod-id", type=lambda s: int(s, 0), help="配合 --mod-index, FFFF=清空")
     p.add_argument("--out")
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--no-backup", action="store_true")
