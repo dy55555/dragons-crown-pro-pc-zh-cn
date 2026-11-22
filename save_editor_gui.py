@@ -114,8 +114,11 @@ class App:
                 cls = se.CLASSES.get(self.effective_u8(o + se.F_CLASS), "?")
                 cnode = self.tree.insert(snode, "end", text=f"  {nm}  {cls}  Lv{lvl}")
                 self.node_tag[cnode] = ("char", slot, ci)
-                for bag in (0, 1):
-                    bnode = self.tree.insert(cnode, "end", text=f"    {se.BAG_NAMES[bag]}",
+                for bag in range(se.BAG_CONFIG_COUNT):
+                    cnt = sum(1 for si in range(se.BAG_SLOT_COUNT)
+                              if self.effective_u16(se.bag_offset(o, bag, si)))
+                    bnode = self.tree.insert(cnode, "end",
+                                             text=f"    {se.BAG_NAMES[bag]}  ({cnt}件)",
                                              open=(bag == 0))
                     self.node_tag[bnode] = ("bag", slot, ci, bag)
                     for si in range(se.BAG_SLOT_COUNT):
@@ -125,6 +128,8 @@ class App:
                             q = self.effective_u16(bo + se.QTY_OFFSET) & 0xFF
                             base = se.consumable_label(self.data, bo, self.cons)
                             txt = base if q == 0xFF else f"{base} x{q}"
+                            if se.is_skill_item(self.data, bo):
+                                txt = "[技能] " + txt
                         else:
                             ms = se.active_mods(self.data, bo)
                             txt = se.item_name(iid, self.names) or ("" if iid == 0 else "?")
@@ -133,6 +138,12 @@ class App:
                         inode = self.tree.insert(bnode, "end",
                                                  text=f"      [{si}] {iid:#05x} {txt}")
                         self.node_tag[inode] = ("item", slot, ci, bag, si)
+            # 通用道具箱节点（该 DATA slot 所有角色共用）
+            boxcnt = sum(1 for bi in range(se.BOX_SLOT_COUNT)
+                         if self.effective_u16(se.box_offset(slot, bi)) == se.CONSUMABLE_ID)
+            xnode = self.tree.insert(snode, "end",
+                                     text=f"  [通用道具箱]  {boxcnt}/{se.BOX_SLOT_COUNT}格（所有角色共用）")
+            self.node_tag[xnode] = ("box", slot)
 
     # ---------- 有效值（含未保存改动）----------
     # edits[offset] = (value, width)，width ∈ {1,2,4}
@@ -171,6 +182,8 @@ class App:
             self.show_slot(tag[1])
         elif tag[0] == "bag":
             self.show_bag(sel[0], *tag[1:])
+        elif tag[0] == "box":
+            self.show_box(tag[1])
         else:
             ttk.Label(self.detail_inner, text="选择左侧任一角色或装备格进行编辑",
                       foreground="#666").pack(anchor="w")
@@ -378,6 +391,78 @@ class App:
                 self.update_changes()
             ent.bind("<Return>", apply)
             ttk.Button(row, text="应用", command=apply).pack(side="left", padx=4)
+
+        # 人物状态候选：只读观察，未标定
+        ttk.Label(self.detail_inner, text="人物状态候选值（只读）",
+                  font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(12, 4))
+        ttk.Label(self.detail_inner,
+                  text="游戏属性由「职业+等级」查表重算，存档内没有独立的 力量/体质/智力/幸运 字段。"
+                       "下面 8 个 u16 是观察到的候选值，含义未最终确认，故不开放修改。",
+                  foreground="#666", wraplength=740, justify="left").pack(anchor="w")
+        vals = se.stat_candidates(self.data, o)
+        srow = ttk.Frame(self.detail_inner)
+        srow.pack(anchor="w", pady=4, fill="x")
+        ttk.Label(srow, text="  偏移:").pack(side="left")
+        ttk.Label(srow, text=" ".join(f"+{off:#x}" for off in se.STAT_CANDIDATES),
+                  foreground="#888", width=54).pack(side="left")
+        vrow = ttk.Frame(self.detail_inner)
+        vrow.pack(anchor="w", pady=2, fill="x")
+        ttk.Label(vrow, text="  数值:").pack(side="left")
+        ttk.Label(vrow, text=" ".join(f"{v:>4}" for v in vals), foreground="#333",
+                  font=("Consolas", 10), width=54).pack(side="left")
+
+        # 技能：只读提示
+        ttk.Label(self.detail_inner, text="技能列表",
+                  font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(12, 4))
+        ttk.Label(self.detail_inner,
+                  text="技能是装备到行囊里的道具（种类ID 0x1D1–0x1F8，界面标 [技能]），"
+                       "受已有技能加点上限约束，随意改写会冲突，因此只读取显示、不提供修改。",
+                  foreground="#666", wraplength=740, justify="left").pack(anchor="w")
+
+    def show_box(self, slot):
+        """通用道具箱：该 DATA slot 内所有角色共用，20 格。"""
+        ttk.Label(self.detail_inner,
+                  text=f"DATA {slot+1} / 通用道具箱 —— 该存档所有角色共用（{se.BOX_SLOT_COUNT} 格）",
+                  font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 6))
+        ttk.Label(self.detail_inner,
+                  text="种类由词条槽1决定；数量是 +0x0C 低字节。[技能] 标记的是技能道具，"
+                       "受技能点上限约束，此处不改。",
+                  foreground="#666", wraplength=740, justify="left").pack(anchor="w", pady=(0, 10))
+        for bi in range(se.BOX_SLOT_COUNT):
+            o = se.box_offset(slot, bi)
+            iid = self.effective_u16(o)
+            if iid != se.CONSUMABLE_ID:
+                continue
+            kind = se.consumable_kind(self.data, o)
+            q = self.effective_u16(o + se.QTY_OFFSET) & 0xFF
+            qo = o + se.QTY_OFFSET
+            mo = o + se.MOD_OFFSETS[0]
+            skill = "[技能] " if se.is_skill_kind(kind) else ""
+            row = ttk.Frame(self.detail_inner)
+            row.pack(anchor="w", pady=2, fill="x")
+            name = self.cons.get(kind) or f"种类{kind:#06x}"
+            ttk.Label(row, text=f"[{bi}] {skill}{name}", width=32).pack(side="left")
+            qvar = tk.StringVar(value=str(q))
+            ttk.Entry(row, textvariable=qvar, width=6).pack(side="left")
+            ttk.Label(row, text=f"数量 @{qo:#x}", foreground="#888").pack(side="left", padx=4)
+
+            def apply_qty(_e=None, qo=qo, qvar=qvar, row=row):
+                try:
+                    v = int(qvar.get())
+                except ValueError:
+                    return
+                if not (0 <= v <= 255):
+                    messagebox.showwarning("超出范围", "数量必须在 0-255")
+                    return
+                old = se.read_u16(self.data, qo) & 0xFF00
+                self.edits[qo] = (old | v, 2)
+                self.refresh_tree()
+                self.update_changes()
+            if not se.is_skill_kind(kind):
+                ttk.Button(row, text="应用", command=apply_qty).pack(side="left", padx=4)
+            else:
+                ttk.Label(row, text="(技能-只读)", foreground="#999").pack(side="left", padx=4)
+            ttk.Label(row, text=f"种类@{mo:#x}={kind:#06x}", foreground="#aaa").pack(side="left", padx=6)
 
     def show_slot(self, slot):
         o = slot * se.DATA_SLOT_STRIDE + se.GOLD_OFFSET

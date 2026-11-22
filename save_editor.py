@@ -4,8 +4,10 @@
 
 能力
 ----
-* 列出 3 个 DATA slot 的角色、金币、装备栏（物品ID + 名称）
-* 修改装备栏里任意一格的物品ID（只改 2 字节 + 重算 CRC32）
+* 列出 3 个 DATA slot 的角色、金币、9 套行囊、通用道具箱（物品ID + 名称）
+* 修改行囊里任意一格的物品ID/词条/等级/攻击/耐久（只改对应字节 + 重算 CRC32）
+* 修改通用道具箱任意格的种类/数量（该 slot 所有角色共用）
+* 技能道具只读标注（游戏按词条判定，受加点限制，不开放修改）
 * 修改金币 / 等级 / HP / 技能点 / 名字（复用上游 save_data.h 已验证的偏移）
 * 全程只读源文件，改写到新文件或原子替换；自动备份；CRC 校验保证游戏能加载
 
@@ -58,8 +60,12 @@ MAX_GOLD = 99999999
 # ---- 本工具逆向出的装备栏常量 -------------------------------------------
 BAG_STRIDE = 0x54          # 与上游 kBagItemSize 一致，实测槽间距
 BAG_SLOT_COUNT = 10
-BAG_OFFSET_MAIN = 0x288    # 角色记录内第一组装备栏起点
-BAG_OFFSET_ALT = 0x5DC     # 第二组（备用/套装）起点：0x630 是旧的错误值，会漏掉第一格
+BAG_OFFSET_MAIN = 0x288    # 角色记录内第一套行囊起点
+# 实测：不是「主装备/备用装备」两套，而是最多 9 套行囊配置。
+# 每套起点 = 角色基址 + 0x288 + bagIndex*0x354 (bagIndex 0..8)，每套 10 格 × 0x54。
+# 0x354 = 10*0x54 + 0x14。旧的 0x5DC 其实只是第 2 套起点 (0x288+0x354)。
+BAG_CONFIG_COUNT = 9
+BAG_CONFIG_STRIDE = 0x354
 ITEM_ID_OFFSET = 0x00      # 槽首 u16 LE = 物品ID
 # 实测块首之后 2 字节是「类型标记」(0x0068/0x006a/0x0022/0x0020)，不动
 ITEM_ITEMID_MIN = 0x00BB
@@ -85,9 +91,27 @@ F_DUR_MAX = 0x08
 DUR_SCALE = 100
 GRADES = "EDCBAS"
 
+# ---- 通用道具箱（每个 DATA slot 一套，该 slot 内所有角色共用）-----------
+# 起点 = slot*DATA_SLOT_STRIDE + GOLD_OFFSET + 0x4C = slot*stride + 0xAF2D4
+# 20 格 × 0x54，结构与行囊消耗品完全相同：iid=0x70，种类=词条0，数量=+0x0C 低字节
+BOX_OFFSET = 0xAF2D4
+BOX_SLOT_COUNT = 20
+
+# ---- 技能道具判定（上游 dcp_cheats.h IsSkillItem 官方掩码）--------------
+# 第一个词条(种类)ID 落在 0x1D1..0x1F8 且命中掩码 => 该消耗品是「技能」
+# 技能是装备上去使用的，受技能点上限约束，本编辑器只读显示、不提供修改。
+SKILL_FIRST_EFFECT = 0x1D1
+SKILL_EFFECT_COUNT = 0x28
+SKILL_EFFECT_MASK = 0xE362E5F7FF
+
+# ---- 人物状态候选字段（只读；上游无静态存档定义，未标定，禁止写入）------
+# 职业+等级由游戏查表重算属性(write_stats)，SAVE0.DAT 内没有独立的 STR/VIT/INT/LUC 字段。
+# 下面 3 对 u16 随等级增长、含义未最终确认，仅作观察展示，不开放编辑。
+STAT_CANDIDATES = (0xE4, 0xE6, 0xE8, 0xEA, 0xEC, 0xEE, 0xF0, 0xF2)
+
 CLASSES = {0: "Fighter/战士", 1: "Amazon/亚马逊", 2: "Elf/精灵",
            3: "Dwarf/矮人", 4: "Sorceress/女巫", 5: "Wizard/法师"}
-BAG_NAMES = {0: "主装备", 1: "备用装备"}
+BAG_NAMES = {i: f"行囊{i + 1}" for i in range(BAG_CONFIG_COUNT)}
 
 DEFAULT_SAVE = Path("D:/GAMES/DragonsCrownPro/user/savedata/1/CUSA10209/SAVEDATA00/SAVE0.DAT")
 HERE = Path(__file__).resolve().parent
@@ -255,8 +279,27 @@ def cname(data, o) -> str:
 
 
 def bag_offset(char_base: int, bag: int, slot_idx: int) -> int:
-    base = BAG_OFFSET_MAIN if bag == 0 else BAG_OFFSET_ALT
-    return char_base + base + slot_idx * BAG_STRIDE
+    """第 bag 套行囊(bagIndex 0..8) 的第 slot_idx 格绝对偏移。"""
+    return char_base + BAG_OFFSET_MAIN + bag * BAG_CONFIG_STRIDE + slot_idx * BAG_STRIDE
+
+
+def box_offset(slot: int, idx: int) -> int:
+    """DATA slot 的通用道具箱第 idx 格绝对偏移。"""
+    return slot * DATA_SLOT_STRIDE + BOX_OFFSET + idx * BAG_STRIDE
+
+
+def is_skill_kind(kind: int) -> bool:
+    """种类ID是否为技能道具（上游 IsSkillItem 的判定核心）。"""
+    index = kind - SKILL_FIRST_EFFECT
+    return 0 <= index < SKILL_EFFECT_COUNT and ((SKILL_EFFECT_MASK >> index) & 1) != 0
+
+
+def is_skill_item(data, o: int) -> bool:
+    return read_u16(data, o) == CONSUMABLE_ID and is_skill_kind(consumable_kind(data, o))
+
+
+def stat_candidates(data, char_base: int) -> list[int]:
+    return [read_u16(data, char_base + off) for off in STAT_CANDIDATES]
 
 
 def sha256(b) -> str:
@@ -285,26 +328,36 @@ def cmd_list(args, data, names):
             maxhp = read_u16(data, o + F_HP_MAX)
             sp = read_u16(data, o + F_SKILL)
             print(f"  角色{ci} {nm:<9} {cls:<16} Lv{lvl:<4} HP {hp}/{maxhp}  技能点 {sp}  @{o:#x}")
-            for bag in (0, 1):
-                print(f"      === {BAG_NAMES[bag]} ===")
+            print(f"      状态候选(只读,未标定) {stat_candidates(data, o)}")
+            for bag in range(BAG_CONFIG_COUNT):
+                items = []
                 for si in range(BAG_SLOT_COUNT):
                     bo = bag_offset(o, bag, si)
                     iid = read_u16(data, bo)
                     if not iid:
                         continue
                     if iid == CONSUMABLE_ID:
-                        print(f"        [{si}] {item_label(data, bo, names, cons)}  "
-                              f"种类 {consumable_kind(data, bo):#05x}  @{bo:#x}")
-                        continue
-                    ms = active_mods(data, bo)
-                    lo, hi = item_atk(data, bo)
-                    dcur, dmax = durability(data, bo)
-                    print(f"        [{si}] {grade(len(ms))}级 {item_name(iid, names)}  "
-                          f"LV{item_level(data, bo)}  "
-                          f"{'ATK' if is_weapon(data, bo) else '数值'} {lo}-{hi}  "
-                          f"耐久 {int(dcur)}/{int(dmax)}  @{bo:#x}")
-                    for idx, mo, v, _flags, param in ms:
-                        print(f"            附加{idx+1} {v:#05x} {zh.get(v, '')}  参数{param:g} @{mo:#x}")
+                        tag = "[技能]" if is_skill_item(data, bo) else ""
+                        items.append(f"[{si}]{tag} {item_label(data, bo, names, cons)}@{bo:#x}")
+                    else:
+                        ms = active_mods(data, bo)
+                        items.append(f"[{si}]{grade(len(ms))}级 {item_name(iid, names)}")
+                if items:
+                    print(f"      === {BAG_NAMES[bag]} ===  " + " | ".join(items))
+        # 通用道具箱
+        box_items = []
+        for bi in range(BOX_SLOT_COUNT):
+            bo = box_offset(slot, bi)
+            if read_u16(data, bo) != CONSUMABLE_ID:
+                continue
+            kind = consumable_kind(data, bo)
+            tag = "[技能]" if is_skill_kind(kind) else ""
+            box_items.append(f"[{bi}]{tag} {consumable_label(data, bo, cons)} x{consumable_qty(data, bo)}")
+        print(f"  --- 通用道具箱（该存档所有角色共用，{BOX_SLOT_COUNT}格）---")
+        for bi in range(0, BOX_SLOT_COUNT, 2):
+            line = "  ".join(box_items[j] for j in (bi, bi + 1) if j < len(box_items))
+            if line:
+                print("      " + line)
         print()
 
 
@@ -354,6 +407,36 @@ def cmd_set_consumable(args, data, names):
           f"@{qo:#x}  {old & 0xFF} -> {args.qty}")
     buf = bytearray(data)
     write_u16(buf, qo, new)
+    seal(buf)
+    if args.dry_run:
+        out = Path(args.out) if args.out else Path("SAVE0.modified.DAT")
+        out.write_bytes(buf)
+        print(f"[演练] 已写出到 {out}（原存档未动）")
+    else:
+        atomic_write(args.save, bytes(buf), backup=not args.no_backup)
+    return 0
+
+
+def cmd_set_box(args, data, names):
+    """修改通用道具箱某格的种类和/或数量（一次 commit，统一 CRC）。"""
+    if not (0 <= args.index < BOX_SLOT_COUNT):
+        raise SystemExit(f"道具箱格号必须是 0-{BOX_SLOT_COUNT - 1}")
+    o = box_offset(args.slot, args.index)
+    buf = bytearray(data)
+    if args.kind is not None:
+        mo = o + MOD_OFFSETS[0]      # 种类 = 词条槽0
+        print(f"改道具箱种类: DATA{args.slot+1}[{args.index}] @{mo:#x}  "
+              f"{read_u16(data, mo):#06x} -> {args.kind:#06x}")
+        write_u16(buf, mo, args.kind)
+    if args.qty is not None:
+        if not (0 <= args.qty <= 255):
+            raise SystemExit("数量必须在 0-255")
+        qo = o + QTY_OFFSET
+        oldq = read_u16(data, qo) & 0xFF
+        print(f"改道具箱数量: DATA{args.slot+1}[{args.index}] @{qo:#x}  {oldq} -> {args.qty}")
+        write_u16(buf, qo, (read_u16(data, qo) & 0xFF00) | args.qty)
+    if args.kind is None and args.qty is None:
+        raise SystemExit("至少要给 --kind 或 --qty 之一")
     seal(buf)
     if args.dry_run:
         out = Path(args.out) if args.out else Path("SAVE0.modified.DAT")
@@ -463,7 +546,7 @@ def main():
     p = sub.add_parser("set-item", help="改装备栏物品ID")
     p.add_argument("--slot", type=int, required=True, help="DATA slot 0-2")
     p.add_argument("--char", type=int, required=True, help="角色 0-15")
-    p.add_argument("--bag", type=int, required=True, choices=[0, 1], help="0=主装备 1=备用")
+    p.add_argument("--bag", type=int, required=True, choices=list(range(BAG_CONFIG_COUNT)), help="行囊 0-8（对应行囊1-9）")
     p.add_argument("--slot-idx", type=int, required=True, help="装备格 0-9")
     p.add_argument("--id", type=lambda s: int(s, 0), required=True, help="新物品ID, 如 0x105")
     p.add_argument("--out", help="演练输出路径")
@@ -474,7 +557,7 @@ def main():
     p = sub.add_parser("set-qty", help="改消耗品数量（该格必须是 0x0070）")
     p.add_argument("--slot", type=int, required=True)
     p.add_argument("--char", type=int, required=True)
-    p.add_argument("--bag", type=int, required=True, choices=[0, 1])
+    p.add_argument("--bag", type=int, required=True, choices=list(range(BAG_CONFIG_COUNT)), help="行囊 0-8")
     p.add_argument("--slot-idx", type=int, required=True)
     p.add_argument("--qty", type=int, required=True, help="0-255")
     p.add_argument("--out")
@@ -485,7 +568,7 @@ def main():
     p = sub.add_parser("set-mod", help="改装备第 N 个附加ID（0-4）")
     p.add_argument("--slot", type=int, required=True)
     p.add_argument("--char", type=int, required=True)
-    p.add_argument("--bag", type=int, required=True, choices=[0, 1])
+    p.add_argument("--bag", type=int, required=True, choices=list(range(BAG_CONFIG_COUNT)), help="行囊 0-8")
     p.add_argument("--slot-idx", type=int, required=True)
     p.add_argument("--index", type=int, required=True)
     p.add_argument("--id", type=lambda s: int(s, 0), required=True)
@@ -497,7 +580,7 @@ def main():
     p = sub.add_parser("set-stat", help="改装备等级/攻击力/耐久")
     p.add_argument("--slot", type=int, required=True)
     p.add_argument("--char", type=int, required=True)
-    p.add_argument("--bag", type=int, required=True, choices=[0, 1])
+    p.add_argument("--bag", type=int, required=True, choices=list(range(BAG_CONFIG_COUNT)), help="行囊 0-8")
     p.add_argument("--slot-idx", type=int, required=True)
     p.add_argument("--field", required=True,
                    choices=["level", "atkmin", "atkmax", "durcur", "durmax"])
@@ -514,6 +597,16 @@ def main():
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--no-backup", action="store_true")
     p.set_defaults(func=cmd_set_gold)
+
+    p = sub.add_parser("set-box", help="改通用道具箱某格（种类ID/数量）")
+    p.add_argument("--slot", type=int, required=True, help="DATA slot 0-2")
+    p.add_argument("--index", type=int, required=True, help=f"道具箱格 0-{BOX_SLOT_COUNT-1}")
+    p.add_argument("--kind", type=lambda s: int(s, 0), help="消耗品种类ID, 如 0x190")
+    p.add_argument("--qty", type=int, help="数量 0-255")
+    p.add_argument("--out")
+    p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--no-backup", action="store_true")
+    p.set_defaults(func=cmd_set_box)
 
     args = ap.parse_args()
     save = Path(args.save)
