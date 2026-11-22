@@ -71,14 +71,38 @@ class App:
         right.grid(row=0, column=1, sticky="nsew")
         self.detail = ttk.LabelFrame(right, text="选中项详情", padding=10)
         self.detail.pack(fill="both", expand=True)
-        self.detail_inner = ttk.Frame(self.detail)
-        self.detail_inner.pack(fill="both", expand=True)
+        # 可滚动容器：内容多（如道具箱列表）时可上下滚动，翻页栏不会被挤出视野
+        self.detail_canvas = tk.Canvas(self.detail, highlightthickness=0, bd=0)
+        self.detail_scroll = ttk.Scrollbar(self.detail, orient="vertical",
+                                           command=self.detail_canvas.yview)
+        self.detail_canvas.pack(side="left", fill="both", expand=True)
+        self.detail_scroll.pack(side="right", fill="y")
+        self.detail_canvas.configure(yscrollcommand=self.detail_scroll.set)
+        self.detail_inner = ttk.Frame(self.detail_canvas)
+        self._inner_win = self.detail_canvas.create_window((0, 0), window=self.detail_inner,
+                                                           anchor="nw")
+        self.detail_inner.bind("<Configure>", self._on_detail_configure)
+        # 鼠标滚轮（Windows / Linux）
+        self.detail_canvas.bind_all("<MouseWheel>", self._on_mousewheel)
+        self.detail_canvas.bind_all("<Button-4>", lambda e: self.detail_canvas.yview_scroll(-1, "units"))
+        self.detail_canvas.bind_all("<Button-5>", lambda e: self.detail_canvas.yview_scroll(1, "units"))
 
         bot = ttk.Frame(self.root, padding=8)
         bot.pack(fill="x")
         self.changes = ttk.Label(bot, text="改动: 0", foreground="#b30")
         self.changes.pack(side="left")
         ttk.Button(bot, text="保存改动", command=self.save).pack(side="right")
+
+    def _on_detail_configure(self, _evt=None):
+        # 内容尺寸变化时更新滚动范围，并让内部框架宽度跟随画布
+        self.detail_canvas.update_idletasks()
+        self.detail_canvas.configure(scrollregion=self.detail_canvas.bbox("all"))
+        w = self.detail_canvas.winfo_width()
+        if w > 1:
+            self.detail_canvas.itemconfigure(self._inner_win, width=w)
+
+    def _on_mousewheel(self, event):
+        self.detail_canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
     # ---------- 数据 ----------
     def open_save(self, initial=False):
@@ -187,6 +211,8 @@ class App:
         else:
             ttk.Label(self.detail_inner, text="选择左侧任一角色或装备格进行编辑",
                       foreground="#666").pack(anchor="w")
+        self.detail_canvas.yview_moveto(0)   # 切换项后滚回顶部
+        self._on_detail_configure()
 
     def select_item(self, node):
         self.tree.selection_set(node)
@@ -419,12 +445,13 @@ class App:
                        "受已有技能加点上限约束，随意改写会冲突，因此只读取显示、不提供修改。",
                   foreground="#666", wraplength=740, justify="left").pack(anchor="w")
 
-    BOX_PAGE_SIZE = 40   # 道具箱每页显示条数
+    BOX_PAGE_SIZE = 15   # 道具箱每页显示条数（一屏可见，翻页栏无需滚动即达）
 
     def show_box(self, slot, page=None):
         """通用道具箱：500 格，装备+消耗品+未鉴定。分页显示，可翻页。"""
         for w in list(self.detail_inner.winfo_children()):
             w.destroy()
+        self.detail_canvas.yview_moveto(0)
         used = [bi for bi in range(se.BOX_SLOT_COUNT)
                 if se.box_used(self.data, se.box_offset(slot, bi))]
         total_pages = max(1, (len(used) + self.BOX_PAGE_SIZE - 1) // self.BOX_PAGE_SIZE)
@@ -495,6 +522,7 @@ class App:
         self._box_mode = (slot, bi)
         for w in list(self.detail_inner.winfo_children()):
             w.destroy()
+        self.detail_canvas.yview_moveto(0)
         # 返回上一级：回到道具箱列表并停在原页
         back = ttk.Frame(self.detail_inner)
         back.pack(anchor="w", pady=(0, 6), fill="x")
