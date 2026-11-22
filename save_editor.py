@@ -113,22 +113,28 @@ DUR_SCALE = 100
 GRADES = "EDCBAS"
 
 # ---- 通用道具箱（每个 DATA slot 一套，该 slot 内所有角色共用）-----------
-# 起点 = slot*DATA_SLOT_STRIDE + 0xAD8（DATA1 实测 0xAD8，DATA2=0xB03AC，DATA3=0x15FC80）
-# 466 格 × 0x54（见 BOX_SLOT_COUNT 注释），结构与行囊装备完全相同：物品ID在槽首+0x00、词条在 -0x40、
-# 类型标记 +0x02 = 0x2A00(箱中装备)/0x2200(消耗品)/0x2800(法杖)/0x2000(空格)。
-# 游戏界面显示 343/500：装备按件计、消耗品种类按堆叠计。
-# 注意：之前误当成道具箱的 0xAF2D4 起 20 格其实是「随身携带道具/快捷栏」，不是仓库。
-BOX_OFFSET = 0xAD8
-# 格数由下面的硬边界决定，不能按游戏界面显示的「500」取：
-#   道具箱区 = 0xAD8 起，角色记录从 0xA400 开始，
-#   (0xA400 - 0xAD8) // 0x54 = 466，所以只有 466 格（索引 0..465）。
-# 按 500 格算，第 467 格起点 0xA414 已经进角色记录，第 473 格会读到角色名的
-# 中间字节（读出 iid=0x696C，其实就是 "li"）。写这种格子会改坏角色数据。
-BOX_SLOT_COUNT = 466
-BOX_SLOT_COUNT_UI = 500   # 游戏界面显示的上限，仅用于提示，不参与寻址
-# 占用判定：类型标记(+0x02) != 0x2000 即算占用（含未鉴定装备，其 iid 可能为 0）。
-# 实测 typ!=0x2000 的格数 = 343，与游戏界面「343/500」完全一致。
-BOX_EMPTY_TYPE = 0x2000
+# 起点 = slot*DATA_SLOT_STRIDE + 0x100，共 500 格 × 0x54。
+# 边界依据（空槽 DATA3 实测）：从 slot+0x100 起恰好是 500 条全空记录，
+# 第 501 条起点 slot+0xA510 开始整段变全零 —— 这就是游戏「500 上限」的物理证据。
+# 结构与行囊装备完全相同：物品ID在槽首+0x00、词条在 -0x40、
+# 类型标记 +0x02 = 0x2A00(箱中装备)/0x2200(消耗品)/0x2800(法杖)/0x2C00(素材)/0x2000(空)。
+# 注意：0xAF2D4 起那 18 格是另一块独立容器，用途未证实（详见 POUCH_OFFSET 注释），不是仓库。
+#
+# 【历史错误】早期把箱底写成 0xAD8，比真正起点晚了 0x9D8（= 30 格），于是
+#   ① 漏掉最前面 30 格里的 30 件物品；② 尾部越界读出 30 个假物品；
+#   ③ 由此得出「只有 466 格 / 312 件」的错误结论。真正的数字是 500 格 / 342 件。
+BOX_OFFSET = 0x100
+BOX_SLOT_COUNT = 500
+
+# 占用判定：物品ID(+0x00) != 0 即算占用。
+# 【为什么不能用类型标记判】箱里存在 2 件「类型标记写成 0x2000、但物品ID有效」的装备
+# （实测索引 4 = iid 0x01C3、索引 27 = iid 0x01C9，三个 DATA 里完全一致）。
+# 按 typ 判会漏掉这 2 件：typ 判 = 340，iid 判 = 342。
+# 游戏界面读数是 342（用掉遗忘灵药前是 343），与 iid 判据逐位吻合。
+BOX_EMPTY_TYPE = 0x2000   # 仅用于「把这一格清空」时写回的类型值
+# 索引 0..498 可安全写入；索引 499 的 0x54 字节与角色0记录头部物理重叠
+# （0xA4BC+0x20 = 0xA4DC 正是角色0 的 HP 字段），写入会改坏角色数据，故禁止写。
+BOX_WRITABLE_MAX = 498
 
 # 物品头 +0x02 的类型标记（换物品时需同步，否则游戏不认这一格）
 ITEM_TYPE_BAG_WEAPON = 0x6800    # 行囊里的武器
@@ -137,9 +143,11 @@ ITEM_TYPE_BOX_EQUIP = 0x2A00     # 道具箱里的装备
 ITEM_TYPE_CONSUMABLE = 0x2200    # 消耗品 / 道具
 ITEM_TYPE_EMPTY = 0x2000         # 空格
 
-# ---- 随身携带道具 / 快捷栏（DATA slot 末尾，18 格）---------------------
-# 起点 = slot*DATA_SLOT_STRIDE + 0xAF2D4，18 格 × 0x54，实测全部 iid=0x0070、
-# 类型标记 0x2200（消耗品），三个 DATA 结构完全一致（DATA1 满、DATA2 19格、DATA3 空）。
+# ---- 尾部 18 格（用途待证实）------------------------------------------
+# 起点 = slot*DATA_SLOT_STRIDE + 0xAF2D4，18 格 × 0x54，紧跟在共享金币(0xAF288)之后，
+# 是 DATA slot 里最后一块容器。实测：18 格里全是 iid=0x0070 的消耗品，
+# 但它们的「效果ID」在通用道具箱里几乎一个都找不到，游戏人物界面也翻不到对应位置。
+# 所以它不是道具箱镜像、也不是仓库；早期把它叫「随身携带道具/快捷栏」是想当然，已改中性名。
 # 边界依据：0xAF2D4 + 18*0x54 = 0xAF8BC，距 slot 末尾 0xAF8D4 只差 0x18；
 # 若按 20 格取，第 19/20 格起点 0xAF910 已跨入下一 DATA，会改坏别的位置，故只取 18 格。
 POUCH_OFFSET = 0xAF2D4
@@ -147,7 +155,13 @@ POUCH_SLOT_COUNT = 18
 
 
 def box_used(data, o: int) -> bool:
-    return read_u16(data, o + 0x02) != BOX_EMPTY_TYPE
+    """该格是否放了东西。判据是物品ID非 0，不是类型标记（见 BOX_EMPTY_TYPE 注释）。"""
+    return read_u16(data, o) != 0
+
+
+def box_writable(idx: int) -> bool:
+    """索引 499 与角色0 记录重叠，禁止写入。"""
+    return 0 <= idx <= BOX_WRITABLE_MAX
 
 # ---- 技能道具判定（上游 dcp_cheats.h IsSkillItem 官方掩码）--------------
 # 第一个词条(效果)ID 落在 0x1D1..0x1F8 且命中掩码 => 该道具是「技能」
@@ -475,7 +489,7 @@ def box_offset(slot: int, idx: int) -> int:
 
 
 def pouch_offset(slot: int, idx: int) -> int:
-    """DATA slot 的随身携带道具(快捷栏)第 idx 格绝对偏移，共 18 格。"""
+    """DATA slot 尾部 18 格中第 idx 格的绝对偏移（用途待证实）。"""
     return slot * DATA_SLOT_STRIDE + POUCH_OFFSET + idx * BAG_STRIDE
 
 
@@ -607,10 +621,11 @@ def cmd_list(args, data, names):
             else:
                 # 未鉴定/异常态：iid 为 0 或其它，类型标记非空格
                 box_items.append(f"[{bi}]未鉴定? iid={iid:#06x} type={read_u16(data, bo + 2):#06x}")
-        print(f"  --- 通用道具箱（该存档所有角色共用，{len(box_items)}/{BOX_SLOT_COUNT} 格占用）---")
+        print(f"  --- 通用道具箱（该存档所有角色共用，{len(box_items)}/{BOX_SLOT_COUNT} 格占用；"
+              f"可写 0-{BOX_WRITABLE_MAX}）---")
         for bi in range(0, len(box_items), 2):
             print("      " + "  ".join(box_items[bi:bi + 2]))
-        # 随身携带道具/快捷栏（18 格）
+        # 尾部 18 格（用途待证实）
         pouch_items = []
         for pi in range(POUCH_SLOT_COUNT):
             po = pouch_offset(slot, pi)
@@ -622,14 +637,16 @@ def cmd_list(args, data, names):
                                   f"{consumable_qty_text(data, po)}")
             else:
                 pouch_items.append(f"[{pi}] iid={iid:#06x} type={read_u16(data, po + 2):#06x}")
-        print(f"  --- 随身携带道具/快捷栏（{len(pouch_items)}/{POUCH_SLOT_COUNT} 格占用，@"
+        print(f"  --- 尾部 18 格（用途待证实，{len(pouch_items)}/{POUCH_SLOT_COUNT} 格占用，@"
               f"{pouch_offset(slot, 0):#x}）---")
         for pi in range(0, len(pouch_items), 3):
             print("      " + "  ".join(pouch_items[pi:pi + 3]))
         print()
 
 
-def atomic_write(path: Path, data: bytes, backup: bool = True):
+def atomic_write(path, data: bytes, backup: bool = True):
+    """原子写入。path 允许传 str（CLI 的 argparse 给的就是 str）。"""
+    path = Path(path)
     errs = validate(data)
     if errs:
         raise SystemExit("拒绝写入，存档校验失败: " + "; ".join(errs))
@@ -690,6 +707,8 @@ def cmd_set_box(args, data, names):
     """修改通用道具箱某格：装备可改物品ID/词条/等级/攻击/耐久，道具改效果ID/数量。"""
     if not (0 <= args.index < BOX_SLOT_COUNT):
         raise SystemExit(f"道具箱格号必须是 0-{BOX_SLOT_COUNT - 1}")
+    if not box_writable(args.index):
+        raise SystemExit(f"道具箱第 {args.index} 格与角色数据物理重叠，不能写（可写 0-{BOX_WRITABLE_MAX}）")
     o = box_offset(args.slot, args.index)
     iid = read_u16(data, o)
     buf = bytearray(data)
@@ -697,9 +716,15 @@ def cmd_set_box(args, data, names):
     if args.item is not None:
         if not (ITEM_ID_ALLOW_MIN <= args.item <= ITEM_ID_ALLOW_MAX) and args.item != CONSUMABLE_ID:
             raise SystemExit(f"物品ID {args.item:#x} 超出可写范围")
-        if iid == CONSUMABLE_ID and args.item != CONSUMABLE_ID:
-            # 从消耗品换成装备：类型标记 0x2200 -> 0x2A00
-            write_u16(buf, o + 0x02, 0x2A00)
+        # 跨类切换必须同步类型标记，否则游戏不认这一格：
+        #   消耗品 -> 装备：0x2200 -> 0x2A00
+        #   装备 -> 消耗品：0x2A00 -> 0x2200
+        old_cons = iid == CONSUMABLE_ID
+        new_cons = args.item == CONSUMABLE_ID
+        if old_cons != new_cons:
+            new_type = ITEM_TYPE_CONSUMABLE if new_cons else ITEM_TYPE_BOX_EQUIP
+            print(f"同步类型标记 +0x02: {read_u16(data, o + 2):#06x} -> {new_type:#06x}")
+            write_u16(buf, o + 0x02, new_type)
         print(f"改道具箱物品ID: [{args.index}] @{o:#x}  {iid:#06x} -> {args.item:#06x}")
         write_u16(buf, o, args.item)
         iid = args.item
@@ -847,9 +872,9 @@ def cmd_set_gold(args, data, names):
 
 
 def cmd_set_pouch(args, data, names):
-    """改随身携带道具(快捷栏)某格。这块 18 格实测全是消耗品。"""
+    """改尾部 18 格某格。用途未证实，仅建议查看，改动风险自负。"""
     if not (0 <= args.index < POUCH_SLOT_COUNT):
-        raise SystemExit(f"快捷栏格号必须是 0-{POUCH_SLOT_COUNT - 1}")
+        raise SystemExit(f"尾部18格格号必须是 0-{POUCH_SLOT_COUNT - 1}")
     if args.kind is None and args.qty is None:
         raise SystemExit("至少给一个修改参数（--kind / --qty）")
     o = pouch_offset(args.slot, args.index)
@@ -863,14 +888,14 @@ def cmd_set_pouch(args, data, names):
             print(f"  该格原为 {iid:#06x}，已补成消耗品格（iid=0x70, 类型=0x2200）")
             iid = CONSUMABLE_ID
         mo = o + MOD_OFFSETS[0]
-        print(f"改快捷栏效果ID: DATA{args.slot+1} [{args.index}] @{mo:#x}  "
+        print(f"改尾部18格效果ID: DATA{args.slot+1} [{args.index}] @{mo:#x}  "
               f"{read_u16(data, mo):#06x} -> {args.kind:#06x}")
         write_u16(buf, mo, args.kind)
     if args.qty is not None:
         if not (0 <= args.qty <= 255):
             raise SystemExit("数量必须在 0-255")
         qo = o + QTY_OFFSET
-        print(f"改快捷栏数量: DATA{args.slot+1} [{args.index}] @{qo:#x}  "
+        print(f"改尾部18格数量: DATA{args.slot+1} [{args.index}] @{qo:#x}  "
               f"{read_u16(data, qo) & 0xFF} -> {args.qty}")
         write_u16(buf, qo, (read_u16(data, qo) & 0xFF00) | args.qty)
     seal(buf)
@@ -962,7 +987,8 @@ def main():
 
     p = sub.add_parser("set-box", help="改通用道具箱某格（装备/消耗品）")
     p.add_argument("--slot", type=int, required=True, help="DATA slot 0-2")
-    p.add_argument("--index", type=int, required=True, help=f"道具箱格 0-{BOX_SLOT_COUNT-1}")
+    p.add_argument("--index", type=int, required=True,
+                   help=f"道具箱格 0-{BOX_SLOT_COUNT-1}（其中 0-{BOX_WRITABLE_MAX} 可写）")
     p.add_argument("--item", type=lambda s: int(s, 0), help="换成装备：物品ID, 如 0x105")
     p.add_argument("--kind", type=lambda s: int(s, 0), help="道具效果ID, 如 0x190=陨石卷轴")
     p.add_argument("--qty", type=int, help="消耗品数量 0-255")
@@ -976,7 +1002,7 @@ def main():
     p.add_argument("--no-backup", action="store_true")
     p.set_defaults(func=cmd_set_box)
 
-    p = sub.add_parser("set-pouch", help=f"改随身携带道具/快捷栏某格（0-{POUCH_SLOT_COUNT-1}）")
+    p = sub.add_parser("set-pouch", help=f"改尾部18格某格（0-{POUCH_SLOT_COUNT-1}，用途待证实）")
     p.add_argument("--slot", type=int, required=True, help="DATA slot 0-2")
     p.add_argument("--index", type=int, required=True, help=f"格号 0-{POUCH_SLOT_COUNT-1}")
     p.add_argument("--kind", type=lambda s: int(s, 0), help="道具效果ID, 如 0x190=陨石卷轴")

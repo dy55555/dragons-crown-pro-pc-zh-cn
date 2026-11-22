@@ -203,12 +203,12 @@ class App:
             self.tree.insert(snode, "end", iid=xnode,
                              text=f"  [通用道具箱]  {boxcnt}/{se.BOX_SLOT_COUNT}格（所有角色共用）")
             self.node_tag[xnode] = ("box", slot)
-            # 随身携带道具/快捷栏（18 格，实测全是消耗品）
+            # 尾部 18 格（用途待证实）
             pcnt = sum(1 for pi in range(se.POUCH_SLOT_COUNT)
                        if se.pouch_used(self.data, se.pouch_offset(slot, pi)))
             pnode = f"s{slot}p"
             self.tree.insert(snode, "end", iid=pnode,
-                             text=f"  [随身携带道具]  {pcnt}/{se.POUCH_SLOT_COUNT}格（快捷栏）")
+                             text=f"  [尾部18格]  {pcnt}/{se.POUCH_SLOT_COUNT}格（用途待证实）")
             self.node_tag[pnode] = ("pouch", slot)
         for i in opened:
             if self.tree.exists(i):
@@ -805,8 +805,8 @@ class App:
                        f"（{len(used)}/{se.BOX_SLOT_COUNT} 格占用）",
                   font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 6))
         ttk.Label(self.detail_inner,
-                  text="占用判定 = 类型标记(+0x02)≠0x2000，未鉴定装备也算。"
-                       "点【编辑】改该格，编辑完点【← 返回道具箱】回到此列表。",
+                  text="占用判定 = 物品ID(+0x00)≠0。箱里有 2 件装备的类型标记也写成 0x2000，"
+                       "所以不能按类型判。点【编辑】改该格，编辑完点【← 返回道具箱】回到此列表。",
                   foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(0, 8))
 
         # 本页条目
@@ -873,6 +873,16 @@ class App:
             back.pack(anchor="w", pady=(0, 6), fill="x")
             ttk.Button(back, text="← 返回道具箱列表",
                        command=lambda: self.show_box(slot, getattr(self, "_box_page", 0))).pack(side="left")
+            if not se.box_writable(bi):
+                ttk.Label(self.detail_inner,
+                          text=f"道具箱[{bi}] 不可编辑  @{o:#x}",
+                          font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 8))
+                ttk.Label(self.detail_inner,
+                          text=f"第 {bi} 格的 0x{se.BAG_STRIDE:02X} 字节与角色0的记录头部物理重叠"
+                               f"（0xA4BC+0x20 就是角色0的血量字段），写这一格会改坏角色数据。"
+                               f"可编辑范围是 0-{se.BOX_WRITABLE_MAX}。",
+                          foreground="#666", wraplength=760, justify="left").pack(anchor="w")
+                return
             iid = self.effective_u16(o)
             if iid == se.CONSUMABLE_ID:
                 self._render_item_editor(o, consumable=True)
@@ -892,7 +902,7 @@ class App:
         self._render_view(view, tag=("box", slot))
 
     def _render_item_picker(self, o, iid, equip_type):
-        """物品ID 下拉 + 还原：道具箱/快捷栏里换装备或换成消耗品都走这里。"""
+        """物品ID 下拉 + 还原：道具箱/尾部18格里换装备或换成消耗品都走这里。"""
         irow = ttk.Frame(self.detail_inner)
         irow.pack(anchor="w", pady=(6, 4), fill="x")
         ttk.Label(irow, text="物品:", width=10).pack(side="left")
@@ -917,7 +927,7 @@ class App:
         combo.bind("<<ComboboxSelected>>", on_combo)
 
     def _render_item_editor(self, o, consumable, where="道具箱格", equip_type=None):
-        """道具箱/快捷栏格子的装备/消耗品编辑器（与行囊 show_item 相同的字段）。"""
+        """道具箱/尾部18格格子的装备/消耗品编辑器（与行囊 show_item 相同的字段）。"""
         iid = self.effective_u16(o)
         if equip_type is None:
             equip_type = se.ITEM_TYPE_BOX_EQUIP
@@ -1044,11 +1054,11 @@ class App:
         self._revert_btn(row, (o,)).pack(side="left")
         ttk.Label(self.detail_inner, text=f"@{o:#x}  u32 小端", foreground="#888").pack(anchor="w", pady=6)
 
-    # ---------- 随身携带道具 / 快捷栏 ----------
+    # ---------- 尾部 18 格（用途待证实）----------
     POUCH_PAGE_SIZE = 15
 
     def show_pouch(self, slot, page=None):
-        """随身携带道具（快捷栏）：18 格，实测全是消耗品。"""
+        """DATA slot 末尾的 18 格消耗品。用途未证实，见说明文字。"""
         used = [pi for pi in range(se.POUCH_SLOT_COUNT)
                 if se.pouch_used(self.data, se.pouch_offset(slot, pi))]
         total_pages = max(1, (len(used) + self.POUCH_PAGE_SIZE - 1) // self.POUCH_PAGE_SIZE)
@@ -1057,13 +1067,14 @@ class App:
         page = max(0, min(page, total_pages - 1))
         self._pouch_page = page
         ttk.Label(self.detail_inner,
-                  text=f"DATA {slot+1} / 随身携带道具（快捷栏）—— "
+                  text=f"DATA {slot+1} / 尾部 18 格（用途待证实）—— "
                        f"{len(used)}/{se.POUCH_SLOT_COUNT} 格占用",
                   font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 6))
         ttk.Label(self.detail_inner,
-                  text=f"起点 @{se.pouch_offset(slot, 0):#x}，18 格 × 0x54。"
-                       "这块就是游戏里随身带着、开局就能直接用的道具，和通用道具箱分开存。"
-                       "点【编辑】改某格。",
+                  text=f"起点 @{se.pouch_offset(slot, 0):#x}，18 格 × 0x54，紧挨着共享金币字段后面。"
+                       "这 18 格装的都是消耗品，但里面的东西在通用道具箱里几乎都找不到，"
+                       "游戏人物界面也翻不到对应位置，所以它到底是干嘛的还没证实。"
+                       "【别当仓库用】只建议看，不建议改。",
                   foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(0, 8))
         start = page * self.POUCH_PAGE_SIZE
         page_items = used[start:start + self.POUCH_PAGE_SIZE]
@@ -1110,9 +1121,9 @@ class App:
                 w.destroy()
             back = ttk.Frame(self.detail_inner)
             back.pack(anchor="w", pady=(0, 6), fill="x")
-            ttk.Button(back, text="← 返回随身道具列表",
+            ttk.Button(back, text="← 返回尾部18格列表",
                        command=lambda: self.show_pouch(slot, getattr(self, "_pouch_page", 0))).pack(side="left")
-            self._render_item_editor(o, consumable=True, where="随身道具格",
+            self._render_item_editor(o, consumable=True, where="尾部18格",
                                      equip_type=se.ITEM_TYPE_BAG_WEAPON)
 
         self._render_view(view, tag=("pouch", slot))
