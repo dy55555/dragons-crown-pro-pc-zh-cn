@@ -1,0 +1,5239 @@
+# 附加ID -> 中文名（xlsx优先，其余按日式游戏惯用译法直译）
+0000	30%幾率毒化敵人
+0001	30%幾率燃燒敵人
+0002	30%幾率凍結敵人
+0003	30%幾率石化敵人
+0004	防禦成功時，75%機率以火焰彈反擊
+0005	防禦成功時，75%機率以冰霜彈反擊
+0006	防禦成功時，75%機率以雷電彈反擊
+0007	防禦成功時，75%機率以魔法彈反擊
+0008	200%受到的傷害轉換爲MP
+0009	連續發動相同魔法時，每次提升傷害5%
+000A	MP充能速度提升50%
+000B	消耗MP與傷害降低40%
+000C	消耗MP與傷害提昇40%
+000D	施放法術時，有80%的概率抵抗擊退效果
+000E	MP最大值+150
+000F	火焰傷害+30%
+0010	冰霜傷害+30%
+0011	雷電傷害+30%
+0012	魔法傷害+75%
+0013	強攻擊傷害+30%
+0014	無效果
+0015	無效果
+0016	脚踢傷害+75%
+0017	徒手攻擊傷害+75%
+0018	徒手時受到的傷害-30%
+0019	徒手攻擊的擊退值+75
+001A	魔法飛彈的數量+3
+001B	魔法射擊傷害+150%
+001C	無效果
+001D	摔擲時50%的幾率造成爆炸
+001E	摔擲傷害+40%
+001F	20%概率承受傷害減半
+0020	HP最大值+30
+0021	造成的傷害+30%
+0022	受到的傷害-20%
+0023	暴擊幾率+20%
+0024	瀕死時，道具治療效果+50%
+0025	瀕死時，移動速度+20%
+0026	瀕死時，造成的傷害+30%
+0027	攻擊有50%概率無視護甲
+0028	攻擊命中敵人有20%概率掉落硬幣
+0029	攻擊的眩暈值+50%
+002A	攻擊的擊倒值+50%
+002B	攻擊的擊退值+50%
+002C	受到傷害時，有30%概率以火焰彈反擊
+002D	受到傷害時，有30%概率以冰霜彈反擊
+002E	受到傷害時，有30%概率以雷電彈反擊
+002F	受到傷害時，有30%概率以魔法彈反擊
+0030	傷害+20%，耐久度下降
+0031	傷害+35%，耐久度大幅度下降
+0032	傷害+50%，耐久度巨幅度下降
+0033	追加相當於傷害值40%的火焰傷害
+0034	追加相當於傷害值40%的冰霜傷害
+0035	追加相當於傷害值40%的雷電傷害
+0036	對人形系敵人傷害+40%
+0037	對自然系敵人傷害+40%
+0038	對亡靈系敵人傷害+40%
+0039	對惡魔系敵人傷害+40%
+003A	對龍系敵人傷害+40%
+003B	對物質系敵人傷害+40%
+003C	LP為0時，造成的傷害+40%
+003D	LP為0時，受到的傷害-30%
+003E	耐久度消耗率降低50%
+003F	敵人掉落物品概率+30%
+0040	滑踢傷害+150%
+0041	敵人倒地時，對其造成的傷害+75%
+0042	獲得額外生命時，HP回復100%
+0043	獲得額外生命時，移除所有異常狀態
+0044	拾取硬幣時，HP回復5
+0045	50%拾取的硬幣列入分數計算
+0046	降低暈眩持續時間50%
+0047	變換場景時，箭矢數量+5
+0048	變換場景時，HP回復30%
+0049	無效果
+004A	免疫中毒效果
+004B	降低中毒時間50%
+004C	No effect（待校）
+004D	免疫燃燒效果
+004E	降低燃燒時間50%
+004F	No effect（待校）
+0050	免疫凍結效果
+0051	降低凍結時間50%
+0052	No effect（待校）
+0053	免疫石化效果
+0054	降低石化時間50%
+0055	火焰抗性+30%
+0056	冰霜抗性+30%
+0057	雷電抗性+30%
+0058	物理抗性+20%
+0059	魔法抗性+20%
+005A	暈眩抗性+75%
+005B	擊倒抗性+75%
+005C	擊退抗性+75%
+005D	來自人型系敵人的傷害-30%
+005E	來自自然系敵人的傷害-30%
+005F	來自亡靈系敵人的傷害-30%
+0060	來自惡魔系敵人的傷害-30%
+0061	來自龍系敵人的傷害-30%
+0062	來自物質系敵人的傷害-30%
+0063	來自陷阱的傷害-99%
+0064	HP回復效果+50%
+0065	瀕死時，消耗MP-50%
+0066	以LUC÷15%的概率減免所有傷害
+0067	以DEX÷10%的概率無視敵人的防禦
+0068	STR+40
+0069	INT+40
+006A	CON+40
+006B	MGR+40
+006C	DEX+40
+006D	LUC+40
+006E	無效果
+006F	STR +（待校）
+0070	無效果
+0071	CON +（待校）
+0072	MGR +（待校）
+0073	DEX +（待校）
+0074	LUC +（待校）
+0075	以MP值抵免30%的傷害
+0076	衝刺攻擊傷害+50%
+0077	地面普通攻擊速度+30%
+0078	踢擊時，30%的概率進行防禦
+0079	踢擊時，30%的概率進行防禦
+007A	踢擊時，有50%機率抵抗擊退效果
+007B	以每秒3%速度回復最後一次承受傷害
+007C	有20%機率使來自背後的攻擊無效
+007D	有50%機率擊潰敵人防禦
+007E	若受到的傷害低於20%HP時，免疫其擊退效果
+007F	對陷入異常狀態的敵人造成的傷害+50%
+0080	獲得分數+30%，受到的傷害+30%
+0081	回復HP時，同時回復其50%的MP值
+0082	施法時，有50%機率不消耗MP
+0083	所有異常狀態的持續時間縮短30%
+0084	HP全滿時，造成的物理傷害+20%
+0085	HP全滿時，造成的魔法傷害+20%
+0086	HP尚餘50%以上時，可抵擋一擊致死的攻擊
+0087	火焰、冰霜和雷電屬性的攻擊全部轉爲無屬性
+0088	HP全滿時，受到的傷害-50%
+0089	在空中是，受到的傷害-30%
+008A	對空中敵人造成的傷害+30%
+008B	盾擊威力+100%
+008C	懲戒劍威力+30%
+008D	反彈投射攻擊威力+100%
+008E	蠻力猛擊威力+30%
+008F	雷神之錘威力+30%
+0090	强力射擊威力+30%
+0091	專心致志效果+30%
+0092	精神吸收效果+30%
+0093	審判劍威力+50%
+0094	招架威力+50%
+0095	石膚化效果+50%
+0096	元素知識威力+50%
+0097	緩速術效果+50%
+0098	防護術效果+50%
+0099	劍刃風暴威力+50%
+009A	狂舞連擊威力+50%
+009B	狂亂威力+50%
+009C	多重箭威力+50%
+009D	法術書威力+50%
+009E	No effect（待校）
+009F	攻擊命中敵人20%概率掉落寶石
+00A0	無效果
+00A1	No effect（待校）
+00A2	No effect（待校）
+00A3	No effect（待校）
+00A4	No effect（待校）
+00A5	No effect（待校）
+00A6	No effect（待校）
+00A7	No effect（待校）
+00A8	無效果
+00A9	No effect（待校）
+00AA	No effect（待校）
+00AB	No effect（待校）
+00AC	No effect（待校）
+00AD	No effect（待校）
+00AE	No effect（待校）
+00AF	No effect（待校）
+00B0	無效果
+00B1	No effect（待校）
+00B2	No effect（待校）
+00B3	No effect（待校）
+00B4	No effect（待校）
+00B5	No effect（待校）
+00B6	No effect（待校）
+00B7	No effect（待校）
+00B8	無效果
+00B9	30%幾率毒化敵人
+00BA	30%幾率燃燒敵人
+00BB	30%幾率凍結敵人
+00BC	30%幾率石化敵人
+00BD	防禦成功時，75%以火焰彈反擊
+00BE	防禦成功時，75%以冰彈反擊
+00BF	防禦成功時，75%以雷電彈反擊
+00C0	防禦成功時，有75%概率以魔法彈反擊
+00C1	200%受到的傷害轉換為MP
+00C2	連續發動相同魔法時，每次提升傷害5%
+00C3	MP充能速度提升50%
+00C4	消耗MP與傷害降低40%
+00C5	消耗MP與傷害提升40%
+00C6	施放法術時，有80%的概率抵抗擊退效果
+00C7	MP最大值+150
+00C8	火焰傷害+30%
+00C9	冰霜傷害+30%
+00CA	雷電傷害+30%
+00CB	魔法傷害+75%
+00CC	強攻擊傷害+30%
+00CD	無效果
+00CE	無效果
+00CF	脚踢傷害+75%
+00D0	徒手攻擊傷害+75%
+00D1	徒手時受到的傷害-30%
+00D2	徒手攻擊的擊退值+75
+00D3	魔法飛彈的數量+3
+00D4	魔法射擊傷害+150%
+00D5	無效果
+00D6	摔擲時50%的幾率造成爆炸
+00D7	摔擲傷害+40%
+00D8	20%概率承受傷害減半
+00D9	HP最大值+30
+00DA	造成的傷害+30%
+00DB	受到的傷害-20%
+00DC	暴擊幾率+20%
+00DD	瀕死時，道具治療效果+50%
+00DE	瀕死時，移動速度+20%
+00DF	瀕死時，造成的傷害+30%
+00E0	攻擊有50%概率無視護甲
+00E1	攻擊命中敵人有20%概率掉落硬幣
+00E2	攻擊的眩暈值+50%
+00E3	攻擊的擊倒值+50%
+00E4	攻擊的擊退值+50%
+00E5	受到傷害時，有30%概率以火焰彈反擊
+00E6	受到傷害時，有30%概率以冰彈反擊
+00E7	受到傷害時，有30%概率以雷電彈反擊
+00E8	受到傷害時，有30%概率以魔法彈反擊
+00E9	傷害+20%，耐久度下降
+00EA	傷害+35%，耐久度大幅度下降
+00EB	傷害+50%，耐久度巨幅度下降
+00EC	追加相當於傷害值40%的火焰傷害
+00ED	追加相當於傷害值40%的冰霜傷害
+00EE	追加相當於傷害值40%的雷電傷害
+00EF	對人形系敵人傷害+40%
+00F0	對自然系敵人傷害+40%
+00F1	對亡靈系敵人傷害+40%
+00F2	對惡魔系敵人傷害+40%
+00F3	對龍系敵人傷害+40%
+00F4	對物質系敵人傷害+40%
+00F5	LP為0時，造成的傷害+40%
+00F6	LP為0時，受到的傷害-30%
+00F7	耐久度消耗率降低50%
+00F8	敵人掉落物品概率+30%
+00F9	滑踢傷害+150%
+00FA	敵人倒地時，對其造成的傷害+75%
+00FB	獲得額外生命時，HP回復100%
+00FC	獲得額外生命時，移除所有異常狀態
+00FD	拾取硬幣時，HP回復5
+00FE	50%拾取的硬幣列入分數計算
+00FF	降低暈眩持續時間50%
+0100	變換場景時，箭矢數量+5
+0101	變換場景時，HP回復30%
+0102	無效果
+0103	免疫中毒效果
+0104	降低中毒時間X%
+0105	無效果
+0106	免疫燃燒效果
+0107	降低燃燒時間X%
+0108	無效果
+0109	免疫凍結效果
+010A	降低凍結時間x%
+010B	無效果
+010C	免疫石化效果
+010D	降低石化時間X%
+010E	火焰抗性+30%
+010F	冰霜抗性+30%
+0110	雷電抗性+30%
+0111	物理抗性+20%
+0112	魔法抗性+20%
+0113	暈眩抗性+75%
+0114	擊倒抗性+75%
+0115	擊退抗性+75%
+0116	來自人型系敵人的傷害-30%
+0117	來自自然系敵人的傷害-30%
+0118	來自亡靈系敵人的傷害-30%
+0119	來自惡魔系敵人的傷害-30%
+011A	來自龍系敵人的傷害-30%
+011B	來自物質系敵人的傷害-30%
+011C	來自陷阱的傷害-99%
+011D	HP回復效果+50%
+011E	瀕死時，消耗MP-50%
+011F	以LUC÷15%的概率減免所有傷害
+0120	以DEX÷10%的概率無視敵人的防禦
+0121	STR+40
+0122	INT+40
+0123	CON+40
+0124	MGR+40
+0125	DEX+40
+0126	LUC+40
+0127	無效果
+0128	STR+30
+0129	INT+30
+012A	CON+30
+012B	MGR+30
+012C	DEX+30
+012D	LUC+30
+012E	進行物理攻擊時，20%的幾率產生閃電
+012F	每次攻擊命中時，回復1%的HP
+0130	移動速度+20%
+0131	以MP值抵免30%的傷害
+0132	衝刺攻擊傷害+50%
+0133	地面普通攻擊速度+30%
+0134	踢擊時，有30%機率進行防禦
+0135	踢擊時，有50%機率抵抗擊退效果
+0136	以每秒3%速度回復最後一次承受傷害
+0137	有20%機率使來自背後的攻擊無效
+0138	50%概率擊潰敵人防禦
+0139	若受到的傷害低於20%HP時，免疫其擊退效果
+013A	對陷入異常狀態的敵人造成的傷害+50%
+013B	獲得分數+30%，受到的傷害+30%
+013C	獲得金錢+30%，造成的傷害-30%
+013D	回復HP時，同時回復其50%的MP值
+013E	施法時，有50%機率不消耗MP
+013F	所有異常狀態的持續時間縮短30%
+0140	HP全滿時造成的物理傷害+20%
+0141	HP全滿時造成的魔法傷害+20%
+0142	HP尚餘50%以上時，可抵擋一擊致死的攻擊
+0143	火焰、冰霜和雷電屬性的攻擊全部轉爲無屬性
+0144	HP全滿時，受到的傷害-50%
+0145	在空中是，受到的傷害-30%
+0146	對空中敵人造成的傷害+30%
+0147	盾擊威力+100%
+0148	懲戒劍威力+30%
+0149	反彈投射攻擊威力+100%
+014A	蠻力猛擊威力+30%
+014B	雷神之錘威力+30%
+014C	强力射擊威力+30%
+014D	專心致志效果+30%
+014E	精神吸收效果+30%
+014F	審判劍威力+50%
+0150	招架威力+50%
+0151	石膚化效果+50%
+0152	元素知識威力+50%
+0153	緩速術效果+50%
+0154	防護術效果+50%
+0155	劍刃風暴威力+50%
+0156	狂舞連擊威力+50%
+0157	狂亂威力+50%
+0158	多重箭威力+50%
+0159	法術書威力+50%
+015A	无效的
+015B	无效的
+015C	无效的
+015D	无效的
+015E	无效的
+015F	无效的
+0160	無效果
+0161	无效的
+0162	无效的
+0163	无效的
+0164	无效的
+0165	无效的
+0166	无效的
+0167	无效的
+0168	無效果
+0169	无效的
+016A	无效的
+016B	无效的
+016C	朴素的
+016D	猎人的
+016E	Bat's（待校）
+016F	Glorious（待校）
+0170	朴素的
+0171	朴素的
+0172	Toxic（待校）
+0173	Igniting（待校）
+0174	召喚劍齒虎
+0175	召喚龍獸
+0176	召喚龍獸
+0177	回復70%HP
+0178	發動閃電術
+0179	發動詛咒
+017A	發動寒霜云
+017B	發動寒冰矛
+017C	發動風暴
+017D	發動魔法飛彈
+017E	指環道具判定用
+017F	發動火球
+0180	發動强力火球
+0181	發動毀滅性火球
+0182	製造冰柱
+0183	製造强力冰柱
+0184	製造極寒冰柱
+0185	發射閃電箭
+0186	發射强力閃電箭
+0187	發射連續閃電箭
+0188	釋放毒霧
+0189	釋放强力毒霧
+018A	釋放致命毒霧
+018B	回復全體友方少量HP
+018C	回復全體友方部分HP
+018D	回復全體友方所有HP
+018E	指環道具判定用
+018F	工兵的
+0190	從天空降下大量火球雨
+0191	釋放一連串的冰霜彈
+0192	召喚强力的龍捲風
+0193	向前方噴灑强酸
+0194	復活所有友方，並回復完整HP
+0195	卷軸道具判定用
+0196	回復30%HP
+0197	朴素的
+0198	回復30%
+0199	回復50%
+019A	回復70%HP
+019B	回復所有HP并且賦予短暫的無敵狀態
+019C	免疫異常狀態，持續20秒
+019D	免疫異常狀態，持續40秒
+019E	免疫異常狀態，持續60秒
+019F	巨人的
+01A0	回復HP，持續30秒
+01A1	回復HP，持續30秒
+01A2	回復HP，持續30秒
+01A3	提昇攻擊傷害，持續30秒
+01A4	提昇攻擊傷害，持續60秒
+01A5	提昇攻擊傷害，持續120秒
+01A6	減少收到的傷害，持續30秒
+01A7	減少受到的傷害，持續60秒
+01A8	減少收到的傷害，持續120秒
+01A9	免疫擊退效果，持續20秒
+01AA	免疫擊退效果，持續40秒
+01AB	免疫擊退效果，持續60秒
+01AC	强化擊退能力，持續20秒
+01AD	强化擊退能力，持續40秒
+01AE	强化擊退能力，持續60秒
+01AF	提昇物品掉落機率，持續60秒
+01B0	提昇物品掉落機率，持續180秒
+01B1	提昇物品掉落機率，持續300秒
+01B2	投擲后會造成小範圍爆炸效果
+01B3	投擲后會造成大範圍爆炸效果
+01B4	投擲后會造成超大範圍爆炸效果
+01B5	藥水道具判定用
+01B6	具有神奇魔力的石頭
+01B7	朴素的
+01B8	具有神奇魔力的石頭
+01B9	具有神奇魔力的石頭
+01BA	具有神奇魔力的石頭
+01BB	具有神奇魔力的石頭
+01BC	具有神奇魔力的石頭
+01BD	具有神奇魔力的石頭
+01BE	具有神奇魔力的石頭
+01BF	具有神奇魔力的石頭
+01C0	具有神奇魔力的石頭
+01C1	具有神奇魔力的石頭
+01C2	具有神奇魔力的石頭
+01C3	具有神奇魔力的石頭
+01C4	具有神奇魔力的石頭
+01C5	具有神奇魔力的石頭
+01C6	具有神奇魔力的石頭
+01C7	具有神奇魔力的石頭
+01C8	具有神奇魔力的石頭
+01C9	具有神奇魔力的石頭
+01CA	具有神奇魔力的石頭
+01CB	具有神奇魔力的石頭
+01CC	具有神奇魔力的石頭
+01CD	具有神奇魔力的石頭
+01CE	具有神奇魔力的石頭
+01CF	具有神奇魔力的石頭
+01D0	技能道具判定用
+01D1	净化的
+01D2	祝福的
+01D3	屠龙的
+01D4	Deleterious（待校）
+01D5	愚者的
+01D6	Healing（待校）
+01D7	---（待校）
+01D8	普通攻擊將附帶火焰屬性
+01D9	箭矢與匕首將附帶火焰屬性
+01DA	箭矢與匕首將附帶毒屬性
+01DB	拿出一把預藏的匕首
+01DC	召喚强力的龍捲風
+01DD	令一顆巨石落在敵人頭上
+01DE	召喚一朵小型雷雲
+01DF	用暴風雪將敵人冰凍住
+01E0	將敵人困在寒霜監獄裏
+01E1	創造出能夠吸住敵人的重力場
+01E2	在敵人頭上降下火雨
+01E3	降低所有友方受到的傷害
+01E4	保護隊伍免於火焰傷害
+01E5	對範圍内的所有敵人造成雷電傷害
+01E6	將目標變形成青蛙
+01E7	憑空變出食物
+01E8	以邪眼將大範圍内的敵人石化
+01E9	召喚隕石群進行攻擊的强大魔法
+01EA	召喚强力的龍捲風
+01EB	令一顆巨石落在敵人頭上
+01EC	召喚一朵小型雷雲
+01ED	用暴風雪將敵人冰凍住
+01EE	在敵人頭上降下火雨
+01EF	產生一道持續長時間的火柱
+01F0	Vigilant（待校）
+01F1	Egotist's（待校）
+01F2	Mercenary（待校）
+01F3	Sacrosanct（待校）
+01F4	Salubrious（待校）
+01F5	Conquering（待校）
+01F6	Valiant（待校）
+01F7	神圣的
+01F8	瞬閒咒殺一名非頭目級的敵人
+01F9	Celestial（待校）
+01FA	Persevering（待校）
+01FB	绝望的
+01FC	Abasing（待校）
+01FD	Brutal（待校）
+01FE	Desolating（待校）
+01FF	Tenacious（待校）
+0200	行囊用來裝備物品
+0201	离子的
+0202	炮击的
+0203	占卜师的
+0204	轻快的
+0205	先锋的
+0206	孤独的
+0207	Colossal（待校）
+0208	特殊道具判定用
+0209	Hindering（待校）
+020A	Divine（待校）
+020B	Cyclonic（待校）
+020C	Psychotic（待校）
+020D	RaMPAGIng（待校）
+020E	Mimic's（待校）
+020F	Overlord's（待校）
+0210	龍天堂酒館
+0211	Alchemist's（待校）
+0212	无效的
+0213	无效的
+0214	無效果
+0215	回避時，會產生威力60的落雷
+0216	衝刺攻擊時，追加威力150的爆炸效果
+0217	空中落下攻擊時追加威力80的爆炸效果
+0218	生成的骷髏兵傷害+100%
+0219	生成的木魔像傷害+100%
+021A	弓箭攻擊時可以貫穿3個敵人/C
+021B	弓箭攻擊時，有30%概率不會消耗弓箭
+021C	暴擊傷害+30%
+021D	造成的傷害與受到的傷害提昇50%
+021E	強攻擊中產生重力術效果
+021F	強攻擊后產生緩速術效果
+0220	詠唱時間縮短50%
+0221	法術書的詠唱時間與威力提昇30%
+0222	傳送術的消耗MP-80%
+0223	免疫緩速術與重力術效果
+0224	獲得額外生命時，所有道具使用次數+1
+0225	獲得額外生命時，所有裝備耐久回復20%
+0226	MP每秒回復15
+0227	HP為999時，造成的傷害+30%
+0228	HP為999時，免疫所有的異常狀態
+0229	魔法攻擊時，火屬性變換爲冰屬性
+022A	魔法攻擊時，冰屬性變換為火屬性
+022B	魔法攻擊時，傷害提昇STR的20%
+022C	使用指環時，有50%的機率不會消耗剩餘次數
+022D	使用法術書時，有30%的機率不會消耗剩餘次數
+022E	依行囊内的指環數X30提升INT
+022F	騎乘座騎時，會追加動作
+0230	騎乘座騎時，擊倒敵人會回復15%HP
+0231	騎乘座騎時不會倒地
+0232	騎乘座騎時受到的傷害-X%
+0233	騎乘座騎時造成傷害+X%
+0234	擺出持盾架式時會消耗耐久度以每秒回復10HP
+0235	所有攻擊變成不是暴擊就是威力只有1
+0236	獲得硬幣時，以30%的機率發射魔法彈
+0237	自背後發動的攻擊傷害+30%
+0238	以10的幾率讓石化狀態的敵人一擊死亡
+0239	攻擊青蛙狀態的敵人傷害+300%
+023A	在物理攻擊上附加火屬性
+023B	在物理攻擊上附加冰屬性
+023C	在物理攻擊上附加雷屬性
+023D	雷神之錘的雷擊變成冰
+023E	飛鷹俯瞰的炸彈數+3
+023F	回避無敵的時間延長50%
+0240	回避無敵中，造成的傷害+50%
+0241	攻擊燃燒中敵人時有20%幾率產生火焰彈
+0242	指環效果+30%
+0243	在魔法增幅狀態中，受到的傷害-30%
+0244	在魔法增幅狀態中，受到MP-20%
+0245	Occult（待校）
+0246	Occult（待校）
+0247	以MP值抵免30%的傷害
+0248	衝刺攻擊傷害+50%
+0249	地面普通攻擊速度+30%
+024A	踢擊時，有30%機率進行防禦
+024B	踢擊時，有50%機率抵抗擊退效果
+024C	以每秒3%速度回復最後一次承受傷害
+024D	有20%機率使來自背後的攻擊無效
+024E	有50%機率擊潰敵人防禦
+024F	若受到的傷害低於20%HP時，免疫其擊退效果
+0250	對陷入異常狀態的敵人造成的傷害+50%
+0251	獲得分數+30%，受到的傷害+30%
+0252	獲得金錢+30%，造成的傷害-30%
+0253	回復HP時，同時回復其50%的MP值
+0254	施法時，有50%機率不消耗MP
+0255	所有異常狀態的持續時間縮短30%
+0256	HP全滿時，造成的物理傷害+20%
+0257	HP全滿時，造成的魔法傷害+20%
+0258	HP尚餘50%以上時，可抵擋一擊致死的攻擊
+0259	火焰、冰霜和雷電屬性的攻擊全部轉爲無屬性
+025A	HP全滿時，受到的傷害-50%
+025B	在空中是，受到的傷害-30%
+025C	對空中敵人造成的傷害+30%
+025D	盾擊威力+100%
+025E	懲戒劍威力+30%
+025F	反彈投射攻擊威力+100%
+0260	蠻力猛擊威力+30%
+0261	雷神之錘威力+30%
+0262	强力射擊威力+30%
+0263	專心致志效果+30%
+0264	精神吸收效果+30%
+0265	審判劍威力+50%
+0266	招架威力+50%
+0267	石膚化效果+50%
+0268	元素知識威力+50%
+0269	緩速術效果+50%
+026A	防護術效果+50%
+026B	劍刃風暴威力+50%
+026C	狂舞連擊威力+50%
+026D	狂亂威力+50%
+026E	多重箭威力+50%
+026F	法術書威力+50%
+0270	無效果
+0271	Unfazed（待校）
+0272	Ranger's（待校）
+0273	Solid（待校）
+0274	无效的
+0275	澄澈的
+0276	增幅的
+0277	无效的
+0278	灼印的
+0279	窒息的
+027A	无效的
+027B	Simmering（待校）
+027C	对流的
+027D	无效的
+027E	Gorgon's（待校）
+027F	Ethereal（待校）
+0280	CD2武器效果0095
+0281	对流的
+0282	抗性的
+0283	Iron Wall（待校）
+0284	贤者的
+0285	滑踢攻擊追加火焰傷害
+0286	滑踢攻擊追加冰柱
+0287	話題攻擊追加閃電箭
+0288	強攻擊時，追加威力120的爆炸
+0289	強攻擊時，追加威力120的火柱
+028A	強攻擊時，追加威力120的冰柱
+028B	強攻擊時，追加威力120的雷電
+028C	強攻擊時，追加威力120的龍捲風
+028D	強攻擊時，追加威力120的毒霧
+028E	獲得額外生命時會自爆
+028F	元素知識發動速度+50%
+0290	藥水系道具效果遍及全體
+0291	擊倒值和擊退值+50%
+0292	STR和CON+30
+0293	INT和MGR+30
+0294	造成傷害時追加20%火焰、冰霜傷害
+0295	造成傷害時追加20%冰霜、雷電傷害
+0296	造成傷害時追加20%雷電、火焰傷害
+0297	減輕30%火焰、冰霜、雷電的傷害
+0298	地面普通連擊速度+20%、威力+30%
+0299	擊中攻擊中的敵人可使其倒退
+029A	颶風粉碎劍威力+50%
+029B	音速爆裂威力+100%
+029C	吸引注意傷害提昇效果+100%
+029D	割喉者威力+50%
+029E	致命迴旋威力+50%
+029F	戰紋持續時間+50%
+02A0	巨力投擲傷害提昇效果+50%
+02A1	凶器之拳效果+50%
+02A2	火焰專精效果+50%
+02A3	連續射擊數+5%
+02A4	强化靴子效果+100%
+02A5	背刺效果+50%
+02A6	萃取魔力效果+100%
+02A7	冰牢術效果+50%
+02A8	石化術效果+100%
+02A9	火焰護盾效果+50%
+02AA	浮游術傷害提昇效果+30%
+02AB	發動傳送術時產生威力50的火焰
+02AC	發動傳送術時產生威力50的冰柱
+02AD	發動傳送術時產生威力50的閃電
+02AE	風暴術變化為冰屬性
+02AF	淬毒銳鋒的效果變化為冰屬性
+02B0	炸彈威力+100%
+02B1	强化匕首性能
+02B2	强化十字弓系的性能
+02B3	强化體魄時，造成的傷害+20%
+02B4	盾攻擊傷害+100%
+02B5	死亡時產生2000的爆炸
+02B6	精英武器到此爲止
+02B7	Desolating（待校）
+02B8	ELT武器效果0046
+02B9	ELT武器效果0047
+02BA	ELT武器效果0048
+02BB	ELT武器效果0049
+02BC	ELT武器效果0050
+02BD	ELT武器效果0051
+02BE	ELT武器效果0052
+02BF	ELT武器效果0053
+02C0	ELT武器效果0054
+02C1	ELT武器效果0055
+02C2	ELT武器效果0056
+02C3	ELT武器效果0057
+02C4	ELT武器效果0058
+02C5	ELT武器效果0059
+02C6	ELT武器效果0060
+02C7	ELT武器效果0061
+02C8	ELT武器效果0062
+02C9	ELT武器效果0063
+02CA	ELT武器效果0064
+02CB	ELT武器效果0065
+02CC	ELT武器效果0066
+02CD	ELT武器效果0067
+02CE	ELT武器效果0068
+02CF	ELT武器效果0069
+02D0	ELT武器效果0070
+02D1	ELT武器效果0071
+02D2	ELT武器效果0072
+02D3	ELT武器效果0073
+02D4	ELT武器效果0074
+02D5	ELT武器效果0075
+02D6	ELT武器效果0076
+02D7	ELT武器效果0077
+02D8	ELT武器效果0078
+02D9	ELT武器效果0079
+02DA	ELT武器效果0080
+02DB	ELT武器效果0081
+02DC	ELT武器效果0082
+02DD	ELT武器效果0083
+02DE	ELT武器效果0084
+02DF	ELT武器效果0085
+02E0	ELT武器效果0086
+02E1	ELT武器效果0087
+02E2	ELT武器效果0088
+02E3	ELT武器效果0089
+02E4	ELT武器效果0090
+02E5	ELT武器效果0091
+02E6	ELT武器效果0092
+02E7	ELT武器效果0093
+02E8	ELT武器效果0094
+02E9	ELT武器效果0095
+02EA	ELT武器效果0096
+02EB	ELT武器效果0097
+02EC	ELT武器效果0098
+02ED	ELT武器效果0099
+02EE	ELT武器效果0100
+02EF	ELT武器效果0101
+02F0	回避時，會產生威力60的落雷
+02F1	衝刺攻擊時，追加威力150的爆炸效果
+02F2	空中落下攻擊時追加威力80的爆炸效果
+02F3	生成的骷髏兵傷害+100%
+02F4	生成的木魔像傷害+100%
+02F5	弓箭攻擊時可以貫穿3個敵人/C
+02F6	弓箭攻擊時，有30%概率不會消耗弓箭
+02F7	暴擊傷害+30%
+02F8	造成傷害與受到傷害提晟50%
+02F9	強攻擊中產生重力術效果
+02FA	強攻擊後產生緩速術效果
+02FB	詠唱時間縮短50%
+02FC	法術書的詠唱時間與威力提昇30%
+02FD	傳送術的消耗MP-80%
+02FE	免疫緩速術與重力術效果
+02FF	獲得額外生命時，所有道具使用次數+1
+0300	獲得額外生命時，所有裝備耐久回復20%
+0301	MP每秒回復15
+0302	HP為999時，造成的傷害+30%
+0303	HP為999時，免疫所有的異常狀態
+0304	魔法攻擊時，火屬性變換爲冰屬性
+0305	魔法攻擊時，冰屬性變換為火屬性
+0306	魔法攻擊時，傷害提昇STR的20%
+0307	使用指環時，有50%的機率不會消耗剩餘次數
+0308	使用法術書時，有30%的機率不會消耗剩餘次數
+0309	依行囊内的指環數X30提升INT
+030A	騎乘座騎時，會追加動作
+030B	騎乘座騎時，擊倒敵人會回復15%HP
+030C	騎乘座騎時不會倒地
+030D	騎乘座騎時受到的傷害-X%
+030E	騎乘座騎時造成傷害+X%
+030F	擺出持盾架式時會消耗耐久度以每秒回復10HP
+0310	所有攻擊變成不是暴擊就是威力只有1
+0311	獲得硬幣時，以30%的機率發射魔法彈
+0312	自背後發動的攻擊傷害+30%
+0313	以10的幾率讓石化狀態的敵人一擊死亡
+0314	攻擊青蛙狀態的敵人傷害+300%
+0315	在物理攻擊上附加火屬性
+0316	在物理攻擊上附加冰屬性
+0317	1
+0318	雷神之錘的雷擊變成冰
+0319	飛鷹俯瞰的炸彈數+3
+031A	回避無敵的時間延長50%
+031B	回避無敵中，造成的傷害+50%
+031C	攻擊燃燒中敵人時有20%幾率產生火焰彈
+031D	指環效果+30%
+031E	在魔法增幅狀態中，受到的傷害-30%
+031F	在魔法增幅狀態中，受到MP-20%
+0320	無效果
+0321	無效果
+0322	以MP值抵免30%的傷害
+0323	衝刺攻擊傷害+50%
+0324	地面普通攻擊速度+30%
+0325	踢擊時，有30%機率進行防禦
+0326	踢擊時，有50%機率抵抗擊退效果
+0327	以每秒3%速度回復最後一次承受傷害
+0328	有20%機率使來自背後的攻擊無效
+0329	有50%機率擊潰敵人防禦
+032A	若受到的傷害低於20%HP時，免疫其擊退效果
+032B	對陷入異常狀態的敵人造成的傷害+50%
+032C	獲得分數+30%，受到的傷害+30%
+032D	獲得金錢+30%，造成的傷害-30%
+032E	回復HP時，同時回復其50%的MP值
+032F	施法時，有50%機率不消耗MP
+0330	所有異常狀態的持續時間縮短30%
+0331	HP全滿時，造成的物理傷害+20%
+0332	HP全滿時，造成的魔法傷害+20%
+0333	HP尚餘50%以上時，可抵擋一擊致死的攻擊
+0334	火焰、冰霜和雷電屬性的攻擊全部轉爲無屬性
+0335	HP全滿時，受到的傷害-50%
+0336	在空中是，受到的傷害-30%
+0337	對空中敵人造成的傷害+30%
+0338	盾擊威力+100%
+0339	懲戒劍威力+30%
+033A	反彈投射攻擊威力+100%
+033B	蠻力猛擊威力+30%
+033C	雷神之錘威力+30%
+033D	强力射擊威力+30%
+033E	專心致志效果+30%
+033F	精神吸收效果+30%
+0340	審判劍威力+50%
+0341	招架威力+50%
+0342	石膚化效果+50%
+0343	元素知識威力+50%
+0344	緩速術效果+50%
+0345	防護術效果+50%
+0346	劍刃風暴威力+50%
+0347	狂舞連擊威力+50%
+0348	狂亂威力+50%
+0349	多重箭威力+50%
+034A	法術書威力+50%
+034B	無效果
+034C	無效果
+034D	無效果
+034E	無效果
+034F	無效果
+0350	CD2配件效果0071
+0351	CD2配件效果0072
+0352	CD2配件效果0073
+0353	CD2配件效果0074
+0354	CD2配件效果0075
+0355	CD2配件效果0076
+0356	CD2配件效果0077
+0357	CD2配件效果0078
+0358	CD2配件效果0079
+0359	CD2配件效果0080
+035A	CD2配件效果0081
+035B	CD2配件效果0082
+035C	CD2配件效果0083
+035D	CD2配件效果0084
+035E	CD2配件效果0085
+035F	CD2配件效果0086
+0360	CD2配件效果0087
+0361	CD2配件效果0088
+0362	CD2配件效果0089
+0363	CD2配件效果0090
+0364	CD2配件效果0091
+0365	CD2配件效果0092
+0366	CD2配件效果0093
+0367	CD2配件效果0094
+0368	CD2配件效果0095
+0369	CD2配件效果0096
+036A	CD2配件效果0097
+036B	CD2配件效果0098
+036C	精英配件從這邊開始
+036D	滑踢攻擊追加威力100火焰傷害
+036E	滑踢攻擊追加威力100
+036F	滑踢攻擊追加閃電箭
+0370	強攻擊時，追加威力120的爆炸
+0371	強攻擊時，追加威力120的火柱
+0372	強攻擊時，追加威力120的冰柱
+0373	強攻擊時，追加威力120的雷電
+0374	強攻擊時，追加威力120的龍捲風
+0375	強攻擊時，追加威力120的毒霧
+0376	獲得額外生命時會自爆
+0377	元素知識發動速度+50%
+0378	藥水系道具效果遍及全體
+0379	擊倒值和擊退值+50%
+037A	STR和CON+30
+037B	INT和MGR+30
+037C	造成傷害時追加20%火焰、冰霜傷害
+037D	造成傷害時追加20%冰霜、雷電傷害
+037E	造成傷害時追加20%雷電、火焰傷害
+037F	減輕30%火焰、冰霜、雷電的傷害
+0380	地面普通連擊速度+20%、威力+30%
+0381	擊中攻擊中的敵人可使其倒退
+0382	颶風粉碎劍威力+50%
+0383	音速爆裂威力+100%
+0384	吸引注意傷害提昇效果+100%
+0385	割喉者威力+50%
+0386	致命迴旋威力+50%
+0387	戰紋持續時間+50%
+0388	巨力投擲傷害提昇效果+50%
+0389	凶器之拳效果+50%
+038A	火焰專精效果+50%
+038B	連續射擊數+5%
+038C	强化靴子效果+100%
+038D	背刺效果+50%
+038E	萃取魔力效果+100%
+038F	冰牢術效果+50%
+0390	石化術效果+100%
+0391	火焰護盾效果+50%
+0392	浮游術傷害提昇效果+30%
+0393	發動傳送術時產生威力50的火焰
+0394	發動傳送術時產生威力50的冰柱
+0395	發動傳送術時產生威力50的閃電
+0396	風暴術變化為冰屬性
+0397	淬毒銳鋒的效果變化為冰屬性
+0398	炸彈威力+100%
+0399	强化匕首性能
+039A	强化十字弓系的性能
+039B	强化體魄時，造成的傷害+20%
+039C	盾攻擊傷害+100%
+039D	死亡時產生2000的爆炸
+039E	精英武器到此爲止
+039F	Gelid（待校）
+03A0	ELT配件效果0009
+03A1	ELT配件效果0010
+03A2	ELT配件效果0011
+03A3	ELT配件效果0012
+03A4	ELT配件效果0013
+03A5	ELT配件效果0014
+03A6	ELT配件效果0015
+03A7	ELT配件效果0016
+03A8	ELT配件效果0017
+03A9	ELT配件效果0018
+03AA	ELT配件效果0019
+03AB	ELT配件效果0020
+03AC	ELT配件效果0021
+03AD	ELT配件效果0022
+03AE	ELT配件效果0023
+03AF	ELT配件效果0024
+03B0	ELT配件效果0025
+03B1	ELT配件效果0026
+03B2	ELT配件效果0027
+03B3	ELT配件效果0028
+03B4	ELT配件效果0029
+03B5	ELT配件效果0030
+03B6	ELT配件效果0031
+03B7	ELT配件效果0032
+03B8	ELT配件效果0033
+03B9	ELT配件效果0034
+03BA	ELT配件效果0035
+03BB	ELT配件效果0036
+03BC	ELT配件效果0037
+03BD	ELT配件效果0038
+03BE	ELT配件效果0039
+03BF	ELT配件效果0040
+03C0	ELT配件效果0041
+03C1	ELT配件效果0042
+03C2	ELT配件效果0043
+03C3	ELT配件效果0044
+03C4	ELT配件效果0045
+03C5	ELT配件效果0046
+03C6	ELT配件效果0047
+03C7	ELT配件效果0048
+03C8	ELT配件效果0049
+03C9	ELT配件效果0050
+03CA	ELT配件效果0051
+03CB	ELT配件效果0052
+03CC	ELT配件效果0053
+03CD	ELT配件效果0054
+03CE	ELT配件效果0055
+03CF	ELT配件效果0056
+03D0	ELT配件效果0057
+03D1	ELT配件效果0058
+03D2	ELT配件效果0059
+03D3	ELT配件效果0060
+03D4	ELT配件效果0061
+03D5	ELT配件效果0062
+03D6	ELT配件效果0063
+03D7	ELT配件效果0064
+03D8	ELT配件效果0065
+03D9	ELT配件效果0066
+03DA	ELT配件效果0067
+03DB	ELT配件效果0068
+03DC	ELT配件效果0069
+03DD	ELT配件效果0070
+03DE	ELT配件效果0071
+03DF	ELT配件效果0072
+03E0	Exquisite（待校）
+03E1	Exquisite（待校）
+03E2	Exquisite（待校）
+03E3	Unbowed（待校）
+03E4	Volley（待校）
+03E5	Exquisite（待校）
+03E6	无效的
+03E7	澄澈的
+03E8	Immunizing（待校）
+03E9	无效的
+03EA	灼印的
+03EB	Fireproof（待校）
+03EC	无效的
+03ED	Simmering（待校）
+03EE	Iceproof（待校）
+03EF	无效的
+03F0	Gorgon's（待校）
+03F1	INTangible（待校）
+03F2	Fireproof（待校）
+03F3	Iceproof（待校）
+03F4	Insulated（待校）
+03F5	Great Wall（待校）
+03F6	Deity's（待校）
+03F7	Unbowed（待校）
+03F8	Unbowed（待校）
+03F9	IMPervious（待校）
+03FA	Murderer's（待校）
+03FB	Mechanical（待校）
+03FC	Venerating（待校）
+03FD	Godly（待校）
+03FE	Wyrmreaper（待校）
+03FF	Wrackful（待校）
+0400	Wanderer's（待校）
+0401	Paladin's（待校）
+0402	---（待校）
+0403	---（待校）
+0404	---（待校）
+0405	Supreme（待校）
+0406	Monk's（待校）
+0407	ChaMPion's（待校）
+0408	Warding（待校）
+0409	Mercurial（待校）
+040A	幸运的
+040B	Supreme（待校）
+040C	Supreme（待校）
+040D	Monk's（待校）
+040E	ChaMPion's（待校）
+040F	Warding（待校）
+0410	Mercurial（待校）
+0411	幸运的
+0412	洞察的
+0413	TraMPling（待校）
+0414	Swift（待校）
+0415	Violent（待校）
+0416	Wrathful（待校）
+0417	Reverent（待校）
+0418	Attentive（待校）
+0419	Inviolable（待校）
+041A	IMPervious（待校）
+041B	Vigilant（待校）
+041C	Egotist's（待校）
+041D	Mercenary（待校）
+041E	Sacrosanct（待校）
+041F	Salubrious（待校）
+0420	Conquering（待校）
+0421	Valiant（待校）
+0422	神圣的
+0423	IMPervious（待校）
+0424	Celestial（待校）
+0425	Persevering（待校）
+0426	绝望的
+0427	Abasing（待校）
+0428	Brutal（待校）
+0429	Desolating（待校）
+042A	Tenacious（待校）
+042B	碾压的
+042C	离子的
+042D	炮击的
+042E	占卜师的
+042F	轻快的
+0430	先锋的
+0431	孤独的
+0432	Colossal（待校）
+0433	Able（待校）
+0434	Hindering（待校）
+0435	Divine（待校）
+0436	Cyclonic（待校）
+0437	Psychotic（待校）
+0438	RaMPAGIng（待校）
+0439	Mimic's（待校）
+043A	Overlord's（待校）
+043B	Supreme（待校）
+043C	Alchemist's（待校）
+043D	无效的
+043E	无效的
+043F	无效的
+0440	无效的
+0441	无效的
+0442	无效的
+0443	无效的
+0444	无效的
+0445	无效的
+0446	无效的
+0447	无效的
+0448	无效的
+0449	无效的
+044A	无效的
+044B	无效的
+044C	无效的
+044D	无效的
+044E	无效的
+044F	无效的
+0450	Exquisite（待校）
+0451	Volley（待校）
+0452	VaMPire's（待校）
+0453	Epic（待校）
+0454	Exquisite（待校）
+0455	Exquisite（待校）
+0456	使敌人中毒 % 概率
+0457	使敌人燃烧 % 概率
+0458	使敌人冻结 % 概率
+0459	使敌人石化 % 概率
+045A	以火焰弹反击 % 概率
+045B	以冰霜弹反击 % 概率
+045C	以雷电弹反击 % 概率
+045D	以魔法弹反击 % 概率
+045E	+% of DMG taken converted to MP（待校）
+045F	DMG up if spell repeated +%（待校）
+0460	MP charge 速度 +%
+0461	MP used & DMG -%
+0462	MP used & DMG +%
+0463	% 概率 to resist knockback when casting
+0464	Max MP +（待校）
+0465	Fire 伤害 +%
+0466	Ice 伤害 +%
+0467	Lightning 伤害 +%
+0468	MAGIc 伤害 +%
+0469	Power Smash 伤害 +%
+046A	No effect（待校）
+046B	No effect（待校）
+046C	Kick attack 伤害 +%
+046D	Barefisted 伤害 +%
+046E	DMG taken while barefisted -%（待校）
+046F	Barefisted knockback +（待校）
+0470	MAGIc Missiles +%（待校）
+0471	MAGIc Shot 伤害 +%
+0472	No effect（待校）
+0473	% 概率 of throw explosion
+0474	Throw 伤害 +%
+0475	% 概率 to take 1/2 伤害
+0476	HP最大值 +
+0477	造成的伤害 +%
+0478	受到的伤害 -%
+0479	暴击率 +%
+047A	At low HP, 物品 healing +%
+047B	At low HP, 速度 +%
+047C	At low HP, DMG dealt +%（待校）
+047D	Ignore armor % 概率
+047E	% of dropping coins each hit（待校）
+047F	Stun 概率 +%
+0480	Knockdown 概率 +%
+0481	Knockback 概率 +%
+0482	% 概率 of fire retribution
+0483	% 概率 of ice retribution
+0484	% 概率 of lightning retribution
+0485	% 概率 of mAGIc retribution
+0486	DMG +%, durability down（待校）
+0487	DMG +%, durability drops（待校）
+0488	DMG +%, durability way down（待校）
+0489	Bonus % as fire DMG（待校）
+048A	Bonus % as ice DMG（待校）
+048B	Bonus % as lightning DMG（待校）
+048C	DMG to human foes +%（待校）
+048D	DMG to natural foes +%（待校）
+048E	DMG to undead foes +%（待校）
+048F	DMG to demonic foes +%（待校）
+0490	DMG to draconic foes +%（待校）
+0491	DMG to objects +%（待校）
+0492	When LP is 0, DMG dealt +%（待校）
+0493	When LP is 0, DMG taken -%（待校）
+0494	耐久度消耗率降低 %
+0495	敌人 物品 drop rate +%
+0496	Slide 伤害 +%
+0497	+% 伤害 to downed 敌人
+0498	While extending, HP recovers %（待校）
+0499	Status ailments removed after extending（待校）
+049A	Recover HP when picking up coins（待校）
+049B	Obtain score % of coins obtained（待校）
+049C	Stun time reduced by %（待校）
+049D	+ 变换场景时箭矢数量
+049E	+% HP on stage transition（待校）
+049F	No effect（待校）
+04A0	Grants immunity to poison（待校）
+04A1	Decrease poison duration by %（待校）
+04A2	No effect（待校）
+04A3	Grants immunity to burning（待校）
+04A4	Decrease burning duration by %（待校）
+04A5	No effect（待校）
+04A6	Grants immunity to freezing（待校）
+04A7	Decrease freezing duration by %（待校）
+04A8	No effect（待校）
+04A9	Grants immunity to petrification（待校）
+04AA	Decrease petrification duration by %（待校）
+04AB	火焰抗性 +%
+04AC	冰霜抗性 +%
+04AD	雷电抗性 +%
+04AE	Physical resistance +%（待校）
+04AF	魔法抗性 +%
+04B0	Stun resistance +%（待校）
+04B1	Knockdown resistance +%（待校）
+04B2	Knockback resistance +%（待校）
+04B3	DMG from human foes -%（待校）
+04B4	DMG from natural foes -%（待校）
+04B5	DMG from undead foes -%（待校）
+04B6	DMG from demonic foes -%（待校）
+04B7	DMG from draconic foes -%（待校）
+04B8	DMG from objects -%（待校）
+04B9	DMG from traps -%（待校）
+04BA	HP recovery effect +%（待校）
+04BB	At low HP, consumed MP -%（待校）
+04BC	LUC/15 概率 to null 受到的伤害
+04BD	DEX/10 概率 to ignore 敌人 defense
+04BE	STR +（待校）
+04BF	INT +（待校）
+04C0	CON +（待校）
+04C1	MGR +（待校）
+04C2	DEX +（待校）
+04C3	LUC +（待校）
+04C4	No effect（待校）
+04C5	STR +（待校）
+04C6	INT +（待校）
+04C7	CON +（待校）
+04C8	MGR +（待校）
+04C9	DEX +（待校）
+04CA	LUC +（待校）
+04CB	+% 概率 release lightning during physical attack
+04CC	Recover HP per attack hit（待校）
+04CD	Move 速度 +% up
+04CE	MP takes % of 伤害
+04CF	Dash attack 伤害 +%
+04D0	Normal attack 速度 +%
+04D1	% 概率 to guard during kick
+04D2	% 概率 to resist knockback when kicking
+04D3	Regain % of last 受到的伤害 every second
+04D4	% 概率 to null back attack
+04D5	% 概率 of guard break
+04D6	No knockback with % of HP（待校）
+04D7	DMG dealt +% to 敌人 with status ailments
+04D8	Score +%, DMG taken +%（待校）
+04D9	金币 obtained +%, DMG dealt -%
+04DA	When recovering HP, also recover % as MP（待校）
+04DB	% 概率 that 0 MP will be consumed when casting
+04DC	Status ailment duration decreased by %（待校）
+04DD	When HP is at max, dealt physical 伤害 +%
+04DE	When HP is at max, dealt mAGIcal 伤害 +%
+04DF	When HP is above %, withstand one-hit KO（待校）
+04E0	Fire, ice, and lightning DMG becomes non-elemental DMG（待校）
+04E1	When HP is max, 受到的伤害 -%
+04E2	While airborne, 受到的伤害 -%
+04E3	造成的伤害 +% to 敌人 in the air
+04E4	Effect of Bash +%（待校）
+04E5	Power of Rebuke +%（待校）
+04E6	Power of Missile Reflect +%（待校）
+04E7	Power of Brutal Drive +%（待校）
+04E8	Power of Grand Smash +%（待校）
+04E9	Power of Power Shot +%（待校）
+04EA	Effect of Concentrate +%（待校）
+04EB	Effect of Mental Absorb +%（待校）
+04EC	Power of Judgement +%（待校）
+04ED	Power of Parry +%（待校）
+04EE	Effect of Rock Skin +%（待校）
+04EF	Power of Elemental Lore +%（待校）
+04F0	Effect of Slow +%（待校）
+04F1	Effect of Protection +%（待校）
+04F2	Power of TeMPest Edge +%（待校）
+04F3	Power of Brandish +%（待校）
+04F4	Power of Frenzy +%（待校）
+04F5	Power of Clone STRikes +%（待校）
+04F6	Power of spells +%（待校）
+04F7	No effect（待校）
+04F8	No effect（待校）
+04F9	No effect（待校）
+04FA	No effect（待校）
+04FB	No effect（待校）
+04FC	No effect（待校）
+04FD	No effect（待校）
+04FE	No effect（待校）
+04FF	No effect（待校）
+0500	No effect（待校）
+0501	No effect（待校）
+0502	No effect（待校）
+0503	No effect（待校）
+0504	No effect（待校）
+0505	No effect（待校）
+0506	No effect（待校）
+0507	No effect（待校）
+0508	No effect（待校）
+0509	No effect（待校）
+050A	No effect（待校）
+050B	No effect（待校）
+050C	No effect（待校）
+050D	No effect（待校）
+050E	No effect（待校）
+050F	No effect（待校）
+0510	No effect（待校）
+0511	No effect（待校）
+0512	Toxic（待校）
+0513	Scorching（待校）
+0514	Gelid（待校）
+0515	Basilisk's（待校）
+0516	Charring（待校）
+0517	Icicle（待校）
+0518	Voltaic（待校）
+0519	Thaumic（待校）
+051A	Mental（待校）
+051B	朴素的
+051C	朴素的
+051D	朴素的
+051E	朴素的
+051F	Thoughtful（待校）
+0520	Priest's（待校）
+0521	Igniting（待校）
+0522	WINTry（待校）
+0523	Sparking（待校）
+0524	朴素的
+0525	朴素的
+0526	无效的
+0527	无效的
+0528	Horse's（待校）
+0529	Horse's（待校）
+052A	Horse's（待校）
+052B	Horse's（待校）
+052C	朴素的
+052D	朴素的
+052E	无效的
+052F	Explosive（待校）
+0530	工兵的
+0531	掩护的
+0532	Hale（待校）
+0533	Aware（待校）
+0534	坚固的
+0535	Sharpened（待校）
+0536	绝望的
+0537	Scrappy（待校）
+0538	Scrappy（待校）
+0539	Vacuum（待校）
+053A	Cutpurse's（待校）
+053B	朴素的
+053C	朴素的
+053D	朴素的
+053E	龙之
+053F	巨人的
+0540	女武神的
+0541	屠夫的
+0542	Ceramic（待校）
+0543	Zirconic（待校）
+0544	Crystal（待校）
+0545	Igniting（待校）
+0546	WINTry（待校）
+0547	Sparking（待校）
+0548	盗贼的
+0549	陷阱师的
+054A	净化的
+054B	祝福的
+054C	屠龙的
+054D	Deleterious（待校）
+054E	Foolhardy（待校）
+054F	Foolhardy（待校）
+0550	可靠的
+0551	吉祥的
+0552	LaMPrey's（待校）
+0553	Merciful（待校）
+0554	Exalted（待校）
+0555	Exalted（待校）
+0556	PillAGIng（待校）
+0557	PillAGIng（待校）
+0558	完好的
+0559	朴素的
+055A	Pioneer's（待校）
+055B	无效的
+055C	澄澈的
+055D	增幅的
+055E	无效的
+055F	灼印的
+0560	窒息的
+0561	无效的
+0562	Simmering（待校）
+0563	对流的
+0564	无效的
+0565	Gorgon's（待校）
+0566	Ethereal（待校）
+0567	窒息的
+0568	对流的
+0569	抗性的
+056A	铁壁的
+056B	贤者的
+056C	完好的
+056D	完好的
+056E	强力的
+056F	盗贼的
+0570	陷阱师的
+0571	净化的
+0572	祝福的
+0573	屠龙的
+0574	Deleterious（待校）
+0575	愚者的
+0576	Healing（待校）
+0577	孤独的
+0578	Exalted（待校）
+0579	Accurate（待校）
+057A	强化的
+057B	敏锐的
+057C	Vibrant（待校）
+057D	Rebuffing（待校）
+057E	Deft（待校）
+057F	吉祥的
+0580	Supreme（待校）
+0581	Supreme（待校）
+0582	Monk's（待校）
+0583	ChaMPion's（待校）
+0584	Warding（待校）
+0585	Mercurial（待校）
+0586	幸运的
+0587	Plasmic（待校）
+0588	Favored（待校）
+0589	Beatified（待校）
+058A	洞察的
+058B	TraMPling（待校）
+058C	Swift（待校）
+058D	Violent（待校）
+058E	Wrathful（待校）
+058F	Reverent（待校）
+0590	Attentive（待校）
+0591	Inviolable（待校）
+0592	IMPervious（待校）
+0593	Vigilant（待校）
+0594	Egotist's（待校）
+0595	Mercenary（待校）
+0596	Sacrosanct（待校）
+0597	Salubrious（待校）
+0598	Conquering（待校）
+0599	Valiant（待校）
+059A	神圣的
+059B	IMPervious（待校）
+059C	Celestial（待校）
+059D	Persevering（待校）
+059E	绝望的
+059F	Abasing（待校）
+05A0	Brutal（待校）
+05A1	Desolating（待校）
+05A2	Tenacious（待校）
+05A3	碾压的
+05A4	离子的
+05A5	炮击的
+05A6	占卜师的
+05A7	轻快的
+05A8	先锋的
+05A9	孤独的
+05AA	Colossal（待校）
+05AB	Able（待校）
+05AC	Hindering（待校）
+05AD	Divine（待校）
+05AE	Cyclonic（待校）
+05AF	Psychotic（待校）
+05B0	RaMPAGIng（待校）
+05B1	Mimic's（待校）
+05B2	Overlord's（待校）
+05B3	Supreme（待校）
+05B4	无效的
+05B5	无效的
+05B6	无效的
+05B7	无效的
+05B8	无效的
+05B9	无效的
+05BA	无效的
+05BB	无效的
+05BC	无效的
+05BD	无效的
+05BE	无效的
+05BF	无效的
+05C0	无效的
+05C1	无效的
+05C2	无效的
+05C3	无效的
+05C4	无效的
+05C5	无效的
+05C6	无效的
+05C7	无效的
+05C8	无效的
+05C9	无效的
+05CA	无效的
+05CB	无效的
+05CC	无效的
+05CD	无效的
+05CE	Toxic（待校）
+05CF	Scorching（待校）
+05D0	Gelid（待校）
+05D1	Basilisk's（待校）
+05D2	Charring（待校）
+05D3	Icicle（待校）
+05D4	Voltaic（待校）
+05D5	Thaumic（待校）
+05D6	Mental（待校）
+05D7	朴素的
+05D8	朴素的
+05D9	朴素的
+05DA	朴素的
+05DB	Thoughtful（待校）
+05DC	Priest's（待校）
+05DD	Igniting（待校）
+05DE	WINTry（待校）
+05DF	Sparking（待校）
+05E0	朴素的
+05E1	朴素的
+05E2	无效的
+05E3	无效的
+05E4	Horse's（待校）
+05E5	Horse's（待校）
+05E6	Horse's（待校）
+05E7	Horse's（待校）
+05E8	朴素的
+05E9	朴素的
+05EA	无效的
+05EB	Explosive（待校）
+05EC	工兵的
+05ED	掩护的
+05EE	Hale（待校）
+05EF	Aware（待校）
+05F0	坚固的
+05F1	Sharpened（待校）
+05F2	绝望的
+05F3	Scrappy（待校）
+05F4	Scrappy（待校）
+05F5	Vacuum（待校）
+05F6	Cutpurse's（待校）
+05F7	朴素的
+05F8	朴素的
+05F9	朴素的
+05FA	龙之
+05FB	巨人的
+05FC	女武神的
+05FD	屠夫的
+05FE	Ceramic（待校）
+05FF	Zirconic（待校）
+0600	Crystal（待校）
+0601	Scalding（待校）
+0602	Frigid（待校）
+0603	Arcing（待校）
+0604	盗贼的
+0605	陷阱师的
+0606	净化的
+0607	祝福的
+0608	屠龙的
+0609	Deleterious（待校）
+060A	Foolhardy（待校）
+060B	Foolhardy（待校）
+060C	可靠的
+060D	吉祥的
+060E	LaMPrey's（待校）
+060F	Merciful（待校）
+0610	Exalted（待校）
+0611	Exalted（待校）
+0612	PillAGIng（待校）
+0613	PillAGIng（待校）
+0614	完好的
+0615	朴素的
+0616	Pioneer's（待校）
+0617	无效的
+0618	澄澈的
+0619	增幅的
+061A	无效的
+061B	灼印的
+061C	窒息的
+061D	无效的
+061E	Simmering（待校）
+061F	对流的
+0620	无效的
+0621	Gorgon's（待校）
+0622	Ethereal（待校）
+0623	窒息的
+0624	对流的
+0625	抗性的
+0626	铁壁的
+0627	贤者的
+0628	完好的
+0629	完好的
+062A	强力的
+062B	盗贼的
+062C	陷阱师的
+062D	净化的
+062E	祝福的
+062F	屠龙的
+0630	Deleterious（待校）
+0631	愚者的
+0632	Healing（待校）
+0633	孤独的
+0634	Exalted（待校）
+0635	Accurate（待校）
+0636	强化的
+0637	敏锐的
+0638	Vibrant（待校）
+0639	Rebuffing（待校）
+063A	Deft（待校）
+063B	吉祥的
+063C	Supreme（待校）
+063D	Supreme（待校）
+063E	Monk's（待校）
+063F	ChaMPion's（待校）
+0640	Warding（待校）
+0641	Mercurial（待校）
+0642	幸运的
+0643	Plasmic（待校）
+0644	Favored（待校）
+0645	Beatified（待校）
+0646	洞察的
+0647	TraMPling（待校）
+0648	Swift（待校）
+0649	Violent（待校）
+064A	Wrathful（待校）
+064B	Reverent（待校）
+064C	Attentive（待校）
+064D	Inviolable（待校）
+064E	IMPervious（待校）
+064F	Vigilant（待校）
+0650	Egotist's（待校）
+0651	Mercenary（待校）
+0652	Sacrosanct（待校）
+0653	Salubrious（待校）
+0654	Conquering（待校）
+0655	Valiant（待校）
+0656	神圣的
+0657	IMPervious（待校）
+0658	Celestial（待校）
+0659	Persevering（待校）
+065A	绝望的
+065B	Abasing（待校）
+065C	Brutal（待校）
+065D	Desolating（待校）
+065E	Tenacious（待校）
+065F	碾压的
+0660	离子的
+0661	炮击的
+0662	占卜师的
+0663	轻快的
+0664	先锋的
+0665	孤独的
+0666	Colossal（待校）
+0667	Able（待校）
+0668	Hindering（待校）
+0669	Divine（待校）
+066A	Cyclonic（待校）
+066B	Psychotic（待校）
+066C	RaMPAGIng（待校）
+066D	Mimic's（待校）
+066E	Overlord's（待校）
+066F	Supreme（待校）
+0670	无效的
+0671	无效的
+0672	无效的
+0673	无效的
+0674	无效的
+0675	无效的
+0676	无效的
+0677	无效的
+0678	无效的
+0679	无效的
+067A	无效的
+067B	无效的
+067C	无效的
+067D	无效的
+067E	无效的
+067F	无效的
+0680	无效的
+0681	无效的
+0682	无效的
+0683	无效的
+0684	无效的
+0685	无效的
+0686	无效的
+0687	无效的
+0688	无效的
+0689	无效的
+068A	Toxic（待校）
+068B	Scorching（待校）
+068C	Gelid（待校）
+068D	Basilisk's（待校）
+068E	Charring（待校）
+068F	Icicle（待校）
+0690	Voltaic（待校）
+0691	Thaumic（待校）
+0692	Mental（待校）
+0693	Solid（待校）
+0694	Solid（待校）
+0695	Solid（待校）
+0696	Solid（待校）
+0697	Focused（待校）
+0698	SaINT's（待校）
+0699	Fervid（待校）
+069A	Frigid（待校）
+069B	Charged（待校）
+069C	Solid（待校）
+069D	Solid（待校）
+069E	无效的
+069F	无效的
+06A0	Horse's（待校）
+06A1	Horse's（待校）
+06A2	Horse's（待校）
+06A3	Horse's（待校）
+06A4	Solid（待校）
+06A5	Solid（待校）
+06A6	无效的
+06A7	Explosive（待校）
+06A8	工兵的
+06A9	保护的
+06AA	强健的
+06AB	战士的
+06AC	Stalwart（待校）
+06AD	Honed（待校）
+06AE	Urgent（待校）
+06AF	Defiant（待校）
+06B0	Defiant（待校）
+06B1	Phasing（待校）
+06B2	Bandit's（待校）
+06B3	Solid（待校）
+06B4	Solid（待校）
+06B5	Solid（待校）
+06B6	龙之
+06B7	巨人的
+06B8	女武神的
+06B9	屠夫的
+06BA	Ceramic（待校）
+06BB	Zirconic（待校）
+06BC	Crystal（待校）
+06BD	Searing（待校）
+06BE	Frosty（待校）
+06BF	Charged（待校）
+06C0	Slayer's（待校）
+06C1	屠夫的
+06C2	Cleansing（待校）
+06C3	Holy（待校）
+06C4	Wyrmslayer（待校）
+06C5	Ruinous（待校）
+06C6	Dauntless（待校）
+06C7	Dauntless（待校）
+06C8	Inherited（待校）
+06C9	Fortuitous（待校）
+06CA	LaMPrey's（待校）
+06CB	Finishing（待校）
+06CC	Hallowed（待校）
+06CD	Hallowed（待校）
+06CE	Plundering（待校）
+06CF	Plundering（待校）
+06D0	Unfazed（待校）
+06D1	Solid（待校）
+06D2	Paradise（待校）
+06D3	无效的
+06D4	澄澈的
+06D5	增幅的
+06D6	无效的
+06D7	灼印的
+06D8	窒息的
+06D9	无效的
+06DA	Simmering（待校）
+06DB	对流的
+06DC	无效的
+06DD	Gorgon's（待校）
+06DE	Ethereal（待校）
+06DF	窒息的
+06E0	对流的
+06E1	抗性的
+06E2	Iron Wall（待校）
+06E3	贤者的
+06E4	Unfazed（待校）
+06E5	Unfazed（待校）
+06E6	Inviolable（待校）
+06E7	Slayer's（待校）
+06E8	Artificial（待校）
+06E9	Cleansing（待校）
+06EA	Holy（待校）
+06EB	Wyrmslayer（待校）
+06EC	Ruinous（待校）
+06ED	Explorer's（待校）
+06EE	ExeMPlar's（待校）
+06EF	Survivor's（待校）
+06F0	Hallowed（待校）
+06F1	Precise（待校）
+06F2	Rugged（待校）
+06F3	Apt（待校）
+06F4	Unbowed（待校）
+06F5	Renitent（待校）
+06F6	Nimble（待校）
+06F7	Propitious（待校）
+06F8	Supreme（待校）
+06F9	Supreme（待校）
+06FA	Monk's（待校）
+06FB	ChaMPion's（待校）
+06FC	Warding（待校）
+06FD	Mercurial（待校）
+06FE	幸运的
+06FF	Plasmic（待校）
+0700	Favored（待校）
+0701	Beatified（待校）
+0702	洞察的
+0703	TraMPling（待校）
+0704	Swift（待校）
+0705	Violent（待校）
+0706	Wrathful（待校）
+0707	Reverent（待校）
+0708	Attentive（待校）
+0709	Inviolable（待校）
+070A	IMPervious（待校）
+070B	Vigilant（待校）
+070C	Egotist's（待校）
+070D	Mercenary（待校）
+070E	Sacrosanct（待校）
+070F	Salubrious（待校）
+0710	Conquering（待校）
+0711	Valiant（待校）
+0712	神圣的
+0713	IMPervious（待校）
+0714	Celestial（待校）
+0715	Persevering（待校）
+0716	绝望的
+0717	Abasing（待校）
+0718	Brutal（待校）
+0719	Desolating（待校）
+071A	Tenacious（待校）
+071B	碾压的
+071C	离子的
+071D	炮击的
+071E	占卜师的
+071F	轻快的
+0720	先锋的
+0721	孤独的
+0722	Colossal（待校）
+0723	Able（待校）
+0724	Hindering（待校）
+0725	Divine（待校）
+0726	Cyclonic（待校）
+0727	Psychotic（待校）
+0728	RaMPAGIng（待校）
+0729	Mimic's（待校）
+072A	Overlord's（待校）
+072B	Supreme（待校）
+072C	无效的
+072D	无效的
+072E	无效的
+072F	无效的
+0730	无效的
+0731	无效的
+0732	无效的
+0733	无效的
+0734	无效的
+0735	无效的
+0736	无效的
+0737	无效的
+0738	无效的
+0739	无效的
+073A	无效的
+073B	无效的
+073C	无效的
+073D	无效的
+073E	无效的
+073F	无效的
+0740	无效的
+0741	无效的
+0742	无效的
+0743	无效的
+0744	无效的
+0745	无效的
+0746	Toxic（待校）
+0747	Scorching（待校）
+0748	Gelid（待校）
+0749	Basilisk's（待校）
+074A	Charring（待校）
+074B	Icicle（待校）
+074C	Voltaic（待校）
+074D	Thaumic（待校）
+074E	Phrenic（待校）
+074F	Fine（待校）
+0750	Fine（待校）
+0751	Fine（待校）
+0752	Fine（待校）
+0753	Focused（待校）
+0754	SaINT's（待校）
+0755	Fervid（待校）
+0756	Frigid（待校）
+0757	Charged（待校）
+0758	Fine（待校）
+0759	Fine（待校）
+075A	无效的
+075B	无效的
+075C	Master's（待校）
+075D	Master's（待校）
+075E	Master's（待校）
+075F	Master's（待校）
+0760	Fine（待校）
+0761	Fine（待校）
+0762	无效的
+0763	Explosive（待校）
+0764	工兵的
+0765	保护的
+0766	强健的
+0767	战士的
+0768	Stalwart（待校）
+0769	Honed（待校）
+076A	Urgent（待校）
+076B	Defiant（待校）
+076C	Defiant（待校）
+076D	Phasing（待校）
+076E	Bandit's（待校）
+076F	Fine（待校）
+0770	Fine（待校）
+0771	Fine（待校）
+0772	龙之
+0773	巨人的
+0774	女武神的
+0775	屠夫的
+0776	Ceramic（待校）
+0777	Zirconic（待校）
+0778	Crystal（待校）
+0779	灼印的
+077A	Icebound（待校）
+077B	离子的
+077C	Slayer's（待校）
+077D	屠夫的
+077E	Cleansing（待校）
+077F	Holy（待校）
+0780	Wyrmslayer（待校）
+0781	Ruinous（待校）
+0782	Dauntless（待校）
+0783	Dauntless（待校）
+0784	Inherited（待校）
+0785	Fortuitous（待校）
+0786	Feral（待校）
+0787	Finishing（待校）
+0788	Hallowed（待校）
+0789	Hallowed（待校）
+078A	Plundering（待校）
+078B	Plundering（待校）
+078C	Unfazed（待校）
+078D	Fine（待校）
+078E	Paradise（待校）
+078F	无效的
+0790	澄澈的
+0791	Immunizing（待校）
+0792	无效的
+0793	灼印的
+0794	Fireproof（待校）
+0795	无效的
+0796	Simmering（待校）
+0797	Iceproof（待校）
+0798	无效的
+0799	Gorgon's（待校）
+079A	INTangible（待校）
+079B	Fireproof（待校）
+079C	Iceproof（待校）
+079D	Insulated（待校）
+079E	Iron Wall（待校）
+079F	贤者的
+07A0	Unfazed（待校）
+07A1	Unfazed（待校）
+07A2	Inviolable（待校）
+07A3	Slayer's（待校）
+07A4	Artificial（待校）
+07A5	Cleansing（待校）
+07A6	Holy（待校）
+07A7	Wyrmslayer（待校）
+07A8	Ruinous（待校）
+07A9	Explorer's（待校）
+07AA	ExeMPlar's（待校）
+07AB	Survivor's（待校）
+07AC	Hallowed（待校）
+07AD	Precise（待校）
+07AE	Rugged（待校）
+07AF	Apt（待校）
+07B0	Unbowed（待校）
+07B1	Renitent（待校）
+07B2	Nimble（待校）
+07B3	Propitious（待校）
+07B4	Supreme（待校）
+07B5	Supreme（待校）
+07B6	Monk's（待校）
+07B7	ChaMPion's（待校）
+07B8	Warding（待校）
+07B9	Mercurial（待校）
+07BA	幸运的
+07BB	Plasmic（待校）
+07BC	Favored（待校）
+07BD	Beatified（待校）
+07BE	洞察的
+07BF	TraMPling（待校）
+07C0	Swift（待校）
+07C1	Violent（待校）
+07C2	Wrathful（待校）
+07C3	Reverent（待校）
+07C4	Attentive（待校）
+07C5	Inviolable（待校）
+07C6	IMPervious（待校）
+07C7	Vigilant（待校）
+07C8	Egotist's（待校）
+07C9	Mercenary（待校）
+07CA	Sacrosanct（待校）
+07CB	Salubrious（待校）
+07CC	Conquering（待校）
+07CD	Valiant（待校）
+07CE	神圣的
+07CF	IMPervious（待校）
+07D0	Celestial（待校）
+07D1	Persevering（待校）
+07D2	绝望的
+07D3	Abasing（待校）
+07D4	Brutal（待校）
+07D5	Desolating（待校）
+07D6	Tenacious（待校）
+07D7	碾压的
+07D8	离子的
+07D9	炮击的
+07DA	占卜师的
+07DB	轻快的
+07DC	先锋的
+07DD	孤独的
+07DE	Colossal（待校）
+07DF	Able（待校）
+07E0	Hindering（待校）
+07E1	Divine（待校）
+07E2	Cyclonic（待校）
+07E3	Psychotic（待校）
+07E4	RaMPAGIng（待校）
+07E5	Mimic's（待校）
+07E6	Overlord's（待校）
+07E7	Supreme（待校）
+07E8	无效的
+07E9	无效的
+07EA	无效的
+07EB	无效的
+07EC	无效的
+07ED	无效的
+07EE	无效的
+07EF	无效的
+07F0	无效的
+07F1	无效的
+07F2	无效的
+07F3	无效的
+07F4	无效的
+07F5	无效的
+07F6	无效的
+07F7	无效的
+07F8	无效的
+07F9	无效的
+07FA	无效的
+07FB	无效的
+07FC	无效的
+07FD	无效的
+07FE	无效的
+07FF	无效的
+0800	无效的
+0801	无效的
+0802	Toxic（待校）
+0803	Scorching（待校）
+0804	Gelid（待校）
+0805	Basilisk's（待校）
+0806	Charring（待校）
+0807	Icicle（待校）
+0808	Voltaic（待校）
+0809	Thaumic（待校）
+080A	Phrenic（待校）
+080B	Exquisite（待校）
+080C	Exquisite（待校）
+080D	Exquisite（待校）
+080E	Exquisite（待校）
+080F	Fanatical（待校）
+0810	Goddess's（待校）
+0811	Torrid（待校）
+0812	Glacial（待校）
+0813	Arcing（待校）
+0814	Exquisite（待校）
+0815	Exquisite（待校）
+0816	无效的
+0817	无效的
+0818	Master's（待校）
+0819	Master's（待校）
+081A	Master's（待校）
+081B	Master's（待校）
+081C	Exquisite（待校）
+081D	Exquisite（待校）
+081E	无效的
+081F	Explosive（待校）
+0820	工兵的
+0821	Sheltering（待校）
+0822	Supernal（待校）
+0823	Veteran's（待校）
+0824	Unyielding（待校）
+0825	Keen（待校）
+0826	Desperate（待校）
+0827	Gladiator's（待校）
+0828	Gladiator's（待校）
+0829	Infinite（待校）
+082A	Raider's（待校）
+082B	Exquisite（待校）
+082C	Exquisite（待校）
+082D	Exquisite（待校）
+082E	龙之
+082F	巨人的
+0830	女武神的
+0831	屠夫的
+0832	Ceramic（待校）
+0833	Zirconic（待校）
+0834	Crystal（待校）
+0835	Immolating（待校）
+0836	Frozen（待校）
+0837	Anionic（待校）
+0838	Murderer's（待校）
+0839	Poacher's（待校）
+083A	Venerating（待校）
+083B	Godly（待校）
+083C	Wyrmreaper（待校）
+083D	Wrackful（待校）
+083E	Last Stand（待校）
+083F	Last Stand（待校）
+0840	Ancient（待校）
+0841	Miraculous（待校）
+0842	Feral（待校）
+0843	Denouement（待校）
+0844	Unnatural（待校）
+0845	Unnatural（待校）
+0846	Embezzling（待校）
+0847	Embezzling（待校）
+0848	Unbowed（待校）
+0849	Exquisite（待校）
+084A	Conquering（待校）
+084B	无效的
+084C	澄澈的
+084D	Immunizing（待校）
+084E	无效的
+084F	灼印的
+0850	Fireproof（待校）
+0851	无效的
+0852	Simmering（待校）
+0853	Iceproof（待校）
+0854	无效的
+0855	Gorgon's（待校）
+0856	INTangible（待校）
+0857	Fireproof（待校）
+0858	Iceproof（待校）
+0859	Insulated（待校）
+085A	Great Wall（待校）
+085B	Deity's（待校）
+085C	Unbowed（待校）
+085D	Unbowed（待校）
+085E	IMPervious（待校）
+085F	Murderer's（待校）
+0860	Mechanical（待校）
+0861	Venerating（待校）
+0862	Godly（待校）
+0863	Wyrmreaper（待校）
+0864	Wrackful（待校）
+0865	Wanderer's（待校）
+0866	Paragon's（待校）
+0867	Soloist's（待校）
+0868	Warping（待校）
+0869	Banishing（待校）
+086A	Supreme（待校）
+086B	Monk's（待校）
+086C	ChaMPion's（待校）
+086D	Warding（待校）
+086E	Mercurial（待校）
+086F	幸运的
+0870	Supreme（待校）
+0871	Supreme（待校）
+0872	Monk's（待校）
+0873	ChaMPion's（待校）
+0874	Warding（待校）
+0875	Mercurial（待校）
+0876	幸运的
+0877	Plasmic（待校）
+0878	Favored（待校）
+0879	Beatified（待校）
+087A	洞察的
+087B	TraMPling（待校）
+087C	Swift（待校）
+087D	Violent（待校）
+087E	Wrathful（待校）
+087F	Reverent（待校）
+0880	Attentive（待校）
+0881	Inviolable（待校）
+0882	IMPervious（待校）
+0883	Vigilant（待校）
+0884	Egotist's（待校）
+0885	Mercenary（待校）
+0886	Sacrosanct（待校）
+0887	Salubrious（待校）
+0888	Conquering（待校）
+0889	Valiant（待校）
+088A	神圣的
+088B	IMPervious（待校）
+088C	Celestial（待校）
+088D	Persevering（待校）
+088E	绝望的
+088F	Abasing（待校）
+0890	Brutal（待校）
+0891	Desolating（待校）
+0892	Tenacious（待校）
+0893	碾压的
+0894	离子的
+0895	炮击的
+0896	占卜师的
+0897	轻快的
+0898	先锋的
+0899	孤独的
+089A	Colossal（待校）
+089B	Able（待校）
+089C	Hindering（待校）
+089D	Divine（待校）
+089E	Cyclonic（待校）
+089F	Psychotic（待校）
+08A0	RaMPAGIng（待校）
+08A1	Mimic's（待校）
+08A2	Overlord's（待校）
+08A3	Supreme（待校）
+08A4	无效的
+08A5	无效的
+08A6	无效的
+08A7	无效的
+08A8	无效的
+08A9	无效的
+08AA	无效的
+08AB	无效的
+08AC	无效的
+08AD	无效的
+08AE	无效的
+08AF	无效的
+08B0	无效的
+08B1	无效的
+08B2	无效的
+08B3	无效的
+08B4	无效的
+08B5	无效的
+08B6	无效的
+08B7	无效的
+08B8	无效的
+08B9	无效的
+08BA	无效的
+08BB	无效的
+08BC	无效的
+08BD	无效的
+08BE	Summon Beast Scroll（待校）
+08BF	Summon Dragon Scroll（待校）
+08C0	Heal Potion (L)（待校）
+08C1	雷のオーブ
+08C2	呪いのオーブ
+08C3	凍結のオーブ
+08C4	氷河のオーブ
+08C5	竜巻のオーブ
+08C6	魔弾のオーブ
+08C7	指輪アイテム判定用
+08C8	Fire Ring（待校）
+08C9	Flame Ring（待校）
+08CA	Blaze Ring（待校）
+08CB	Ice Ring（待校）
+08CC	Frost Ring（待校）
+08CD	Glacial Ring（待校）
+08CE	Bolt Ring（待校）
+08CF	Storm Ring（待校）
+08D0	Electric Ring（待校）
+08D1	Poison Ring（待校）
+08D2	Venom Ring（待校）
+08D3	Toxic Ring（待校）
+08D4	Heal Ring（待校）
+08D5	Emergency Ring（待校）
+08D6	Miracle Ring（待校）
+08D7	指輪アイテム判定用
+08D8	巻物アイテム判定用
+08D9	Meteorite Scroll（待校）
+08DA	Blizzard Scroll（待校）
+08DB	Vortex Scroll（待校）
+08DC	Acid Scroll（待校）
+08DD	Rebirth Scroll（待校）
+08DE	巻物アイテム判定用
+08DF	ポーションアイテム判定用
+08E0	Heal Potion (S)（待校）
+08E1	Heal Potion (S)（待校）
+08E2	Heal Potion (S)（待校）
+08E3	Heal Potion (M)（待校）
+08E4	Heal Potion (L)（待校）
+08E5	Elixir（待校）
+08E6	Resist Brew (S)（待校）
+08E7	Resist Brew (M)（待校）
+08E8	Resist Brew (L)（待校）
+08E9	Invigorating Dram (S)（待校）
+08EA	Invigorating Dram (M)（待校）
+08EB	Invigorating Dram (L)（待校）
+08EC	STRong Draught (S)（待校）
+08ED	STRong Draught (M)（待校）
+08EE	STRong Draught (L)（待校）
+08EF	Defense Tonic (S)（待校）
+08F0	Defense Tonic (M)（待校）
+08F1	Defense Tonic (L)（待校）
+08F2	Stalwart Spirits (S)（待校）
+08F3	Stalwart Spirits (M)（待校）
+08F4	Stalwart Spirits (L)（待校）
+08F5	Blood of the Ogre (S)（待校）
+08F6	Blood of the Ogre (M)（待校）
+08F7	Blood of the Ogre (L)（待校）
+08F8	Liquid LUCk (S)（待校）
+08F9	Liquid LUCk (M)（待校）
+08FA	Liquid LUCk (L)（待校）
+08FB	Explosive (S)（待校）
+08FC	Explosive (M)（待校）
+08FD	Explosive (L)（待校）
+08FE	ポーションアイテム判定用
+08FF	Runestone A（待校）
+0900	Runestone B（待校）
+0901	Runestone C（待校）
+0902	Runestone D（待校）
+0903	Runestone E（待校）
+0904	Runestone F（待校）
+0905	Runestone G（待校）
+0906	Runestone H（待校）
+0907	Runestone I（待校）
+0908	Runestone J（待校）
+0909	Runestone K（待校）
+090A	Runestone L（待校）
+090B	Runestone M（待校）
+090C	Runestone N（待校）
+090D	Runestone O（待校）
+090E	Runestone P（待校）
+090F	Runestone Q（待校）
+0910	Runestone R（待校）
+0911	Runestone S（待校）
+0912	Runestone T（待校）
+0913	Runestone U（待校）
+0914	Runestone V（待校）
+0915	Runestone W（待校）
+0916	Runestone X（待校）
+0917	Runestone Y（待校）
+0918	Runestone Z（待校）
+0919	アビリティアイテム判定用
+091A	Sacrifice（待校）
+091B	DiSTRaction（待校）
+091C	War PaINT（待校）
+091D	Iron Will（待校）
+091E	Incite Rage（待校）
+091F	Fire Barrel（待校）
+0920	Bomb Satchel（待校）
+0921	Lava Bracer（待校）
+0922	Salamander Oil（待校）
+0923	Toxic Extract（待校）
+0924	Holdout Dagger（待校）
+0925	Spell: Storm
+0926	Spell: Rock Crusher
+0927	Spell: Thunderhead
+0928	Spell: Blizzard
+0929	Spell: Ice Prison
+092A	Spell: GraVITy
+092B	Spell: Flame Burst
+092C	Spell: Protection
+092D	Spell: Fire Ward
+092E	Spell: Thunderbolt
+092F	Spell: Curse
+0930	Spell: Create Food
+0931	Spell: Petrification
+0932	Spell: Meteor Swarm
+0933	Spell: Storm
+0934	Spell: Rock Press
+0935	Spell: Thunderhead
+0936	Spell: Blizzard
+0937	Spell: Flame Burst
+0938	Spell: Blaze
+0939	Spell: Protection
+093A	Spell: Fire Ward
+093B	Spell: Thunderbolt
+093C	Spell: Curse
+093D	Spell: Create Food
+093E	Spell: Petrification
+093F	Spell: Meteor Swarm
+0940	Spell: Slow
+0941	Spell: Extinction
+0942	アビリティアイテム判定用
+0943	Gazer Soul Catcher Urn（待校）
+0944	Ritual Amazon Armor（待校）
+0945	依頼書「%s」
+0946	かばんアイテム判定用
+0947	##(CUSTOMSET)
+0948	##(CUSTOMSET)
+0949	##(CUSTOMSET)
+094A	##(CUSTOMSET)
+094B	##(CUSTOMSET)
+094C	##(CUSTOMSET)
+094D	##(CUSTOMSET)
+094E	##(CUSTOMSET)
+094F	##(CUSTOMSET)
+0950	かばんアイテム判定用
+0951	---（待校）
+0952	##(SKILL_RESET物品)
+0953	Seal of the Conqueror（待校）
+0954	---（待校）
+0955	---（待校）
+0956	Narration Voice: ##(FIGHTER)
+0957	Narration Voice: ##(AMAZON)
+0958	Narration Voice: ##(ELF)
+0959	Narration Voice: ##(DWARF)
+095A	Narration Voice: ##(SORCERESS)
+095B	Narration Voice: ##(WIZARD)
+095C	---（待校）
+095D	Summons a Sabertooth（待校）
+095E	Summons a Dragonlisk（待校）
+095F	Restores 70% of HP（待校）
+0960	サンダーを発動する
+0961	カースを発動する
+0962	フロストクラウドを発動する
+0963	グラシアルスパイクを発動する
+0964	ストームを発動する
+0965	マジックミサイルを発動する
+0966	指輪アイテム判定用
+0967	Shoots fireballs（待校）
+0968	Shoots STRong fireballs（待校）
+0969	Shoots devastating fireballs（待校）
+096A	Forms ice pillars（待校）
+096B	Forms STRong ice pillars（待校）
+096C	Forms chilling ice pillars（待校）
+096D	Shoots a bolt of lightning（待校）
+096E	Shoots a STRong bolt of lightning（待校）
+096F	Shoots a crackling bolt of lightning（待校）
+0970	Disperse a poison cloud（待校）
+0971	Disperse a STRong poison cloud（待校）
+0972	Disperse a lethal poison cloud（待校）
+0973	Restores a bit of all allies' HP（待校）
+0974	Restores some of all allies' HP（待校）
+0975	Fully restores all allies' HP（待校）
+0976	指輪アイテム判定用
+0977	巻物アイテム判定用
+0978	Fireballs rain down from heaven（待校）
+0979	Unleashes a flurry of ice attacks（待校）
+097A	Summons a slashing tornado（待校）
+097B	Disgorges a spray of acid（待校）
+097C	Raises all allies, restores all HP（待校）
+097D	巻物アイテム判定用
+097E	ポーションアイテム判定用
+097F	Restores 30% of HP（待校）
+0980	Restores 30% of HP（待校）
+0981	Restores 30% of HP（待校）
+0982	Restores 50% of HP（待校）
+0983	Restores 70% of HP（待校）
+0984	Restores all HP and brief invulnerability（待校）
+0985	Wards off status ailments for 20s（待校）
+0986	Wards off status ailments for 40s（待校）
+0987	Wards off status ailments for 60s（待校）
+0988	Regenerate HP for 30s（待校）
+0989	Regenerate HP for 60s（待校）
+098A	Regenerate HP for 120s（待校）
+098B	Increases 造成的伤害 for 30s
+098C	Increases 造成的伤害 for 60s
+098D	Increases 造成的伤害 for 120s
+098E	Reduces 受到的伤害 for 30s
+098F	Reduces 受到的伤害 for 60s
+0990	Reduces 受到的伤害 for 120s
+0991	Immune to knockback for 20s（待校）
+0992	Immune to knockback for 40s（待校）
+0993	Immune to knockback for 60s（待校）
+0994	Boosts knockback ability for 20s（待校）
+0995	Boosts knockback ability for 40s（待校）
+0996	Boosts knockback ability for 60s（待校）
+0997	Increases 物品 drop rate for 60s
+0998	Increases 物品 drop rate for 180s
+0999	Increases 物品 drop rate for 300s
+099A	Causes a small explosion when hurled（待校）
+099B	Causes a big explosion when hurled（待校）
+099C	Causes a grand explosion when hurled（待校）
+099D	ポーションアイテム判定用
+099E	A stone that holds a STRange power（待校）
+099F	A stone that holds a STRange power（待校）
+09A0	A stone that holds a STRange power（待校）
+09A1	A stone that holds a STRange power（待校）
+09A2	A stone that holds a STRange power（待校）
+09A3	A stone that holds a STRange power（待校）
+09A4	A stone that holds a STRange power（待校）
+09A5	A stone that holds a STRange power（待校）
+09A6	A stone that holds a STRange power（待校）
+09A7	A stone that holds a STRange power（待校）
+09A8	A stone that holds a STRange power（待校）
+09A9	A stone that holds a STRange power（待校）
+09AA	A stone that holds a STRange power（待校）
+09AB	A stone that holds a STRange power（待校）
+09AC	A stone that holds a STRange power（待校）
+09AD	A stone that holds a STRange power（待校）
+09AE	A stone that holds a STRange power（待校）
+09AF	A stone that holds a STRange power（待校）
+09B0	A stone that holds a STRange power（待校）
+09B1	A stone that holds a STRange power（待校）
+09B2	A stone that holds a STRange power（待校）
+09B3	A stone that holds a STRange power（待校）
+09B4	A stone that holds a STRange power（待校）
+09B5	A stone that holds a STRange power（待校）
+09B6	A stone that holds a STRange power（待校）
+09B7	A stone that holds a STRange power（待校）
+09B8	アビリティアイテム判定用
+09B9	Take an ally's 伤害 for them
+09BA	Attract 敌人 attention
+09BB	Create clones of yourself（待校）
+09BC	Prevent knockback（待校）
+09BD	Use HP to go INTo Berserker mode（待校）
+09BE	Produce a barrel filled with gunpowder（待校）
+09BF	Produce a bomb（待校）
+09C0	Fire properties added to normal attacks（待校）
+09C1	Grants fire properties to 箭矢s and daggers
+09C2	Grants poison properties to 箭矢s and daggers
+09C3	Use a spare dagger（待校）
+09C4	Summon a slashing tornado（待校）
+09C5	Drop a large stone on your foes（待校）
+09C6	Summon a small lightning cloud（待校）
+09C7	Freeze your foes with a blizzard（待校）
+09C8	Trap 敌人 in a frozen prison
+09C9	Alter graVITy to pull 敌人 in
+09CA	Rain fire down upon your foes（待校）
+09CB	Decrease 伤害 received for all allies
+09CC	Protect party against fire（待校）
+09CD	Electrocute all foes in an area（待校）
+09CE	Force your target to live as a frog（待校）
+09CF	Make food materialize（待校）
+09D0	Turn target to stone（待校）
+09D1	Drop stones from space on your foes（待校）
+09D2	Summon a slashing tornado（待校）
+09D3	Drop a large stone on your foes（待校）
+09D4	Summon a small lightning cloud（待校）
+09D5	Freeze your foes with a blizzard（待校）
+09D6	Rain fire down upon your foes（待校）
+09D7	A long-burning fire attack（待校）
+09D8	Decrease 伤害 received by all allies
+09D9	Increase fire DMG dealt, reduce fire DMG taken（待校）
+09DA	Electrocute all foes in an area（待校）
+09DB	Force your target to live as a frog（待校）
+09DC	Make food materialize（待校）
+09DD	Turn target to stone（待校）
+09DE	Drop stones from space on your foes（待校）
+09DF	Dilate time to slow 敌人 movement
+09E0	Instakill a non-boss 敌人
+09E1	アビリティアイテム判定用
+09E2	Quest 物品 for "Soul Gazing" Must be equipped in ##(COLOR_CUSTOMSET)
+09E3	Quest 物品 for "Rite of Passage" Must be equipped in ##(COLOR_CUSTOMSET)
+09E4	使うことで依頼内容が確認できる
+09E5	かばんアイテム判定用
+09E6	A ##(COLOR_CUSTOMSET) to carry your 物品s. You can buy multiple ##(COLOR_CUSTOMSET)s.
+09E7	A ##(COLOR_CUSTOMSET) to carry your 物品s. You can buy multiple ##(COLOR_CUSTOMSET)s.
+09E8	A ##(COLOR_CUSTOMSET) to carry your 物品s. You can buy multiple ##(COLOR_CUSTOMSET)s.
+09E9	A ##(COLOR_CUSTOMSET) to carry your 物品s. You can buy multiple ##(COLOR_CUSTOMSET)s.
+09EA	A ##(COLOR_CUSTOMSET) to carry your 物品s. You can buy multiple ##(COLOR_CUSTOMSET)s.
+09EB	A ##(COLOR_CUSTOMSET) to carry your 物品s. You can buy multiple ##(COLOR_CUSTOMSET)s.
+09EC	A ##(COLOR_CUSTOMSET) to carry your 物品s. You can buy multiple ##(COLOR_CUSTOMSET)s.
+09ED	A ##(COLOR_CUSTOMSET) to carry your 物品s. You can buy multiple ##(COLOR_CUSTOMSET)s.
+09EE	A ##(COLOR_CUSTOMSET) to carry your 物品s. You can buy multiple ##(COLOR_CUSTOMSET)s.
+09EF	かばんアイテム判定用
+09F0	---（待校）
+09F1	Forget all ##(ABILITY)s learned thus far and reassign ##(ABILITY) poINTs. You can use them at the ##(COLOR_P_GUILD).
+09F2	This is a legendary trinket that enhances various combat skills the farther you venture in the ##(COLOR_R_RD). This 物品 must be set in your ##(COLOR_CUSTOMSET). Valid for ##(MDLV4) and higher difficulty.
+09F3	For checking special 物品s. You rock, Testerperson!
+09F4	Use this option to test the character voiceover thangamabobs. Yes, "thangamabobs".
+09F5	You will now be able to choose "Fighter" for the narration voice in the Option menu on the title screen.
+09F6	You will now be able to choose "Amazon" for the narration voice in the Option menu on the title screen.
+09F7	You will now be able to choose "Elf" for the narration voice in the Option menu on the title screen.
+09F8	You will now be able to choose "Dwarf" for the narration voice in the Option menu on the title screen.
+09F9	You will now be able to choose "Sorceress" for the narration voice in the Option menu on the title screen.
+09FA	You will now be able to choose "Wizard" for the narration voice in the Option menu on the title screen.
+09FB	---（待校）
+09FC	No effect（待校）
+09FD	+ power lightning STRike during evasion（待校）
+09FE	+ explosion 伤害 added to dash attack
+09FF	+ explosion 伤害 added to diving attack
+0A00	Summoned Skeleton's dealt 伤害 +%
+0A01	Summoned Wood Golem's dealt 伤害 +%
+0A02	箭矢 attacks penetrate 敌人
+0A03	% 概率 of 箭矢 attack without consuMPtion
+0A04	Dealt 伤害 +% during critical hit
+0A05	Dealt 伤害 and taken 伤害 +%
+0A06	Power Smash activates GraVITy（待校）
+0A07	Power Smash activates Slow（待校）
+0A08	Shortens spell casting time %（待校）
+0A09	Raises spell casting time and power %（待校）
+0A0A	Teleport MP cost -%（待校）
+0A0B	Negates Slow and GraVITy effects（待校）
+0A0C	While extending, all use 物品s recover +1
+0A0D	While extending, all equipment durability recovers %（待校）
+0A0E	Recover MP per second（待校）
+0A0F	Dealt 伤害 +% when HP at 999
+0A10	Negates all status ailments when HP at 999（待校）
+0A11	Changes mAGIc attack element from Fire to Ice（待校）
+0A12	Changes mAGIc attack element from Ice to Fire（待校）
+0A13	% of STR added to mAGIc attack 伤害
+0A14	% 概率 of using ring mAGIc without consuMPtion
+0A15	% 概率 of using spell book without consuMPtion
+0A16	INT increases by number of rings in bag X（待校）
+0A17	While mounted, additional action added（待校）
+0A18	While mounted, HP recovers % per 敌人 defeated
+0A19	While mounted, immune to knockdowns（待校）
+0A1A	While mounted, 受到的伤害 -%
+0A1B	While mounted, 造成的伤害 +%
+0A1C	While shield guarding, durability consumed to recover HP per second（待校）
+0A1D	All attacks are either critical hits or 1 伤害
+0A1E	% 概率 of mAGIc shot per coin pickup
+0A1F	造成的伤害 +% on back attacks
+0A20	% 概率 of one-hit KO a "stoned" 敌人
+0A21	Dealt 伤害 +% to "frogged" 敌人
+0A22	Adds Fire 伤害 to attacks
+0A23	Adds Ice 伤害 to attacks
+0A24	Adds Lightning 伤害 to attacks
+0A25	Lightning attacks of Grand Smash become Ice（待校）
+0A26	Eagle Dive bombs +（待校）
+0A27	Evasion invincibility time +%（待校）
+0A28	While evasion invincibility active, dealt 伤害 +%
+0A29	% 概率 of additional fire shot when attacking burning 敌人
+0A2A	Ring effect +%（待校）
+0A2B	During mAGIc boost, 受到的伤害 -%
+0A2C	During mAGIc boost, MP cost -%（待校）
+0A2D	No effect（待校）
+0A2E	No effect（待校）
+0A2F	MP takes % of 伤害
+0A30	Dash attack 伤害 +%
+0A31	Normal attack 速度 +%
+0A32	% 概率 to guard during kick
+0A33	% 概率 to resist knockback when kicking
+0A34	Regain % of last 受到的伤害 every second
+0A35	% 概率 to null back attack
+0A36	% 概率 of guard break
+0A37	No knockback with % of HP（待校）
+0A38	DMG dealt +% to 敌人 with status ailments
+0A39	Score +%, DMG taken +%（待校）
+0A3A	金币 obtained +%, DMG dealt -%
+0A3B	When recovering HP, also recover % as MP（待校）
+0A3C	% 概率 that 0 MP will be consumed when casting
+0A3D	Status ailment duration decreased by %（待校）
+0A3E	When HP is at max, dealt physical 伤害 +%
+0A3F	When HP is at max, dealt mAGIcal 伤害 +%
+0A40	When HP is above %, withstand one-hit KO（待校）
+0A41	Fire, ice, and lightning DMG becomes non-elemental DMG（待校）
+0A42	When HP is max, 受到的伤害 -%
+0A43	While airborne, 受到的伤害 -%
+0A44	造成的伤害 +% to 敌人 in the air
+0A45	Effect of Bash +%（待校）
+0A46	Power of Rebuke +%（待校）
+0A47	Power of Missile Reflect +%（待校）
+0A48	Power of Brutal Drive +%（待校）
+0A49	Power of Grand Smash +%（待校）
+0A4A	Power of Power Shot +%（待校）
+0A4B	Effect of Concentrate +%（待校）
+0A4C	Effect of Mental Absorb +%（待校）
+0A4D	Power of Judgement +%（待校）
+0A4E	Power of Parry +%（待校）
+0A4F	Effect of Rock Skin +%（待校）
+0A50	Power of Elemental Lore +%（待校）
+0A51	Effect of Slow +%（待校）
+0A52	Effect of Protection +%（待校）
+0A53	Power of TeMPest Edge +%（待校）
+0A54	Power of Brandish +%（待校）
+0A55	Power of Frenzy +%（待校）
+0A56	Power of Clone STRikes +%（待校）
+0A57	Power of spells +%（待校）
+0A58	No effect（待校）
+0A59	CD2 Weapon Effect 0080（待校）
+0A5A	CD2 Weapon Effect 0081（待校）
+0A5B	CD2 Weapon Effect 0082（待校）
+0A5C	CD2 Weapon Effect 0083（待校）
+0A5D	CD2 Weapon Effect 0084（待校）
+0A5E	CD2 Weapon Effect 0085（待校）
+0A5F	CD2 Weapon Effect 0086（待校）
+0A60	CD2 Weapon Effect 0087（待校）
+0A61	CD2 Weapon Effect 0088（待校）
+0A62	CD2 Weapon Effect 0089（待校）
+0A63	CD2 Weapon Effect 0090（待校）
+0A64	CD2 Weapon Effect 0091（待校）
+0A65	CD2 Weapon Effect 0092（待校）
+0A66	CD2 Weapon Effect 0093（待校）
+0A67	CD2 Weapon Effect 0094（待校）
+0A68	CD2 Weapon Effect 0095（待校）
+0A69	CD2 Weapon Effect 0096（待校）
+0A6A	CD2 Weapon Effect 0097（待校）
+0A6B	CD2 Weapon Effect 0098（待校）
+0A6C	START ELITE WEAPONS FROM HERE（待校）
+0A6D	Add Fire to sliding attack（待校）
+0A6E	Add Ice to sliding attack（待校）
+0A6F	Add Lightning to sliding attack（待校）
+0A70	Add explosion with 伤害 to Power Smash
+0A71	Add Fire Pillar with 伤害 to Power Smash
+0A72	Add Ice Pillar with 伤害 to Power Smash
+0A73	Add Lightning with 伤害 to Power Smash
+0A74	Add Storm with 伤害 to Power Smash
+0A75	Add Poison with 伤害 to Power Smash
+0A76	While extending, self deSTRuct（待校）
+0A77	Elemetal Lore activation 速度 +%
+0A78	Apply heal effects of all potions to party（待校）
+0A79	Knockback and knockdown +%（待校）
+0A7A	STR and CON +（待校）
+0A7B	INT and MGR +（待校）
+0A7C	% of dealt 伤害 added as Fire and Ice 伤害
+0A7D	% of dealt 伤害 added as Ice and Lightning 伤害
+0A7E	% of dealt 伤害 added as Lightning and Fire 伤害
+0A7F	Decrease % of Fire, Ice, Lightning 受到的伤害
+0A80	Ground attack 速度 +%, power +%
+0A81	Hitting 敌人 during their attack will cause knockback
+0A82	Power of Cyclone Masher +%（待校）
+0A83	Power of Shockwave +%（待校）
+0A84	伤害 increase effect of DiSTRaction +%
+0A85	Power of Neck Splitter +%（待校）
+0A86	Power of Deadly Revolution +%（待校）
+0A87	War PaINT duration +%（待校）
+0A88	伤害 increase effect of Power Bomb +%
+0A89	Effect of Lethal Fists +%（待校）
+0A8A	Effect of Powder Mastery +%（待校）
+0A8B	箭矢 count of Rapid Fire +
+0A8C	Effect of Deadly Boots +%（待校）
+0A8D	Effect of Backstab +%（待校）
+0A8E	Effect of Extract +%（待校）
+0A8F	Effect of Ice Prison +%（待校）
+0A90	Effect of Petrification +%（待校）
+0A91	Effect of Fire Ward +%（待校）
+0A92	伤害 increase effect of LeVITation +%
+0A93	While teleporting, release Fire Pillar with 伤害
+0A94	While teleporting, release Ice Pillar with 伤害
+0A95	While teleporting, release lightning bolt with 伤害
+0A96	Change Storm element to Ice（待校）
+0A97	Change Toxic Extract element to Ice（待校）
+0A98	Power of bombs +%（待校）
+0A99	Enhance dagger power（待校）
+0A9A	Enhance crossbow power（待校）
+0A9B	Dealt 伤害 +% during PuMP Up
+0A9C	Dealt 伤害 +% to shield attacks
+0A9D	Power 伤害 bomb released on death
+0A9E	END ELITE WEAPONS（待校）
+0A9F	ELT Weapon Effect 0045（待校）
+0AA0	ELT Weapon Effect 0046（待校）
+0AA1	ELT Weapon Effect 0047（待校）
+0AA2	ELT Weapon Effect 0048（待校）
+0AA3	ELT Weapon Effect 0049（待校）
+0AA4	ELT Weapon Effect 0050（待校）
+0AA5	ELT Weapon Effect 0051（待校）
+0AA6	ELT Weapon Effect 0052（待校）
+0AA7	ELT Weapon Effect 0053（待校）
+0AA8	ELT Weapon Effect 0054（待校）
+0AA9	ELT Weapon Effect 0055（待校）
+0AAA	ELT Weapon Effect 0056（待校）
+0AAB	ELT Weapon Effect 0057（待校）
+0AAC	ELT Weapon Effect 0058（待校）
+0AAD	ELT Weapon Effect 0059（待校）
+0AAE	ELT Weapon Effect 0060（待校）
+0AAF	ELT Weapon Effect 0061（待校）
+0AB0	ELT Weapon Effect 0062（待校）
+0AB1	ELT Weapon Effect 0063（待校）
+0AB2	ELT Weapon Effect 0064（待校）
+0AB3	ELT Weapon Effect 0065（待校）
+0AB4	ELT Weapon Effect 0066（待校）
+0AB5	ELT Weapon Effect 0067（待校）
+0AB6	ELT Weapon Effect 0068（待校）
+0AB7	ELT Weapon Effect 0069（待校）
+0AB8	ELT Weapon Effect 0070（待校）
+0AB9	ELT Weapon Effect 0071（待校）
+0ABA	ELT Weapon Effect 0072（待校）
+0ABB	ELT Weapon Effect 0073（待校）
+0ABC	ELT Weapon Effect 0074（待校）
+0ABD	ELT Weapon Effect 0075（待校）
+0ABE	ELT Weapon Effect 0076（待校）
+0ABF	ELT Weapon Effect 0077（待校）
+0AC0	ELT Weapon Effect 0078（待校）
+0AC1	ELT Weapon Effect 0079（待校）
+0AC2	ELT Weapon Effect 0080（待校）
+0AC3	ELT Weapon Effect 0081（待校）
+0AC4	ELT Weapon Effect 0082（待校）
+0AC5	ELT Weapon Effect 0083（待校）
+0AC6	ELT Weapon Effect 0084（待校）
+0AC7	ELT Weapon Effect 0085（待校）
+0AC8	ELT Weapon Effect 0086（待校）
+0AC9	ELT Weapon Effect 0087（待校）
+0ACA	ELT Weapon Effect 0088（待校）
+0ACB	ELT Weapon Effect 0089（待校）
+0ACC	ELT Weapon Effect 0090（待校）
+0ACD	ELT Weapon Effect 0091（待校）
+0ACE	ELT Weapon Effect 0092（待校）
+0ACF	ELT Weapon Effect 0093（待校）
+0AD0	ELT Weapon Effect 0094（待校）
+0AD1	ELT Weapon Effect 0095（待校）
+0AD2	ELT Weapon Effect 0096（待校）
+0AD3	ELT Weapon Effect 0097（待校）
+0AD4	ELT Weapon Effect 0098（待校）
+0AD5	ELT Weapon Effect 0099（待校）
+0AD6	ELT Weapon Effect 0100（待校）
+0AD7	无效的
+0AD8	Thunderclap（待校）
+0AD9	Detonating（待校）
+0ADA	Detonating（待校）
+0ADB	Summoner's（待校）
+0ADC	Summoner's（待校）
+0ADD	Showdown（待校）
+0ADE	Rainbow（待校）
+0ADF	Cavalry（待校）
+0AE0	Gambler's（待校）
+0AE1	Dark Knight's（待校）
+0AE2	Dark Knight's（待校）
+0AE3	Cardinal's（待校）
+0AE4	Grand Mage's（待校）
+0AE5	Hermit's（待校）
+0AE6	Dimensional（待校）
+0AE7	Merchant's（待校）
+0AE8	Helical（待校）
+0AE9	Angelic（待校）
+0AEA	King's（待校）
+0AEB	Moonlight（待校）
+0AEC	Runed（待校）
+0AED	Runed（待校）
+0AEE	Demonic（待校）
+0AEF	Worshiper's（待校）
+0AF0	Heavenly（待校）
+0AF1	Enchanting（待校）
+0AF2	Beastmaster's（待校）
+0AF3	Beastmaster's（待校）
+0AF4	Beastmaster's（待校）
+0AF5	Beastmaster's（待校）
+0AF6	Beastmaster's（待校）
+0AF7	Paladin's（待校）
+0AF8	Fallen（待校）
+0AF9	Twilight（待校）
+0AFA	Assassin's（待校）
+0AFB	Massive（待校）
+0AFC	蛇眼的
+0AFD	Wyvern's（待校）
+0AFE	Frozen（待校）
+0AFF	Thunderous（待校）
+0B00	Ice Storm（待校）
+0B01	Bombing（待校）
+0B02	Epic（待校）
+0B03	Condemned（待校）
+0B04	Volcanic（待校）
+0B05	Darkness（待校）
+0B06	Savior's（待校）
+0B07	Savior's（待校）
+0B08	无效的
+0B09	无效的
+0B0A	洞察的
+0B0B	TraMPling（待校）
+0B0C	Swift（待校）
+0B0D	Violent（待校）
+0B0E	Wrathful（待校）
+0B0F	Reverent（待校）
+0B10	Attentive（待校）
+0B11	Inviolable（待校）
+0B12	IMPervious（待校）
+0B13	Vigilant（待校）
+0B14	Egotist's（待校）
+0B15	Mercenary（待校）
+0B16	Sacrosanct（待校）
+0B17	Salubrious（待校）
+0B18	Conquering（待校）
+0B19	Valiant（待校）
+0B1A	神圣的
+0B1B	IMPervious（待校）
+0B1C	Celestial（待校）
+0B1D	Persevering（待校）
+0B1E	绝望的
+0B1F	Abasing（待校）
+0B20	Brutal（待校）
+0B21	Desolating（待校）
+0B22	Tenacious（待校）
+0B23	碾压的
+0B24	离子的
+0B25	炮击的
+0B26	占卜师的
+0B27	轻快的
+0B28	先锋的
+0B29	孤独的
+0B2A	Colossal（待校）
+0B2B	Able（待校）
+0B2C	Hindering（待校）
+0B2D	Divine（待校）
+0B2E	Cyclonic（待校）
+0B2F	Psychotic（待校）
+0B30	RaMPAGIng（待校）
+0B31	Mimic's（待校）
+0B32	Overlord's（待校）
+0B33	无效的
+0B34	Mirage（待校）
+0B35	Mirage（待校）
+0B36	Mirage（待校）
+0B37	Mirage（待校）
+0B38	Mirage（待校）
+0B39	Mirage（待校）
+0B3A	Mirage（待校）
+0B3B	Mirage（待校）
+0B3C	Mirage（待校）
+0B3D	Mirage（待校）
+0B3E	Mirage（待校）
+0B3F	Mirage（待校）
+0B40	Mirage（待校）
+0B41	Mirage（待校）
+0B42	Mirage（待校）
+0B43	Mirage（待校）
+0B44	Mirage（待校）
+0B45	Mirage（待校）
+0B46	Mirage（待校）
+0B47	无效的
+0B48	Flame-red（待校）
+0B49	Crystalline（待校）
+0B4A	Electrifying（待校）
+0B4B	Detonating（待校）
+0B4C	Flame-red（待校）
+0B4D	Crystalline（待校）
+0B4E	Electrifying（待校）
+0B4F	Gusty（待校）
+0B50	Sunless（待校）
+0B51	Bursting（待校）
+0B52	Spiritual（待校）
+0B53	Chemist's（待校）
+0B54	Ballistic（待校）
+0B55	Legendary（待校）
+0B56	Wizard's（待校）
+0B57	Exorcist's（待校）
+0B58	Exorcist's（待校）
+0B59	Exorcist's（待校）
+0B5A	Containment（待校）
+0B5B	Master's（待校）
+0B5C	Aggressive（待校）
+0B5D	Sand Blast（待校）
+0B5E	IMPulsive（待校）
+0B5F	Duelist's（待校）
+0B60	Executioner's（待校）
+0B61	Sky High（待校）
+0B62	Traditional（待校）
+0B63	Stormrising（待校）
+0B64	Fearless（待校）
+0B65	Red-hot（待校）
+0B66	Whirlwind（待校）
+0B67	Rumbling（待校）
+0B68	Killer's（待校）
+0B69	Phantom（待校）
+0B6A	Ice Crusted（待校）
+0B6B	Abyssal（待校）
+0B6C	Flame-gated（待校）
+0B6D	Flying（待校）
+0B6E	Draconic（待校）
+0B6F	Neptune（待校）
+0B70	Flash（待校）
+0B71	Arctic（待校）
+0B72	Cometary（待校）
+0B73	Miner's（待校）
+0B74	Acrobat's（待校）
+0B75	Mystical（待校）
+0B76	Infernal（待校）
+0B77	Guardian's（待校）
+0B78	Lamented（待校）
+0B79	无效的
+0B7A	Mirage（待校）
+0B7B	Mirage（待校）
+0B7C	Mirage（待校）
+0B7D	Mirage（待校）
+0B7E	Mirage（待校）
+0B7F	Mirage（待校）
+0B80	Mirage（待校）
+0B81	Mirage（待校）
+0B82	Mirage（待校）
+0B83	Mirage（待校）
+0B84	Mirage（待校）
+0B85	Mirage（待校）
+0B86	Mirage（待校）
+0B87	Mirage（待校）
+0B88	Mirage（待校）
+0B89	Mirage（待校）
+0B8A	Mirage（待校）
+0B8B	Mirage（待校）
+0B8C	Mirage（待校）
+0B8D	Mirage（待校）
+0B8E	Mirage（待校）
+0B8F	Mirage（待校）
+0B90	Mirage（待校）
+0B91	Mirage（待校）
+0B92	Mirage（待校）
+0B93	Mirage（待校）
+0B94	Mirage（待校）
+0B95	Mirage（待校）
+0B96	Mirage（待校）
+0B97	Mirage（待校）
+0B98	Mirage（待校）
+0B99	Mirage（待校）
+0B9A	Mirage（待校）
+0B9B	Mirage（待校）
+0B9C	Mirage（待校）
+0B9D	Mirage（待校）
+0B9E	Mirage（待校）
+0B9F	Mirage（待校）
+0BA0	Mirage（待校）
+0BA1	Mirage（待校）
+0BA2	Mirage（待校）
+0BA3	Mirage（待校）
+0BA4	Mirage（待校）
+0BA5	Mirage（待校）
+0BA6	Mirage（待校）
+0BA7	Mirage（待校）
+0BA8	Mirage（待校）
+0BA9	Mirage（待校）
+0BAA	Mirage（待校）
+0BAB	Mirage（待校）
+0BAC	Mirage（待校）
+0BAD	Mirage（待校）
+0BAE	Mirage（待校）
+0BAF	Mirage（待校）
+0BB0	Mirage（待校）
+0BB1	Mirage（待校）
+0BB2	无效的
+0BB3	Thunderclap（待校）
+0BB4	Detonating（待校）
+0BB5	Detonating（待校）
+0BB6	Summoner's（待校）
+0BB7	Summoner's（待校）
+0BB8	Showdown（待校）
+0BB9	Rainbow（待校）
+0BBA	Cavalry（待校）
+0BBB	Gambler's（待校）
+0BBC	Dark Knight's（待校）
+0BBD	Dark Knight's（待校）
+0BBE	Cardinal's（待校）
+0BBF	Grand Mage's（待校）
+0BC0	Hermit's（待校）
+0BC1	Dimensional（待校）
+0BC2	Merchant's（待校）
+0BC3	Helical（待校）
+0BC4	Angelic（待校）
+0BC5	King's（待校）
+0BC6	Moonlight（待校）
+0BC7	Runed（待校）
+0BC8	Runed（待校）
+0BC9	Demonic（待校）
+0BCA	Worshiper's（待校）
+0BCB	Heavenly（待校）
+0BCC	Enchanting（待校）
+0BCD	Beastmaster's（待校）
+0BCE	Beastmaster's（待校）
+0BCF	Beastmaster's（待校）
+0BD0	Beastmaster's（待校）
+0BD1	Beastmaster's（待校）
+0BD2	Paladin's（待校）
+0BD3	Fallen（待校）
+0BD4	Twilight（待校）
+0BD5	Assassin's（待校）
+0BD6	Massive（待校）
+0BD7	蛇眼的
+0BD8	Wyvern's（待校）
+0BD9	Frozen（待校）
+0BDA	Thunderous（待校）
+0BDB	Ice Storm（待校）
+0BDC	Bombing（待校）
+0BDD	Epic（待校）
+0BDE	Condemned（待校）
+0BDF	Volcanic（待校）
+0BE0	Darkness（待校）
+0BE1	Savior's（待校）
+0BE2	Savior's（待校）
+0BE3	无效的
+0BE4	无效的
+0BE5	洞察的
+0BE6	TraMPling（待校）
+0BE7	Swift（待校）
+0BE8	Violent（待校）
+0BE9	Wrathful（待校）
+0BEA	Reverent（待校）
+0BEB	Attentive（待校）
+0BEC	Inviolable（待校）
+0BED	IMPervious（待校）
+0BEE	Vigilant（待校）
+0BEF	Egotist's（待校）
+0BF0	Mercenary（待校）
+0BF1	Sacrosanct（待校）
+0BF2	Salubrious（待校）
+0BF3	Conquering（待校）
+0BF4	Valiant（待校）
+0BF5	神圣的
+0BF6	IMPervious（待校）
+0BF7	Celestial（待校）
+0BF8	Persevering（待校）
+0BF9	绝望的
+0BFA	Abasing（待校）
+0BFB	Brutal（待校）
+0BFC	Desolating（待校）
+0BFD	Tenacious（待校）
+0BFE	碾压的
+0BFF	离子的
+0C00	炮击的
+0C01	占卜师的
+0C02	轻快的
+0C03	先锋的
+0C04	孤独的
+0C05	Colossal（待校）
+0C06	Able（待校）
+0C07	Hindering（待校）
+0C08	Divine（待校）
+0C09	Cyclonic（待校）
+0C0A	Psychotic（待校）
+0C0B	RaMPAGIng（待校）
+0C0C	Mimic's（待校）
+0C0D	Overlord's（待校）
+0C0E	无效的
+0C0F	Mirage（待校）
+0C10	Mirage（待校）
+0C11	Mirage（待校）
+0C12	Mirage（待校）
+0C13	Mirage（待校）
+0C14	Mirage（待校）
+0C15	Mirage（待校）
+0C16	Mirage（待校）
+0C17	Mirage（待校）
+0C18	Mirage（待校）
+0C19	Mirage（待校）
+0C1A	Mirage（待校）
+0C1B	Mirage（待校）
+0C1C	Mirage（待校）
+0C1D	Mirage（待校）
+0C1E	Mirage（待校）
+0C1F	Mirage（待校）
+0C20	Mirage（待校）
+0C21	Mirage（待校）
+0C22	无效的
+0C23	Flame-red（待校）
+0C24	Crystalline（待校）
+0C25	Electrifying（待校）
+0C26	Detonating（待校）
+0C27	Flame-red（待校）
+0C28	Crystalline（待校）
+0C29	Electrifying（待校）
+0C2A	Gusty（待校）
+0C2B	Sunless（待校）
+0C2C	Bursting（待校）
+0C2D	Spiritual（待校）
+0C2E	Chemist's（待校）
+0C2F	Ballistic（待校）
+0C30	Legendary（待校）
+0C31	Wizard's（待校）
+0C32	Exorcist's（待校）
+0C33	Exorcist's（待校）
+0C34	Exorcist's（待校）
+0C35	Containment（待校）
+0C36	Master's（待校）
+0C37	Aggressive（待校）
+0C38	Sand Blast（待校）
+0C39	IMPulsive（待校）
+0C3A	Duelist's（待校）
+0C3B	Executioner's（待校）
+0C3C	Sky High（待校）
+0C3D	Traditional（待校）
+0C3E	Stormrising（待校）
+0C3F	Fearless（待校）
+0C40	Red-hot（待校）
+0C41	Whirlwind（待校）
+0C42	Rumbling（待校）
+0C43	Killer's（待校）
+0C44	Phantom（待校）
+0C45	Ice Crusted（待校）
+0C46	Abyssal（待校）
+0C47	Flame-gated（待校）
+0C48	Flying（待校）
+0C49	Draconic（待校）
+0C4A	Neptune（待校）
+0C4B	Flash（待校）
+0C4C	Arctic（待校）
+0C4D	Cometary（待校）
+0C4E	Miner's（待校）
+0C4F	Acrobat's（待校）
+0C50	Mystical（待校）
+0C51	Infernal（待校）
+0C52	Guardian's（待校）
+0C53	Lamented（待校）
+0C54	无效的
+0C55	Mirage（待校）
+0C56	Mirage（待校）
+0C57	Mirage（待校）
+0C58	Mirage（待校）
+0C59	Mirage（待校）
+0C5A	Mirage（待校）
+0C5B	Mirage（待校）
+0C5C	Mirage（待校）
+0C5D	Mirage（待校）
+0C5E	Mirage（待校）
+0C5F	Mirage（待校）
+0C60	Mirage（待校）
+0C61	Mirage（待校）
+0C62	Mirage（待校）
+0C63	Mirage（待校）
+0C64	Mirage（待校）
+0C65	Mirage（待校）
+0C66	Mirage（待校）
+0C67	Mirage（待校）
+0C68	Mirage（待校）
+0C69	Mirage（待校）
+0C6A	Mirage（待校）
+0C6B	Mirage（待校）
+0C6C	Mirage（待校）
+0C6D	Mirage（待校）
+0C6E	Mirage（待校）
+0C6F	Mirage（待校）
+0C70	Mirage（待校）
+0C71	Mirage（待校）
+0C72	Mirage（待校）
+0C73	Mirage（待校）
+0C74	Mirage（待校）
+0C75	Mirage（待校）
+0C76	Mirage（待校）
+0C77	Mirage（待校）
+0C78	Mirage（待校）
+0C79	Mirage（待校）
+0C7A	Mirage（待校）
+0C7B	Mirage（待校）
+0C7C	Mirage（待校）
+0C7D	Mirage（待校）
+0C7E	Mirage（待校）
+0C7F	Mirage（待校）
+0C80	Mirage（待校）
+0C81	Mirage（待校）
+0C82	Mirage（待校）
+0C83	Mirage（待校）
+0C84	Mirage（待校）
+0C85	Mirage（待校）
+0C86	Mirage（待校）
+0C87	Mirage（待校）
+0C88	Mirage（待校）
+0C89	Mirage（待校）
+0C8A	Mirage（待校）
+0C8B	Mirage（待校）
+0C8C	Mirage（待校）
+0C8D	无效的
+0C8E	Thunderclap（待校）
+0C8F	Detonating（待校）
+0C90	Detonating（待校）
+0C91	Summoner's（待校）
+0C92	Summoner's（待校）
+0C93	Showdown（待校）
+0C94	Rainbow（待校）
+0C95	Cavalry（待校）
+0C96	Gambler's（待校）
+0C97	Dark Knight's（待校）
+0C98	Dark Knight's（待校）
+0C99	Cardinal's（待校）
+0C9A	Grand Mage's（待校）
+0C9B	Hermit's（待校）
+0C9C	Dimensional（待校）
+0C9D	Merchant's（待校）
+0C9E	Helical（待校）
+0C9F	Angelic（待校）
+0CA0	King's（待校）
+0CA1	Moonlight（待校）
+0CA2	Runed（待校）
+0CA3	Runed（待校）
+0CA4	Demonic（待校）
+0CA5	Worshiper's（待校）
+0CA6	Heavenly（待校）
+0CA7	Enchanting（待校）
+0CA8	Beastmaster's（待校）
+0CA9	Beastmaster's（待校）
+0CAA	Beastmaster's（待校）
+0CAB	Beastmaster's（待校）
+0CAC	Beastmaster's（待校）
+0CAD	Paladin's（待校）
+0CAE	Fallen（待校）
+0CAF	Twilight（待校）
+0CB0	Assassin's（待校）
+0CB1	Massive（待校）
+0CB2	蛇眼的
+0CB3	Wyvern's（待校）
+0CB4	Frozen（待校）
+0CB5	Thunderous（待校）
+0CB6	Ice Storm（待校）
+0CB7	Bombing（待校）
+0CB8	Epic（待校）
+0CB9	Condemned（待校）
+0CBA	Volcanic（待校）
+0CBB	Darkness（待校）
+0CBC	Savior's（待校）
+0CBD	Savior's（待校）
+0CBE	无效的
+0CBF	无效的
+0CC0	洞察的
+0CC1	TraMPling（待校）
+0CC2	Swift（待校）
+0CC3	Violent（待校）
+0CC4	Wrathful（待校）
+0CC5	Reverent（待校）
+0CC6	Attentive（待校）
+0CC7	Inviolable（待校）
+0CC8	IMPervious（待校）
+0CC9	Vigilant（待校）
+0CCA	Egotist's（待校）
+0CCB	Mercenary（待校）
+0CCC	Sacrosanct（待校）
+0CCD	Salubrious（待校）
+0CCE	Conquering（待校）
+0CCF	Valiant（待校）
+0CD0	神圣的
+0CD1	IMPervious（待校）
+0CD2	Celestial（待校）
+0CD3	Persevering（待校）
+0CD4	绝望的
+0CD5	Abasing（待校）
+0CD6	Brutal（待校）
+0CD7	Desolating（待校）
+0CD8	Tenacious（待校）
+0CD9	碾压的
+0CDA	离子的
+0CDB	炮击的
+0CDC	占卜师的
+0CDD	轻快的
+0CDE	先锋的
+0CDF	孤独的
+0CE0	Colossal（待校）
+0CE1	Able（待校）
+0CE2	Hindering（待校）
+0CE3	Divine（待校）
+0CE4	Cyclonic（待校）
+0CE5	Psychotic（待校）
+0CE6	RaMPAGIng（待校）
+0CE7	Mimic's（待校）
+0CE8	Overlord's（待校）
+0CE9	无效的
+0CEA	Mirage（待校）
+0CEB	Mirage（待校）
+0CEC	Mirage（待校）
+0CED	Mirage（待校）
+0CEE	Mirage（待校）
+0CEF	Mirage（待校）
+0CF0	Mirage（待校）
+0CF1	Mirage（待校）
+0CF2	Mirage（待校）
+0CF3	Mirage（待校）
+0CF4	Mirage（待校）
+0CF5	Mirage（待校）
+0CF6	Mirage（待校）
+0CF7	Mirage（待校）
+0CF8	Mirage（待校）
+0CF9	Mirage（待校）
+0CFA	Mirage（待校）
+0CFB	Mirage（待校）
+0CFC	Mirage（待校）
+0CFD	无效的
+0CFE	Flame-red（待校）
+0CFF	Crystalline（待校）
+0D00	Electrifying（待校）
+0D01	Detonating（待校）
+0D02	Flame-red（待校）
+0D03	Crystalline（待校）
+0D04	Electrifying（待校）
+0D05	Gusty（待校）
+0D06	Sunless（待校）
+0D07	Bursting（待校）
+0D08	Spiritual（待校）
+0D09	Chemist's（待校）
+0D0A	Ballistic（待校）
+0D0B	Legendary（待校）
+0D0C	Wizard's（待校）
+0D0D	Exorcist's（待校）
+0D0E	Exorcist's（待校）
+0D0F	Exorcist's（待校）
+0D10	Containment（待校）
+0D11	Master's（待校）
+0D12	Aggressive（待校）
+0D13	Sand Blast（待校）
+0D14	IMPulsive（待校）
+0D15	Duelist's（待校）
+0D16	Executioner's（待校）
+0D17	Sky High（待校）
+0D18	Traditional（待校）
+0D19	Stormrising（待校）
+0D1A	Fearless（待校）
+0D1B	Red-hot（待校）
+0D1C	Whirlwind（待校）
+0D1D	Rumbling（待校）
+0D1E	Killer's（待校）
+0D1F	Phantom（待校）
+0D20	Ice Crusted（待校）
+0D21	Abyssal（待校）
+0D22	Flame-gated（待校）
+0D23	Flying（待校）
+0D24	Draconic（待校）
+0D25	Neptune（待校）
+0D26	Flash（待校）
+0D27	Arctic（待校）
+0D28	Cometary（待校）
+0D29	Miner's（待校）
+0D2A	Acrobat's（待校）
+0D2B	Mystical（待校）
+0D2C	Infernal（待校）
+0D2D	Guardian's（待校）
+0D2E	Lamented（待校）
+0D2F	无效的
+0D30	Mirage（待校）
+0D31	Mirage（待校）
+0D32	Mirage（待校）
+0D33	Mirage（待校）
+0D34	Mirage（待校）
+0D35	Mirage（待校）
+0D36	Mirage（待校）
+0D37	Mirage（待校）
+0D38	Mirage（待校）
+0D39	Mirage（待校）
+0D3A	Mirage（待校）
+0D3B	Mirage（待校）
+0D3C	Mirage（待校）
+0D3D	Mirage（待校）
+0D3E	Mirage（待校）
+0D3F	Mirage（待校）
+0D40	Mirage（待校）
+0D41	Mirage（待校）
+0D42	Mirage（待校）
+0D43	Mirage（待校）
+0D44	Mirage（待校）
+0D45	Mirage（待校）
+0D46	Mirage（待校）
+0D47	Mirage（待校）
+0D48	Mirage（待校）
+0D49	Mirage（待校）
+0D4A	Mirage（待校）
+0D4B	Mirage（待校）
+0D4C	Mirage（待校）
+0D4D	Mirage（待校）
+0D4E	Mirage（待校）
+0D4F	Mirage（待校）
+0D50	Mirage（待校）
+0D51	Mirage（待校）
+0D52	Mirage（待校）
+0D53	Mirage（待校）
+0D54	Mirage（待校）
+0D55	Mirage（待校）
+0D56	Mirage（待校）
+0D57	Mirage（待校）
+0D58	Mirage（待校）
+0D59	Mirage（待校）
+0D5A	Mirage（待校）
+0D5B	Mirage（待校）
+0D5C	Mirage（待校）
+0D5D	Mirage（待校）
+0D5E	Mirage（待校）
+0D5F	Mirage（待校）
+0D60	Mirage（待校）
+0D61	Mirage（待校）
+0D62	Mirage（待校）
+0D63	Mirage（待校）
+0D64	Mirage（待校）
+0D65	Mirage（待校）
+0D66	Mirage（待校）
+0D67	Mirage（待校）
+0D68	无效的
+0D69	Thunderclap（待校）
+0D6A	Detonating（待校）
+0D6B	Detonating（待校）
+0D6C	Summoner's（待校）
+0D6D	Summoner's（待校）
+0D6E	Showdown（待校）
+0D6F	Rainbow（待校）
+0D70	Cavalry（待校）
+0D71	Gambler's（待校）
+0D72	Dark Knight's（待校）
+0D73	Dark Knight's（待校）
+0D74	Cardinal's（待校）
+0D75	Grand Mage's（待校）
+0D76	Hermit's（待校）
+0D77	Dimensional（待校）
+0D78	Merchant's（待校）
+0D79	Helical（待校）
+0D7A	Angelic（待校）
+0D7B	King's（待校）
+0D7C	Moonlight（待校）
+0D7D	Runed（待校）
+0D7E	Runed（待校）
+0D7F	Demonic（待校）
+0D80	Worshiper's（待校）
+0D81	Heavenly（待校）
+0D82	Enchanting（待校）
+0D83	Beastmaster's（待校）
+0D84	Beastmaster's（待校）
+0D85	Beastmaster's（待校）
+0D86	Beastmaster's（待校）
+0D87	Beastmaster's（待校）
+0D88	Paladin's（待校）
+0D89	Fallen（待校）
+0D8A	Twilight（待校）
+0D8B	Assassin's（待校）
+0D8C	Massive（待校）
+0D8D	蛇眼的
+0D8E	Wyvern's（待校）
+0D8F	Frozen（待校）
+0D90	Thunderous（待校）
+0D91	Ice Storm（待校）
+0D92	Bombing（待校）
+0D93	Epic（待校）
+0D94	Condemned（待校）
+0D95	Volcanic（待校）
+0D96	Darkness（待校）
+0D97	Savior's（待校）
+0D98	Savior's（待校）
+0D99	无效的
+0D9A	无效的
+0D9B	洞察的
+0D9C	TraMPling（待校）
+0D9D	Swift（待校）
+0D9E	Violent（待校）
+0D9F	Wrathful（待校）
+0DA0	Reverent（待校）
+0DA1	Attentive（待校）
+0DA2	Inviolable（待校）
+0DA3	IMPervious（待校）
+0DA4	Vigilant（待校）
+0DA5	Egotist's（待校）
+0DA6	Mercenary（待校）
+0DA7	Sacrosanct（待校）
+0DA8	Salubrious（待校）
+0DA9	Conquering（待校）
+0DAA	Valiant（待校）
+0DAB	神圣的
+0DAC	IMPervious（待校）
+0DAD	Celestial（待校）
+0DAE	Persevering（待校）
+0DAF	绝望的
+0DB0	Abasing（待校）
+0DB1	Brutal（待校）
+0DB2	Desolating（待校）
+0DB3	Tenacious（待校）
+0DB4	碾压的
+0DB5	离子的
+0DB6	炮击的
+0DB7	占卜师的
+0DB8	轻快的
+0DB9	先锋的
+0DBA	孤独的
+0DBB	Colossal（待校）
+0DBC	Able（待校）
+0DBD	Hindering（待校）
+0DBE	Divine（待校）
+0DBF	Cyclonic（待校）
+0DC0	Psychotic（待校）
+0DC1	RaMPAGIng（待校）
+0DC2	Mimic's（待校）
+0DC3	Overlord's（待校）
+0DC4	无效的
+0DC5	Mirage（待校）
+0DC6	Mirage（待校）
+0DC7	Mirage（待校）
+0DC8	Mirage（待校）
+0DC9	Mirage（待校）
+0DCA	Mirage（待校）
+0DCB	Mirage（待校）
+0DCC	Mirage（待校）
+0DCD	Mirage（待校）
+0DCE	Mirage（待校）
+0DCF	Mirage（待校）
+0DD0	Mirage（待校）
+0DD1	Mirage（待校）
+0DD2	Mirage（待校）
+0DD3	Mirage（待校）
+0DD4	Mirage（待校）
+0DD5	Mirage（待校）
+0DD6	Mirage（待校）
+0DD7	Mirage（待校）
+0DD8	无效的
+0DD9	Flame-red（待校）
+0DDA	Crystalline（待校）
+0DDB	Electrifying（待校）
+0DDC	Detonating（待校）
+0DDD	Flame-red（待校）
+0DDE	Crystalline（待校）
+0DDF	Electrifying（待校）
+0DE0	Gusty（待校）
+0DE1	Sunless（待校）
+0DE2	Bursting（待校）
+0DE3	Spiritual（待校）
+0DE4	Chemist's（待校）
+0DE5	Ballistic（待校）
+0DE6	Legendary（待校）
+0DE7	Wizard's（待校）
+0DE8	Exorcist's（待校）
+0DE9	Exorcist's（待校）
+0DEA	Exorcist's（待校）
+0DEB	Containment（待校）
+0DEC	Master's（待校）
+0DED	Aggressive（待校）
+0DEE	Sand Blast（待校）
+0DEF	IMPulsive（待校）
+0DF0	Duelist's（待校）
+0DF1	Executioner's（待校）
+0DF2	Sky High（待校）
+0DF3	Traditional（待校）
+0DF4	Stormrising（待校）
+0DF5	Fearless（待校）
+0DF6	Red-hot（待校）
+0DF7	Whirlwind（待校）
+0DF8	Rumbling（待校）
+0DF9	Killer's（待校）
+0DFA	Phantom（待校）
+0DFB	Ice Crusted（待校）
+0DFC	Abyssal（待校）
+0DFD	Flame-gated（待校）
+0DFE	Flying（待校）
+0DFF	Draconic（待校）
+0E00	Neptune（待校）
+0E01	Flash（待校）
+0E02	Arctic（待校）
+0E03	Cometary（待校）
+0E04	Miner's（待校）
+0E05	Acrobat's（待校）
+0E06	Mystical（待校）
+0E07	Infernal（待校）
+0E08	Guardian's（待校）
+0E09	Lamented（待校）
+0E0A	无效的
+0E0B	Mirage（待校）
+0E0C	Mirage（待校）
+0E0D	Mirage（待校）
+0E0E	Mirage（待校）
+0E0F	Mirage（待校）
+0E10	Mirage（待校）
+0E11	Mirage（待校）
+0E12	Mirage（待校）
+0E13	Mirage（待校）
+0E14	Mirage（待校）
+0E15	Mirage（待校）
+0E16	Mirage（待校）
+0E17	Mirage（待校）
+0E18	Mirage（待校）
+0E19	Mirage（待校）
+0E1A	Mirage（待校）
+0E1B	Mirage（待校）
+0E1C	Mirage（待校）
+0E1D	Mirage（待校）
+0E1E	Mirage（待校）
+0E1F	Mirage（待校）
+0E20	Mirage（待校）
+0E21	Mirage（待校）
+0E22	Mirage（待校）
+0E23	Mirage（待校）
+0E24	Mirage（待校）
+0E25	Mirage（待校）
+0E26	Mirage（待校）
+0E27	Mirage（待校）
+0E28	Mirage（待校）
+0E29	Mirage（待校）
+0E2A	Mirage（待校）
+0E2B	Mirage（待校）
+0E2C	Mirage（待校）
+0E2D	Mirage（待校）
+0E2E	Mirage（待校）
+0E2F	Mirage（待校）
+0E30	Mirage（待校）
+0E31	Mirage（待校）
+0E32	Mirage（待校）
+0E33	Mirage（待校）
+0E34	Mirage（待校）
+0E35	Mirage（待校）
+0E36	Mirage（待校）
+0E37	Mirage（待校）
+0E38	Mirage（待校）
+0E39	Mirage（待校）
+0E3A	Mirage（待校）
+0E3B	Mirage（待校）
+0E3C	Mirage（待校）
+0E3D	Mirage（待校）
+0E3E	Mirage（待校）
+0E3F	Mirage（待校）
+0E40	Mirage（待校）
+0E41	Mirage（待校）
+0E42	Mirage（待校）
+0E43	无效的
+0E44	Thunderclap（待校）
+0E45	Detonating（待校）
+0E46	Detonating（待校）
+0E47	Summoner's（待校）
+0E48	Summoner's（待校）
+0E49	Showdown（待校）
+0E4A	Rainbow（待校）
+0E4B	Cavalry（待校）
+0E4C	Gambler's（待校）
+0E4D	Dark Knight's（待校）
+0E4E	Dark Knight's（待校）
+0E4F	Cardinal's（待校）
+0E50	Grand Mage's（待校）
+0E51	Hermit's（待校）
+0E52	Dimensional（待校）
+0E53	Merchant's（待校）
+0E54	Helical（待校）
+0E55	Angelic（待校）
+0E56	King's（待校）
+0E57	Moonlight（待校）
+0E58	Runed（待校）
+0E59	Runed（待校）
+0E5A	Demonic（待校）
+0E5B	Worshiper's（待校）
+0E5C	Heavenly（待校）
+0E5D	Enchanting（待校）
+0E5E	Beastmaster's（待校）
+0E5F	Beastmaster's（待校）
+0E60	Beastmaster's（待校）
+0E61	Beastmaster's（待校）
+0E62	Beastmaster's（待校）
+0E63	Paladin's（待校）
+0E64	Fallen（待校）
+0E65	Twilight（待校）
+0E66	Assassin's（待校）
+0E67	Massive（待校）
+0E68	蛇眼的
+0E69	Wyvern's（待校）
+0E6A	Frozen（待校）
+0E6B	Thunderous（待校）
+0E6C	Ice Storm（待校）
+0E6D	Bombing（待校）
+0E6E	Epic（待校）
+0E6F	Condemned（待校）
+0E70	Volcanic（待校）
+0E71	Darkness（待校）
+0E72	Savior's（待校）
+0E73	Savior's（待校）
+0E74	无效的
+0E75	无效的
+0E76	洞察的
+0E77	TraMPling（待校）
+0E78	Swift（待校）
+0E79	Violent（待校）
+0E7A	Wrathful（待校）
+0E7B	Reverent（待校）
+0E7C	Attentive（待校）
+0E7D	Inviolable（待校）
+0E7E	IMPervious（待校）
+0E7F	Vigilant（待校）
+0E80	Egotist's（待校）
+0E81	Mercenary（待校）
+0E82	Sacrosanct（待校）
+0E83	Salubrious（待校）
+0E84	Conquering（待校）
+0E85	Valiant（待校）
+0E86	神圣的
+0E87	IMPervious（待校）
+0E88	Celestial（待校）
+0E89	Persevering（待校）
+0E8A	绝望的
+0E8B	Abasing（待校）
+0E8C	Brutal（待校）
+0E8D	Desolating（待校）
+0E8E	Tenacious（待校）
+0E8F	碾压的
+0E90	离子的
+0E91	炮击的
+0E92	占卜师的
+0E93	轻快的
+0E94	先锋的
+0E95	孤独的
+0E96	Colossal（待校）
+0E97	Able（待校）
+0E98	Hindering（待校）
+0E99	Divine（待校）
+0E9A	Cyclonic（待校）
+0E9B	Psychotic（待校）
+0E9C	RaMPAGIng（待校）
+0E9D	Mimic's（待校）
+0E9E	Overlord's（待校）
+0E9F	无效的
+0EA0	Mirage（待校）
+0EA1	Mirage（待校）
+0EA2	Mirage（待校）
+0EA3	Mirage（待校）
+0EA4	Mirage（待校）
+0EA5	Mirage（待校）
+0EA6	Mirage（待校）
+0EA7	Mirage（待校）
+0EA8	Mirage（待校）
+0EA9	Mirage（待校）
+0EAA	Mirage（待校）
+0EAB	Mirage（待校）
+0EAC	Mirage（待校）
+0EAD	Mirage（待校）
+0EAE	Mirage（待校）
+0EAF	Mirage（待校）
+0EB0	Mirage（待校）
+0EB1	Mirage（待校）
+0EB2	Mirage（待校）
+0EB3	无效的
+0EB4	Flame-red（待校）
+0EB5	Crystalline（待校）
+0EB6	Electrifying（待校）
+0EB7	Detonating（待校）
+0EB8	Flame-red（待校）
+0EB9	Crystalline（待校）
+0EBA	Electrifying（待校）
+0EBB	Gusty（待校）
+0EBC	Sunless（待校）
+0EBD	Bursting（待校）
+0EBE	Spiritual（待校）
+0EBF	Chemist's（待校）
+0EC0	Ballistic（待校）
+0EC1	Legendary（待校）
+0EC2	Wizard's（待校）
+0EC3	Exorcist's（待校）
+0EC4	Exorcist's（待校）
+0EC5	Exorcist's（待校）
+0EC6	Containment（待校）
+0EC7	Master's（待校）
+0EC8	Aggressive（待校）
+0EC9	Sand Blast（待校）
+0ECA	IMPulsive（待校）
+0ECB	Duelist's（待校）
+0ECC	Executioner's（待校）
+0ECD	Sky High（待校）
+0ECE	Traditional（待校）
+0ECF	Stormrising（待校）
+0ED0	Fearless（待校）
+0ED1	Red-hot（待校）
+0ED2	Whirlwind（待校）
+0ED3	Rumbling（待校）
+0ED4	Killer's（待校）
+0ED5	Phantom（待校）
+0ED6	Ice Crusted（待校）
+0ED7	Abyssal（待校）
+0ED8	Flame-gated（待校）
+0ED9	Flying（待校）
+0EDA	Draconic（待校）
+0EDB	Neptune（待校）
+0EDC	Flash（待校）
+0EDD	Arctic（待校）
+0EDE	Cometary（待校）
+0EDF	Miner's（待校）
+0EE0	Acrobat's（待校）
+0EE1	Mystical（待校）
+0EE2	Infernal（待校）
+0EE3	Guardian's（待校）
+0EE4	Lamented（待校）
+0EE5	无效的
+0EE6	Mirage（待校）
+0EE7	Mirage（待校）
+0EE8	Mirage（待校）
+0EE9	Mirage（待校）
+0EEA	Mirage（待校）
+0EEB	Mirage（待校）
+0EEC	Mirage（待校）
+0EED	Mirage（待校）
+0EEE	Mirage（待校）
+0EEF	Mirage（待校）
+0EF0	Mirage（待校）
+0EF1	Mirage（待校）
+0EF2	Mirage（待校）
+0EF3	Mirage（待校）
+0EF4	Mirage（待校）
+0EF5	Mirage（待校）
+0EF6	Mirage（待校）
+0EF7	Mirage（待校）
+0EF8	Mirage（待校）
+0EF9	Mirage（待校）
+0EFA	Mirage（待校）
+0EFB	Mirage（待校）
+0EFC	Mirage（待校）
+0EFD	Mirage（待校）
+0EFE	Mirage（待校）
+0EFF	Mirage（待校）
+0F00	Mirage（待校）
+0F01	Mirage（待校）
+0F02	Mirage（待校）
+0F03	Mirage（待校）
+0F04	Mirage（待校）
+0F05	Mirage（待校）
+0F06	Mirage（待校）
+0F07	Mirage（待校）
+0F08	Mirage（待校）
+0F09	Mirage（待校）
+0F0A	Mirage（待校）
+0F0B	Mirage（待校）
+0F0C	Mirage（待校）
+0F0D	Mirage（待校）
+0F0E	Mirage（待校）
+0F0F	Mirage（待校）
+0F10	Mirage（待校）
+0F11	Mirage（待校）
+0F12	Mirage（待校）
+0F13	Mirage（待校）
+0F14	Mirage（待校）
+0F15	Mirage（待校）
+0F16	Mirage（待校）
+0F17	Mirage（待校）
+0F18	Mirage（待校）
+0F19	Mirage（待校）
+0F1A	Mirage（待校）
+0F1B	Mirage（待校）
+0F1C	Mirage（待校）
+0F1D	Mirage（待校）
+0F1E	No effect（待校）
+0F1F	+ power lightning STRike during evasion（待校）
+0F20	+ explosion 伤害 added to dash attack
+0F21	+ explosion 伤害 added to diving attack
+0F22	Summoned Skeleton's dealt 伤害 +%
+0F23	Summoned Wood Golem's dealt 伤害 +%
+0F24	箭矢 attacks penetrate 敌人
+0F25	% 概率 of 箭矢 attack without consuMPtion
+0F26	Dealt 伤害 +% during critical hit
+0F27	Dealt 伤害 and taken 伤害 +%
+0F28	Power Smash activates GraVITy（待校）
+0F29	Power Smash activates Slow（待校）
+0F2A	Shortens spell casting time %（待校）
+0F2B	Raises spell casting time and power %（待校）
+0F2C	Teleport MP cost -%（待校）
+0F2D	Negates Slow and GraVITy effects（待校）
+0F2E	While extending, all use 物品s recover +1
+0F2F	While extending, all equipment durability recovers %（待校）
+0F30	Recover MP per second（待校）
+0F31	Dealt 伤害 +% when HP at 999
+0F32	Negates all status ailments when HP at 999（待校）
+0F33	Changes mAGIc attack element from Fire to Ice（待校）
+0F34	Changes mAGIc attack element from Ice to Fire（待校）
+0F35	% of STR added to mAGIc attack 伤害
+0F36	% 概率 of using ring mAGIc without consuMPtion
+0F37	% 概率 of using spell book without consuMPtion
+0F38	INT increases by number of rings in bag X（待校）
+0F39	While mounted, additional action added（待校）
+0F3A	While mounted, HP recovers % per 敌人 defeated
+0F3B	While mounted, immune to knockdowns（待校）
+0F3C	While mounted, 受到的伤害 -%
+0F3D	While mounted, 造成的伤害 +%
+0F3E	While shield guarding, durability consumed to recover HP per second（待校）
+0F3F	All attacks are either critical hits or 1 伤害
+0F40	% 概率 of mAGIc shot per coin pickup
+0F41	造成的伤害 +% on back attacks
+0F42	% 概率 of one-hit KO a "stoned" 敌人
+0F43	Dealt 伤害 +% to "frogged" 敌人
+0F44	Adds Fire 伤害 to attacks
+0F45	Adds Ice 伤害 to attacks
+0F46	Adds Lightning 伤害 to attacks
+0F47	Lightning attacks of Grand Smash becomes Ice（待校）
+0F48	Eagle Dive bombs +（待校）
+0F49	Evasion invincibility time +%（待校）
+0F4A	While evasion invincibility active, dealt 伤害 +%
+0F4B	% 概率 of additional fire shot when attacking burning 敌人
+0F4C	Ring effect +%（待校）
+0F4D	During mAGIc boost, 受到的伤害 -%
+0F4E	During mAGIc boost, MP cost -%（待校）
+0F4F	No effect（待校）
+0F50	No effect（待校）
+0F51	MP takes % of 伤害
+0F52	Dash attack 伤害 +%
+0F53	Normal attack 速度 +%
+0F54	% 概率 to guard during kick
+0F55	% 概率 to resist knockback when kicking
+0F56	Regain % of last 受到的伤害 every second
+0F57	% 概率 to null back attack
+0F58	% 概率 of guard break
+0F59	No knockback with % of HP（待校）
+0F5A	DMG dealt +% to 敌人 with status ailments
+0F5B	Score +%, DMG taken +%（待校）
+0F5C	金币 obtained +%, DMG dealt -%
+0F5D	When recovering HP, also recover % as MP（待校）
+0F5E	% 概率 that 0 MP will be consumed when casting
+0F5F	Status ailment duration decreased by %（待校）
+0F60	When HP is at max, dealt physical 伤害 +%
+0F61	When HP is at max, dealt mAGIcal 伤害 +%
+0F62	When HP is above %, withstand one-hit KO（待校）
+0F63	Fire, ice, and lightning DMG becomes non-elemental DMG（待校）
+0F64	When HP is max, 受到的伤害 -%
+0F65	While airborne, 受到的伤害 -%
+0F66	造成的伤害 +% to 敌人 in the air
+0F67	Effect of Bash +%（待校）
+0F68	Power of Rebuke +%（待校）
+0F69	Power of Missile Reflect +%（待校）
+0F6A	Power of Brutal Drive +%（待校）
+0F6B	Power of Grand Smash +%（待校）
+0F6C	Power of Power Shot +%（待校）
+0F6D	Effect of Concentrate +%（待校）
+0F6E	Effect of Mental Absorb +%（待校）
+0F6F	Power of Judgement +%（待校）
+0F70	Power of Parry +%（待校）
+0F71	Effect of Rock Skin +%（待校）
+0F72	Power of Elemental Lore +%（待校）
+0F73	Effect of Slow +%（待校）
+0F74	Effect of Protection +%（待校）
+0F75	Power of TeMPest Edge +%（待校）
+0F76	Power of Brandish +%（待校）
+0F77	Power of Frenzy +%（待校）
+0F78	Power of Clone STRikes +%（待校）
+0F79	Power of spells +%（待校）
+0F7A	No effect（待校）
+0F7B	CD2 アクセ効果 0067
+0F7C	CD2 アクセ効果 0068
+0F7D	CD2 アクセ効果 0069
+0F7E	CD2 アクセ効果 0070
+0F7F	CD2 アクセ効果 0071
+0F80	CD2 アクセ効果 0072
+0F81	CD2 アクセ効果 0073
+0F82	CD2 アクセ効果 0074
+0F83	CD2 アクセ効果 0075
+0F84	CD2 アクセ効果 0076
+0F85	CD2 アクセ効果 0077
+0F86	CD2 アクセ効果 0078
+0F87	CD2 アクセ効果 0079
+0F88	CD2 アクセ効果 0080
+0F89	CD2 アクセ効果 0081
+0F8A	CD2 アクセ効果 0082
+0F8B	CD2 アクセ効果 0083
+0F8C	CD2 アクセ効果 0084
+0F8D	CD2 アクセ効果 0085
+0F8E	CD2 アクセ効果 0086
+0F8F	CD2 アクセ効果 0087
+0F90	CD2 アクセ効果 0088
+0F91	CD2 アクセ効果 0089
+0F92	CD2 アクセ効果 0090
+0F93	CD2 アクセ効果 0091
+0F94	CD2 アクセ効果 0092
+0F95	CD2 アクセ効果 0093
+0F96	CD2 アクセ効果 0094
+0F97	CD2 アクセ効果 0095
+0F98	CD2 アクセ効果 0096
+0F99	CD2 アクセ効果 0097
+0F9A	CD2 アクセ効果 0098
+0F9B	START ELETE ACCESSORIES FROM HERE（待校）
+0F9C	Add Fire to sliding attack（待校）
+0F9D	Add Ice to sliding attack（待校）
+0F9E	Add Lightning to sliding attack（待校）
+0F9F	Add explosion with 伤害 to Power Smash
+0FA0	Add Fire Pillar with 伤害 to Power Smash
+0FA1	Add Ice Pillar with 伤害 to Power Smash
+0FA2	Add Lightning with 伤害 to Power Smash
+0FA3	Add Storm with 伤害 to Power Smash
+0FA4	Add Poison with 伤害 to Power Smash
+0FA5	While extending, self deSTRuct（待校）
+0FA6	Elemetal Lore activation 速度 +%
+0FA7	Apply heal effects of all potions to party（待校）
+0FA8	Knockback and knockdown +%（待校）
+0FA9	STR and CON +（待校）
+0FAA	INT and MGR +（待校）
+0FAB	% of dealt 伤害 added as Fire and Ice 伤害
+0FAC	% of dealt 伤害 added as Ice and Lightning 伤害
+0FAD	% of dealt 伤害 added as Lightning and Fire 伤害
+0FAE	Decrease % of Fire, Ice, Lightning 受到的伤害
+0FAF	Ground attack 速度 +%, power +%
+0FB0	Hitting 敌人 during their attack will cause knockback
+0FB1	Power of Cyclone Masher +%（待校）
+0FB2	Power of Shockwave +%（待校）
+0FB3	伤害 increase effect of DiSTRaction +%
+0FB4	Power of Neck Splitter +%（待校）
+0FB5	Power of Deadly Revolution +%（待校）
+0FB6	War PaINT duration +%（待校）
+0FB7	伤害 increase effect of Power Bomb +%
+0FB8	Effect of Lethal Fists +%（待校）
+0FB9	Effect of Powder Mastery +%（待校）
+0FBA	箭矢 count of Rapid Fire +
+0FBB	Effect of Deadly Boots +%（待校）
+0FBC	Effect of Backstab +%（待校）
+0FBD	Effect of Extract +%（待校）
+0FBE	Effect of Ice Prison +%（待校）
+0FBF	Effect of Petrification +%（待校）
+0FC0	Effect of Fire Ward +%（待校）
+0FC1	伤害 increase effect of LeVITation +%
+0FC2	While teleporting, release Fire Pillar with 伤害
+0FC3	While teleporting, release Ice Pillar with 伤害
+0FC4	While teleporting, release lightning bolt with 伤害
+0FC5	Change Storm element to Ice（待校）
+0FC6	Change Toxic Extract element to Ice（待校）
+0FC7	Power of bombs +%（待校）
+0FC8	Enhance dagger power（待校）
+0FC9	Enhance crossbow power（待校）
+0FCA	Dealt 伤害 +% during PuMP Up
+0FCB	Dealt 伤害 +% to shield attacks
+0FCC	Power 伤害 bomb released on death
+0FCD	END ELITE WEAPONS（待校）
+0FCE	ELT アクセ効果 0008
+0FCF	ELT アクセ効果 0009
+0FD0	ELT アクセ効果 0010
+0FD1	ELT アクセ効果 0011
+0FD2	ELT アクセ効果 0012
+0FD3	ELT アクセ効果 0013
+0FD4	ELT アクセ効果 0014
+0FD5	ELT アクセ効果 0015
+0FD6	ELT アクセ効果 0016
+0FD7	ELT アクセ効果 0017
+0FD8	ELT アクセ効果 0018
+0FD9	ELT アクセ効果 0019
+0FDA	ELT アクセ効果 0020
+0FDB	ELT アクセ効果 0021
+0FDC	ELT アクセ効果 0022
+0FDD	ELT アクセ効果 0023
+0FDE	ELT アクセ効果 0024
+0FDF	ELT アクセ効果 0025
+0FE0	ELT アクセ効果 0026
+0FE1	ELT アクセ効果 0027
+0FE2	ELT アクセ効果 0028
+0FE3	ELT アクセ効果 0029
+0FE4	ELT アクセ効果 0030
+0FE5	ELT アクセ効果 0031
+0FE6	ELT アクセ効果 0032
+0FE7	ELT アクセ効果 0033
+0FE8	ELT アクセ効果 0034
+0FE9	ELT アクセ効果 0035
+0FEA	ELT アクセ効果 0036
+0FEB	ELT アクセ効果 0037
+0FEC	ELT アクセ効果 0038
+0FED	ELT アクセ効果 0039
+0FEE	ELT アクセ効果 0040
+0FEF	ELT アクセ効果 0041
+0FF0	ELT アクセ効果 0042
+0FF1	ELT アクセ効果 0043
+0FF2	ELT アクセ効果 0044
+0FF3	ELT アクセ効果 0045
+0FF4	ELT アクセ効果 0046
+0FF5	ELT アクセ効果 0047
+0FF6	ELT アクセ効果 0048
+0FF7	ELT アクセ効果 0049
+0FF8	ELT アクセ効果 0050
+0FF9	ELT アクセ効果 0051
+0FFA	ELT アクセ効果 0052
+0FFB	ELT アクセ効果 0053
+0FFC	ELT アクセ効果 0054
+0FFD	ELT アクセ効果 0055
+0FFE	ELT アクセ効果 0056
+0FFF	ELT アクセ効果 0057
+1000	ELT アクセ効果 0058
+1001	ELT アクセ効果 0059
+1002	Supreme（待校）
+1003	Thunderclap（待校）
+1004	Detonating（待校）
+1005	Detonating（待校）
+1006	Summoner's（待校）
+1007	Summoner's（待校）
+1008	Showdown（待校）
+1009	Rainbow（待校）
+100A	Cavalry（待校）
+100B	Gambler's（待校）
+100C	Dark Knight's（待校）
+100D	Dark Knight's（待校）
+100E	Cardinal's（待校）
+100F	Grand Mage's（待校）
+1010	Hermit's（待校）
+1011	Dimensional（待校）
+1012	Merchant's（待校）
+1013	Helical（待校）
+1014	Angelic（待校）
+1015	King's（待校）
+1016	Moonlight（待校）
+1017	Runed（待校）
+1018	Runed（待校）
+1019	Demonic（待校）
+101A	Worshiper's（待校）
+101B	Heavenly（待校）
+101C	Enchanting（待校）
+101D	Beastmaster's（待校）
+101E	Beastmaster's（待校）
+101F	Beastmaster's（待校）
+1020	Beastmaster's（待校）
+1021	Beastmaster's（待校）
+1022	Paladin's（待校）
+1023	Fallen（待校）
+1024	Twilight（待校）
+1025	Assassin's（待校）
+1026	Massive（待校）
+1027	蛇眼的
+1028	Wyvern's（待校）
+1029	Frozen（待校）
+102A	Thunderous（待校）
+102B	Ice Storm（待校）
+102C	Bombing（待校）
+102D	Epic（待校）
+102E	Condemned（待校）
+102F	Volcanic（待校）
+1030	Darkness（待校）
+1031	Savior's（待校）
+1032	Savior's（待校）
+1033	Supreme（待校）
+1034	无效的
+1035	洞察的
+1036	TraMPling（待校）
+1037	Swift（待校）
+1038	Violent（待校）
+1039	Wrathful（待校）
+103A	Reverent（待校）
+103B	Attentive（待校）
+103C	Inviolable（待校）
+103D	IMPervious（待校）
+103E	Vigilant（待校）
+103F	Egotist's（待校）
+1040	Mercenary（待校）
+1041	Sacrosanct（待校）
+1042	Salubrious（待校）
+1043	Conquering（待校）
+1044	Valiant（待校）
+1045	神圣的
+1046	IMPervious（待校）
+1047	Celestial（待校）
+1048	Persevering（待校）
+1049	绝望的
+104A	Abasing（待校）
+104B	Brutal（待校）
+104C	Desolating（待校）
+104D	Tenacious（待校）
+104E	碾压的
+104F	离子的
+1050	炮击的
+1051	占卜师的
+1052	轻快的
+1053	先锋的
+1054	孤独的
+1055	Colossal（待校）
+1056	Able（待校）
+1057	Hindering（待校）
+1058	Divine（待校）
+1059	Cyclonic（待校）
+105A	Psychotic（待校）
+105B	RaMPAGIng（待校）
+105C	Mimic's（待校）
+105D	Overlord's（待校）
+105E	无效的
+105F	Mirage（待校）
+1060	Mirage（待校）
+1061	Mirage（待校）
+1062	Mirage（待校）
+1063	Mirage（待校）
+1064	Mirage（待校）
+1065	Mirage（待校）
+1066	Mirage（待校）
+1067	Mirage（待校）
+1068	Mirage（待校）
+1069	Mirage（待校）
+106A	Mirage（待校）
+106B	Mirage（待校）
+106C	Mirage（待校）
+106D	Mirage（待校）
+106E	Mirage（待校）
+106F	Mirage（待校）
+1070	Mirage（待校）
+1071	Mirage（待校）
+1072	Mirage（待校）
+1073	Mirage（待校）
+1074	Mirage（待校）
+1075	Mirage（待校）
+1076	Mirage（待校）
+1077	Mirage（待校）
+1078	Mirage（待校）
+1079	Mirage（待校）
+107A	Mirage（待校）
+107B	Mirage（待校）
+107C	Mirage（待校）
+107D	Mirage（待校）
+107E	Mirage（待校）
+107F	Supreme（待校）
+1080	Flame-red（待校）
+1081	Crystalline（待校）
+1082	Electrifying（待校）
+1083	Detonating（待校）
+1084	Flame-red（待校）
+1085	Crystalline（待校）
+1086	Electrifying（待校）
+1087	Gusty（待校）
+1088	Sunless（待校）
+1089	Bursting（待校）
+108A	Spiritual（待校）
+108B	Chemist's（待校）
+108C	Ballistic（待校）
+108D	Legendary（待校）
+108E	Wizard's（待校）
+108F	Exorcist's（待校）
+1090	Exorcist's（待校）
+1091	Exorcist's（待校）
+1092	Containment（待校）
+1093	Master's（待校）
+1094	Aggressive（待校）
+1095	Sand Blast（待校）
+1096	IMPulsive（待校）
+1097	Duelist's（待校）
+1098	Executioner's（待校）
+1099	Sky High（待校）
+109A	Traditional（待校）
+109B	Stormrising（待校）
+109C	Fearless（待校）
+109D	Red-hot（待校）
+109E	Whirlwind（待校）
+109F	Rumbling（待校）
+10A0	Killer's（待校）
+10A1	Phantom（待校）
+10A2	Ice Crusted（待校）
+10A3	Abyssal（待校）
+10A4	Flame-gated（待校）
+10A5	Flying（待校）
+10A6	Draconic（待校）
+10A7	Neptune（待校）
+10A8	Flash（待校）
+10A9	Arctic（待校）
+10AA	Cometary（待校）
+10AB	Miner's（待校）
+10AC	Acrobat's（待校）
+10AD	Mystical（待校）
+10AE	Infernal（待校）
+10AF	Guardian's（待校）
+10B0	Lamented（待校）
+10B1	Supreme（待校）
+10B2	Mirage（待校）
+10B3	Mirage（待校）
+10B4	Mirage（待校）
+10B5	Mirage（待校）
+10B6	Mirage（待校）
+10B7	Mirage（待校）
+10B8	Mirage（待校）
+10B9	Mirage（待校）
+10BA	Mirage（待校）
+10BB	Mirage（待校）
+10BC	Mirage（待校）
+10BD	Mirage（待校）
+10BE	Mirage（待校）
+10BF	Mirage（待校）
+10C0	Mirage（待校）
+10C1	Mirage（待校）
+10C2	Mirage（待校）
+10C3	Mirage（待校）
+10C4	Mirage（待校）
+10C5	Mirage（待校）
+10C6	Mirage（待校）
+10C7	Mirage（待校）
+10C8	Mirage（待校）
+10C9	Mirage（待校）
+10CA	Mirage（待校）
+10CB	Mirage（待校）
+10CC	Mirage（待校）
+10CD	Mirage（待校）
+10CE	Mirage（待校）
+10CF	Mirage（待校）
+10D0	Mirage（待校）
+10D1	Mirage（待校）
+10D2	Mirage（待校）
+10D3	Mirage（待校）
+10D4	Mirage（待校）
+10D5	Mirage（待校）
+10D6	Mirage（待校）
+10D7	Mirage（待校）
+10D8	Mirage（待校）
+10D9	Mirage（待校）
+10DA	Mirage（待校）
+10DB	Mirage（待校）
+10DC	Mirage（待校）
+10DD	Mirage（待校）
+10DE	Mirage（待校）
+10DF	Mirage（待校）
+10E0	Mirage（待校）
+10E1	Mirage（待校）
+10E2	Mirage（待校）
+10E3	Mirage（待校）
+10E4	Mirage（待校）
+10E5	Mirage（待校）
+10E6	Supreme（待校）
+10E7	Thunderclap（待校）
+10E8	Detonating（待校）
+10E9	Detonating（待校）
+10EA	Summoner's（待校）
+10EB	Summoner's（待校）
+10EC	Showdown（待校）
+10ED	Rainbow（待校）
+10EE	Cavalry（待校）
+10EF	Gambler's（待校）
+10F0	Dark Knight's（待校）
+10F1	Dark Knight's（待校）
+10F2	Cardinal's（待校）
+10F3	Grand Mage's（待校）
+10F4	Hermit's（待校）
+10F5	Dimensional（待校）
+10F6	Merchant's（待校）
+10F7	Helical（待校）
+10F8	Angelic（待校）
+10F9	King's（待校）
+10FA	Moonlight（待校）
+10FB	Runed（待校）
+10FC	Runed（待校）
+10FD	Demonic（待校）
+10FE	Worshiper's（待校）
+10FF	Heavenly（待校）
+1100	Enchanting（待校）
+1101	Beastmaster's（待校）
+1102	Beastmaster's（待校）
+1103	Beastmaster's（待校）
+1104	Beastmaster's（待校）
+1105	Beastmaster's（待校）
+1106	Paladin's（待校）
+1107	Fallen（待校）
+1108	Twilight（待校）
+1109	Assassin's（待校）
+110A	Massive（待校）
+110B	蛇眼的
+110C	Wyvern's（待校）
+110D	Frozen（待校）
+110E	Thunderous（待校）
+110F	Ice Storm（待校）
+1110	Bombing（待校）
+1111	Epic（待校）
+1112	Condemned（待校）
+1113	Volcanic（待校）
+1114	Darkness（待校）
+1115	Savior's（待校）
+1116	Savior's（待校）
+1117	Supreme（待校）
+1118	无效的
+1119	洞察的
+111A	TraMPling（待校）
+111B	Swift（待校）
+111C	Violent（待校）
+111D	Wrathful（待校）
+111E	Reverent（待校）
+111F	Attentive（待校）
+1120	Inviolable（待校）
+1121	IMPervious（待校）
+1122	Vigilant（待校）
+1123	Egotist's（待校）
+1124	Mercenary（待校）
+1125	Sacrosanct（待校）
+1126	Salubrious（待校）
+1127	Conquering（待校）
+1128	Valiant（待校）
+1129	神圣的
+112A	IMPervious（待校）
+112B	Celestial（待校）
+112C	Persevering（待校）
+112D	绝望的
+112E	Abasing（待校）
+112F	Brutal（待校）
+1130	Desolating（待校）
+1131	Tenacious（待校）
+1132	碾压的
+1133	离子的
+1134	炮击的
+1135	占卜师的
+1136	轻快的
+1137	先锋的
+1138	孤独的
+1139	Colossal（待校）
+113A	Able（待校）
+113B	Hindering（待校）
+113C	Divine（待校）
+113D	Cyclonic（待校）
+113E	Psychotic（待校）
+113F	RaMPAGIng（待校）
+1140	Mimic's（待校）
+1141	Overlord's（待校）
+1142	无效的
+1143	Mirage（待校）
+1144	Mirage（待校）
+1145	Mirage（待校）
+1146	Mirage（待校）
+1147	Mirage（待校）
+1148	Mirage（待校）
+1149	Mirage（待校）
+114A	Mirage（待校）
+114B	Mirage（待校）
+114C	Mirage（待校）
+114D	Mirage（待校）
+114E	Mirage（待校）
+114F	Mirage（待校）
+1150	Mirage（待校）
+1151	Mirage（待校）
+1152	Mirage（待校）
+1153	Mirage（待校）
+1154	Mirage（待校）
+1155	Mirage（待校）
+1156	Mirage（待校）
+1157	Mirage（待校）
+1158	Mirage（待校）
+1159	Mirage（待校）
+115A	Mirage（待校）
+115B	Mirage（待校）
+115C	Mirage（待校）
+115D	Mirage（待校）
+115E	Mirage（待校）
+115F	Mirage（待校）
+1160	Mirage（待校）
+1161	Mirage（待校）
+1162	Mirage（待校）
+1163	Supreme（待校）
+1164	Flame-red（待校）
+1165	Crystalline（待校）
+1166	Electrifying（待校）
+1167	Detonating（待校）
+1168	Flame-red（待校）
+1169	Crystalline（待校）
+116A	Electrifying（待校）
+116B	Gusty（待校）
+116C	Sunless（待校）
+116D	Bursting（待校）
+116E	Spiritual（待校）
+116F	Chemist's（待校）
+1170	Ballistic（待校）
+1171	Legendary（待校）
+1172	Wizard's（待校）
+1173	Exorcist's（待校）
+1174	Exorcist's（待校）
+1175	Exorcist's（待校）
+1176	Containment（待校）
+1177	Master's（待校）
+1178	Aggressive（待校）
+1179	Sand Blast（待校）
+117A	IMPulsive（待校）
+117B	Duelist's（待校）
+117C	Executioner's（待校）
+117D	Sky High（待校）
+117E	Traditional（待校）
+117F	Stormrising（待校）
+1180	Fearless（待校）
+1181	Red-hot（待校）
+1182	Whirlwind（待校）
+1183	Rumbling（待校）
+1184	Killer's（待校）
+1185	Phantom（待校）
+1186	Ice Crusted（待校）
+1187	Abyssal（待校）
+1188	Flame-gated（待校）
+1189	Flying（待校）
+118A	Draconic（待校）
+118B	Neptune（待校）
+118C	Flash（待校）
+118D	Arctic（待校）
+118E	Cometary（待校）
+118F	Miner's（待校）
+1190	Acrobat's（待校）
+1191	Mystical（待校）
+1192	Infernal（待校）
+1193	Guardian's（待校）
+1194	Lamented（待校）
+1195	Supreme（待校）
+1196	Mirage（待校）
+1197	Mirage（待校）
+1198	Mirage（待校）
+1199	Mirage（待校）
+119A	Mirage（待校）
+119B	Mirage（待校）
+119C	Mirage（待校）
+119D	Mirage（待校）
+119E	Mirage（待校）
+119F	Mirage（待校）
+11A0	Mirage（待校）
+11A1	Mirage（待校）
+11A2	Mirage（待校）
+11A3	Mirage（待校）
+11A4	Mirage（待校）
+11A5	Mirage（待校）
+11A6	Mirage（待校）
+11A7	Mirage（待校）
+11A8	Mirage（待校）
+11A9	Mirage（待校）
+11AA	Mirage（待校）
+11AB	Mirage（待校）
+11AC	Mirage（待校）
+11AD	Mirage（待校）
+11AE	Mirage（待校）
+11AF	Mirage（待校）
+11B0	Mirage（待校）
+11B1	Mirage（待校）
+11B2	Mirage（待校）
+11B3	Mirage（待校）
+11B4	Mirage（待校）
+11B5	Mirage（待校）
+11B6	Mirage（待校）
+11B7	Mirage（待校）
+11B8	Mirage（待校）
+11B9	Mirage（待校）
+11BA	Mirage（待校）
+11BB	Mirage（待校）
+11BC	Mirage（待校）
+11BD	Mirage（待校）
+11BE	Mirage（待校）
+11BF	Mirage（待校）
+11C0	Mirage（待校）
+11C1	Mirage（待校）
+11C2	Mirage（待校）
+11C3	Mirage（待校）
+11C4	Mirage（待校）
+11C5	Mirage（待校）
+11C6	Mirage（待校）
+11C7	Mirage（待校）
+11C8	Mirage（待校）
+11C9	Mirage（待校）
+11CA	Supreme（待校）
+11CB	Thunderclap（待校）
+11CC	Detonating（待校）
+11CD	Detonating（待校）
+11CE	Summoner's（待校）
+11CF	Summoner's（待校）
+11D0	Showdown（待校）
+11D1	Rainbow（待校）
+11D2	Cavalry（待校）
+11D3	Gambler's（待校）
+11D4	Dark Knight's（待校）
+11D5	Dark Knight's（待校）
+11D6	Cardinal's（待校）
+11D7	Grand Mage's（待校）
+11D8	Hermit's（待校）
+11D9	Dimensional（待校）
+11DA	Merchant's（待校）
+11DB	Helical（待校）
+11DC	Angelic（待校）
+11DD	King's（待校）
+11DE	Moonlight（待校）
+11DF	Runed（待校）
+11E0	Runed（待校）
+11E1	Demonic（待校）
+11E2	Worshiper's（待校）
+11E3	Heavenly（待校）
+11E4	Enchanting（待校）
+11E5	Beastmaster's（待校）
+11E6	Beastmaster's（待校）
+11E7	Beastmaster's（待校）
+11E8	Beastmaster's（待校）
+11E9	Beastmaster's（待校）
+11EA	Paladin's（待校）
+11EB	Fallen（待校）
+11EC	Twilight（待校）
+11ED	Assassin's（待校）
+11EE	Massive（待校）
+11EF	蛇眼的
+11F0	Wyvern's（待校）
+11F1	Frozen（待校）
+11F2	Thunderous（待校）
+11F3	Ice Storm（待校）
+11F4	Bombing（待校）
+11F5	Epic（待校）
+11F6	Condemned（待校）
+11F7	Volcanic（待校）
+11F8	Darkness（待校）
+11F9	Savior's（待校）
+11FA	Savior's（待校）
+11FB	Supreme（待校）
+11FC	无效的
+11FD	洞察的
+11FE	TraMPling（待校）
+11FF	Swift（待校）
+1200	Violent（待校）
+1201	Wrathful（待校）
+1202	Reverent（待校）
+1203	Attentive（待校）
+1204	Inviolable（待校）
+1205	IMPervious（待校）
+1206	Vigilant（待校）
+1207	Egotist's（待校）
+1208	Mercenary（待校）
+1209	Sacrosanct（待校）
+120A	Salubrious（待校）
+120B	Conquering（待校）
+120C	Valiant（待校）
+120D	神圣的
+120E	IMPervious（待校）
+120F	Celestial（待校）
+1210	Persevering（待校）
+1211	绝望的
+1212	Abasing（待校）
+1213	Brutal（待校）
+1214	Desolating（待校）
+1215	Tenacious（待校）
+1216	碾压的
+1217	离子的
+1218	炮击的
+1219	占卜师的
+121A	轻快的
+121B	先锋的
+121C	孤独的
+121D	Colossal（待校）
+121E	Able（待校）
+121F	Hindering（待校）
+1220	Divine（待校）
+1221	Cyclonic（待校）
+1222	Psychotic（待校）
+1223	RaMPAGIng（待校）
+1224	Mimic's（待校）
+1225	Overlord's（待校）
+1226	无效的
+1227	Mirage（待校）
+1228	Mirage（待校）
+1229	Mirage（待校）
+122A	Mirage（待校）
+122B	Mirage（待校）
+122C	Mirage（待校）
+122D	Mirage（待校）
+122E	Mirage（待校）
+122F	Mirage（待校）
+1230	Mirage（待校）
+1231	Mirage（待校）
+1232	Mirage（待校）
+1233	Mirage（待校）
+1234	Mirage（待校）
+1235	Mirage（待校）
+1236	Mirage（待校）
+1237	Mirage（待校）
+1238	Mirage（待校）
+1239	Mirage（待校）
+123A	Mirage（待校）
+123B	Mirage（待校）
+123C	Mirage（待校）
+123D	Mirage（待校）
+123E	Mirage（待校）
+123F	Mirage（待校）
+1240	Mirage（待校）
+1241	Mirage（待校）
+1242	Mirage（待校）
+1243	Mirage（待校）
+1244	Mirage（待校）
+1245	Mirage（待校）
+1246	Mirage（待校）
+1247	Supreme（待校）
+1248	Flame-red（待校）
+1249	Crystalline（待校）
+124A	Electrifying（待校）
+124B	Detonating（待校）
+124C	Flame-red（待校）
+124D	Crystalline（待校）
+124E	Electrifying（待校）
+124F	Gusty（待校）
+1250	Sunless（待校）
+1251	Bursting（待校）
+1252	Spiritual（待校）
+1253	Chemist's（待校）
+1254	Ballistic（待校）
+1255	Legendary（待校）
+1256	Wizard's（待校）
+1257	Exorcist's（待校）
+1258	Exorcist's（待校）
+1259	Exorcist's（待校）
+125A	Containment（待校）
+125B	Master's（待校）
+125C	Aggressive（待校）
+125D	Sand Blast（待校）
+125E	IMPulsive（待校）
+125F	Duelist's（待校）
+1260	Executioner's（待校）
+1261	Sky High（待校）
+1262	Traditional（待校）
+1263	Stormrising（待校）
+1264	Fearless（待校）
+1265	Red-hot（待校）
+1266	Whirlwind（待校）
+1267	Rumbling（待校）
+1268	Killer's（待校）
+1269	Phantom（待校）
+126A	Ice Crusted（待校）
+126B	Abyssal（待校）
+126C	Flame-gated（待校）
+126D	Flying（待校）
+126E	Draconic（待校）
+126F	Neptune（待校）
+1270	Flash（待校）
+1271	Arctic（待校）
+1272	Cometary（待校）
+1273	Miner's（待校）
+1274	Acrobat's（待校）
+1275	Mystical（待校）
+1276	Infernal（待校）
+1277	Guardian's（待校）
+1278	Lamented（待校）
+1279	Supreme（待校）
+127A	Mirage（待校）
+127B	Mirage（待校）
+127C	Mirage（待校）
+127D	Mirage（待校）
+127E	Mirage（待校）
+127F	Mirage（待校）
+1280	Mirage（待校）
+1281	Mirage（待校）
+1282	Mirage（待校）
+1283	Mirage（待校）
+1284	Mirage（待校）
+1285	Mirage（待校）
+1286	Mirage（待校）
+1287	Mirage（待校）
+1288	Mirage（待校）
+1289	Mirage（待校）
+128A	Mirage（待校）
+128B	Mirage（待校）
+128C	Mirage（待校）
+128D	Mirage（待校）
+128E	Mirage（待校）
+128F	Mirage（待校）
+1290	Mirage（待校）
+1291	Mirage（待校）
+1292	Mirage（待校）
+1293	Mirage（待校）
+1294	Mirage（待校）
+1295	Mirage（待校）
+1296	Mirage（待校）
+1297	Mirage（待校）
+1298	Mirage（待校）
+1299	Mirage（待校）
+129A	Mirage（待校）
+129B	Mirage（待校）
+129C	Mirage（待校）
+129D	Mirage（待校）
+129E	Mirage（待校）
+129F	Mirage（待校）
+12A0	Mirage（待校）
+12A1	Mirage（待校）
+12A2	Mirage（待校）
+12A3	Mirage（待校）
+12A4	Mirage（待校）
+12A5	Mirage（待校）
+12A6	Mirage（待校）
+12A7	Mirage（待校）
+12A8	Mirage（待校）
+12A9	Mirage（待校）
+12AA	Mirage（待校）
+12AB	Mirage（待校）
+12AC	Mirage（待校）
+12AD	Mirage（待校）
+12AE	Supreme（待校）
+12AF	Thunderclap（待校）
+12B0	Detonating（待校）
+12B1	Detonating（待校）
+12B2	Summoner's（待校）
+12B3	Summoner's（待校）
+12B4	Showdown（待校）
+12B5	Rainbow（待校）
+12B6	Cavalry（待校）
+12B7	Gambler's（待校）
+12B8	Dark Knight's（待校）
+12B9	Dark Knight's（待校）
+12BA	Cardinal's（待校）
+12BB	Grand Mage's（待校）
+12BC	Hermit's（待校）
+12BD	Dimensional（待校）
+12BE	Merchant's（待校）
+12BF	Helical（待校）
+12C0	Angelic（待校）
+12C1	King's（待校）
+12C2	Moonlight（待校）
+12C3	Runed（待校）
+12C4	Runed（待校）
+12C5	Demonic（待校）
+12C6	Worshiper's（待校）
+12C7	Heavenly（待校）
+12C8	Enchanting（待校）
+12C9	Beastmaster's（待校）
+12CA	Beastmaster's（待校）
+12CB	Beastmaster's（待校）
+12CC	Beastmaster's（待校）
+12CD	Beastmaster's（待校）
+12CE	Paladin's（待校）
+12CF	Fallen（待校）
+12D0	Twilight（待校）
+12D1	Assassin's（待校）
+12D2	Massive（待校）
+12D3	蛇眼的
+12D4	Wyvern's（待校）
+12D5	Frozen（待校）
+12D6	Thunderous（待校）
+12D7	Ice Storm（待校）
+12D8	Bombing（待校）
+12D9	Epic（待校）
+12DA	Condemned（待校）
+12DB	Volcanic（待校）
+12DC	Darkness（待校）
+12DD	Savior's（待校）
+12DE	Savior's（待校）
+12DF	Supreme（待校）
+12E0	无效的
+12E1	洞察的
+12E2	TraMPling（待校）
+12E3	Swift（待校）
+12E4	Violent（待校）
+12E5	Wrathful（待校）
+12E6	Reverent（待校）
+12E7	Attentive（待校）
+12E8	Inviolable（待校）
+12E9	IMPervious（待校）
+12EA	Vigilant（待校）
+12EB	Egotist's（待校）
+12EC	Mercenary（待校）
+12ED	Sacrosanct（待校）
+12EE	Salubrious（待校）
+12EF	Conquering（待校）
+12F0	Valiant（待校）
+12F1	神圣的
+12F2	IMPervious（待校）
+12F3	Celestial（待校）
+12F4	Persevering（待校）
+12F5	绝望的
+12F6	Abasing（待校）
+12F7	Brutal（待校）
+12F8	Desolating（待校）
+12F9	Tenacious（待校）
+12FA	碾压的
+12FB	离子的
+12FC	炮击的
+12FD	占卜师的
+12FE	轻快的
+12FF	先锋的
+1300	孤独的
+1301	Colossal（待校）
+1302	Able（待校）
+1303	Hindering（待校）
+1304	Divine（待校）
+1305	Cyclonic（待校）
+1306	Psychotic（待校）
+1307	RaMPAGIng（待校）
+1308	Mimic's（待校）
+1309	Overlord's（待校）
+130A	无效的
+130B	Mirage（待校）
+130C	Mirage（待校）
+130D	Mirage（待校）
+130E	Mirage（待校）
+130F	Mirage（待校）
+1310	Mirage（待校）
+1311	Mirage（待校）
+1312	Mirage（待校）
+1313	Mirage（待校）
+1314	Mirage（待校）
+1315	Mirage（待校）
+1316	Mirage（待校）
+1317	Mirage（待校）
+1318	Mirage（待校）
+1319	Mirage（待校）
+131A	Mirage（待校）
+131B	Mirage（待校）
+131C	Mirage（待校）
+131D	Mirage（待校）
+131E	Mirage（待校）
+131F	Mirage（待校）
+1320	Mirage（待校）
+1321	Mirage（待校）
+1322	Mirage（待校）
+1323	Mirage（待校）
+1324	Mirage（待校）
+1325	Mirage（待校）
+1326	Mirage（待校）
+1327	Mirage（待校）
+1328	Mirage（待校）
+1329	Mirage（待校）
+132A	Mirage（待校）
+132B	Supreme（待校）
+132C	Flame-red（待校）
+132D	Crystalline（待校）
+132E	Electrifying（待校）
+132F	Detonating（待校）
+1330	Flame-red（待校）
+1331	Crystalline（待校）
+1332	Electrifying（待校）
+1333	Gusty（待校）
+1334	Sunless（待校）
+1335	Bursting（待校）
+1336	Spiritual（待校）
+1337	Chemist's（待校）
+1338	Ballistic（待校）
+1339	Legendary（待校）
+133A	Wizard's（待校）
+133B	Exorcist's（待校）
+133C	Exorcist's（待校）
+133D	Exorcist's（待校）
+133E	Containment（待校）
+133F	Master's（待校）
+1340	Aggressive（待校）
+1341	Sand Blast（待校）
+1342	IMPulsive（待校）
+1343	Duelist's（待校）
+1344	Executioner's（待校）
+1345	Sky High（待校）
+1346	Traditional（待校）
+1347	Stormrising（待校）
+1348	Fearless（待校）
+1349	Red-hot（待校）
+134A	Whirlwind（待校）
+134B	Rumbling（待校）
+134C	Killer's（待校）
+134D	Phantom（待校）
+134E	Ice Crusted（待校）
+134F	Abyssal（待校）
+1350	Flame-gated（待校）
+1351	Flying（待校）
+1352	Draconic（待校）
+1353	Neptune（待校）
+1354	Flash（待校）
+1355	Arctic（待校）
+1356	Cometary（待校）
+1357	Miner's（待校）
+1358	Acrobat's（待校）
+1359	Mystical（待校）
+135A	Infernal（待校）
+135B	Guardian's（待校）
+135C	Lamented（待校）
+135D	Supreme（待校）
+135E	Mirage（待校）
+135F	Mirage（待校）
+1360	Mirage（待校）
+1361	Mirage（待校）
+1362	Mirage（待校）
+1363	Mirage（待校）
+1364	Mirage（待校）
+1365	Mirage（待校）
+1366	Mirage（待校）
+1367	Mirage（待校）
+1368	Mirage（待校）
+1369	Mirage（待校）
+136A	Mirage（待校）
+136B	Mirage（待校）
+136C	Mirage（待校）
+136D	Mirage（待校）
+136E	Mirage（待校）
+136F	Mirage（待校）
+1370	Mirage（待校）
+1371	Mirage（待校）
+1372	Mirage（待校）
+1373	Mirage（待校）
+1374	Mirage（待校）
+1375	Mirage（待校）
+1376	Mirage（待校）
+1377	Mirage（待校）
+1378	Mirage（待校）
+1379	Mirage（待校）
+137A	Mirage（待校）
+137B	Mirage（待校）
+137C	Mirage（待校）
+137D	Mirage（待校）
+137E	Mirage（待校）
+137F	Mirage（待校）
+1380	Mirage（待校）
+1381	Mirage（待校）
+1382	Mirage（待校）
+1383	Mirage（待校）
+1384	Mirage（待校）
+1385	Mirage（待校）
+1386	Mirage（待校）
+1387	Mirage（待校）
+1388	Mirage（待校）
+1389	Mirage（待校）
+138A	Mirage（待校）
+138B	Mirage（待校）
+138C	Mirage（待校）
+138D	Mirage（待校）
+138E	Mirage（待校）
+138F	Mirage（待校）
+1390	Mirage（待校）
+1391	Mirage（待校）
+1392	Supreme（待校）
+1393	Thunderclap（待校）
+1394	Detonating（待校）
+1395	Detonating（待校）
+1396	Summoner's（待校）
+1397	Summoner's（待校）
+1398	Showdown（待校）
+1399	Rainbow（待校）
+139A	Cavalry（待校）
+139B	Gambler's（待校）
+139C	Dark Knight's（待校）
+139D	Dark Knight's（待校）
+139E	Cardinal's（待校）
+139F	Grand Mage's（待校）
+13A0	Hermit's（待校）
+13A1	Dimensional（待校）
+13A2	Merchant's（待校）
+13A3	Helical（待校）
+13A4	Angelic（待校）
+13A5	King's（待校）
+13A6	Moonlight（待校）
+13A7	Runed（待校）
+13A8	Runed（待校）
+13A9	Demonic（待校）
+13AA	Worshiper's（待校）
+13AB	Heavenly（待校）
+13AC	Enchanting（待校）
+13AD	Beastmaster's（待校）
+13AE	Beastmaster's（待校）
+13AF	Beastmaster's（待校）
+13B0	Beastmaster's（待校）
+13B1	Beastmaster's（待校）
+13B2	Paladin's（待校）
+13B3	Fallen（待校）
+13B4	Twilight（待校）
+13B5	Assassin's（待校）
+13B6	Massive（待校）
+13B7	蛇眼的
+13B8	Wyvern's（待校）
+13B9	Frozen（待校）
+13BA	Thunderous（待校）
+13BB	Ice Storm（待校）
+13BC	Bombing（待校）
+13BD	Epic（待校）
+13BE	Condemned（待校）
+13BF	Volcanic（待校）
+13C0	Darkness（待校）
+13C1	Savior's（待校）
+13C2	Savior's（待校）
+13C3	Supreme（待校）
+13C4	无效的
+13C5	洞察的
+13C6	TraMPling（待校）
+13C7	Swift（待校）
+13C8	Violent（待校）
+13C9	Wrathful（待校）
+13CA	Reverent（待校）
+13CB	Attentive（待校）
+13CC	Inviolable（待校）
+13CD	IMPervious（待校）
+13CE	Vigilant（待校）
+13CF	Egotist's（待校）
+13D0	Mercenary（待校）
+13D1	Sacrosanct（待校）
+13D2	Salubrious（待校）
+13D3	Conquering（待校）
+13D4	Valiant（待校）
+13D5	神圣的
+13D6	IMPervious（待校）
+13D7	Celestial（待校）
+13D8	Persevering（待校）
+13D9	绝望的
+13DA	Abasing（待校）
+13DB	Brutal（待校）
+13DC	Desolating（待校）
+13DD	Tenacious（待校）
+13DE	碾压的
+13DF	离子的
+13E0	炮击的
+13E1	占卜师的
+13E2	轻快的
+13E3	先锋的
+13E4	孤独的
+13E5	Colossal（待校）
+13E6	Able（待校）
+13E7	Hindering（待校）
+13E8	Divine（待校）
+13E9	Cyclonic（待校）
+13EA	Psychotic（待校）
+13EB	RaMPAGIng（待校）
+13EC	Mimic's（待校）
+13ED	Overlord's（待校）
+13EE	无效的
+13EF	Mirage（待校）
+13F0	Mirage（待校）
+13F1	Mirage（待校）
+13F2	Mirage（待校）
+13F3	Mirage（待校）
+13F4	Mirage（待校）
+13F5	Mirage（待校）
+13F6	Mirage（待校）
+13F7	Mirage（待校）
+13F8	Mirage（待校）
+13F9	Mirage（待校）
+13FA	Mirage（待校）
+13FB	Mirage（待校）
+13FC	Mirage（待校）
+13FD	Mirage（待校）
+13FE	Mirage（待校）
+13FF	Mirage（待校）
+1400	Mirage（待校）
+1401	Mirage（待校）
+1402	Mirage（待校）
+1403	Mirage（待校）
+1404	Mirage（待校）
+1405	Mirage（待校）
+1406	Mirage（待校）
+1407	Mirage（待校）
+1408	Mirage（待校）
+1409	Mirage（待校）
+140A	Mirage（待校）
+140B	Mirage（待校）
+140C	Mirage（待校）
+140D	Mirage（待校）
+140E	Mirage（待校）
+140F	Supreme（待校）
+1410	Flame-red（待校）
+1411	Crystalline（待校）
+1412	Electrifying（待校）
+1413	Detonating（待校）
+1414	Flame-red（待校）
+1415	Crystalline（待校）
+1416	Electrifying（待校）
+1417	Gusty（待校）
+1418	Sunless（待校）
+1419	Bursting（待校）
+141A	Spiritual（待校）
+141B	Chemist's（待校）
+141C	Ballistic（待校）
+141D	Legendary（待校）
+141E	Wizard's（待校）
+141F	Exorcist's（待校）
+1420	Exorcist's（待校）
+1421	Exorcist's（待校）
+1422	Containment（待校）
+1423	Master's（待校）
+1424	Aggressive（待校）
+1425	Sand Blast（待校）
+1426	IMPulsive（待校）
+1427	Duelist's（待校）
+1428	Executioner's（待校）
+1429	Sky High（待校）
+142A	Traditional（待校）
+142B	Stormrising（待校）
+142C	Fearless（待校）
+142D	Red-hot（待校）
+142E	Whirlwind（待校）
+142F	Rumbling（待校）
+1430	Killer's（待校）
+1431	Phantom（待校）
+1432	Ice Crusted（待校）
+1433	Abyssal（待校）
+1434	Flame-gated（待校）
+1435	Flying（待校）
+1436	Draconic（待校）
+1437	Neptune（待校）
+1438	Flash（待校）
+1439	Arctic（待校）
+143A	Cometary（待校）
+143B	Miner's（待校）
+143C	Acrobat's（待校）
+143D	Mystical（待校）
+143E	Infernal（待校）
+143F	Guardian's（待校）
+1440	Lamented（待校）
+1441	Supreme（待校）
+1442	Mirage（待校）
+1443	Mirage（待校）
+1444	Mirage（待校）
+1445	Mirage（待校）
+1446	Mirage（待校）
+1447	Mirage（待校）
+1448	Mirage（待校）
+1449	Mirage（待校）
+144A	Mirage（待校）
+144B	Mirage（待校）
+144C	Mirage（待校）
+144D	Mirage（待校）
+144E	Mirage（待校）
+144F	Mirage（待校）
+1450	Mirage（待校）
+1451	Mirage（待校）
+1452	Mirage（待校）
+1453	Mirage（待校）
+1454	Mirage（待校）
+1455	Mirage（待校）
+1456	Mirage（待校）
+1457	Mirage（待校）
+1458	Mirage（待校）
+1459	Mirage（待校）
+145A	Mirage（待校）
+145B	Mirage（待校）
+145C	Mirage（待校）
+145D	Mirage（待校）
+145E	Mirage（待校）
+145F	Mirage（待校）
+1460	Mirage（待校）
+1461	Mirage（待校）
+1462	Mirage（待校）
+1463	Mirage（待校）
+1464	Mirage（待校）
+1465	Mirage（待校）
+1466	Mirage（待校）
+1467	Mirage（待校）
+1468	Mirage（待校）
+1469	Mirage（待校）
+146A	Mirage（待校）
+146B	Mirage（待校）
+146C	Mirage（待校）
+146D	Mirage（待校）
+146E	Mirage（待校）
+146F	Mirage（待校）
+1470	Mirage（待校）
+1471	Mirage（待校）
+1472	Mirage（待校）
+1473	Mirage（待校）
+1474	Mirage（待校）
+1475	Mirage（待校）

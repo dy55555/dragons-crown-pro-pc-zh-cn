@@ -30,7 +30,8 @@ class App:
         self.path = tk.StringVar(value=str(se.DEFAULT_SAVE))
         self.data = None
         self.names = se.load_names(se.ITEMS_TSV)
-        self.mods = se.load_names(se.MODS_TSV)
+        self.mods = se.mod_names(zh=True)
+        self.cons = se.consumable_names()
         self.item_list = sorted(self.names.items())
         self.item_choices = [f"{v:04X}  {n}" for v, n in self.item_list]
         self.choice_to_id = {f"{v:04X}  {n}": v for v, n in self.item_list}
@@ -121,11 +122,14 @@ class App:
                         bo = se.bag_offset(o, bag, si)
                         iid = self.effective_u16(bo)
                         if iid == se.CONSUMABLE_ID:
-                            qo = bo + se.QTY_OFFSET
-                            q = self.effective_u16(qo) & 0xFF
-                            txt = f"消耗品 x{q}"
+                            q = self.effective_u16(bo + se.QTY_OFFSET) & 0xFF
+                            base = se.consumable_label(self.data, bo, self.cons)
+                            txt = base if q == 0xFF else f"{base} x{q}"
                         else:
+                            ms = se.active_mods(self.data, bo)
                             txt = se.item_name(iid, self.names) or ("" if iid == 0 else "?")
+                            if iid:
+                                txt = f"{se.grade(len(ms))}级 {txt}"
                         inode = self.tree.insert(bnode, "end",
                                                  text=f"      [{si}] {iid:#05x} {txt}")
                         self.node_tag[inode] = ("item", slot, ci, bag, si)
@@ -189,9 +193,13 @@ class App:
             iid = self.effective_u16(bo)
             if iid == se.CONSUMABLE_ID:
                 q = self.effective_u16(bo + se.QTY_OFFSET) & 0xFF
-                lab = "特殊物品(非堆叠)" if q == 0xFF else f"消耗品 x{q}"
+                base = se.consumable_label(self.data, bo, self.cons)
+                lab = base if q == 0xFF else f"{base} x{q}"
             else:
+                ms = se.active_mods(self.data, bo)
                 lab = se.item_name(iid, self.names) or ("(空)" if iid == 0 else "?")
+                if iid:
+                    lab = f"{se.grade(len(ms))}级 {lab}"
             row = ttk.Frame(self.detail_inner)
             row.pack(anchor="w", pady=2, fill="x")
             ttk.Label(row, text=f"[{si}] {iid:#05x}  {lab}", width=34).pack(side="left")
@@ -229,7 +237,9 @@ class App:
         combo.bind("<<ComboboxSelected>>", on_combo)
 
         if cur == se.CONSUMABLE_ID:
-            ttk.Label(self.detail_inner, text="消耗品（这一格攒的是消耗品，不是装备）",
+            ttk.Label(self.detail_inner,
+                      text=f"消耗品：{se.consumable_label(self.data, o, self.cons)}  "
+                           f"（种类ID {se.consumable_kind(self.data, o):#06x}）",
                       font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(10, 4))
             qo = o + se.QTY_OFFSET
             rawq = self.effective_u16(qo)
@@ -253,21 +263,69 @@ class App:
                 self.update_changes()
             ttk.Button(qrow, text="应用", command=apply_qty).pack(side="left", padx=4)
             ttk.Label(self.detail_inner,
-                      text=f"种类ID: {se.consumable_kind(self.data, o):#06x} "
-                           "（游戏内具体 item 名尚未标定，先按原值保留）",
+                      text="种类由词条1决定，已按实机截图命名；数量改低字节即可。",
                       foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=4)
         else:
-            ttk.Label(self.detail_inner, text="附加字段 1-5（上游 CustomItem 索引）",
-                      font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(10, 4))
+            ms = se.active_mods(self.data, o)
+            lo, hi = se.item_atk(self.data, o)
+            dcur, dmax = se.durability(self.data, o)
+            ttk.Label(self.detail_inner,
+                      text=f"品质 {se.grade(len(ms))} —— 由 {len(ms)} 条生效词条决定（E0 D1 C2 B3 A4 S5）",
+                      font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(8, 2))
+            ttk.Label(self.detail_inner,
+                      text=f"{'攻击力' if se.is_weapon(self.data, o) else '数值'} {lo}-{hi}    "
+                           f"耐久 {int(dcur)}/{int(dmax)}    "
+                           f"装备等级 LV{se.item_level(self.data, o)}",
+                      foreground="#444").pack(anchor="w")
+
+            def num_field(label, off, width, get, store, note=""):
+                row = ttk.Frame(self.detail_inner)
+                row.pack(anchor="w", pady=2, fill="x")
+                ttk.Label(row, text=label, width=14).pack(side="left")
+                var = tk.StringVar(value=str(get()))
+                ttk.Entry(row, textvariable=var, width=8).pack(side="left")
+                ttk.Label(row, text=note or f"@{off:#x}", foreground="#888").pack(side="left", padx=6)
+
+                def apply(_e=None, off=off, width=width, var=var, store=store):
+                    try:
+                        v = int(var.get())
+                    except ValueError:
+                        return
+                    self.edits[off] = (store(v), width)
+                    self.refresh_tree()
+                    self.update_changes()
+                ttk.Button(row, text="应用", command=apply).pack(side="left", padx=4)
+
+            num_field("装备等级", o + se.F_ITEM_LEVEL, 1,
+                      lambda: se.item_level(self.data, o),
+                      lambda v: max(0, min(254, v - 1)), "显示等级=存值+1")
+            num_field("攻击下限", o + se.F_ITEM_ATK_MIN, 1,
+                      lambda: se.item_atk(self.data, o)[0],
+                      lambda v: max(0, min(255, v)))
+            num_field("攻击上限", o + se.F_ITEM_ATK_MAX, 1,
+                      lambda: se.item_atk(self.data, o)[1],
+                      lambda v: max(0, min(255, v)))
+            num_field("耐久当前", o + se.F_DUR_CUR, 4,
+                      lambda: int(se.durability(self.data, o)[0]),
+                      lambda v: v * se.DUR_SCALE + se.read_u32(self.data, o + se.F_DUR_CUR) % se.DUR_SCALE,
+                      "存值=显示×100")
+            num_field("耐久最大", o + se.F_DUR_MAX, 4,
+                      lambda: int(se.durability(self.data, o)[1]),
+                      lambda v: v * se.DUR_SCALE + se.read_u32(self.data, o + se.F_DUR_MAX) % se.DUR_SCALE,
+                      "存值=显示×100")
+
+            ttk.Label(self.detail_inner, text="附加词条 1-8（填 FFFF 即清空该条）",
+                      font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(12, 4))
             for idx, off in enumerate(se.MOD_OFFSETS):
                 mo = o + off
                 v = self.effective_u16(mo)
                 mrow = ttk.Frame(self.detail_inner)
                 mrow.pack(anchor="w", pady=2, fill="x")
-                ttk.Label(mrow, text=f"附加{idx+1}", width=8).pack(side="left")
+                ttk.Label(mrow, text=f"词条{idx+1}", width=9).pack(side="left")
                 var = tk.StringVar(value=f"{v:04X}")
                 ttk.Entry(mrow, textvariable=var, width=8).pack(side="left")
-                ttk.Label(mrow, text=self.mods.get(v, ""), width=40, foreground="#666").pack(side="left", padx=6)
+                ttk.Label(mrow, text=self.mods.get(v, ""), width=42,
+                          foreground="#666").pack(side="left", padx=6)
                 ttk.Label(mrow, text=f"@{mo:#x}", foreground="#aaa").pack(side="left")
 
                 def apply_mod(_e=None, mo=mo, var=var):
@@ -280,8 +338,8 @@ class App:
                     self.update_changes()
                 ttk.Button(mrow, text="应用", command=apply_mod).pack(side="left", padx=4)
             ttk.Label(self.detail_inner,
-                      text="说明：附加ID的英文名取自上游 v1.4.0 表；中文显示名需进游戏核对后才可定稿。\n"
-                           "只改这几处 2 字节字段，耐久等其余字节原样保留。",
+                      text="说明：中文名按 xlsx/日式游戏惯用译法直译，数值可能与本版本略有出入，"
+                           "意思对得上就行；以后发现差太多再逐条改。",
                       foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(10, 0))
 
     def show_char(self, slot, ci):

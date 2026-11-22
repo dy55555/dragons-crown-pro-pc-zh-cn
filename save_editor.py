@@ -68,9 +68,22 @@ ITEM_ITEMID_MAX = 0x01E8
 # 消耗品槽：物品ID 固定 0x0070，真实种类和数量在下面两个字段
 CONSUMABLE_ID = 0x0070
 QTY_OFFSET = 0x0C          # u16 低字节 = 数量（实测 x20/x8/x4/x7 全部吻合）
-KIND_OFFSET = 0x14         # u16 = 上游 CustomItem 索引，区分是哪一种消耗品
-# 装备块里 5 个附加ID（上游 CustomItem 索引），游戏按这些显示前缀/附加效果
-MOD_OFFSETS = (0x14, 0x1C, 0x24, 0x2C, 0x34)
+KIND_OFFSET = 0x00         # 消耗品种类ID就是"附加字段1"，见下
+# 附加字段（前缀/词条）实际位于物品ID往前 0x40 处，共 8 个 8 字节槽。
+# 旧版误读成物品ID往后 0x14，正好读到下一件装备的附加字段，才会两件都显示 5 条。
+MOD_BASE_SHIFT = 0x40
+MOD_STRIDE = 8
+MOD_SLOT_COUNT = 8
+MOD_EMPTY = 0xFFFF
+MOD_OFFSETS = tuple(-MOD_BASE_SHIFT + i * MOD_STRIDE for i in range(MOD_SLOT_COUNT))
+# 物品自身字段（相对物品ID）
+F_ITEM_LEVEL = 0x0E        # u8，显示等级 = 存值 + 1（实测 0x22 → LV35）
+F_ITEM_ATK_MIN = 0x10      # u8，武器攻击力下限（实测 0x56 = 86）
+F_ITEM_ATK_MAX = 0x11      # u8，武器攻击力上限（实测 0x60 = 96）
+F_DUR_CUR = 0x04           # u32，耐久 = 存值 / 100（195889 → 1958）
+F_DUR_MAX = 0x08
+DUR_SCALE = 100
+GRADES = "EDCBAS"
 
 CLASSES = {0: "Fighter/战士", 1: "Amazon/亚马逊", 2: "Elf/精灵",
            3: "Dwarf/矮人", 4: "Sorceress/女巫", 5: "Wizard/法师"}
@@ -81,6 +94,8 @@ HERE = Path(__file__).resolve().parent
 ITEMS_TSV = HERE / "save_items.tsv"
 AFFIX_TSV = HERE / "save_affixes.tsv"
 MODS_TSV = HERE / "save_mods.tsv"
+MODS_ZH_TSV = HERE / "save_mods.zh.tsv"
+CONSUMABLES_TSV = HERE / "save_consumables.tsv"
 
 
 def load_names(path: Path) -> dict[int, str]:
@@ -111,9 +126,13 @@ def item_name(item_id: int, names: dict[int, str]) -> str:
     return ""
 
 
-def mod_names() -> dict[int, str]:
-    """上游 CustomItem 表：附加ID -> 英文原名（中文名需游戏内核实）。"""
-    return load_names(MODS_TSV)
+def mod_names(zh: bool = False) -> dict[int, str]:
+    """附加ID -> 名称。默认中文（xlsx 优先，其余按惯用译法直译）。"""
+    return load_names(MODS_ZH_TSV if zh else MODS_TSV)
+
+
+def consumable_names() -> dict[int, str]:
+    return load_names(CONSUMABLES_TSV)
 
 
 def consumable_qty(data, o: int) -> int:
@@ -122,14 +141,59 @@ def consumable_qty(data, o: int) -> int:
 
 
 def consumable_kind(data, o: int) -> int:
-    return read_u16(data, o + KIND_OFFSET)
+    """消耗品种类ID就是第一个附加字段。"""
+    return read_u16(data, o + MOD_OFFSETS[0])
 
 
-def item_label(data, o: int, names: dict[int, str]) -> str:
+def active_mods(data, o: int) -> list[tuple[int, int, int, int, float]]:
+    """返回 [(槽号, 绝对偏移, 附加ID, flags, 参数float)]，0xFFFF 表示空槽。"""
+    out = []
+    for idx, off in enumerate(MOD_OFFSETS):
+        mo = o + off
+        v = read_u16(data, mo)
+        if v == MOD_EMPTY:
+            continue
+        out.append((idx, mo, v, read_u16(data, mo + 2),
+                    struct.unpack_from("<f", data, mo + 4)[0]))
+    return out
+
+
+def grade(count: int) -> str:
+    """游戏品质由生效附加词条数决定：E=0 D=1 C=2 B=3 A=4 S=5。"""
+    return GRADES[min(count, len(GRADES) - 1)]
+
+
+def item_level(data, o: int) -> int:
+    return data[o + F_ITEM_LEVEL] + 1
+
+
+def item_atk(data, o: int) -> tuple[int, int]:
+    return data[o + F_ITEM_ATK_MIN], data[o + F_ITEM_ATK_MAX]
+
+
+def is_weapon(data, o: int) -> bool:
+    """类型标记 0x6800 = 武器，0x6A00 = 防具/饰品。"""
+    return read_u16(data, o + 0x02) == 0x6800
+
+
+def durability(data, o: int) -> tuple[float, float]:
+    return (read_u32(data, o + F_DUR_CUR) / DUR_SCALE,
+            read_u32(data, o + F_DUR_MAX) / DUR_SCALE)
+
+
+def consumable_label(data, o: int, cons: dict[int, str] | None = None) -> str:
+    kind = consumable_kind(data, o)
+    if cons is None:
+        cons = consumable_names()
+    return cons.get(kind) or f"消耗品(种类{kind:#05x})"
+
+
+def item_label(data, o: int, names: dict[int, str], cons=None) -> str:
     iid = read_u16(data, o)
     if iid == CONSUMABLE_ID:
         q = consumable_qty(data, o)
-        return "特殊物品(非堆叠)" if q == 0xFF else f"消耗品 x{q}"
+        base = consumable_label(data, o, cons)
+        return base if q == 0xFF else f"{base} x{q}"
     return item_name(iid, names) or ("" if iid == 0 else "?")
 
 
@@ -200,6 +264,8 @@ def sha256(b) -> str:
 
 
 def cmd_list(args, data, names):
+    zh = mod_names(zh=True)
+    cons = consumable_names()
     print(f"存档: {args.save}")
     print(f"大小: {len(data):#x}  CRC: {read_u32(data, 0):#010x}  校验: {'OK' if not validate(data) else 'FAIL'}")
     print()
@@ -220,18 +286,25 @@ def cmd_list(args, data, names):
             sp = read_u16(data, o + F_SKILL)
             print(f"  角色{ci} {nm:<9} {cls:<16} Lv{lvl:<4} HP {hp}/{maxhp}  技能点 {sp}  @{o:#x}")
             for bag in (0, 1):
-                items = []
+                print(f"      === {BAG_NAMES[bag]} ===")
                 for si in range(BAG_SLOT_COUNT):
                     bo = bag_offset(o, bag, si)
                     iid = read_u16(data, bo)
-                    if iid:
-                        lab = item_label(data, bo, names)
-                        if iid != CONSUMABLE_ID:
-                            mv = [v for v in mod_values(data, bo) if v != 0xFFFF]
-                            if mv:
-                                lab += "  附加:" + "/".join(f"{v:#05x}" for v in mv)
-                        items.append(f"[{si}]{iid:#05x} {lab}")
-                print(f"      {BAG_NAMES[bag]}: " + " | ".join(items) if items else f"      {BAG_NAMES[bag]}: (空)")
+                    if not iid:
+                        continue
+                    if iid == CONSUMABLE_ID:
+                        print(f"        [{si}] {item_label(data, bo, names, cons)}  "
+                              f"种类 {consumable_kind(data, bo):#05x}  @{bo:#x}")
+                        continue
+                    ms = active_mods(data, bo)
+                    lo, hi = item_atk(data, bo)
+                    dcur, dmax = durability(data, bo)
+                    print(f"        [{si}] {grade(len(ms))}级 {item_name(iid, names)}  "
+                          f"LV{item_level(data, bo)}  "
+                          f"{'ATK' if is_weapon(data, bo) else '数值'} {lo}-{hi}  "
+                          f"耐久 {int(dcur)}/{int(dmax)}  @{bo:#x}")
+                    for idx, mo, v, _flags, param in ms:
+                        print(f"            附加{idx+1} {v:#05x} {zh.get(v, '')}  参数{param:g} @{mo:#x}")
         print()
 
 
@@ -293,16 +366,63 @@ def cmd_set_consumable(args, data, names):
 
 def cmd_set_mod(args, data, names):
     o = bag_offset(char_offset(args.slot, args.char), args.bag, args.slot_idx)
-    if not (0 <= args.index < len(MOD_OFFSETS)):
-        raise SystemExit(f"附加字段序号必须是 0-{len(MOD_OFFSETS)-1}")
+    if not (0 <= args.index < MOD_SLOT_COUNT):
+        raise SystemExit(f"附加字段序号必须是 0-{MOD_SLOT_COUNT-1}")
     mo = o + MOD_OFFSETS[args.index]
     old = read_u16(data, mo)
-    mods = mod_names()
+    mods = mod_names(zh=True)
+    before = grade(len(active_mods(data, o)))
+    after_n = len(active_mods(data, o))
+    if old == MOD_EMPTY and args.id != MOD_EMPTY:
+        after_n += 1
+    elif old != MOD_EMPTY and args.id == MOD_EMPTY:
+        after_n -= 1
     print(f"改附加ID: DATA{args.slot+1} 角色{args.char} {BAG_NAMES[args.bag]}[{args.slot_idx}] "
           f"第{args.index+1}项 @{mo:#x}  {old:#06x} {mods.get(old,'')} -> "
-          f"{args.id:#06x} {mods.get(args.id,'')}")
+          f"{args.id:#06x} {mods.get(args.id,'')}  品质 {before} -> {grade(after_n)}")
     buf = bytearray(data)
     write_u16(buf, mo, args.id)
+    seal(buf)
+    if args.dry_run:
+        out = Path(args.out) if args.out else Path("SAVE0.modified.DAT")
+        out.write_bytes(buf)
+        print(f"[演练] 已写出到 {out}（原存档未动）")
+    else:
+        atomic_write(args.save, bytes(buf), backup=not args.no_backup)
+    return 0
+
+
+def cmd_set_stat(args, data, names):
+    o = bag_offset(char_offset(args.slot, args.char), args.bag, args.slot_idx)
+    if read_u16(data, o) == CONSUMABLE_ID:
+        raise SystemExit("消耗品没有等级/攻击力/耐久字段")
+    kind = args.field
+    fields = {
+        "level": (o + F_ITEM_LEVEL, 1), "atkmin": (o + F_ITEM_ATK_MIN, 1),
+        "atkmax": (o + F_ITEM_ATK_MAX, 1), "durcur": (o + F_DUR_CUR, 4),
+        "durmax": (o + F_DUR_MAX, 4),
+    }
+    fo, width = fields[kind]
+    v = args.value
+    if kind == "level":
+        if not (1 <= v <= 255):
+            raise SystemExit("等级必须 1-255")
+        v -= 1
+    elif kind in ("atkmin", "atkmax"):
+        if not (0 <= v <= 255):
+            raise SystemExit("攻击力必须 0-255")
+    else:
+        if v < 0:
+            raise SystemExit("耐久不能为负")
+        frac = read_u32(data, fo) % DUR_SCALE
+        v = v * DUR_SCALE + frac
+    print(f"改 {kind}: DATA{args.slot+1} 角色{args.char} {BAG_NAMES[args.bag]}[{args.slot_idx}] "
+          f"@{fo:#x} -> {args.value}")
+    buf = bytearray(data)
+    if width == 1:
+        buf[fo] = v & 0xFF
+    else:
+        write_u32(buf, fo, v)
     seal(buf)
     if args.dry_run:
         out = Path(args.out) if args.out else Path("SAVE0.modified.DAT")
@@ -373,6 +493,19 @@ def main():
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--no-backup", action="store_true")
     p.set_defaults(func=cmd_set_mod)
+
+    p = sub.add_parser("set-stat", help="改装备等级/攻击力/耐久")
+    p.add_argument("--slot", type=int, required=True)
+    p.add_argument("--char", type=int, required=True)
+    p.add_argument("--bag", type=int, required=True, choices=[0, 1])
+    p.add_argument("--slot-idx", type=int, required=True)
+    p.add_argument("--field", required=True,
+                   choices=["level", "atkmin", "atkmax", "durcur", "durmax"])
+    p.add_argument("--value", type=int, required=True)
+    p.add_argument("--out")
+    p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--no-backup", action="store_true")
+    p.set_defaults(func=cmd_set_stat)
 
     p = sub.add_parser("set-gold", help="改金币")
     p.add_argument("--slot", type=int, required=True)
