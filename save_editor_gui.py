@@ -37,6 +37,10 @@ class App:
         self.item_list = sorted(self.names.items())
         self.item_choices = [f"{v:04X}  {n}" for v, n in self.item_list]
         self.choice_to_id = {f"{v:04X}  {n}": v for v, n in self.item_list}
+        # 消耗品单列一项：物品ID 恒为 0x70，具体是哪种由「词条1=种类ID」决定
+        self.consumable_key = f"{se.CONSUMABLE_ID:04X}  消耗品/道具（名称看种类ID）"
+        self.item_choices.append(self.consumable_key)
+        self.choice_to_id[self.consumable_key] = se.CONSUMABLE_ID
         self.edits = {}          # (byte_offset) -> new_value
         self._build()
         self.open_save(initial=True)
@@ -334,6 +338,12 @@ class App:
         return ttk.Button(row, text="还原", width=5,
                           command=lambda: self.revert_field(*offs))
 
+    def _item_key(self, iid):
+        """物品ID -> 下拉显示文本（消耗品固定显示为消耗品项）。"""
+        if iid == se.CONSUMABLE_ID:
+            return self.consumable_key
+        return f"{iid:04X}  {se.item_name(iid, self.names)}"
+
     def _fix_type_for(self, o, old_id, new_id, equip_type):
         """换物品时同步类型标记(+0x02)：消耗品与装备互转必须改，否则游戏不认这格。"""
         if old_id == new_id:
@@ -495,7 +505,7 @@ class App:
         row.pack(anchor="w", pady=10, fill="x")
         ttk.Label(row, text="物品:").pack(side="left", padx=(0, 6))
         combo = ttk.Combobox(row, values=self.item_choices, width=44, state="readonly")
-        key = f"{cur:04X}  {se.item_name(cur, self.names)}"
+        key = self._item_key(cur)
         if key in self.choice_to_id:
             combo.set(key)
         combo.pack(side="left")
@@ -848,7 +858,7 @@ class App:
         irow.pack(anchor="w", pady=(6, 4), fill="x")
         ttk.Label(irow, text="物品:", width=10).pack(side="left")
         combo = ttk.Combobox(irow, values=self.item_choices, width=40, state="readonly")
-        key = f"{iid:04X}  {se.item_name(iid, self.names)}"
+        key = self._item_key(iid)
         if key in self.choice_to_id:
             combo.set(key)
         combo.pack(side="left")
