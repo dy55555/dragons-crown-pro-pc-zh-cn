@@ -380,8 +380,8 @@ class App:
                 ttk.Label(mrow, text=f"词条{idx+1}", width=9).pack(side="left")
                 var = tk.StringVar(value=f"{v:04X}")
                 ttk.Entry(mrow, textvariable=var, width=8).pack(side="left")
-                ttk.Label(mrow, text=self.mods.get(v, ""), width=42,
-                          foreground="#666").pack(side="left", padx=6)
+                disp = se.mod_display(self.data, o, idx, self.mods) if v != 0xFFFF else ""
+                ttk.Label(mrow, text=disp, foreground="#666").pack(side="left", padx=6)
                 ttk.Label(mrow, text=f"@{mo:#x}", foreground="#aaa").pack(side="left")
 
                 def apply_mod(_e=None, mo=mo, var=var):
@@ -631,7 +631,8 @@ class App:
                 ttk.Label(row, text=f"词条{idx+1}", width=8).pack(side="left")
                 var = tk.StringVar(value=f"{v:04X}")
                 ttk.Entry(row, textvariable=var, width=8).pack(side="left")
-                ttk.Label(row, text=self.mods.get(v, ""), width=40, foreground="#666").pack(side="left", padx=6)
+                disp = se.mod_display(self.data, o, idx, self.mods) if v != 0xFFFF else ""
+                ttk.Label(row, text=disp, foreground="#666").pack(side="left", padx=6)
                 def apply_mod(_e=None, mo=mo, var=var):
                     try:
                         self.edits[mo] = (int(var.get(),16)&0xFFFF, 2)

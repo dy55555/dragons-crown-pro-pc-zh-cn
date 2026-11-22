@@ -197,6 +197,23 @@ def grade(count: int) -> str:
     return GRADES[min(count, len(GRADES) - 1)]
 
 
+def mod_param(data, o: int, idx: int) -> float:
+    """第 idx 个词条槽存档里的 f32 参数（游戏据此换算真实显示数值）。"""
+    return struct.unpack_from("<f", data, o + MOD_OFFSETS[idx] + 4)[0]
+
+
+def mod_display(data, o: int, idx: int, zh: dict) -> str:
+    """词条显示文本：存档真实参数 + xlsx样本名（明确标注样本非实时值）。"""
+    v = read_u16(data, o + MOD_OFFSETS[idx])
+    if v == MOD_EMPTY:
+        return ""
+    param = mod_param(data, o, idx)
+    sample = zh.get(v, "")
+    if sample:
+        return f"参数{param:g}  表样本:{sample}(数值以游戏为准)"
+    return f"参数{param:g}"
+
+
 def item_level(data, o: int) -> int:
     return data[o + F_ITEM_LEVEL] + 1
 
