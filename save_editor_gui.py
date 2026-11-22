@@ -27,6 +27,7 @@ class App:
         self.root = root
         self.root.title("龙之皇冠 Pro PC · 存档编辑器 (SAVE0.DAT)")
         self.root.geometry("1180x720")
+        self.root.minsize(900, 560)   # 再小控件会挤在一起被裁，限制最小尺寸
         self.path = tk.StringVar(value=str(se.DEFAULT_SAVE))
         self.data = None
         self.names = se.load_names(se.ITEMS_TSV)
@@ -43,16 +44,17 @@ class App:
     def _build(self):
         top = ttk.Frame(self.root, padding=8)
         top.pack(fill="x")
-        ttk.Label(top, text="存档文件:").pack(side="left")
-        ttk.Entry(top, textvariable=self.path, width=88).pack(side="left", padx=5)
-        ttk.Button(top, text="打开", command=self.open_save).pack(side="left", padx=2)
-        ttk.Button(top, text="重新载入", command=lambda: self.open_save(initial=True)).pack(side="left", padx=2)
+        top.columnconfigure(1, weight=1)     # 路径输入框占中间，随窗口伸缩
+        ttk.Label(top, text="存档文件:").grid(row=0, column=0, sticky="w")
+        ttk.Entry(top, textvariable=self.path).grid(row=0, column=1, sticky="ew", padx=5)
+        ttk.Button(top, text="打开", command=self.open_save).grid(row=0, column=2, padx=2)
+        ttk.Button(top, text="重新载入", command=lambda: self.open_save(initial=True)).grid(row=0, column=3, padx=2)
 
         bar = ttk.Frame(self.root, padding=(8, 0))
         bar.pack(fill="x")
-        self.status = ttk.Label(bar, text="", foreground="#0a6")
-        self.status.pack(side="left")
         ttk.Button(bar, text="还原备份 (.editor-bak)", command=self.restore).pack(side="right")
+        self.status = ttk.Label(bar, text="", foreground="#0a6")
+        self.status.pack(side="left", fill="x", expand=True)
 
         # 主体：左侧角色树 + 右侧详情
         main = ttk.Frame(self.root, padding=8)
@@ -100,6 +102,21 @@ class App:
         w = self.detail_canvas.winfo_width()
         if w > 1:
             self.detail_canvas.itemconfigure(self._inner_win, width=w)
+            # 说明文字随宽度动态换行，避免窄窗口溢出
+            wrap = max(200, w - 30)
+
+            def apply_wrap():
+                def walk(widget):
+                    for ch in widget.winfo_children():
+                        if isinstance(ch, ttk.Label):
+                            try:
+                                if ch.cget("wraplength") and ch.cget("wraplength") != wrap:
+                                    ch.configure(wraplength=wrap)
+                            except tk.TclError:
+                                pass
+                        walk(ch)
+                walk(self.detail_inner)
+            self.root.after_idle(apply_wrap)
 
     def _on_mousewheel(self, event):
         self.detail_canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
@@ -490,31 +507,35 @@ class App:
                 name = f"未鉴定? iid={iid:#06x} type={typ:#06x}"
             row = ttk.Frame(self.detail_inner)
             row.pack(anchor="w", pady=1, fill="x")
-            ttk.Label(row, text=f"[{bi:3}] @{o:#x}  {name}", width=58).pack(side="left")
-            ttk.Button(row, text="编辑", command=lambda b=bi: self.select_box_item(slot, b)).pack(side="left")
+            row.columnconfigure(0, weight=1)   # 名称可伸缩
+            ttk.Label(row, text=f"[{bi:3}] @{o:#x}  {name}", anchor="w").grid(
+                row=0, column=0, sticky="ew")
+            ttk.Button(row, text="编辑", command=lambda b=bi: self.select_box_item(slot, b)).grid(
+                row=0, column=1, padx=4)
 
-        # 翻页控件
+        # 翻页控件：两行 grid，窄窗口也不挤掉按钮
         nav = ttk.Frame(self.detail_inner)
         nav.pack(anchor="w", pady=(10, 2), fill="x")
-        ttk.Button(nav, text="« 首页", command=lambda: self.show_box(slot, 0)).pack(side="left", padx=2)
-        ttk.Button(nav, text="‹ 上一页", command=lambda: self.show_box(slot, page - 1)).pack(side="left", padx=2)
-        ttk.Label(nav, text=f"  第 {page + 1} / {total_pages} 页  "
-                            f"(第 {start + 1}-{start + len(page_items)} 条)  ",
-                  foreground="#333").pack(side="left", padx=6)
-        ttk.Button(nav, text="下一页 ›", command=lambda: self.show_box(slot, page + 1)).pack(side="left", padx=2)
-        ttk.Button(nav, text="末页 »", command=lambda: self.show_box(slot, total_pages - 1)).pack(side="left", padx=2)
-        # 直接跳页
-        ttk.Label(nav, text="跳至:", foreground="#888").pack(side="left", padx=(12, 2))
+        for c in range(5):
+            nav.columnconfigure(c, weight=1)
+        ttk.Button(nav, text="« 首页", command=lambda: self.show_box(slot, 0)).grid(row=0, column=0, sticky="ew", padx=2)
+        ttk.Button(nav, text="‹ 上一页", command=lambda: self.show_box(slot, page - 1)).grid(row=0, column=1, sticky="ew", padx=2)
+        ttk.Label(nav, text=f"第 {page + 1} / {total_pages} 页 (第 {start + 1}-{start + len(page_items)} 条)",
+                  foreground="#333", anchor="center").grid(row=0, column=2, sticky="ew", padx=4)
+        ttk.Button(nav, text="下一页 ›", command=lambda: self.show_box(slot, page + 1)).grid(row=0, column=3, sticky="ew", padx=2)
+        ttk.Button(nav, text="末页 »", command=lambda: self.show_box(slot, total_pages - 1)).grid(row=0, column=4, sticky="ew", padx=2)
+        # 直接跳页（第二行）
         jump = tk.StringVar(value=str(page + 1))
+        ttk.Label(nav, text="跳至第", foreground="#888").grid(row=1, column=0, sticky="e", padx=2)
         jent = ttk.Entry(nav, textvariable=jump, width=5)
-        jent.pack(side="left")
+        jent.grid(row=1, column=1, sticky="w", padx=2)
         def do_jump():
             try:
                 self.show_box(slot, int(jump.get()) - 1)
             except ValueError:
                 pass
         jent.bind("<Return>", lambda _e: do_jump())
-        ttk.Button(nav, text="转到", command=do_jump).pack(side="left", padx=2)
+        ttk.Button(nav, text="页 转到", command=do_jump).grid(row=1, column=2, sticky="w", padx=2)
 
     def select_box_item(self, slot, bi):
         """选中道具箱某格，用统一详情面板编辑（复用 show_item 的装备/消耗品逻辑）。"""
