@@ -34,7 +34,6 @@ class App:
         self.names = se.load_names(se.ITEMS_TSV)
         self.mods = se.mod_names(zh=True)
         self.cons = se.consumable_names()
-        self.skill_ref = self._load_skill_ref()   # 技能名参考表（只读，不绑定槽号）
         self.item_list = sorted(self.names.items())
         self.item_choices = [f"{v:04X}  {n}" for v, n in self.item_list]
         self.choice_to_id = {f"{v:04X}  {n}": v for v, n in self.item_list}
@@ -46,41 +45,6 @@ class App:
         self.edits = {}          # (byte_offset) -> new_value
         self._build()
         self.open_save(initial=True)
-
-    def _load_skill_ref(self):
-        """读技能名参考表（TSV）。只是名字清单，不与技能槽号绑定。"""
-        try:
-            raw = (se.HERE / "save_skills.tsv").read_text(encoding="utf-8-sig")
-        except OSError:
-            return []
-        out = []
-        for line in raw.splitlines():
-            if not line or line.startswith("#"):
-                continue
-            parts = line.split("\t")
-            if len(parts) >= 2:
-                out.append((parts[0], parts[1], parts[2] if len(parts) > 2 else ""))
-        return out
-
-    def show_skill_ref(self):
-        """弹出只读窗口显示技能名参考表。"""
-        win = tk.Toplevel(self.root)
-        win.title("技能名参考表（仅供参考，未绑定槽号）")
-        win.geometry("460x620")
-        ttk.Label(win, text="游戏技能名清单（AbilityList 文本顺序）。存档不含槽号→技能名映射，"
-                            "请进游戏对照后再决定哪个槽是哪个技能。",
-                  foreground="#666", wraplength=430, justify="left").pack(anchor="w", padx=8, pady=6)
-        frame = ttk.Frame(win)
-        frame.pack(fill="both", expand=True, padx=8, pady=4)
-        sb = ttk.Scrollbar(frame, orient="vertical")
-        txt = tk.Text(frame, yscrollcommand=sb.set, width=52)
-        sb.config(command=txt.yview)
-        sb.pack(side="right", fill="y")
-        txt.pack(side="left", fill="both", expand=True)
-        for idx, name, seg in self.skill_ref:
-            txt.insert("end", f"{idx:>3}  {name:<24} {seg}\n")
-        txt.config(state="disabled")
-        ttk.Button(win, text="关闭", command=win.destroy).pack(pady=6)
 
     # ---------- UI ----------
     def _build(self):
@@ -798,7 +762,7 @@ class App:
                   text=f"DATA {slot+1} / 玩家  {len(players)}/{se.COMPANION_FIRST} 个",
                   font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 6))
         ttk.Label(self.detail_inner,
-                  text="这里是自己创建的角色（记录索引0-15）。点【编辑】改等级/HP/技能点/名字/技能等级，"
+                  text="这里是自己创建的角色（记录索引0-15）。点【编辑】改等级/HP/技能点/名字，"
                        "展开左侧行囊还能改装备。玩家有 9 套行囊配置。",
                   foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(0, 10))
         for ci, o, nm in players:
@@ -807,13 +771,12 @@ class App:
             hp = self.effective_u16(o + se.F_HP_CUR)
             maxhp = self.effective_u16(o + se.F_HP_MAX)
             sp = self.effective_u16(o + se.F_SKILL)
-            used = se.skill_points_used(se.skill_levels(self.data, o))
             row = ttk.Frame(self.detail_inner)
             row.pack(anchor="w", pady=2, fill="x")
             ttk.Button(row, text="编辑", width=6,
                        command=lambda c=ci: self.select_item(f"s{slot}c{c}")).pack(side="right", padx=4)
             ttk.Label(row, text=f"角色{ci:<2d}  {nm:<12} {cls:<14} Lv{lvl:<4} "
-                                f"HP {hp}/{maxhp}  技能点 {sp}  已投 {used}",
+                                f"HP {hp}/{maxhp}  技能点 {sp}",
                       anchor="w").pack(side="left", fill="x", expand=True)
 
     def show_companions(self, slot):
@@ -901,45 +864,13 @@ class App:
         ttk.Label(vrow, text=" ".join(f"{v:>4}" for v in vals), foreground="#333",
                   font=("Consolas", 10), width=54).pack(side="left")
 
-        # ---- 技能加点等级（已标定，可写）----
-        sk_head = ttk.Frame(self.detail_inner)
-        sk_head.pack(anchor="w", pady=(12, 4), fill="x")
-        ttk.Label(sk_head, text="技能等级（24 个技能槽，可改）",
-                  font=("Tahoma", 10, "bold")).pack(side="left")
-        ttk.Button(sk_head, text="查看技能名参考", command=self.show_skill_ref).pack(side="left", padx=10)
-        lv = se.skill_levels(self.data, o)
-        used_pts = se.skill_points_used(lv)
-        sp_left = self.effective_u16(o + se.F_SKILL)
+        # 技能：只读提示（游戏对技能有严密保护，存档里改了进游戏也会被按等级/任务重算，故不提供修改）
+        ttk.Label(self.detail_inner, text="技能列表",
+                  font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(12, 4))
         ttk.Label(self.detail_inner,
-                  text=f"角色记录 +0x{se.SKILL_LV_OFFSET:X} 起 24 个字节，每字节一个技能槽的等级（0-7）。"
-                       f"本角色已投 {used_pts} 点、剩余技能点 {sp_left}。"
-                       "槽号→技能名存档里没有明文，界面只显示槽号并附可参考的技能名，"
-                       "不硬套名字；请在游戏里对照一次即可锁定每个槽。伙伴这段全 0 属正常（NPC 自动成长）。",
+                  text="技能（等级加点 + 装在行囊里的技能道具）不提供修改：游戏对技能点有严密保护，"
+                       "存档里即使改高，进游戏也会按角色等级和已完成任务重算回来。",
                   foreground="#666", wraplength=740, justify="left").pack(anchor="w")
-        for k in range(se.SKILL_LV_COUNT):
-            so = se.skill_level_offset(o, k)
-            row = ttk.Frame(self.detail_inner)
-            row.pack(anchor="w", pady=1)
-            ttk.Label(row, text=f"  技能槽{k:<2d}", width=26).pack(side="left")
-            var = tk.StringVar(value=str(self.effective_u8(so)))
-            ent = ttk.Entry(row, textvariable=var, width=5)
-            ent.pack(side="left")
-            ttk.Label(row, text=f"+0x{se.SKILL_LV_OFFSET + k:X}",
-                      foreground="#888", width=9).pack(side="left")
-
-            def apply_skill(_e=None, so=so, var=var):
-                try:
-                    v = int(var.get())
-                except ValueError:
-                    return
-                if not (0 <= v <= se.SKILL_LV_MAX):
-                    return
-                self.edits[so] = (v, 1)
-                self.refresh_tree()
-                self.update_changes()
-            ent.bind("<Return>", apply_skill)
-            ttk.Button(row, text="应用", width=6, command=apply_skill).pack(side="left", padx=4)
-            self._revert_btn(row, (so,)).pack(side="left")
 
     BOX_PAGE_SIZE = 15   # 道具箱每页显示条数（一屏可见，翻页栏无需滚动即达）
 
