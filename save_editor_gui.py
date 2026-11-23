@@ -164,38 +164,18 @@ class App:
                 o = se.char_offset(slot, ci)
                 if not se.present(self.data, o):
                     continue
-                nm = se.cname(self.data, o)
-                lvl = self.effective_u8(o + se.F_LEVEL) + 1
-                cls = se.CLASSES.get(self.effective_u8(o + se.F_CLASS), "?")
-                cnode = f"s{slot}c{ci}"
-                self.tree.insert(snode, "end", iid=cnode, text=f"  {nm}  {cls}  Lv{lvl}")
-                self.node_tag[cnode] = ("char", slot, ci)
-                for bag in range(se.BAG_CONFIG_COUNT):
-                    cnt = sum(1 for si in range(se.BAG_SLOT_COUNT)
-                              if self.effective_u16(se.bag_offset(o, bag, si)))
-                    bnode = f"s{slot}c{ci}b{bag}"
-                    self.tree.insert(cnode, "end", iid=bnode,
-                                     text=f"    {se.BAG_NAMES[bag]}  ({cnt}件)",
-                                     open=(bag == 0))
-                    self.node_tag[bnode] = ("bag", slot, ci, bag)
-                    for si in range(se.BAG_SLOT_COUNT):
-                        bo = se.bag_offset(o, bag, si)
-                        iid = self.effective_u16(bo)
-                        if iid == se.CONSUMABLE_ID:
-                            q = self.effective_u16(bo + se.QTY_OFFSET) & 0xFF
-                            base = se.consumable_label(self.data, bo, self.cons)
-                            txt = base if q == 0xFF else f"{base} x{q}"
-                            if se.is_skill_item(self.data, bo):
-                                txt = "[技能] " + txt
-                        else:
-                            ms = se.active_mods(self.data, bo)
-                            txt = se.item_name(iid, self.names) or ("" if iid == 0 else "?")
-                            if iid:
-                                txt = f"{se.grade(len(ms))}级 {txt}"
-                        inode = f"s{slot}c{ci}b{bag}i{si}"
-                        self.tree.insert(bnode, "end", iid=inode,
-                                         text=f"      [{si}] {iid:#05x} {txt}")
-                        self.node_tag[inode] = ("item", slot, ci, bag, si)
+                self._add_record_nodes(slot, ci, snode, open_first_bag=True)
+            # 伙伴（索引 16..45）：与角色完全同构，直接复用同一套节点与编辑页。
+            comps = se.companion_list(self.data, slot)
+            croot = f"s{slot}comp"
+            self.tree.insert(snode, "end", iid=croot,
+                             text=f"  [伙伴]  {len(comps)}/{se.COMPANION_SLOT_COUNT} 个",
+                             open=False)
+            self.node_tag[croot] = ("companions", slot)
+            for idx, _o, _nm in comps:
+                # companion_list 返回的是相对伙伴号，树节点要用绝对记录号
+                self._add_record_nodes(slot, se.COMPANION_FIRST + idx, croot,
+                                       open_first_bag=False)
             # 通用道具箱节点（该 DATA slot 所有角色共用）
             boxcnt = sum(1 for bi in range(se.BOX_SLOT_COUNT)
                          if se.box_used(self.data, se.box_offset(slot, bi)))
@@ -216,6 +196,43 @@ class App:
         if keep and self.tree.exists(keep):
             self.tree.selection_set(keep)
             self.tree.focus(keep)
+
+    def _add_record_nodes(self, slot, ci, parent, open_first_bag=True):
+        """给一条 0x21D0 记录建树节点。角色(0-15)与伙伴(16-45)共用，
+        iid 一律用 s{slot}c{ci} 格式，这样 show_bag/select_item 里的节点号拼接才对得上。"""
+        o = se.char_offset(slot, ci)
+        nm = se.cname(self.data, o)
+        lvl = self.effective_u8(o + se.F_LEVEL) + 1
+        cls = se.CLASSES.get(self.effective_u8(o + se.F_CLASS), "?")
+        cnode = f"s{slot}c{ci}"
+        self.tree.insert(parent, "end", iid=cnode, text=f"  {nm}  {cls}  Lv{lvl}")
+        self.node_tag[cnode] = ("char", slot, ci)
+        for bag in range(se.BAG_CONFIG_COUNT):
+            cnt = sum(1 for si in range(se.BAG_SLOT_COUNT)
+                      if self.effective_u16(se.bag_offset(o, bag, si)))
+            bnode = f"s{slot}c{ci}b{bag}"
+            self.tree.insert(cnode, "end", iid=bnode,
+                             text=f"    {se.BAG_NAMES[bag]}  ({cnt}件)",
+                             open=(bag == 0 and open_first_bag))
+            self.node_tag[bnode] = ("bag", slot, ci, bag)
+            for si in range(se.BAG_SLOT_COUNT):
+                bo = se.bag_offset(o, bag, si)
+                iid = self.effective_u16(bo)
+                if iid == se.CONSUMABLE_ID:
+                    q = self.effective_u16(bo + se.QTY_OFFSET) & 0xFF
+                    base = se.consumable_label(self.data, bo, self.cons)
+                    txt = base if q == 0xFF else f"{base} x{q}"
+                    if se.is_skill_item(self.data, bo):
+                        txt = "[技能] " + txt
+                else:
+                    ms = se.active_mods(self.data, bo)
+                    txt = se.item_name(iid, self.names) or ("" if iid == 0 else "?")
+                    if iid:
+                        txt = f"{se.grade(len(ms))}级 {txt}"
+                inode = f"s{slot}c{ci}b{bag}i{si}"
+                self.tree.insert(bnode, "end", iid=inode,
+                                 text=f"      [{si}] {iid:#05x} {txt}")
+                self.node_tag[inode] = ("item", slot, ci, bag, si)
 
     def _iter_nodes(self, parent=""):
         for i in self.tree.get_children(parent):
@@ -262,6 +279,8 @@ class App:
             self.show_item(*tag[1:])
         elif kind == "char":
             self.show_char(*tag[1:])
+        elif kind == "companions":
+            self.show_companions(tag[1])
         elif kind == "slot":
             self.show_slot(tag[1])
         elif kind == "bag":
@@ -479,7 +498,7 @@ class App:
 
     def show_bag(self, slot, ci, bag):
         ttk.Label(self.detail_inner,
-                  text=f"DATA {slot+1} / 角色{ci} / {se.BAG_NAMES[bag]} —— 整栏一览",
+                  text=f"DATA {slot+1} / {se.record_label(ci)} / {se.BAG_NAMES[bag]} —— 整栏一览",
                   font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 6))
         ttk.Label(self.detail_inner,
                   text="点每行的【编辑】即可选中该格并修改；也可直接双击左侧具体格子。",
@@ -505,7 +524,7 @@ class App:
     def show_item(self, slot, ci, bag, si):
         o = se.bag_offset(se.char_offset(slot, ci), bag, si)
         cur = self.effective_u16(o)
-        ttk.Label(self.detail_inner, text=f"DATA {slot+1} / 角色{ci} / {se.BAG_NAMES[bag]} / 格{si}",
+        ttk.Label(self.detail_inner, text=f"DATA {slot+1} / {se.record_label(ci)} / {se.BAG_NAMES[bag]} / 格{si}",
                   font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 8))
         ttk.Label(self.detail_inner, text=f"文件偏移: {o:#x}    字段: u16 小端 = 物品ID").pack(anchor="w")
         row = ttk.Frame(self.detail_inner)
@@ -719,9 +738,37 @@ class App:
                            "存档里另有一个 float 参数决定幅度，目前不在此处开放。",
                       foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(10, 0))
 
+    def show_companions(self, slot):
+        """伙伴总览：只列名字/等级/HP，点【编辑】进 show_char（与角色同一套编辑页）。"""
+        comps = se.companion_list(self.data, slot)
+        for w in list(self.detail_inner.winfo_children()):
+            w.destroy()
+        self.detail_canvas.yview_moveto(0)
+        ttk.Label(self.detail_inner,
+                  text=f"DATA {slot+1} / 伙伴  {len(comps)}/{se.COMPANION_SLOT_COUNT} 个",
+                  font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 6))
+        ttk.Label(self.detail_inner,
+                  text="这里是已经跟着你的伙伴（记录索引16-45）。点【编辑】改等级/HP/技能点/名字，"
+                       "展开左侧行囊还能改装备。教堂里待复活的遗骸在索引46-75，不开放修改。",
+                  foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(0, 10))
+        for idx, o, nm in comps:
+            ci = se.COMPANION_FIRST + idx
+            lvl = self.effective_u8(o + se.F_LEVEL) + 1
+            cls = se.CLASSES.get(self.effective_u8(o + se.F_CLASS), "?")
+            hp = self.effective_u16(o + se.F_HP_CUR)
+            maxhp = self.effective_u16(o + se.F_HP_MAX)
+            sp = self.effective_u16(o + se.F_SKILL)
+            row = ttk.Frame(self.detail_inner)
+            row.pack(anchor="w", pady=2, fill="x")
+            ttk.Button(row, text="编辑", width=6,
+                       command=lambda c=ci: self.select_item(f"s{slot}c{c}")).pack(side="right", padx=4)
+            ttk.Label(row, text=f"伙伴{idx+1:2d}  {nm:<12} {cls:<14} Lv{lvl:<4} "
+                                f"HP {hp}/{maxhp}  技能点 {sp}",
+                      anchor="w").pack(side="left", fill="x", expand=True)
+
     def show_char(self, slot, ci):
         o = se.char_offset(slot, ci)
-        ttk.Label(self.detail_inner, text=f"DATA {slot+1} / 角色{ci}  {se.cname(self.data, o)}",
+        ttk.Label(self.detail_inner, text=f"DATA {slot+1} / {se.record_label(ci)}  {se.cname(self.data, o)}",
                   font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 10))
         fields = [
             ("等级 (1-255)", o + se.F_LEVEL, "u8", lambda v: v + 1, lambda v: max(0, min(254, v - 1))),

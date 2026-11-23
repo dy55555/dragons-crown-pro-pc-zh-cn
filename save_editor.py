@@ -45,6 +45,15 @@ GOLD_OFFSET = 0xAF288
 CHAR_COUNT = 16
 CHAR_STRIDE = 0x21D0
 CHAR_OFFSET = 0xA400
+# 角色/伙伴记录其实排在同一条 0x21D0 的数组里，三段各占连续区间：
+#   索引  0..15  = 玩家自建角色（16 槽）
+#   索引 16..45  = 伙伴（30 槽，DATA1 实占 16..38 共 23 个）—— 开放编辑
+#   索引 46..75  = 路上捡到的遗骸，要在教堂复活才会变成伙伴（30 槽）
+#                 一哥 2026-11-23 确认，这段不用改，编辑器不开放写入。
+# 三段都是同一套 0x21D0 结构，字段偏移完全一致，所以编辑页可以直接复用。
+COMPANION_FIRST = 16
+COMPANION_SLOT_COUNT = 30
+REMAINS_FIRST = COMPANION_FIRST + COMPANION_SLOT_COUNT   # 46，遗骸区起点，只读
 F_HP_CUR = 0xDC
 F_HP_MAX = 0xE0
 F_SKILL = 0xF4
@@ -469,13 +478,43 @@ def char_offset(slot: int, char: int) -> int:
     return slot * DATA_SLOT_STRIDE + CHAR_OFFSET + char * CHAR_STRIDE
 
 
+def companion_offset(slot: int, idx: int) -> int:
+    """DATA slot 的第 idx 个伙伴（0..29）记录绝对偏移。"""
+    return char_offset(slot, COMPANION_FIRST + idx)
+
+
+def record_label(ci: int) -> str:
+    """数组下标 -> 界面显示名。三段共用一条数组，别把伙伴 16 显示成「角色16」。"""
+    if 0 <= ci < COMPANION_FIRST:
+        return f"角色{ci}"
+    if COMPANION_FIRST <= ci < REMAINS_FIRST:
+        return f"伙伴{ci - COMPANION_FIRST + 1}"
+    return f"遗骸{ci - REMAINS_FIRST + 1}"
+
+
 def present(data, o) -> bool:
     return (read_u32(data, o) != EMPTY_FILL and data[o + F_NAME] != 0)
+
+
+def companion_present(data, o) -> bool:
+    """伙伴是否实存。不能复用 present()：伙伴0(Shauna) 的 +0x00 恰是 0xCCCCCCCC，
+    会被 present() 当成空格漏掉。实测 23 个伙伴全靠名字首字节非空识别。"""
+    return data[o + F_NAME] != 0
 
 
 def cname(data, o) -> str:
     raw = data[o + F_NAME:o + F_NAME + NAME_BYTES]
     return raw.split(b"\0", 1)[0].decode("ascii", errors="replace")
+
+
+def companion_list(data, slot: int) -> list[tuple[int, int, str]]:
+    """返回该 DATA 里实际存在的伙伴 [(idx, 绝对偏移, 名字)]。"""
+    out = []
+    for idx in range(COMPANION_SLOT_COUNT):
+        o = companion_offset(slot, idx)
+        if companion_present(data, o):
+            out.append((idx, o, cname(data, o)))
+    return out
 
 
 def bag_offset(char_base: int, bag: int, slot_idx: int) -> int:
@@ -584,7 +623,7 @@ def cmd_list(args, data, names):
             hp = read_u16(data, o + F_HP_CUR)
             maxhp = read_u16(data, o + F_HP_MAX)
             sp = read_u16(data, o + F_SKILL)
-            print(f"  角色{ci} {nm:<9} {cls:<16} Lv{lvl:<4} HP {hp}/{maxhp}  技能点 {sp}  @{o:#x}")
+            print(f"  {record_label(ci)} {nm:<9} {cls:<16} Lv{lvl:<4} HP {hp}/{maxhp}  技能点 {sp}  @{o:#x}")
             print(f"      状态候选(只读,未标定) {stat_candidates(data, o)}")
             for bag in range(BAG_CONFIG_COUNT):
                 items = []
@@ -601,6 +640,17 @@ def cmd_list(args, data, names):
                         items.append(f"[{si}]{grade(len(ms))}级 {item_name(iid, names)}")
                 if items:
                     print(f"      === {BAG_NAMES[bag]} ===  " + " | ".join(items))
+        # 伙伴（与角色同构，索引 16..45；用名字判定，见 companion_present）
+        comps = companion_list(data, slot)
+        print(f"  --- 伙伴（{len(comps)}/{COMPANION_SLOT_COUNT} 个）---")
+        for idx, o, nm in comps:
+            lvl = data[o + F_LEVEL] + 1
+            cls = CLASSES.get(data[o + F_CLASS], str(data[o + F_CLASS]))
+            hp = read_u16(data, o + F_HP_CUR)
+            maxhp = read_u16(data, o + F_HP_MAX)
+            sp = read_u16(data, o + F_SKILL)
+            print(f"  伙伴{idx + 1:2d} {nm:<12} {cls:<16} Lv{lvl:<4} "
+                  f"HP {hp}/{maxhp}  技能点 {sp}  @{o:#x}")
         # 通用道具箱（500 格，装装备 + 消耗品）
         box_items = []
         for bi in range(BOX_SLOT_COUNT):
@@ -666,7 +716,7 @@ def cmd_set_item(args, data, names):
     if args.id != CONSUMABLE_ID and not (ITEM_ID_ALLOW_MIN <= args.id <= ITEM_ID_ALLOW_MAX):
         raise SystemExit(f"物品ID {args.id:#x} 超出可写范围 "
                          f"{ITEM_ID_ALLOW_MIN:#x}-{ITEM_ID_ALLOW_MAX:#x}（或 0x70 消耗品）")
-    print(f"改装备: DATA{args.slot+1} 角色{args.char} {BAG_NAMES[args.bag]}[{args.slot_idx}] @{o:#x}")
+    print(f"改装备: DATA{args.slot+1} {record_label(args.char)} {BAG_NAMES[args.bag]}[{args.slot_idx}] @{o:#x}")
     print(f"  {old:#05x} {item_name(old, names)}  ->  {args.id:#05x} {item_name(args.id, names)}")
     buf = bytearray(data)
     write_u16(buf, o, args.id)
@@ -689,10 +739,69 @@ def cmd_set_consumable(args, data, names):
     qo = o + QTY_OFFSET
     old = read_u16(data, qo)
     new = (old & 0xFF00) | args.qty
-    print(f"改数量: DATA{args.slot+1} 角色{args.char} {BAG_NAMES[args.bag]}[{args.slot_idx}] "
+    print(f"改数量: DATA{args.slot+1} {record_label(args.char)} {BAG_NAMES[args.bag]}[{args.slot_idx}] "
           f"@{qo:#x}  {old & 0xFF} -> {args.qty}")
     buf = bytearray(data)
     write_u16(buf, qo, new)
+    seal(buf)
+    if args.dry_run:
+        out = Path(args.out) if args.out else Path("SAVE0.modified.DAT")
+        out.write_bytes(buf)
+        print(f"[演练] 已写出到 {out}（原存档未动）")
+    else:
+        atomic_write(args.save, bytes(buf), backup=not args.no_backup)
+    return 0
+
+
+def cmd_set_companion(args, data, names):
+    """修改某个伙伴的等级/HP/技能点/名字。伙伴记录与角色完全同构。"""
+    if not (0 <= args.slot < DATA_SLOT_COUNT):
+        raise SystemExit(f"DATA slot 必须是 0-{DATA_SLOT_COUNT - 1}")
+    if not (0 <= args.index < COMPANION_SLOT_COUNT):
+        raise SystemExit(f"伙伴号必须是 0-{COMPANION_SLOT_COUNT - 1}")
+    o = companion_offset(args.slot, args.index)
+    if not companion_present(data, o):
+        raise SystemExit(f"DATA{args.slot+1} 伙伴{args.index+1} 是空槽（名字为空），拒绝修改")
+    # 所有参数先校验完再动手，避免「提示已改 HP、实际一个字节都没写」
+    field = None
+    if args.name is not None:
+        try:
+            raw = args.name.encode("ascii")
+        except UnicodeEncodeError:
+            raise SystemExit("名字只支持 ASCII（8 字节存档位放不下中文）")
+        # 实测 Jannette 就是满 8 字符不留终止符，所以允许 1-8
+        if not (1 <= len(raw) <= NAME_BYTES):
+            raise SystemExit(f"名字必须是 1-{NAME_BYTES} 个 ASCII 字符")
+        field = raw + b"\0" * (NAME_BYTES - len(raw))
+    for key in ("hp", "hpmax", "skill"):
+        v = getattr(args, key)
+        if v is not None and not (0 <= v <= 65535):
+            raise SystemExit(f"{key} 必须在 0-65535")
+    if args.level is not None and not (1 <= args.level <= 255):
+        raise SystemExit("等级必须 1-255")
+
+    old_name = cname(data, o)
+    print(f"改伙伴: DATA{args.slot+1} 伙伴{args.index+1} {old_name} @{o:#x}")
+    buf = bytearray(data)
+
+    simple = {"hp": F_HP_CUR, "hpmax": F_HP_MAX, "skill": F_SKILL}
+    for key, off in simple.items():
+        v = getattr(args, key)
+        if v is None:
+            continue
+        print(f"  {key}: @{off+o:#x}  {read_u16(data, o + off)} -> {v}")
+        write_u16(buf, o + off, v)
+
+    if args.level is not None:
+        print(f"  level: @{o+F_LEVEL:#x}  {data[o+F_LEVEL]+1} -> {args.level}")
+        buf[o + F_LEVEL] = (args.level - 1) & 0xFF
+
+    if field is not None:
+        for off in (F_NAME, F_NAME2):
+            old = data[o + off:o + off + NAME_BYTES].split(b"\0", 1)[0].decode("ascii", errors="replace")
+            print(f"  name@{off:#x}: {old!r} -> {args.name!r}")
+            buf[o + off:o + off + NAME_BYTES] = field
+
     seal(buf)
     if args.dry_run:
         out = Path(args.out) if args.out else Path("SAVE0.modified.DAT")
@@ -797,7 +906,7 @@ def cmd_set_mod(args, data, names):
         after_n += 1
     elif old != MOD_EMPTY and args.id == MOD_EMPTY:
         after_n -= 1
-    print(f"改附加ID: DATA{args.slot+1} 角色{args.char} {BAG_NAMES[args.bag]}[{args.slot_idx}] "
+    print(f"改附加ID: DATA{args.slot+1} {record_label(args.char)} {BAG_NAMES[args.bag]}[{args.slot_idx}] "
           f"第{args.index+1}项 @{mo:#x}  {old:#06x} {mods.get(old,'')} -> "
           f"{args.id:#06x} {mods.get(args.id,'')}  品质 {before} -> {grade(after_n)}")
     buf = bytearray(data)
@@ -836,7 +945,7 @@ def cmd_set_stat(args, data, names):
             raise SystemExit("耐久不能为负")
         frac = read_u32(data, fo) % DUR_SCALE
         v = v * DUR_SCALE + frac
-    print(f"改 {kind}: DATA{args.slot+1} 角色{args.char} {BAG_NAMES[args.bag]}[{args.slot_idx}] "
+    print(f"改 {kind}: DATA{args.slot+1} {record_label(args.char)} {BAG_NAMES[args.bag]}[{args.slot_idx}] "
           f"@{fo:#x} -> {args.value}")
     buf = bytearray(data)
     if width == 1:
@@ -984,6 +1093,20 @@ def main():
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--no-backup", action="store_true")
     p.set_defaults(func=cmd_set_gold)
+
+    p = sub.add_parser("set-companion",
+                       help=f"改伙伴的等级/HP/技能点/名字（伙伴号 0-{COMPANION_SLOT_COUNT-1}）")
+    p.add_argument("--slot", type=int, required=True, help="DATA slot 0-2")
+    p.add_argument("--index", type=int, required=True, help=f"伙伴号 0-{COMPANION_SLOT_COUNT-1}")
+    p.add_argument("--level", type=int, help="显示等级 1-255（存档存值 = 显示-1）")
+    p.add_argument("--hp", type=int, help="HP 当前")
+    p.add_argument("--hpmax", type=int, help="HP 最大")
+    p.add_argument("--skill", type=int, help="技能点")
+    p.add_argument("--name", help="新名字（1-7 位 ASCII，中文不支持）")
+    p.add_argument("--out")
+    p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--no-backup", action="store_true")
+    p.set_defaults(func=cmd_set_companion)
 
     p = sub.add_parser("set-box", help="改通用道具箱某格（装备/消耗品）")
     p.add_argument("--slot", type=int, required=True, help="DATA slot 0-2")

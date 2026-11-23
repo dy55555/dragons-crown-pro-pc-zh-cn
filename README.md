@@ -267,6 +267,8 @@ python save_editor.py set-mod  --slot 0 --char 0 --bag 0 --slot-idx 0 --index 0 
 python save_editor.py set-stat --slot 0 --char 0 --bag 0 --slot-idx 0 --field durcur --value 2000
 python save_editor.py set-stat --slot 0 --char 0 --bag 0 --slot-idx 0 --field level --value 40
 python save_editor.py set-gold --slot 0 --value 12345678
+python save_editor.py set-companion --slot 0 --index 0 --level 99 --hp 999 --skill 10   # 伙伴1
+python save_editor.py set-companion --slot 0 --index 0 --name "MyHero"                  # 改名字(ASCII 1-8字符)
 python save_editor.py set-box --slot 0 --index 9 --field level --value 40        # 道具箱第10格装备等级
 python save_editor.py set-box --slot 0 --index 9 --mod-index 0 --mod-id 0x21      # 改第1条词条
 python save_editor.py set-box --slot 0 --index 9 --item 0x105                    # 换成十字军之弓
@@ -276,7 +278,11 @@ python save_editor.py search-mod 攻击                                         
 python save_editor.py search-mod "攻击 伤害" --limit 20                            # 多个关键字同时命中
 ```
 
-`--bag` 取 `0–8`，对应界面的「行囊1–9」；`--index` 在 `set-pouch` 里是 `0–17`。
+`--bag` 取 `0–8`，对应界面的「行囊1–9」；`--index` 在 `set-pouch` 里是 `0–17`，在 `set-companion` 里是伙伴号 `0–29`。
+
+界面上 DATA 节点下多了 **[伙伴] N/30 个** 分组：点分组看总览，点单个伙伴改等级/HP/技能点，
+展开行囊还能改装备——全部复用角色那套编辑逻辑。命令行改伙伴装备用
+`set-item/set-mod/set-stat --char 16..45`（16=伙伴1，38=伙伴23）。
 
 ### 已搞清的存档结构（CUSA10209 1.00 Asia/HK）
 
@@ -286,8 +292,8 @@ python save_editor.py search-mod "攻击 伤害" --limit 20                     
 | 文件头 | `0x00` = u32 CRC32（覆盖 `[4, EOF)`，标准 IEEE 反射多项式 `0xEDB88320`）；`0x04` = `DCSD` |
 | DATA slot | 3 个，stride `0xAF8D4` |
 | 金币 | slot 基址 + `0xAF288`，u32 小端 |
-| 角色记录 | slot 基址 + `0xA400` + 角色号 × `0x21D0`，共 16 个 |
-| 角色字段 | HP `+0xDC/+0xE0`、技能点 `+0xF4`、等级 `+0xF6`(u8, 存值=显示−1)、职业 `+0xF7`、名字 `+0x208`(8字节) |
+| 角色记录 | slot 基址 + `0xA400` + 记录号 × `0x21D0`。**0–15 = 自建角色，16–45 = 伙伴，46–75 = 待复活遗骸**，三段同构、共用一套字段 |
+| 角色字段 | HP `+0xDC/+0xE0`、技能点 `+0xF4`、等级 `+0xF6`(u8, 存值=显示−1)、职业 `+0xF7`、名字 `+0x208`(8字节，另有副本 `+0x210`) |
 | **9 套行囊** | 角色基址 + `0x288` + 行囊号 × `0x354`（行囊号 `0–8`），每套 10 格 × `0x54` 字节；`0x354 = 10×0x54 + 0x14`。旧的「备用栏 `0x5DC`」其实就是第 2 套起点 |
 | **通用道具箱** | slot 基址 + `0x100`（DATA1=`0x100`/DATA2=`0xAF9D4`/DATA3=`0x15F2A8`），**500 格 × `0x54`**，结构同行囊装备：物品ID在槽首、词条在 `-0x40`、等级 `+0x0E`、攻击 `+0x10/11`。占用看 `+0x00` 是否非 0。类型标记 `+0x02`：`0x2A00`=箱中装备、`0x2200`=消耗品、`0x2800`=法杖、`0x2C00`=素材、`0x2000`=空（高位置 `0x8000` 是标志位，判类型前先 `& 0x7FFF`）。该 slot 内所有角色共用 |
 | **物品ID** | 每格首 2 字节，u16 小端，范围 `0x00BB`–`0x01E8` |
@@ -298,6 +304,23 @@ python save_editor.py search-mod "攻击 伤害" --limit 20                     
 | **装备等级** | 物品ID `+0x0E` u8，显示等级 = 存值 + 1（实测 `0x22` → LV35） |
 | **攻击力/数值** | 物品ID `+0x10`/`+0x11` 两个 u8；武器是 ATK 上下限（弓 `0x56/0x60` → 86-96；长弓 `0x5C/0x5F` → 92-95） |
 | **耐久** | 物品ID `+0x04`/`+0x08` u32，显示值 = 存值 ÷ 100（195889 → 1958） |
+
+### 角色 / 伙伴 / 遗骸：同一条数组的三段
+
+`slot基 + 0xA400` 起有一条步长 `0x21D0` 的大数组，**角色、伙伴、遗骸都排在里面**，字段布局完全一样
+（HP、等级、职业、名字、9 套行囊全都能照搬）：
+
+| 记录号 | 是什么 | 编辑器 |
+| --- | --- | --- |
+| 0–15 | 自己建的角色（DATA1 实占 0–1：Natalia、Dinah） | 可编辑 |
+| 16–45 | **伙伴**（DATA1 实占 16–38 共 **23 个**：Shauna…Glen） | 可编辑 |
+| 46–75 | **路上捡到的遗骸**，要在教堂复活才会变成伙伴 | **不开放**（一哥 2026-11-23 确认） |
+
+伙伴 = 绝对记录号 `16 + 伙伴号`，所以命令行改伙伴装备写 `--char 16`（伙伴1 Shauna）到 `--char 38`（伙伴23 Glen）。
+
+**判定伙伴存在的坑**：不能直接用 `present()`——伙伴1 Shauna 的记录头 `+0x00` 恰好是 `0xCCCCCCCC`，
+会被当成空格漏掉，23 个就只剩 22 个。这里改用「名字首字节非 0」判定（`companion_present()`），
+实测 23 个全中，DATA2 是 23 个（旧备份），DATA3 是 0 个。
 
 ### 关于「备用装备」其实是 9 套行囊
 
