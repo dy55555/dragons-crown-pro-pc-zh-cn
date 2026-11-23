@@ -909,3 +909,65 @@ Invalid appearance value	外观数值无效
 A character has an invalid appearance value. Pick a color for it, then Apply Changes.	某角色的外观数值无效。请为其选择颜色，再应用更改。
 The preview draws the default weapon, not the equipped one.	预览显示的是默认武器，而非已装备的武器。
 Character art unavailable	角色图像不可用
+The saved Controller prompts or Arachnophobia Safe Mode could not be applied to the game files.	已保存的手柄按键提示或蜘蛛恐惧安全模式未能应用到游戏文件。
+Open the launcher to change them, or see the log.	打开启动器修改，或查看日志。
+Enter  Play        Esc  Quit        Ctrl+S  Save	Enter  开始        Esc  退出        Ctrl+S  保存
+Settings are saved when you press Play.	按「开始」时保存设置。
+Manage saves, characters and appearance.	管理存档、角色与外观。
+Select your own legally obtained Dragon's Crown Pro PKG, or an already extracted game folder (the one with eboot.bin, sce_module and sce_sys). Supported: 	请选择你合法获取的《龙之皇冠 Pro》PKG，或已解包的游戏文件夹（含 eboot.bin、sce_module 和 sce_sys 的那个）。支持： 
+Auto	自动
+Voice Language	语音语言
+The language of every spoken voice: your characters, resurrected and AI party members, NPCs, enemies and the narrator. Each keeps its own voice; only the language changes. Menu & Subtitles do not change. Game Default leaves the game's own choice. Applies at the next game start.	所有语音的语言：你的角色、复活与 AI 队友、NPC、敌人和旁白。各自保留自己的声音，只改变语言。菜单与字幕不受影响。「游戏默认」沿用游戏自身的选择。下次启动游戏生效。
+Skip startup logos and the opening movie and go straight to the title screen	跳过开机 LOGO 与开场动画，直接进入标题画面
+Game Default	游戏默认
+Controller shortcuts	手柄快捷键
+Controller Exit Shortcut	手柄退出快捷键
+Hold L1 + R1 + Options for 2 seconds to close the game. Applies at the next game start.	按住 L1 + R1 + Options 2 秒关闭游戏。下次启动游戏生效。
+Used together with the keyboard and the controller while Mouse Controls is On. Each mouse button presses one control; choosing a control another button has moves it. Pointer Control hides the cursor and moves the game's pointer with the mouse; the interaction button then performs the pointer interaction.	鼠标控制开启时可与键盘、手柄同用。每个鼠标键对应一个操作；选了别的键已有的操作会转移过来。指针控制会隐藏光标、用鼠标移动游戏指针，交互键随即执行指针交互。
+Puts the mouse buttons, wheel, Pointer Control Mode and pointer sensitivity back to their defaults.	将鼠标按键、滚轮、指针控制模式与指针灵敏度恢复默认。
+Pointer Control Mode	指针控制模式
+Hold moves the game's pointer while the Pointer Control button is held. Always On moves it whenever the mouse is free for gameplay, which suits a trackpad.	「按住」在按住指针控制键时移动游戏指针；「始终开启」在鼠标可自由操作时移动指针，适合触摸板。
+Steam Deck Trackpad	Steam Deck 触摸板
+Auto moves the game's pointer with the Steam Deck trackpad in Gaming Mode without holding Pointer Control, and the trackpad click is the Pointer Interaction. Off keeps ordinary mouse behavior, for a mouse plugged into the Steam Deck.	「自动」在游戏模式下用 Steam Deck 触摸板移动游戏指针，无需按住指针控制键，点击触摸板即为指针交互。「关闭」保持普通鼠标行为，适合插在 Steam Deck 上的鼠标。
+Not used while Always On is selected. The button is kept for Hold.	选中「始终开启」时此项无效，该键保留给「按住」模式。
+Choose the control this mouse button presses.	选择此鼠标键对应的操作。
+This button is Pointer Interaction while Always On is selected. Pick another Pointer Interaction button below to use it for a control.	选中「始终开启」时此键为指针交互。可在下方另选一个指针交互键来使用此键。
+This button is Pointer Control. Pick another Pointer Control button below to use it for a control.	此键为指针控制。可在下方另选一个指针控制键来使用此键。
+Also performs the pointer interaction while Pointer Control is active.	指针控制生效时，此键同时执行指针交互。
+Skips startup logos and the opening movie, then starts at the title screen.	跳过开机 LOGO 与开场动画，从标题画面开始。
+The language of every spoken voice: characters, NPCs, enemies and the narrator. Each keeps its own voice. Menu & Subtitles do not change.	所有语音的语言：角色、NPC、敌人和旁白。各自保留自己的声音。菜单与字幕不受影响。
+Hold	按住
+Always On	始终开启
+Exit Game	退出游戏
+Loading Editor...	正在加载编辑器…
+You confirmed that this issue is fixed	你已确认此问题已修复
+The issue is still happening	问题仍然存在
+Please send a new Bug Report so we can receive fresh logs	请发送新的错误报告，以便我们获取最新日志
+Send a new report	发送新报告
+Yes, fixed	是，已修复
+No, still happening	否，仍存在
+Did this fix the issue?	这个问题修复了吗？
+Could not reach the online service. Your answer was not sent.	无法连接在线服务，你的回复未发送。
+Your answer could not be sent. Try again later.	回复未能发送，请稍后重试。
+Close details	收起详情
+Attach crash report	附带崩溃报告
+Uploading the crash report...	正在上传崩溃报告…
+This can take a little longer than the report itself.	这可能比报告本身耗时稍长。
+The crash report was uploaded with it.	崩溃报告已随报告一同上传。
+The report was sent, but its crash report could not be uploaded.	报告已发送，但崩溃报告上传失败。
+Retry crash report upload	重试上传崩溃报告
+Crash detected	检测到崩溃
+Includes the crash dump to help diagnose the problem. A crash dump may contain process memory used for diagnostics, and it is not filtered like the log.	包含崩溃转储以帮助诊断问题。崩溃转储可能含有用于诊断的进程内存，且不像日志那样经过过滤。
+The crash dump of this session cannot be sent, so only the log is.	本次会话的崩溃转储无法发送，因此只发送日志。
+The package or folder is incomplete or some of the game's files are missing. Copy or download it again.	该 PKG 或文件夹不完整，或缺少部分游戏文件，请重新复制或下载。
+The package or folder could not be read or is damaged. Check it, then try again.	该 PKG 或文件夹无法读取或已损坏，请检查后重试。
+Choose another source	换一个来源
+Select your game package or extracted game folder, not something inside the port's own game folder.	请选择游戏 PKG 或已解包的游戏文件夹，而不是移植版 game 文件夹里的文件。
+Select this folder	选择此文件夹
+From extracted folder...	从已解包文件夹…
+Select your Dragon's Crown Pro extracted game folder	选择你的《龙之皇冠 Pro》已解包游戏文件夹
+Voice language	语音语言
+True ultrawide	真超宽屏
+System type	系统类型
+Skip offers	跳过提议
+Startup save	启动存档
