@@ -1,0 +1,91 @@
+# 技能名参考表 —— 取自游戏英文文本表 AbilityList.json 索引86-171
+# 用途：改技能等级时对照名字。注意：存档没有存槽号->技能名的映射，
+#      下表只是游戏里的全部技能名及其文本顺序，段位是按名字推断的，
+#      不要把第N行直接当成技能槽N。请进游戏对照一次再定。
+# idx	name	segment
+86	Slide Attack	通用/被动
+87	Wealth to Health	通用/被动
+88	Money is Power	通用/被动
+89	Vitality Boost	通用/被动
+90	Nutritionist	通用/被动
+91	Maintenance	通用/被动
+92	Adroit Hands	通用/被动
+93	Evasion	通用/被动
+94	Deep Pockets	通用/被动
+95	Cyclone Masher	通用/被动
+96	Shockwave	通用/被动
+97	Judgement	通用/被动
+98	Rebuke	通用/被动
+99	Tempest Edge	通用/被动
+100	Cover Allies	战士 Fighter
+101	Reflex Guard	战士 Fighter
+102	Bash	战士 Fighter
+103	Missile Reflect	战士 Fighter
+104	Distraction	战士 Fighter
+105	Sacrifice	战士 Fighter
+106	Shield Tactics	战士 Fighter
+107	Stun Wave	战士 Fighter
+108	Neck Splitter	战士 Fighter
+109	Deadly Revolution	战士 Fighter
+110	Brutal Drive	亚马逊 Amazon
+111	Parry	亚马逊 Amazon
+112	Punisher	亚马逊 Amazon
+113	Brandish	亚马逊 Amazon
+114	Berserk	亚马逊 Amazon
+115	Adrenaline	亚马逊 Amazon
+116	War Paint	亚马逊 Amazon
+117	Incite Rage	亚马逊 Amazon
+118	Iron Will	亚马逊 Amazon
+119	Power Bomb	亚马逊 Amazon
+120	Lethal Fists	矮人 Dwarf
+121	Eagle Dive	矮人 Dwarf
+122	Grand Smash	矮人 Dwarf
+123	Frenzy	矮人 Dwarf
+124	Bomb Satchel	矮人 Dwarf
+125	Fire Barrel	矮人 Dwarf
+126	Magma Infusion	矮人 Dwarf
+127	Powder Mastery	矮人 Dwarf
+128	Trinket Maniac	矮人 Dwarf
+129	Rock Skin	矮人 Dwarf
+130	Toughness	精灵 Elf
+131	Power Shot	精灵 Elf
+132	Rapid Fire	精灵 Elf
+133	Spacious Quiver	精灵 Elf
+134	Impact Arrow	精灵 Elf
+135	Clone Strikes	精灵 Elf
+136	Toxic Extract	精灵 Elf
+137	Holdout Dagger	精灵 Elf
+138	Salamander Oil	精灵 Elf
+139	Elemental Lore	精灵 Elf
+140	Deadly Boots	可疑段(待确认)
+141	Backstab	可疑段(待确认)
+142	Battle Hardened	可疑段(待确认)
+143	Mental Absorb	可疑段(待确认)
+144	Extract	可疑段(待确认)
+145	Concentrate	可疑段(待确认)
+146	Spirit Up	可疑段(待确认)
+147	Ice Prison	可疑段(待确认)
+148	Protection	法术A(待确认)
+149	Gravity	法术A(待确认)
+150	Thunderhead	法术A(待确认)
+151	Rock Press	法术A(待确认)
+152	Blizzard	法术A(待确认)
+153	Animate Skeleton	法术A(待确认)
+154	Levitation	法术A(待确认)
+155	Create Food	法术A(待确认)
+156	Curse	法术A(待确认)
+157	Petrification	法术A(待确认)
+158	Concentrate	法术B(待确认)
+159	Extract	法术B(待确认)
+160	Mental Absorb	法术B(待确认)
+161	Spirit Up	法术B(待确认)
+162	Fire Ward	法术B(待确认)
+163	Blaze	法术B(待确认)
+164	Storm	法术B(待确认)
+165	Flame Burst	法术B(待确认)
+166	Thunderbolt	法术B(待确认)
+167	Meteor Swarm	法术B(待确认)
+168	Create Wood Golem	法术B(待确认)
+169	Levitation	法术B(待确认)
+170	Slow	法术B(待确认)
+171	Extinction	法术B(待确认)

@@ -34,6 +34,7 @@ class App:
         self.names = se.load_names(se.ITEMS_TSV)
         self.mods = se.mod_names(zh=True)
         self.cons = se.consumable_names()
+        self.skill_ref = self._load_skill_ref()   # 技能名参考表（只读，不绑定槽号）
         self.item_list = sorted(self.names.items())
         self.item_choices = [f"{v:04X}  {n}" for v, n in self.item_list]
         self.choice_to_id = {f"{v:04X}  {n}": v for v, n in self.item_list}
@@ -45,6 +46,41 @@ class App:
         self.edits = {}          # (byte_offset) -> new_value
         self._build()
         self.open_save(initial=True)
+
+    def _load_skill_ref(self):
+        """读技能名参考表（TSV）。只是名字清单，不与技能槽号绑定。"""
+        try:
+            raw = (se.HERE / "save_skills.tsv").read_text(encoding="utf-8-sig")
+        except OSError:
+            return []
+        out = []
+        for line in raw.splitlines():
+            if not line or line.startswith("#"):
+                continue
+            parts = line.split("\t")
+            if len(parts) >= 2:
+                out.append((parts[0], parts[1], parts[2] if len(parts) > 2 else ""))
+        return out
+
+    def show_skill_ref(self):
+        """弹出只读窗口显示技能名参考表。"""
+        win = tk.Toplevel(self.root)
+        win.title("技能名参考表（仅供参考，未绑定槽号）")
+        win.geometry("460x620")
+        ttk.Label(win, text="游戏技能名清单（AbilityList 文本顺序）。存档不含槽号→技能名映射，"
+                            "请进游戏对照后再决定哪个槽是哪个技能。",
+                  foreground="#666", wraplength=430, justify="left").pack(anchor="w", padx=8, pady=6)
+        frame = ttk.Frame(win)
+        frame.pack(fill="both", expand=True, padx=8, pady=4)
+        sb = ttk.Scrollbar(frame, orient="vertical")
+        txt = tk.Text(frame, yscrollcommand=sb.set, width=52)
+        sb.config(command=txt.yview)
+        sb.pack(side="right", fill="y")
+        txt.pack(side="left", fill="both", expand=True)
+        for idx, name, seg in self.skill_ref:
+            txt.insert("end", f"{idx:>3}  {name:<24} {seg}\n")
+        txt.config(state="disabled")
+        ttk.Button(win, text="关闭", command=win.destroy).pack(pady=6)
 
     # ---------- UI ----------
     def _build(self):
@@ -160,12 +196,19 @@ class App:
             self.tree.insert("", "end", iid=snode, text=f"DATA {slot+1}   金币 {gold}",
                              open=(slot == 0))
             self.node_tag[snode] = ("slot", slot)
-            for ci in range(se.CHAR_COUNT):
-                o = se.char_offset(slot, ci)
-                if not se.present(self.data, o):
-                    continue
-                self._add_record_nodes(slot, ci, snode, open_first_bag=True)
+            # 玩家（索引 0..15）：与伙伴对称，也放进自己的上级目录。
+            players = [(ci, se.char_offset(slot, ci))
+                       for ci in range(se.COMPANION_FIRST)
+                       if se.present(self.data, se.char_offset(slot, ci))]
+            proot = f"s{slot}players"
+            self.tree.insert(snode, "end", iid=proot,
+                             text=f"  [玩家]  {len(players)}/{se.COMPANION_FIRST} 个",
+                             open=False)
+            self.node_tag[proot] = ("players", slot)
+            for ci, _o in players:
+                self._add_record_nodes(slot, ci, proot, open_first_bag=True, bag_count=se.BAG_CONFIG_COUNT)
             # 伙伴（索引 16..45）：与角色完全同构，直接复用同一套节点与编辑页。
+            # 伙伴实测只有行囊1有东西，2-9全空，所以只列行囊1，不列空的2-9。
             comps = se.companion_list(self.data, slot)
             croot = f"s{slot}comp"
             self.tree.insert(snode, "end", iid=croot,
@@ -175,7 +218,7 @@ class App:
             for idx, _o, _nm in comps:
                 # companion_list 返回的是相对伙伴号，树节点要用绝对记录号
                 self._add_record_nodes(slot, se.COMPANION_FIRST + idx, croot,
-                                       open_first_bag=False)
+                                       open_first_bag=False, bag_count=1)
             # 通用道具箱节点（该 DATA slot 所有角色共用）
             boxcnt = sum(1 for bi in range(se.BOX_SLOT_COUNT)
                          if se.box_used(self.data, se.box_offset(slot, bi)))
@@ -197,9 +240,12 @@ class App:
             self.tree.selection_set(keep)
             self.tree.focus(keep)
 
-    def _add_record_nodes(self, slot, ci, parent, open_first_bag=True):
-        """给一条 0x21D0 记录建树节点。角色(0-15)与伙伴(16-45)共用，
-        iid 一律用 s{slot}c{ci} 格式，这样 show_bag/select_item 里的节点号拼接才对得上。"""
+    def _add_record_nodes(self, slot, ci, parent, open_first_bag=True, bag_count=None):
+        """给一条 0x21D0 记录建树节点。玩家(0-15)与伙伴(16-45)共用，
+        iid 一律用 s{slot}c{ci} 格式，这样 show_bag/select_item 里的节点号拼接才对得上。
+        bag_count：列几套行囊。玩家=9，伙伴=1（实测伙伴2-9全空，不列）。"""
+        if bag_count is None:
+            bag_count = se.BAG_CONFIG_COUNT
         o = se.char_offset(slot, ci)
         nm = se.cname(self.data, o)
         lvl = self.effective_u8(o + se.F_LEVEL) + 1
@@ -207,7 +253,7 @@ class App:
         cnode = f"s{slot}c{ci}"
         self.tree.insert(parent, "end", iid=cnode, text=f"  {nm}  {cls}  Lv{lvl}")
         self.node_tag[cnode] = ("char", slot, ci)
-        for bag in range(se.BAG_CONFIG_COUNT):
+        for bag in range(bag_count):
             cnt = sum(1 for si in range(se.BAG_SLOT_COUNT)
                       if self.effective_u16(se.bag_offset(o, bag, si)))
             bnode = f"s{slot}c{ci}b{bag}"
@@ -281,6 +327,8 @@ class App:
             self.show_char(*tag[1:])
         elif kind == "companions":
             self.show_companions(tag[1])
+        elif kind == "players":
+            self.show_players(tag[1])
         elif kind == "slot":
             self.show_slot(tag[1])
         elif kind == "bag":
@@ -738,6 +786,36 @@ class App:
                            "存档里另有一个 float 参数决定幅度，目前不在此处开放。",
                       foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(10, 0))
 
+    def show_players(self, slot):
+        """玩家总览：列自建角色(0-15)，点【编辑】进 show_char。"""
+        players = [(ci, se.char_offset(slot, ci), se.cname(self.data, se.char_offset(slot, ci)))
+                   for ci in range(se.COMPANION_FIRST)
+                   if se.present(self.data, se.char_offset(slot, ci))]
+        for w in list(self.detail_inner.winfo_children()):
+            w.destroy()
+        self.detail_canvas.yview_moveto(0)
+        ttk.Label(self.detail_inner,
+                  text=f"DATA {slot+1} / 玩家  {len(players)}/{se.COMPANION_FIRST} 个",
+                  font=("Tahoma", 11, "bold")).pack(anchor="w", pady=(0, 6))
+        ttk.Label(self.detail_inner,
+                  text="这里是自己创建的角色（记录索引0-15）。点【编辑】改等级/HP/技能点/名字/技能等级，"
+                       "展开左侧行囊还能改装备。玩家有 9 套行囊配置。",
+                  foreground="#666", wraplength=760, justify="left").pack(anchor="w", pady=(0, 10))
+        for ci, o, nm in players:
+            lvl = self.effective_u8(o + se.F_LEVEL) + 1
+            cls = se.CLASSES.get(self.effective_u8(o + se.F_CLASS), "?")
+            hp = self.effective_u16(o + se.F_HP_CUR)
+            maxhp = self.effective_u16(o + se.F_HP_MAX)
+            sp = self.effective_u16(o + se.F_SKILL)
+            used = se.skill_points_used(se.skill_levels(self.data, o))
+            row = ttk.Frame(self.detail_inner)
+            row.pack(anchor="w", pady=2, fill="x")
+            ttk.Button(row, text="编辑", width=6,
+                       command=lambda c=ci: self.select_item(f"s{slot}c{c}")).pack(side="right", padx=4)
+            ttk.Label(row, text=f"角色{ci:<2d}  {nm:<12} {cls:<14} Lv{lvl:<4} "
+                                f"HP {hp}/{maxhp}  技能点 {sp}  已投 {used}",
+                      anchor="w").pack(side="left", fill="x", expand=True)
+
     def show_companions(self, slot):
         """伙伴总览：只列名字/等级/HP，点【编辑】进 show_char（与角色同一套编辑页）。"""
         comps = se.companion_list(self.data, slot)
@@ -823,13 +901,45 @@ class App:
         ttk.Label(vrow, text=" ".join(f"{v:>4}" for v in vals), foreground="#333",
                   font=("Consolas", 10), width=54).pack(side="left")
 
-        # 技能：只读提示
-        ttk.Label(self.detail_inner, text="技能列表",
-                  font=("Tahoma", 10, "bold")).pack(anchor="w", pady=(12, 4))
+        # ---- 技能加点等级（已标定，可写）----
+        sk_head = ttk.Frame(self.detail_inner)
+        sk_head.pack(anchor="w", pady=(12, 4), fill="x")
+        ttk.Label(sk_head, text="技能等级（24 个技能槽，可改）",
+                  font=("Tahoma", 10, "bold")).pack(side="left")
+        ttk.Button(sk_head, text="查看技能名参考", command=self.show_skill_ref).pack(side="left", padx=10)
+        lv = se.skill_levels(self.data, o)
+        used_pts = se.skill_points_used(lv)
+        sp_left = self.effective_u16(o + se.F_SKILL)
         ttk.Label(self.detail_inner,
-                  text="技能是装备到行囊里的道具（效果ID 0x1D1 起，界面标 [技能]），"
-                       "受已有技能加点上限约束，随意改写会冲突，因此只读取显示、不提供修改。",
+                  text=f"角色记录 +0x{se.SKILL_LV_OFFSET:X} 起 24 个字节，每字节一个技能槽的等级（0-7）。"
+                       f"本角色已投 {used_pts} 点、剩余技能点 {sp_left}。"
+                       "槽号→技能名存档里没有明文，界面只显示槽号并附可参考的技能名，"
+                       "不硬套名字；请在游戏里对照一次即可锁定每个槽。伙伴这段全 0 属正常（NPC 自动成长）。",
                   foreground="#666", wraplength=740, justify="left").pack(anchor="w")
+        for k in range(se.SKILL_LV_COUNT):
+            so = se.skill_level_offset(o, k)
+            row = ttk.Frame(self.detail_inner)
+            row.pack(anchor="w", pady=1)
+            ttk.Label(row, text=f"  技能槽{k:<2d}", width=26).pack(side="left")
+            var = tk.StringVar(value=str(self.effective_u8(so)))
+            ent = ttk.Entry(row, textvariable=var, width=5)
+            ent.pack(side="left")
+            ttk.Label(row, text=f"+0x{se.SKILL_LV_OFFSET + k:X}",
+                      foreground="#888", width=9).pack(side="left")
+
+            def apply_skill(_e=None, so=so, var=var):
+                try:
+                    v = int(var.get())
+                except ValueError:
+                    return
+                if not (0 <= v <= se.SKILL_LV_MAX):
+                    return
+                self.edits[so] = (v, 1)
+                self.refresh_tree()
+                self.update_changes()
+            ent.bind("<Return>", apply_skill)
+            ttk.Button(row, text="应用", width=6, command=apply_skill).pack(side="left", padx=4)
+            self._revert_btn(row, (so,)).pack(side="left")
 
     BOX_PAGE_SIZE = 15   # 道具箱每页显示条数（一屏可见，翻页栏无需滚动即达）
 

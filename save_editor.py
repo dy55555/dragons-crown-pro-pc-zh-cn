@@ -186,6 +186,24 @@ SKILL_EFFECT_MASK = 0xE362E5F7FF
 # 下面 3 对 u16 随等级增长、含义未最终确认，仅作观察展示，不开放编辑。
 STAT_CANDIDATES = (0xE4, 0xE6, 0xE8, 0xEA, 0xEC, 0xEE, 0xF0, 0xF2)
 
+# ---- 角色技能等级数组（u8，已标定，可写）--------------------------------
+# 角色记录 +0x140 起连续 24 字节 = 24 个技能槽的加点等级，0=没点，1..7=等级。
+# 证据（2026-11-23 实测 SAVE0.DAT）：
+#   * 值域 0..7，没有任何 >7 的字节；按 u16 解读会解出 0x0101(257) 这种非法等级，
+#     所以确定是 u8 不是 u16。
+#   * DATA1 Natalia(Lv65, 剩余技能点2) = [7,0,3,0,1,0,1,0,...]；
+#     DATA2 同角色(Lv35, 剩余技能点0) = [0,0,2,0,0,0,1,1,1,1,...]。
+#     两个存档加点方案不同，正好对上「技能点被分配掉」，符合游戏机制。
+#   * 只有玩家自建角色(0..15)这段有非零；23 个伙伴(16..45)全 0 —— 伙伴是
+#     按等级 Automatic 成长的 NPC，不走玩家这套加点，所以伙伴页全 0 是正常的。
+#   * +0x158 起是 0/1 的解锁/标记位（Natalia 有 46 个 1），不是等级，不开放写。
+# 槽号→技能名的映射：存档里没有明文存技能ID。游戏文本表 AbilityList.json
+# 有技能名（索引 86..171），但没有证据把它和槽号一一对应，所以界面按「技能槽N」
+# 显示并附参考名表，不硬套名字，避免重蹈道具名错位的覆辙。
+SKILL_LV_OFFSET = 0x140
+SKILL_LV_COUNT = 24
+SKILL_LV_MAX = 7
+
 CLASSES = {0: "Fighter/战士", 1: "Amazon/亚马逊", 2: "Elf/精灵",
            3: "Dwarf/矮人", 4: "Sorceress/女巫", 5: "Wizard/法师"}
 BAG_NAMES = {i: f"行囊{i + 1}" for i in range(BAG_CONFIG_COUNT)}
@@ -598,6 +616,23 @@ def stat_candidates(data, char_base: int) -> list[int]:
     return [read_u16(data, char_base + off) for off in STAT_CANDIDATES]
 
 
+def skill_level_offset(char_base: int, slot: int) -> int:
+    """角色记录里第 slot 个技能等级的绝对偏移（slot 0..23）。"""
+    if not (0 <= slot < SKILL_LV_COUNT):
+        raise ValueError(f"技能槽必须是 0-{SKILL_LV_COUNT - 1}")
+    return char_base + SKILL_LV_OFFSET + slot
+
+
+def skill_levels(data, char_base: int) -> list[int]:
+    """读一条角色记录的 24 个技能加点等级。"""
+    return [data[char_base + SKILL_LV_OFFSET + k] for k in range(SKILL_LV_COUNT)]
+
+
+def skill_points_used(levels) -> int:
+    """已投入的技能点（= 各槽等级之和）。游戏剩余技能点在 F_SKILL。"""
+    return sum(levels)
+
+
 def sha256(b) -> str:
     return hashlib.sha256(b).hexdigest()
 
@@ -624,6 +659,10 @@ def cmd_list(args, data, names):
             maxhp = read_u16(data, o + F_HP_MAX)
             sp = read_u16(data, o + F_SKILL)
             print(f"  {record_label(ci)} {nm:<9} {cls:<16} Lv{lvl:<4} HP {hp}/{maxhp}  技能点 {sp}  @{o:#x}")
+            slv = skill_levels(data, o)
+            nz = [f"槽{k}={v}" for k, v in enumerate(slv) if v]
+            print(f"      技能等级(已投{skill_points_used(slv)}点) "
+                  + (" ".join(nz) if nz else "全0"))
             print(f"      状态候选(只读,未标定) {stat_candidates(data, o)}")
             for bag in range(BAG_CONFIG_COUNT):
                 items = []
@@ -802,6 +841,40 @@ def cmd_set_companion(args, data, names):
             print(f"  name@{off:#x}: {old!r} -> {args.name!r}")
             buf[o + off:o + off + NAME_BYTES] = field
 
+    seal(buf)
+    if args.dry_run:
+        out = Path(args.out) if args.out else Path("SAVE0.modified.DAT")
+        out.write_bytes(buf)
+        print(f"[演练] 已写出到 {out}（原存档未动）")
+    else:
+        atomic_write(args.save, bytes(buf), backup=not args.no_backup)
+    return 0
+
+
+def cmd_set_skill(args, data, names):
+    """修改某个角色的技能加点等级（24 个 u8 槽，0-7）。角色0-15玩家，16-45伙伴。"""
+    if not (0 <= args.slot < DATA_SLOT_COUNT):
+        raise SystemExit(f"DATA slot 必须是 0-{DATA_SLOT_COUNT - 1}")
+    if not (0 <= args.char < REMAINS_FIRST):
+        raise SystemExit(f"角色号必须是 0-{REMAINS_FIRST - 1}（遗骸 46-75 不开放）")
+    o = char_offset(args.slot, args.char)
+    if args.char < COMPANION_FIRST:
+        if not present(data, o):
+            raise SystemExit(f"DATA{args.slot+1} 角色{args.char} 是空槽，拒绝修改")
+    else:
+        if not companion_present(data, o):
+            raise SystemExit(f"DATA{args.slot+1} 伙伴{args.char-COMPANION_FIRST+1} 是空槽，拒绝修改")
+    if not (0 <= args.slot_idx < SKILL_LV_COUNT):
+        raise SystemExit(f"技能槽必须是 0-{SKILL_LV_COUNT - 1}")
+    if not (0 <= args.level <= SKILL_LV_MAX):
+        raise SystemExit(f"技能等级必须是 0-{SKILL_LV_MAX}")
+
+    so = skill_level_offset(o, args.slot_idx)
+    old = data[so]
+    print(f"改技能等级: DATA{args.slot+1} {record_label(args.char)} "
+          f"{cname(data, o)} 技能槽{args.slot_idx} @{so:#x}  {old} -> {args.level}")
+    buf = bytearray(data)
+    buf[so] = args.level
     seal(buf)
     if args.dry_run:
         out = Path(args.out) if args.out else Path("SAVE0.modified.DAT")
@@ -1107,6 +1180,18 @@ def main():
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--no-backup", action="store_true")
     p.set_defaults(func=cmd_set_companion)
+
+    p = sub.add_parser("set-skill",
+                       help=f"改角色/伙伴的技能加点等级（技能槽 0-{SKILL_LV_COUNT-1}，等级 0-{SKILL_LV_MAX}）")
+    p.add_argument("--slot", type=int, required=True, help="DATA slot 0-2")
+    p.add_argument("--char", type=int, required=True,
+                   help="记录号：玩家 0-15，伙伴 16-45（遗骸 46-75 不开放）")
+    p.add_argument("--slot-idx", type=int, required=True, help=f"技能槽 0-{SKILL_LV_COUNT-1}")
+    p.add_argument("--level", type=int, required=True, help=f"等级 0-{SKILL_LV_MAX}")
+    p.add_argument("--out")
+    p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--no-backup", action="store_true")
+    p.set_defaults(func=cmd_set_skill)
 
     p = sub.add_parser("set-box", help="改通用道具箱某格（装备/消耗品）")
     p.add_argument("--slot", type=int, required=True, help="DATA slot 0-2")
