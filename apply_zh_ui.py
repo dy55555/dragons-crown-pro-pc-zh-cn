@@ -63,9 +63,15 @@ SKIP_SPECIAL = {"play", "about", "russian"}
 # 每条 = (定位锚点, 受保护的英文串)。锚点里须含该英文串。
 INTERNAL_KEY_ANCHORS = (
     # --- Cheats: 签名表 SiteSpec.feature / 诊断分类键（改了金手指全废）---
-    (b"49 89 fe\x00Cheats\x00hook: damage", b"Cheats"),
-    (b"last %s\x00Cheats\x00Japanese NPC voices", b"Cheats"),
-    (b"locators\x00%s\x00Cheats\x00site\x00", b"Cheats"),
+    # v1.4.1 换了这三处的上下文，旧锚点全部失效 → Cheats 被译成「作弊」→ 金手指全废。
+    # 新锚点取"紧邻的下一串"做定位，跨版本稳定（下行列出旧锚点供 --check 兼容旧版）。
+    (b"\x00Cheats\x00hook: damage\x00", b"Cheats"),              # 键1：紧跟机器码+hook: damage
+    (b"\x00Cheats\x00site\x00not in the cheat set", b"Cheats"),  # 键2：紧跟 site + cheat set
+    (b"\x00Cheats\x00Voice language\x00", b"Cheats"),            # 键3：v1.4.1 把 Japanese NPC voices 换成 Voice language
+    (b"\x00Cheats\x00Japanese NPC voices", b"Cheats"),           # 键3 旧版(v1.4.0)兼容
+    (b"\x00Cheats\x00Voice language\x00", b"Voice language"),    # 键3 相邻内部键：Voice language 也是 feature 分类键
+    (b"49 89 fe\x00Cheats\x00hook: damage", b"Cheats"),          # 键1 旧版(v1.4.0)兼容
+    (b"locators\x00%s\x00Cheats\x00site\x00", b"Cheats"),        # 键2 旧版(v1.4.0)兼容
     # --- 联机连接测试：connection_test.cpp:80 用 label == 这两串判断该显示哪条建议 ---
     (b"\x00Direct connections\x00", b"Direct connections"),
     (b"\x00Router configuration\x00", b"Router configuration"),
