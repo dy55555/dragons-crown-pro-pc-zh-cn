@@ -89,6 +89,10 @@ SPECIAL_ANCHORS = (
      21, "Play", "玩"),
     (b"Generic PnP MoniPlay\x00", b"Generic PnP Moni" + "玩".encode(),
      16, "Play", "玩"),
+    # v1.5.1 底部大按钮是全大写 PLAY（SKIP_SPECIAL 按小写匹配会跳过它），
+    # 前面那处定点只修了导航的 Play。这处用紧邻的 INSTALL GAME 做唯一锚点。
+    (b"PLAY\x00INSTALL GAME\x00", "玩".encode() + b"\x00\x00INSTALL GAME\x00",
+     0, "PLAY", "玩"),
     # About 5 字符槽装不下 6 字节的「关于」，但紧邻的下一个字节本来就是 NUL，可借 1 字节
     (b"Bug Report\x00About\x00", "反馈".encode() + b"\x00" * 5 + "关于".encode(),
      11, "About", "关于"),

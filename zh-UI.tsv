@@ -979,7 +979,7 @@ Dragon's Crown save (SAVE0.DAT)	龙之皇冠存档（SAVE0.DAT）
 Save archive (ZIP, RAR)	存档压缩包（ZIP、RAR）
 Choose an archive of a PS3 save	选择 PS3 存档压缩包
 Dragon's Crown Pro PC in numbers	龙之皇冠 Pro PC 数据一览
-Your SAVE0.DAT files: overview, backups, export, import and restore.	你的 SAVE0.DAT 文件：总览、备份、导出、导入与还原。
+Your SAVE0.DAT files: overview, backups, export, import and restore.	SAVE0.DAT 总览、备份、导出、导入与还原
 Characters, appearance and inventory.	角色、外观与物品栏。
 Touchscreen	触摸屏
 Controller Comms Wheel Shortcut	手柄交流轮盘快捷键
@@ -1044,8 +1044,8 @@ Choose an existing folder.	请选一个已有的文件夹。
 That is the selected save itself. Choose another folder.	那就是所选存档本身，请另选一个文件夹。
 Exporting into the launcher's savedata folder would replace a save without a backup. Use Import instead.	导出到启动器的 savedata 文件夹会替换存档且没有备份，请改用「导入」。
 That folder holds a folder named SAVE0.DAT. Choose another folder.	那个文件夹里有个叫 SAVE0.DAT 的子文件夹，请另选一个。
-This is a PS3 save. Use Import PS3 save.	这是 PS3 存档，请用「导入 PS3 存档」。
-This is a PS Vita save, not a PS3 save. Use Import PS4 save.	这是 PS Vita 存档，不是 PS3 存档。请用「导入 PS4 存档」。
+This is a PS3 save. Use Import PS3 save.	这是 PS3 存档，请用导入 PS3。
+This is a PS Vita save, not a PS3 save. Use Import PS4 save.	这是 PS Vita 存档，非 PS3 存档。请用导入 PS4。
 This is a Dragon's Crown Pro save. Use Import PS4 save.	这是龙之皇冠 Pro 存档，请用「导入 PS4 存档」。
 Home folder	主文件夹
 The source could not be read.	无法读取来源。
@@ -1057,7 +1057,7 @@ The archive could not be read as a ZIP file.	压缩包无法按 ZIP 格式读取
 The archive has an unsafe file path and was not opened.	压缩包含有不安全的路径，未打开。
 The archive is too large, or holds too many files, to be a single save.	压缩包太大或文件太多，不可能是单个存档。
 The archive is password protected.	压缩包有密码保护。
-A PS3 save needs its PARAM.PFD beside SAVE0.DAT. Choose the save folder or a ZIP of it, not SAVE0.DAT alone.	PS3 存档需要 PARAM.PFD 和 SAVE0.DAT 放在一起。请选择存档文件夹或它的 ZIP，不要只选 SAVE0.DAT。
+A PS3 save needs its PARAM.PFD beside SAVE0.DAT. Choose the save folder or a ZIP of it, not SAVE0.DAT alone.	PS3 存档需 PARAM.PFD 与 SAVE0.DAT 放一起。请选存档文件夹或 ZIP，别只选 SAVE0.DAT。
 PARAM.PFD could not be read as the description of a Dragon's Crown PS3 save.	PARAM.PFD 无法作为龙之皇冠 PS3 存档的描述读取。
 This PS3 save is not from Dragon's Crown, so it is not supported.	这个 PS3 存档不是龙之皇冠的，不支持。
 SAVE0.DAT does not match its PARAM.PFD: the save is damaged or was modified.	SAVE0.DAT 与 PARAM.PFD 不匹配：存档已损坏或被修改过。
@@ -1085,3 +1085,91 @@ This is not a Dragon's Crown PS3 save directory	这不是龙之皇冠 PS3 存档
 SAVE0.DAT does not match the hash PARAM.PFD records	SAVE0.DAT 与 PARAM.PFD 记录的哈希不符
 The decryption failed	解密失败
 SAVE0.DAT decrypted, but it is not a Dragon's Crown save	SAVE0.DAT 已解密，但不是龙之皇冠存档
+Loading saves...	正在载入存档…
+No installed game	没有安装游戏
+Install the game on the Play page. The Saves page manages the saves of the installed game.	请先在「玩」页安装游戏。「存档」页管理已安装游戏的存档。
+No saves found	没有找到存档
+Play the game once and save, then come back. Saves are kept in the user folder's savedata folder.	先玩一次游戏并存个档，再回来。存档保存在用户文件夹的 savedata 里。
+Selected save	选中的存档
+The save folders of the installed game. Choosing one never changes it.	已安装游戏的存档文件夹。选中它不会改动任何东西。
+Valid save	有效存档
+This save cannot be used	此存档不可用
+This save belongs to the installed game.	此存档属于已安装的游戏。
+It is shown for reference only: nothing on this page will back it up or replace it.	仅作参考显示：本页不会对它备份或替换。
+Overview	总览
+Save folder	存档文件夹
+DATA slots	DATA 槽位
+Modified	修改时间
+File size	文件大小
+DATA Slots	DATA 槽位
+Empty	空
+Names, levels, skill points, HP and appearance are edited on the Editor page.	名字、等级、技能点、HP 和外观在编辑器页修改。
+The Editor edits the saves of the installed game.	编辑器修改已安装游戏的存档。
+Open Editor	打开编辑器
+Save Management	存档管理
+Create backup	创建备份
+Copies this SAVE0.DAT into the backup folder. The save is not changed.	把此 SAVE0.DAT 复制到备份文件夹。存档本身不变。
+Backup created.	备份已创建。
+Could not create the backup.	无法创建备份。
+Export PS4 save	导出 PS4 存档
+Copies this Dragon's Crown Pro SAVE0.DAT, byte for byte, into a folder you choose.	把此龙之皇冠 Pro 的 SAVE0.DAT 逐字节复制到你选的文件夹。
+Export PS4 save...	导出 PS4 存档…
+Import PS4 save	导入 PS4 存档
+Replaces this save with a Dragon's Crown Pro SAVE0.DAT, a folder holding one, or a ZIP of it, after a confirmation. This save is backed up first.	经确认后，用龙之皇冠 Pro 的 SAVE0.DAT、含它的文件夹或它的 ZIP 替换此存档。会先备份当前存档。
+Import PS4 save...	导入 PS4 存档…
+Import PS3 save	导入 PS3 存档
+Replaces this save with a Dragon's Crown PS3 save: its folder, or a ZIP of it, with SAVE0.DAT and PARAM.PFD. It is decrypted and converted, and this save is backed up first.	用龙之皇冠 PS3 存档替换此存档：它的文件夹或 ZIP，内含 SAVE0.DAT 和 PARAM.PFD。会解密转换，并先备份当前存档。
+Import PS3 save...	导入 PS3 存档…
+Backups	备份
+Where the backups of every save are kept.	所有存档的备份都存在这里。
+Open backup folder	打开备份文件夹
+ZIP archive of a PS3 save...	PS3 存档的 ZIP 压缩包…
+SAVE0.DAT or ZIP archive...	SAVE0.DAT 或 ZIP 压缩包…
+PS3 save folder (SAVE0.DAT and PARAM.PFD)...	PS3 存档文件夹（SAVE0.DAT 和 PARAM.PFD）…
+Folder containing SAVE0.DAT...	含 SAVE0.DAT 的文件夹…
+Save exported.	存档已导出。
+Could not export the save.	无法导出存档。
+The chosen folder already has a SAVE0.DAT. Replace it with a copy of this save?	所选文件夹里已有 SAVE0.DAT。要用此存档的副本替换它吗？
+Replace existing file	替换已有文件
+The file in the chosen folder is replaced; the selected save is not changed.	所选文件夹里的文件会被替换；选中的存档本身不变。
+Replace file...	替换文件…
+Cancel export	取消导出
+Source	来源
+Source type	来源类型
+Save status	存档状态
+Dismiss	知道了
+PS Vita saves have not been verified with Dragon's Crown Pro. The file passes the Pro checks, but the game may not read it as expected.	PS Vita 存档尚未在龙之皇冠 Pro 上验证。文件通过了 Pro 的检查，但游戏可能不能如预期读取。
+Replace the selected save with the converted PS3 save?	用转换后的 PS3 存档替换选中的存档？
+Replace the selected save with the imported SAVE0.DAT?	用导入的 SAVE0.DAT 替换选中的存档？
+Replaces	替换为
+The selected save is backed up first.	会先备份选中的存档。
+Replace the selected save	替换选中的存档
+Your current save will be backed up before it is replaced	替换前会先备份你当前的存档
+Import and replace...	导入并替换…
+Import	导入
+Save imported. The previous save was backed up.	存档已导入，之前的存档已备份。
+Import failed; the selected save was not changed.	导入失败；选中的存档未改动。
+Cancel import	取消导入
+No backups of this save yet. The launcher also makes one before every change it writes.	此存档还没有备份。启动器在每次写入改动前都会自动备份。
+Showing latest {shown} of {total}	显示最新 {shown} / {total}
+Delete backup	删除备份
+This permanently deletes this backup	这将永久删除此备份
+Replace the selected save with this backup?	用此备份替换选中的存档？
+Backup	备份
+Restore	还原
+Backup deleted.	备份已删除。
+Delete failed	删除失败
+Backup restored. The previous save was backed up.	备份已还原；之前的存档已备份。
+Restore failed; the selected save was not changed.	还原失败；选中的存档未改动。
+Details	详情
+File	文件
+Backup folder	备份文件夹
+SAVE0.DAT file	SAVE0.DAT 文件
+Folder	文件夹
+ZIP archive	ZIP 压缩包
+RAR archive	RAR 压缩包
+Restore...	还原…
+Delete...	删除…
+PS4 Touchpad moves the pointer by dragging your finger, like the touchpad of the PS4 version. PS Vita Direct Touch places the pointer where you touch the screen and a quick tap clicks there. Only physical touchscreens are affected, never a controller's touchpad. Applies at the next game start.	「PS4 触摸板」像 PS4 版那样拖动手指来移动指针；「PS Vita 直接触摸」把你触摸的位置设为指针，轻点即在该处点击。只影响实体触摸屏，不影响手柄触摸板。下次启动游戏生效。
+Infernal	地狱
+Ultimate	终极

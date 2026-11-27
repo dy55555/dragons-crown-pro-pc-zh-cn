@@ -5,9 +5,14 @@
   "based_on_version": "v1.5.1",
   "based_on_commit": "dd028cb",
   "based_on_date": "2026-11-20",
-  "also_compatible": ["v1.2.0", "v1.3.0", "v1.4.0", "v1.4.1"],
+  "also_compatible": [
+    "v1.2.0",
+    "v1.3.0",
+    "v1.4.0",
+    "v1.4.1"
+  ],
   "translation": "zh-CN",
-  "language_pack_entries": 1080,
+  "language_pack_entries": 1168,
   "license": "GPL-2.0",
   "note": "非官方项目。本仓库不含游戏本体、不含上游 exe，只提供界面译文与一个本地补丁脚本。"
 }
