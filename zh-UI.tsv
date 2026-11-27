@@ -971,3 +971,117 @@ True ultrawide	真超宽屏
 System type	系统类型
 Skip offers	跳过提议
 Startup save	启动存档
+Choose the folder to export SAVE0.DAT to	选择要把 SAVE0.DAT 导出到的文件夹
+Choose the PS3 save folder (SAVE0.DAT and PARAM.PFD)	选择 PS3 存档文件夹（SAVE0.DAT 和 PARAM.PFD）
+Choose the folder holding SAVE0.DAT	选择含 SAVE0.DAT 的文件夹
+Choose a SAVE0.DAT or an archive of a PS4 save	选择 SAVE0.DAT 或 PS4 存档压缩包
+Dragon's Crown save (SAVE0.DAT)	龙之皇冠存档（SAVE0.DAT）
+Save archive (ZIP, RAR)	存档压缩包（ZIP、RAR）
+Choose an archive of a PS3 save	选择 PS3 存档压缩包
+Dragon's Crown Pro PC in numbers	龙之皇冠 Pro PC 数据一览
+Your SAVE0.DAT files: overview, backups, export, import and restore.	你的 SAVE0.DAT 文件：总览、备份、导出、导入与还原。
+Characters, appearance and inventory.	角色、外观与物品栏。
+Touchscreen	触摸屏
+Controller Comms Wheel Shortcut	手柄交流轮盘快捷键
+Opens the Comms Wheel in online rooms. Bare D-pad Up stays normal game input unless D-pad Up is selected. Applies at the next game start.	在联机房间里打开交流轮盘。除非选中「十字键上」，否则裸按十字键上仍是正常游戏输入。下次启动游戏生效。
+Highlights your locally controlled character on this screen only: the chord on a controller outlines the player it drives, and again turns it off. Never shared online; every session starts with it off.	仅在此屏幕高亮你当前操作的角色：手柄和弦键会框出它所控制的玩家，再按一次关闭。不会联机共享，每次会话开始都是关闭。
+Touchscreen Mode	触摸屏模式
+Character Highlight	角色高亮
+PS4 Touchpad	PS4 触摸板
+PS Vita Direct Touch	PS Vita 直接触摸
+View / Back + D-pad Up	查看 / 返回 + 十字键上
+L1 + D-pad Up	L1 + 十字键上
+R1 + D-pad Up	R1 + 十字键上
+D-pad Up	十字键上
+Unlikely: your game and the online service use different public addresses (proxy or VPN?), and it cannot share the game's yet	不太可能：你的游戏与在线服务用了不同的公网地址（代理或 VPN？），目前还无法共享地址
+Your game and the online service use different public addresses (proxy or VPN?). Direct connectivity will be verified when joining a match	你的游戏与在线服务用了不同的公网地址（代理或 VPN？）。加入房间时会验证直连。
+Ready for online play through the relay	可通过中继正常联机
+Ready for online play; direct depends on your network	可正常联机；直连取决于你的网络
+Could not write the character stats; nothing was applied.	无法写入角色属性；什么都没改动。
+The current HP cannot be higher than the maximum HP.	当前 HP 不能高于最大 HP。
+Loading inventory...	正在载入物品栏…
+Inventory Editor	物品栏编辑器
+Attack, durability, required level and the modifier values can be changed. Nothing is written until Apply Changes.	可改攻击、耐久、所需等级和词条数值。点「应用改动」前不会写入任何东西。
+Item names are unavailable because the game files could not be read.	因为读不到游戏文件，物品名称不可用。
+Search items...	搜索物品…
+This category has no items.	这个分类没有物品。
+No items match the search.	没有匹配的物品。
+Not understood	无法识别
+Select an item to see its details.	选一个物品查看详情。
+Name will change to	名称将变为
+Shared by every character in this DATA slot.	此 DATA 槽内所有角色共用。
+This item is not understood by the editor and is kept unchanged.	编辑器无法识别此物品，将保持原样。
+Attack min	攻击下限
+Attack max	攻击上限
+Durability	耐久
+Max durability	最大耐久
+Game limit:	游戏上限：
+Required level	所需等级
+Items are shown as the game names them; the editor does not change them.	物品按游戏里的名字显示；编辑器不改动它们。
+Modifiers	词条
+This item has no modifiers.	此物品没有词条。
+Changing modifier values can also change the item's generated name.	改词条数值也可能改变物品生成的名称。
+Weapons / Shields	武器 / 盾牌
+Category	分类
+Equipment level	装备等级
+Shared storage	共用仓库
+Weapon	武器
+Accessory	饰品
+This item cannot be changed.	此物品不可修改。
+Modifier value is outside the supported range.	词条数值超出支持范围。
+Required level is invalid.	所需等级无效。
+Max durability exceeds the limit the game keeps.	最大耐久超过了游戏保存的上限。
+Unreadable	无法读取
+Invalid: wrong file size	无效：文件大小不对
+Invalid: not a Dragon's Crown save	无效：不是龙之皇冠存档
+Corrupt: CRC mismatch	损坏：CRC 不匹配
+Not checked	未检查
+No save is selected.	没有选中存档。
+The game is starting. Saves cannot be changed now.	游戏正在启动，现在不能改存档。
+This save is not valid, so it cannot be backed up, exported or replaced from here.	此存档无效，不能从这里备份、导出或替换。
+The Editor has unapplied changes. Apply or discard them on the Editor page before you import or restore a save.	编辑器还有未应用的改动。导入或还原存档前，请先在编辑器页应用或放弃。
+Choose an existing folder.	请选一个已有的文件夹。
+That is the selected save itself. Choose another folder.	那就是所选存档本身，请另选一个文件夹。
+Exporting into the launcher's savedata folder would replace a save without a backup. Use Import instead.	导出到启动器的 savedata 文件夹会替换存档且没有备份，请改用「导入」。
+That folder holds a folder named SAVE0.DAT. Choose another folder.	那个文件夹里有个叫 SAVE0.DAT 的子文件夹，请另选一个。
+This is a PS3 save. Use Import PS3 save.	这是 PS3 存档，请用「导入 PS3 存档」。
+This is a PS Vita save, not a PS3 save. Use Import PS4 save.	这是 PS Vita 存档，不是 PS3 存档。请用「导入 PS4 存档」。
+This is a Dragon's Crown Pro save. Use Import PS4 save.	这是龙之皇冠 Pro 存档，请用「导入 PS4 存档」。
+Home folder	主文件夹
+The source could not be read.	无法读取来源。
+The file is too large to be a Dragon's Crown save.	文件太大，不可能是龙之皇冠存档。
+No SAVE0.DAT was found.	没找到 SAVE0.DAT。
+More than one different SAVE0.DAT was found. Choose the folder or archive of a single save.	找到多个不同的 SAVE0.DAT。请选择只含一个存档的文件夹或压缩包。
+RAR archives are not opened by the launcher. Extract it first, then import the extracted folder.	启动器不打开 RAR 压缩包。请先解压，再导入解压后的文件夹。
+The archive could not be read as a ZIP file.	压缩包无法按 ZIP 格式读取。
+The archive has an unsafe file path and was not opened.	压缩包含有不安全的路径，未打开。
+The archive is too large, or holds too many files, to be a single save.	压缩包太大或文件太多，不可能是单个存档。
+The archive is password protected.	压缩包有密码保护。
+A PS3 save needs its PARAM.PFD beside SAVE0.DAT. Choose the save folder or a ZIP of it, not SAVE0.DAT alone.	PS3 存档需要 PARAM.PFD 和 SAVE0.DAT 放在一起。请选择存档文件夹或它的 ZIP，不要只选 SAVE0.DAT。
+PARAM.PFD could not be read as the description of a Dragon's Crown PS3 save.	PARAM.PFD 无法作为龙之皇冠 PS3 存档的描述读取。
+This PS3 save is not from Dragon's Crown, so it is not supported.	这个 PS3 存档不是龙之皇冠的，不支持。
+SAVE0.DAT does not match its PARAM.PFD: the save is damaged or was modified.	SAVE0.DAT 与 PARAM.PFD 不匹配：存档已损坏或被修改过。
+SAVE0.DAT could not be decrypted into a Dragon's Crown save.	SAVE0.DAT 无法解密成龙之皇冠存档。
+Unsupported PS3 save layout: only PS3 saves of layout version 36 can be converted, and this save uses a different one.	不支持的 PS3 存档布局：只支持转换布局版本 36 的 PS3 存档，这个存档用了别的版本。
+This PS Vita save is still encrypted. Export a decrypted SAVE0.DAT first.	这个 PS Vita 存档仍是加密的。请先导出解密后的 SAVE0.DAT。
+This is not a valid Dragon's Crown Pro SAVE0.DAT.	这不是有效的龙之皇冠 Pro SAVE0.DAT。
+PS3 layout, big-endian	PS3 布局，大端序
+PS Vita container, encrypted	PS Vita 容器，已加密
+Not a Dragon's Crown Pro save	不是龙之皇冠 Pro 存档
+Dragon's Crown Pro layout	龙之皇冠 Pro 布局
+Dragon's Crown	龙之皇冠
+Missing	缺失
+PS3 container, encrypted	PS3 容器，已加密
+Not supported	不支持
+Supported	支持
+PS3 layout, big-endian (decrypted)	PS3 布局，大端序（已解密）
+PARAM.PFD is not a PS3 protected-file database	PARAM.PFD 不是 PS3 保护文件数据库
+PARAM.PFD has a version this launcher does not read	PARAM.PFD 的版本此启动器不认识
+PARAM.PFD is truncated	PARAM.PFD 被截断了
+PARAM.PFD does not list SAVE0.DAT	PARAM.PFD 没有列出 SAVE0.DAT
+PARAM.PFD has an invalid entry for SAVE0.DAT	PARAM.PFD 里 SAVE0.DAT 的条目无效
+SAVE0.DAT does not have the size PARAM.PFD records	SAVE0.DAT 的大小与 PARAM.PFD 记录的不符
+This is not a Dragon's Crown PS3 save directory	这不是龙之皇冠 PS3 存档目录
+SAVE0.DAT does not match the hash PARAM.PFD records	SAVE0.DAT 与 PARAM.PFD 记录的哈希不符
+The decryption failed	解密失败
+SAVE0.DAT decrypted, but it is not a Dragon's Crown save	SAVE0.DAT 已解密，但不是龙之皇冠存档

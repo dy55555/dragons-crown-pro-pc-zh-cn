@@ -82,7 +82,11 @@ INTERNAL_KEY_ANCHORS = (
 # 锚点仍能命中，一键汉化可跨版本复用。
 # 两份锚点供 --check 精确判断：只看目标词是否落地，不会因别处出现同字而误报。
 SPECIAL_ANCHORS = (
-    # Play 紧贴 "Generic PnP Moni" 尾部，"前一字节必须是 NUL" 的规则会漏掉它
+    # Play 紧贴 "Generic PnP Moni" 尾部，"前一字节必须是 NUL" 的规则会漏掉它。
+    # v1.5.1 中间插了 "Home"：Generic PnP MoniHome\0Play\0，旧锚点失效。
+    # 保留两套锚点：v1.5.1 新结构 + v1.4.x 旧结构（patch_special 会逐个尝试）。
+    (b"Generic PnP MoniHome\x00Play\x00", b"Generic PnP MoniHome\x00" + "玩".encode(),
+     21, "Play", "玩"),
     (b"Generic PnP MoniPlay\x00", b"Generic PnP Moni" + "玩".encode(),
      16, "Play", "玩"),
     # About 5 字符槽装不下 6 字节的「关于」，但紧邻的下一个字节本来就是 NUL，可借 1 字节
@@ -576,10 +580,18 @@ def do_check(exe: Path, orig: Path, data: bytes, rdra: int, rd_end: int,
     pe = PE(data)
     _n, _va, _vsz, rdra, rdrsz = pe.sec(".rdata")
     end = rdra + rdrsz
+    # 同一个词可能有多套跨版本锚点（如 Play 的 v1.4.x / v1.5.1 两种结构）。
+    # 按目标词聚合：任一英文锚点还在=未汉化；否则任一中文锚点在=已汉化。
+    # 不能逐锚点判断——旧版锚点在新版 exe 里本就找不到，会误报「两者都找不到」。
+    special_by_word = {}
     for anchor, zh_anchor, disp, en, zh in SPECIAL_ANCHORS:
-        if data.find(anchor, rdra, end) >= 0:
+        g = special_by_word.setdefault(en, {"en": [], "zh": []})
+        g["en"].append(anchor)
+        g["zh"].append(zh_anchor)
+    for en, g in special_by_word.items():
+        if any(data.find(a, rdra, end) >= 0 for a in g["en"]):
             state = "未汉化"
-        elif data.find(zh_anchor, rdra, end) >= 0:
+        elif any(data.find(a, rdra, end) >= 0 for a in g["zh"]):
             state = "已汉化"
         else:
             state = "（两者都找不到，界面结构可能已变）"
